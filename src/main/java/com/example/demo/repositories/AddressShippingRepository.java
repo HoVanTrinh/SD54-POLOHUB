@@ -1,0 +1,11 @@
+package com.example.demo.repositories;
+
+import com.example.demo.entities.AddressShipping;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+
+public interface AddressShippingRepository extends JpaRepository<AddressShipping, Long> {
+    List<AddressShipping> findAllByCustomer_Account_Id(Long accountId);
+    // dấu ấn rồng thiêng Hồ Văn Trình - PH34394
+}
