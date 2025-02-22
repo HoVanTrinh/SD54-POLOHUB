@@ -1,222 +1,657 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<html xmlns:th="http://www.thymeleaf.org" lang="en" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head th:replace="~{fragments-admin::page_head('Admin page')}">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Page</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/trangChu.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 
-    <style>
-        body {
-            background-color: #f8f9fa; /* Màu nền nhẹ nhàng */
-            font-family: Arial, sans-serif;
-        }
+    <script>
 
-        .navbar {
-            background-color: #007bff; /* Màu xanh của navbar */
-        }
-
-        .navbar-brand img {
-            height: 40px; /* Đặt chiều cao cho logo */
-        }
-
-        .nav-link {
-            color: white; /* Màu chữ trắng */
-        }
-
-        .nav-link:hover {
-            background-color: #0056b3; /* Màu nền khi hover qua các liên kết trong navbar */
-        }
-
-        .user-area {
-            position: relative;
-        }
-
-        .user-avatar {
-            cursor: pointer;
-            border-radius: 50%;
-            height: 34px;
-            width: 34px;
-            border: 2px solid white; /* Thêm viền trắng cho avatar */
-        }
-
-        .user-menu {
-            display: none;
-            position: absolute;
-            top: 40px; /* Căn chỉnh menu xuống dưới avatar */
-            right: 0;
-            background-color: white;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-            z-index: 10;
-            width: 150px;
-        }
-
-        .user-menu.active {
-            display: block;
-        }
-
-        .user-menu a {
-            padding: 10px;
-            color: #333;
-            text-decoration: none;
-        }
-
-        .user-menu a:hover {
-            background-color: #f0f0f0; /* Màu nền sáng cho các mục menu khi hover */
-        }
-
-        .main-menu {
-            background-color: #ffffff; /* Màu nền cho menu bên trái */
-            border-right: 1px solid #ccc; /* Đường viền bên phải */
-        }
-
-        .main-menu .nav-link {
-            color: #333; /* Màu chữ cho mục menu */
-        }
-
-        .main-menu .nav-link:hover {
-            background-color: #e9ecef; /* Màu nền khi hover qua */
-        }
-
-        .content {
-            margin-left: 250px; /* Căn chỉnh nội dung bên phải */
-            padding: 20px;
-            background-color: #f8f9fa; /* Màu nền cho nội dung */
-            min-height: 100vh; /* Chiều cao tối thiểu cho nội dung */
-        }
-
-        .menu-title {
-            padding: 10px 15px;
-            color: #007bff; /* Màu sắc cho tiêu đề menu */
-        }
-    </style>
+    </script>
+    <th:block layout:fragment="head_link"></th:block>
 </head>
+<!--<style>-->
 
+<!--    .user-menu {-->
+<!--        display: none;-->
+<!--        position: absolute;-->
+<!--        top: 50px;-->
+<!--        right: 10px;-->
+<!--        background-color: white;-->
+<!--        border: 1px solid #cccccc;-->
+<!--        border-radius: 5px;-->
+<!--        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);-->
+<!--        z-index: 10;-->
+<!--        width: 150px;-->
+<!--    }-->
+
+<!--    .user-menu.active {-->
+<!--        display: block;-->
+<!--    }-->
+
+<!--    .nav-link:hover {-->
+<!--        background-color: #cccccc;-->
+<!--    }-->
+
+<!--    /* Sử dụng flexbox cho phần user-area để căn chỉnh email và avatar */-->
+<!--    .user-area {-->
+<!--        display: flex;-->
+<!--        align-items: center;-->
+<!--        justify-content: flex-end;-->
+<!--        position: relative;-->
+<!--    }-->
+
+<!--    /* Tạo khoảng cách giữa email và avatar */-->
+<!--    .user-area span {-->
+<!--        margin-right: 10px;-->
+<!--    }-->
+
+<!--    .user-avatar {-->
+<!--        cursor: pointer;-->
+<!--        border-radius: 50%;-->
+<!--        height: 34px;-->
+<!--        width: 34px;-->
+<!--    }-->
+
+<!--    /* Định dạng cho các mục trong menu */-->
+<!--    .user-menu a {-->
+<!--        display: block;-->
+<!--        padding: 10px;-->
+<!--        color: #333;-->
+<!--        text-decoration: none;-->
+<!--        font-size: 14px;-->
+<!--    }-->
+
+<!--    .user-menu a:hover {-->
+<!--        background-color: #f0f0f0;-->
+<!--    }-->
+<!--</style>-->
 <body>
-
-<aside id="left-panel" class="left-panel">
-    <nav class="navbar navbar-expand-sm navbar-default flex-column main-menu">
-
-        <div class="navbar-header">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu"
-                    aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
-                <i class="fa fa-bars"></i>
-            </button>
-            <a class="navbar-brand text-white" href="/"><img th:src="@{/admin/images/color-1.png}" alt="Logo"></a>
-        </div>
-
-        <div id="main-menu" class="collapse navbar-collapse">
-            <ul class="nav navbar-nav flex-column">
-                <h3 class="menu-title">DANH MỤC</h3><!-- /.menu-title -->
-                <li class="nav-item">
-                    <a class="nav-link active" th:href="@{/admin}"> <i class="menu-icon fas fa-home"></i>Trang chủ </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/admin/pos}"> <i class="menu-icon fa fa-shopping-bag"></i>Bán hàng tại quầy </a>
-                </li>
-                <h3 class="menu-title">QUẢN LÝ</h3><!-- /.menu-title -->
-                <li class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                       aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Quản lý sản phẩm</a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" th:href="@{/admin/product-all}">Sản phẩm</a></li>
-                        <li><a class="dropdown-item" th:href="@{/admin/color-list}">Màu sắc</a></li>
-                        <li><a class="dropdown-item" th:href="@{/admin/material-all}">Chất liệu</a></li>
-                        <li><a class="dropdown-item" th:href="@{/admin/size-all}">Kích cỡ</a></li>
-                        <li><a class="dropdown-item" th:href="@{/admin/brand-all}">Nhãn hàng</a></li>
+<header style="height: 50px; padding: 12px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5 header-left">
+                <div class="hotline1">
+                    <a href="#" class="hotline">Hotline:0000000000</a>
+                </div>
+            </div>
+            <div class="col-md-7 header-right">
+                <div class="a">
+                    <ul>
+                        <li><a href="">Hotline:0000000000</a></li>
+                        <li><a href="">Kiểm tra đơn hàng</a></li>
+                        <li><a href="gioHang.html">Giỏ hàng</a></li>
+                        <li><a href="dangNhap.html">Đăng nhập</a></li>
+                        <li><a href="dangKi.html">Đăng ký</a></li>
                     </ul>
-                </li>
-                <li class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                       aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Quản lý hóa đơn</a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" th:href="@{/admin/bill-list}">Hóa đơn</a></li>
-                        <li><a class="dropdown-item" th:href="@{/admin/bill-return}">Đổi trả</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item dropdown" sec:authorize="hasRole('ADMIN')">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                       aria-expanded="false"> <i class="menu-icon fa fa-american-sign-language-interpreting"></i>Công cụ khuyến mãi</a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" th:href="@{/admin-only/discount-code}">Mã giảm giá</a></li>
-                        <li><a class="dropdown-item" th:href="@{/admin-only/product-discount}">Giảm giá sản phẩm</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                       aria-expanded="false"> <i class="menu-icon fas fa-project-diagram"></i>Thống kê</a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" th:href="@{/admin/thong-ke-doanh-thu}">Doanh Thu</a></li>
-                        <li><a class="dropdown-item" th:href="@{/admin/thong-ke-san-pham}">Sản phẩm</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item dropdown" sec:authorize="hasRole('ADMIN')">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                       aria-expanded="false"> <i class="menu-icon fas fa-user"></i>Quản lý tài khoản</a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" th:href="@{/admin-only/account-employee}">Nhân Viên</a></li>
-                        <li><a class="dropdown-item" th:href="@{/admin-only/account-user}">Khách Hàng</a></li>
-                    </ul>
-                </li>
-                <h3 class="menu-title">Công cụ khác</h3><!-- /.menu-title -->
-                <li class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
-                       aria-expanded="false"> <i class="menu-icon fa fa-glass"></i>Khác</a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" th:href="@{/user_logout}">Đăng xuất</a></li>
-
-                    </ul>
-                </li>
-            </ul>
-        </div><!-- /.navbar-collapse -->
-    </nav>
-</aside><!-- /#left-panel -->
-
-<div id="right-panel" class="right-panel">
-    <header id="header" class="header">
-        <div class="container-fluid d-flex justify-content-between">
-            <a id="menuToggle" class="menutoggle"><i class="fa fa-tasks"></i></a>
-
-            <div class="user-area dropdown">
-                <span sec:authentication="principal.username">abc@gmail.com</span>
-                <a class="dropdown-toggle" id="avatarToggle">
-                    <img class="user-avatar" src="https://png.pngtree.com/png-clipart/20210608/ourlarge/pngtree-dark-gray-simple-avatar-png-image_3418404.jpg" alt="User Avatar">
-                </a>
-                <div class="user-menu">
-                    <a class="nav-link" th:href="@{/}"><i class="fa fa-user"></i> Trang khách</a>
-                    <a class="nav-link" th:href="@{/user_logout}"><i class="fa fa-power-off"></i> Đăng xuất</a>
                 </div>
             </div>
         </div>
+    </div>
+</header>
+<!---->
+<div style="width: auto;height: auto;background-color: white;" >
+    <section class="container">
+        <nav class="navbar bg-body-tertiary">
+            <div class="container-fluid">
+                <p>
+                <form class="d-flex" role="search" style="margin-top: 50px;margin-bottom: 50px">
+                    <input style="width: 600px;" class="form-control me-2" type="search" placeholder="Search" aria-label="Search" >
+                    <button class="btn btn-outline-success" type="submit" style="background-color: black;"><img src="imgs/search.svg" alt="" width="65px" height="30px" style="margin: 0%;"></button>
+                </form>
+                </p>
+            </div>
+        </nav>
+    </section>
+</div>
+<!--1-->
+<div class="background">
+    <div class="container">
+        <ul class="nav">
+            <li class="nav-item-s">
+                <a class="nav-link active" aria-current="page" href="#">Trang Chủ</a>
+            </li>
+            <li class="nav-item-s">
+                <a class="nav-link" href="gioiThieu.html">Giới Thiệu</a>
+            </li>
+            <li class="nav-item-s">
+                <a class="nav-link" href="sanPham.html">Sản Phẩm</a>
+            </li>
+            <li class="nav-item-s">
+                <a class="nav-link "href="#">Tin Tức</a>
+            </li>
+            <li class="nav-item-s">
+                <a class="nav-link "href="#">Liên Hệ</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+<!---->
+<div id="carouselExampleDark" class="carousel carousel-dark slide">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner" >
+        <div class="carousel-item active" data-bs-interval="10000">
+            <img src="imgs/banner01.jpg" class="d-block" alt="..."style="margin: auto;width: 1290px; height:750px">
+            <div class="carousel-caption d-none d-md-block">
+            </div>
+        </div>
+        <div class="carousel-item" data-bs-interval="2000">
+            <img src="imgs/banner02.jpg" class="d-block" alt="..." style="margin: auto;width: 1290px; height:750px">
+            <div class="carousel-caption d-none d-md-block">
+            </div>
+        </div>
+        <div class="carousel-item">
+            <img src="imgs/banner01.jpg" class="d-block" alt="..." style="margin: auto;width: 1290px; height:750px">
+            <div class="carousel-caption d-none d-md-block">
+            </div>
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+<!---->
+<br>
+<br>
+<div class="container">
+    <div style="width: 100%;height: 50px;background-color: antiquewhite;padding: 5px;text-align: center;"><h3>Danh mục sản phẩm</h3></div>
+</div>
+<br>
+<!---->
+<div class="container">
+    <div class="row">
+        <div class="col-md-3 col-3">
+            <div class="thumbnail">
+                <img class="sp"  src="imgs/clothes-type1-02.jpg" alt="Lights"
+                     style="width: 100%">
+                <div class="caption">
+                    <h2><a href="">Thời trang công sở</a></h2>
+                </div>
+            </div>
+        </div>
+        <!----------->
+        <div class="col-md-3 col-3">
+            <div class="thumbnail">
+                <img class="sp"  src="imgs/clothes-type1-02.jpg" alt="Lights"
+                     style="width: 100%">
+                <div class="caption">
+                    <h2><a href="">Thời trang công sở</a></h2>
+                </div>
+            </div>
+        </div>
+        <!----------->
+        <div class="col-md-3 col-3">
+            <div class="thumbnail">
+                <img class="sp"  src="imgs/clothes-type1-02.jpg" alt="Lights"
+                     style="width: 100%">
+                <div class="caption">
+                    <h2><a href="">Thời trang công sở</a></h2>
+                </div>
+            </div>
+        </div>
+        <!----------->
+        <div class="col-md-3 col-3">
+            <div class="thumbnail">
+                <img class="sp"  src="imgs/clothes-type1-02.jpg" alt="Lights"
+                     style="width: 100%">
+                <div class="caption">
+                    <h2><a href="">Thời trang công sở</a></h2>
+                </div>
+            </div>
+        </div>
+        <!----------->
+    </div>
+</div>
+
+<!---->
+<div class="container">
+    <div style="width: 100%;height: 50px;background-color: antiquewhite;padding: 5px;text-align: center;"><h3>Sản phẩm bán chạy</h3></div>
+</div>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3 col-3">
+            <div class="thumbnail">
+                <img class="sp"  src="imgs/clothes-type1-02.jpg" alt="Lights" style="width: 100%">
+                <div class="caption">
+                    <p>
+                        klajfklajsdf;kl
+                    </p>
+                    <div class="container">
+                        <p>
+                        <p class="goc" >329,000đ <del style="padding-left: 15px; color: black;">400,000đ</del></p>
+                        </p>
+                    </div>
+                    <button style="border-color:red ;"><img src="" style="width: 20px;" alt="">Mua</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-3">
+            <div class="thumbnail">
+                <img class="sp"  src="imgs/clothes-type1-02.jpg" alt="Lights" style="width: 100%">
+                <div class="caption">
+                    <p>
+                        klajfklajsdf;kl
+                    </p>
+                    <div class="container">
+                        <p>
+                        <p class="goc" >329,000đ <del style="padding-left: 15px; color: black;">400,000đ</del></p>
+                        </p>
+                    </div>
+                    <button style="border-color:red ;"><img src="" style="width: 20px;" alt="">Mua</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-3">
+            <div class="thumbnail">
+                <img class="sp"  src="imgs/clothes-type1-02.jpg" alt="Lights" style="width: 100%">
+                <div class="caption">
+                    <p>
+                        klajfklajsdf;kl
+                    </p>
+                    <div class="container">
+                        <p>
+                        <p class="goc" >329,000đ <del style="padding-left: 15px; color: black;">400,000đ</del></p>
+                        </p>
+                    </div>
+                    <button style="border-color:red ;"><img src="" style="width: 20px;" alt="">Mua</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-3">
+            <div class="thumbnail">
+                <img class="sp"  src="imgs/clothes-type1-02.jpg" alt="Lights" style="width: 100%">
+                <div class="caption">
+                    <p>
+                        klajfklajsdf;kl
+                    </p>
+                    <div class="container">
+                        <p>
+                        <p class="goc" >329,000đ <del style="padding-left: 15px; color: black;">400,000đ</del></p>
+                        </p>
+                    </div>
+                    <button style="border-color:red ;"><img src="" style="width: 20px;" alt="">Mua</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<!---->
+<div class="container">
+    <div style="width: 100%;height: 50px;background-color: antiquewhite;padding: 5px;text-align: center;"><h3><a href="">Xem thêm nhiều sản phẩm</a></h3></div>
+</div>
+<!---->
+
+<!-- Footer -->
+<footer class="text-center text-lg-start bg-light text-muted">
+    <!-- Section: Social media -->
+
+    <!-- Left -->
+
+    <!-- Right -->
+    <div>
+        <a href="" class="me-4 text-reset">
+            <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="" class="me-4 text-reset">
+            <i class="fab fa-twitter"></i>
+        </a>
+        <a href="" class="me-4 text-reset">
+            <i class="fab fa-google"></i>
+        </a>
+        <a href="" class="me-4 text-reset">
+            <i class="fab fa-instagram"></i>
+        </a>
+        <a href="" class="me-4 text-reset">
+            <i class="fab fa-linkedin"></i>
+        </a>
+        <a href="" class="me-4 text-reset">
+            <i class="fab fa-github"></i>
+        </a>
+    </div>
+    <!-- Right -->
+    </section>
+    <!-- Section: Social media -->
+
+    <!-- Section: Links  -->
+    <section class="">
+        <div class="container text-center text-md-start mt-5">
+            <!-- Grid row -->
+            <div class="row mt-3">
+                <!-- Grid column -->
+                <!-- Grid column -->
+                <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                    <!-- Links -->
+                    <h6 class="text-uppercase fw-bold mb-4">
+                        GIỚI THIỆU
+                    </h6>
+                    <p>
+                        <a href="#!" class="text-reset">Về chúng tôi</a>
+                    </p>
+                    <p>
+                        <a href="#!" class="text-reset">Lĩnh vực hoạt động</a>
+                    </p>
+                    <p>
+                        <a href="#!" class="text-reset">Hỏi đáp</a>
+                    </p>
+                    <p>
+                        <a href="#!" class="text-reset">Quy chế hoạt động</a>
+                    </p>
+                    <p>
+                        <a href="#!" class="text-reset">Tuyển dụng</a>
+                    </p>
+                </div>
+                <!-- Grid column -->
+
+                <!-- Grid column -->
+                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                    <!-- Links -->
+                    <h6 class="text-uppercase fw-bold mb-4">
+                        TRỢ GIÚP
+                    </h6>
+                    <p>
+                        <a href="https://prod.support.services.microsoft.com/vi-vn/office/show-size-or-dimensions-of-shapes-in-visio-98fb5a5a-baab-41f6-b838-67c031ffa656" class="text-reset">Hướng dẫn thanh toán</a>
+                    </p>
+                    <p>
+                        <a href="#!" class="text-reset">Quy định đổi trả</a>
+                    </p>
+                    <p>
+                        <a href="#!" class="text-reset">Quy định thảo luận</a>
+                    </p>
+                    <p>
+                        <a href="#!" class="text-reset">Chính sách bảo mật</a>
+                    </p>
+                    <p>
+                        <a href="#!" class="text-reset">Chính sách bán hàng</a>
+                    </p>
+                </div>
+                <!-- Grid column -->
+                <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                    <!-- Content -->
+                    <h6 class="text-uppercase fw-bold mb-4">
+                        <i class="fas fa-gem me-3"></i>THÔNG TIN CÔNG TY
+                    </h6>
+                    <p>
+                        CÔNG TY TNHH PHÁT TRIỂN CÔNG NGHỆ RUNTIME
+                        <br>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house" viewBox="0 0 16 16" >
+                            <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z"/>
+                        </svg>
+                        5/12A Quang Trung, P.14, Q.Gò Vấp, TP.HCM
+                        <br>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-envelope-at" viewBox="0 0 16 16">
+                            <path d="M2 2a2 2 0 0 0-2 2v8.01A2 2 0 0 0 2 14h5.5a.5.5 0 0 0 0-1H2a1 1 0 0 1-.966-.741l5.64-3.471L8 9.583l7-4.2V8.5a.5.5 0 0 0 1 0V4a2 2 0 0 0-2-2H2Zm3.708 6.208L1 11.105V5.383l4.708 2.825ZM1 4.217V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v.217l-7 4.2-7-4.2Z"/>
+                            <path d="M14.247 14.269c1.01 0 1.587-.857 1.587-2.025v-.21C15.834 10.43 14.64 9 12.52 9h-.035C10.42 9 9 10.36 9 12.432v.214C9 14.82 10.438 16 12.358 16h.044c.594 0 1.018-.074 1.237-.175v-.73c-.245.11-.673.18-1.18.18h-.044c-1.334 0-2.571-.788-2.571-2.655v-.157c0-1.657 1.058-2.724 2.64-2.724h.04c1.535 0 2.484 1.05 2.484 2.326v.118c0 .975-.324 1.39-.639 1.39-.232 0-.41-.148-.41-.42v-2.19h-.906v.569h-.03c-.084-.298-.368-.63-.954-.63-.778 0-1.259.555-1.259 1.4v.528c0 .892.49 1.434 1.26 1.434.471 0 .896-.227 1.014-.643h.043c.118.42.617.648 1.12.648Zm-2.453-1.588v-.227c0-.546.227-.791.573-.791.297 0 .572.192.572.708v.367c0 .573-.253.744-.564.744-.354 0-.581-.215-.581-.8Z"/>
+                        </svg>
+                        Email: infor@runtime.vn
+                        <br>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-telephone" viewBox="0 0 16 16">
+                            <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
+                        </svg>
+                        Phone: (08) 66 85 85 38
+                    </p>
+                </div>
+                <!-- Grid column -->
+
+
+                <!-- Grid column -->
+                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                    <!-- Links -->
+                    <h6 class="text-uppercase fw-bold mb-4">Fage Của Chúng Tôi</h6>
+                    <br>
+                    <p>
+                        <button>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
+                                <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
+                            </svg>
+                        </button>
+                        <button>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-google" viewBox="0 0 16 16">
+                                <path d="M15.545 6.558a9.42 9.42 0 0 1 .139 1.626c0 2.434-.87 4.492-2.384 5.885h.002C11.978 15.292 10.158 16 8 16A8 8 0 1 1 8 0a7.689 7.689 0 0 1 5.352 2.082l-2.284 2.284A4.347 4.347 0 0 0 8 3.166c-2.087 0-3.86 1.408-4.492 3.304a4.792 4.792 0 0 0 0 3.063h.003c.635 1.893 2.405 3.301 4.492 3.301 1.078 0 2.004-.276 2.722-.764h-.003a3.702 3.702 0 0 0 1.599-2.431H8v-3.08h7.545z"/>
+                            </svg>
+                        </button>
+                        <button>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-youtube" viewBox="0 0 16 16">
+                                <path d="M8.051 1.999h.089c.822.003 4.987.033 6.11.335a2.01 2.01 0 0 1 1.415 1.42c.101.38.172.883.22 1.402l.01.104.022.26.008.104c.065.914.073 1.77.074 1.957v.075c-.001.194-.01 1.108-.082 2.06l-.008.105-.009.104c-.05.572-.124 1.14-.235 1.558a2.007 2.007 0 0 1-1.415 1.42c-1.16.312-5.569.334-6.18.335h-.142c-.309 0-1.587-.006-2.927-.052l-.17-.006-.087-.004-.171-.007-.171-.007c-1.11-.049-2.167-.128-2.654-.26a2.007 2.007 0 0 1-1.415-1.419c-.111-.417-.185-.986-.235-1.558L.09 9.82l-.008-.104A31.4 31.4 0 0 1 0 7.68v-.123c.002-.215.01-.958.064-1.778l.007-.103.003-.052.008-.104.022-.26.01-.104c.048-.519.119-1.023.22-1.402a2.007 2.007 0 0 1 1.415-1.42c.487-.13 1.544-.21 2.654-.26l.17-.007.172-.006.086-.003.171-.007A99.788 99.788 0 0 1 7.858 2h.193zM6.4 5.209v4.818l4.157-2.408L6.4 5.209z"/>
+                            </svg>
+                        </button>
+                        <button>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-twitter" viewBox="0 0 16 16">
+                                <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/>
+                            </svg>
+                        </button>
+
+                    </p>
+                    <a href="https://www.facebook.com/"></a>
+                </div>
+                <!-- Grid column -->
+            </div>
+            <!-- Grid row -->
+        </div>
+    </section>
+    <!-- Section: Links  -->
+
+    <!-- Copyright -->
+
+    <!-- Copyright -->
+</footer>
+<!-- Footer -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+<!--<aside id="left-panel" class="left-panel">-->
+<!--    <nav class="navbar navbar-expand-sm navbar-default">-->
+
+<!--        <div class="navbar-header">-->
+<!--            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu"-->
+<!--                    aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--                <i class="fa fa-bars"></i>-->
+<!--            </button>-->
+<!--            <a class="navbar-brand text-white" style="background-color: #272c33" href="/">< ></a>-->
+<!--            <a class="navbar-brand hidden" href="/"><></a>-->
+<!--        </div>-->
+
+<!--        <div id="main-menu" class="main-menu collapse navbar-collapse">-->
+<!--            <ul class="nav navbar-nav">-->
+<!--                <li class="active">-->
+<!--                    <a > <i class="menu-icon fas fa-home"></i>Trang chủ </a>-->
+<!--                </li>-->
+<!--                <li class="active">-->
+<!--                    <a > <i class="menu-icon fa fa-shopping-bag"></i>Bán hàng tại quầy </a>-->
+<!--                </li>-->
+<!--                <h3 class="menu-title">QUẢN LÝ</h3>&lt;!&ndash; /.menu-title &ndash;&gt;-->
+<!--                <li class="menu-item-has-children dropdown">-->
+<!--                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"-->
+<!--                       aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>Quản lý sản phẩm</a>-->
+<!--                    <ul class="sub-menu children dropdown-menu">-->
+<!--                        <li><i class="fas fa-tshirt"></i><a>Sản phẩm</a></li>-->
+<!--                        <li><i class="fas fa-palette"></i><a >Màu sắc</a></li>-->
+<!--                        <li><i class="fab fa-cotton-bureau"></i><>Chất liệu</a></li>-->
+<!--                        <li><i class="fas fa-ruler"></i><a >Kích cỡ</a></li>-->
+<!--                        <li><i class="far fa-copyright"></i><a>Nhãn hàng</a></li>-->
+<!--                    </ul>-->
+<!--                </li>-->
+<!--                <li class="menu-item-has-children dropdown">-->
+<!--                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"-->
+<!--                       aria-expanded="false"> <i class="menu-icon fa fa-table"></i>Quản lý hóa đơn</a>-->
+<!--                    <ul class="sub-menu children dropdown-menu">-->
+<!--                        <li><i class="fas fa-file-invoice"></i><a>Hóa đơn</a></li>-->
+<!--                        <li><i class="fas fa-exchange-alt"></i><a>Đổi trả</a></li>-->
+
+<!--                    </ul>-->
+<!--                </li>-->
+<!--                <li class="menu-item-has-children dropdown" sec:authorize="hasRole('ADMIN')">-->
+<!--                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"-->
+<!--                       aria-expanded="false"> <i class="menu-icon fa fa-american-sign-language-interpreting"></i>Công cụ khuyến mãi</a>-->
+<!--                    <ul class="sub-menu children dropdown-menu">-->
+<!--                        <li><i class="fa fa-hand-peace-o"></i><a >Mã giảm giá</a></li>-->
+<!--                        <li><i class="fas fa-tag"></i><a>Giảm giá sản phẩm</a></li>-->
+<!--                    </ul>-->
+<!--                </li>-->
+
+<!--&lt;!&ndash;                                <li class="menu-item-has-children dropdown" sec:authorize="hasRole('ADMIN')">&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"&ndash;&gt;-->
+<!--&lt;!&ndash;                                       aria-expanded="false"> <i class="menu-icon fas fa-shopping-basket"></i>Giao dịch</a>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <ul class="sub-menu children dropdown-menu">&ndash;&gt;-->
+<!--&lt;!&ndash;                &lt;!&ndash;                        <li><i class="fas fa-cash-register"></i><a th:href="@{/admin/transaction}">Theo dõi thanh toán online</a></li>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;                                        <li><i class="fas fa-undo"></i><a th:href="@{/admin-only/need-refund-mng}">Đơn hoàn tiền</a></li>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    </ul>&ndash;&gt;-->
+<!--&lt;!&ndash;                                </li>&ndash;&gt;-->
+
+<!--                <li class="menu-item-has-children dropdown">-->
+<!--                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"-->
+<!--                       aria-expanded="false"> <i class="menu-icon fas fa-project-diagram"></i>Thống kê</a>-->
+<!--                    <ul class="sub-menu children dropdown-menu">-->
+<!--                        <li><i class="fas fa-chart-line"></i><a >Doanh Thu</a></li>-->
+<!--                        <li><i class="fas fa-chart-pie"></i><a >Sản phẩm</a></li>-->
+<!--                    </ul>-->
+<!--                </li>-->
+
+<!--                <li class="menu-item-has-children dropdown" sec:authorize="hasRole('ADMIN')">-->
+<!--                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"-->
+<!--                       aria-expanded="false"> <i class="menu-icon fas fa-user"></i>Quản lý tài khoản</a>-->
+<!--                    <ul class="sub-menu children dropdown-menu">-->
+<!--                        <li><i class="fas fa-chart-line"></i><a >Nhân Viên</a></li>-->
+<!--                        <li><i class="fas fa-chart-pie"></i><a >Khách Hàng</a></li>-->
+<!--                    </ul>-->
+<!--                </li>-->
+
+<!--                <h3 class="menu-title">Công cụ khác</h3>&lt;!&ndash; /.menu-title &ndash;&gt;-->
+<!--                <li class="menu-item-has-children dropdown">-->
+<!--                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"-->
+<!--                       aria-expanded="false"> <i class="menu-icon fa fa-glass"></i>Khác</a>-->
+<!--                    <ul class="sub-menu children dropdown-menu">-->
+<!--                        <li><i class="menu-icon fa fa-sign-in"></i><a >Đăng xuất</a></li>-->
+<!--                        <li><i class="menu-icon fa fa-paper-plane"></i><a >Cập nhật thông tin</a>-->
+<!--                        </li>-->
+<!--                    </ul>-->
+<!--                </li>-->
+<!--            </ul>-->
+<!--        </div>&lt;!&ndash; /.navbar-collapse &ndash;&gt;-->
+<!--    </nav>-->
+<!--</aside>&lt;!&ndash; /#left-panel &ndash;&gt;-->
+
+<!--<div id="right-panel" class="right-panel">-->
+<!--    &lt;!&ndash; Header&ndash;&gt;-->
+<!--    <header id="header" class="header">-->
+<!--        <div class="col-sm-7">-->
+<!--            <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>-->
+<!--        </div>-->
+
+<!--        <div class="col-sm-5">-->
+<!--            &lt;!&ndash; Phần user-area căn chỉnh lại với flexbox &ndash;&gt;-->
+<!--            <div class="user-area dropdown float-right">-->
+<!--                &lt;!&ndash; Hiển thị email người dùng &ndash;&gt;-->
+<!--&lt;!&ndash;                <span sec:authentication="principal.username">abc@gmail.com</span>&ndash;&gt;-->
+
+<!--                &lt;!&ndash; Avatar người dùng (đã loại bỏ href="#" để tránh chuyển trang) &ndash;&gt;-->
+<!--                <a class="dropdown-toggle" id="avatarToggle">-->
+<!--                    <img class="user-avatar" src="https://png.pngtree.com/png-clipart/20210608/ourlarge/pngtree-dark-gray-simple-avatar-png-image_3418404.jpg" alt="User Avatar">-->
+<!--                </a>-->
+
+<!--                 Menu khi nhấp vào avatar-->
+<!--                <div class="user-menu">-->
+<!--                    <a class="nav-link" ><i class="fa fa-user"></i> Trang khách</a>-->
+<!--                    <a class="nav-link" ><i class="fa fa-power-off"></i> Đăng xuất</a>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            <style>-->
+<!--                .user-menu {-->
+<!--                    display: none;-->
+<!--                    position: absolute;-->
+<!--                    top: 50px;-->
+<!--                    right: 10px;-->
+<!--                    background-color: white;-->
+<!--                    border: 1px solid #cccccc;-->
+<!--                    border-radius: 5px;-->
+<!--                    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);-->
+<!--                    z-index: 10;-->
+<!--                    width: 150px;-->
+<!--                }-->
+
+<!--                .user-menu.active {-->
+<!--                    display: block;-->
+<!--                }-->
+
+<!--                .nav-link:hover {-->
+<!--                    background-color: #cccccc;-->
+<!--                }-->
+
+<!--                .user-area {-->
+<!--                    display: flex;-->
+<!--                    align-items: center;-->
+<!--                    justify-content: flex-end;-->
+<!--                    position: relative;-->
+<!--                }-->
+
+<!--                .user-area span {-->
+<!--                    margin-right: 10px;-->
+<!--                }-->
+
+<!--                .user-avatar {-->
+<!--                    cursor: pointer;-->
+<!--                    border-radius: 50%;-->
+<!--                    height: 34px;-->
+<!--                    width: 34px;-->
+<!--                }-->
+
+<!--                .user-menu a {-->
+<!--                    display: block;-->
+<!--                    padding: 10px;-->
+<!--                    color: #333;-->
+<!--                    text-decoration: none;-->
+<!--                    font-size: 14px;-->
+<!--                }-->
+
+<!--                .user-menu a:hover {-->
+<!--                    background-color: #f0f0f0;-->
+<!--                }-->
+<!--            </style>-->
+
+<!--        </div>-->
     </header>
 
-    <div class="content">
+
+    <div class="content p-4">
+
         <div layout:fragment="content">
-            <!-- Nội dung chính hiển thị ở đây -->
+
         </div>
     </div>
 </div>
 
-<script>
-    // Toggle menu khi nhấp vào avatar
-    document.querySelector('#avatarToggle').addEventListener('click', function (event) {
-        event.preventDefault(); // Ngăn chặn hành vi mặc định của liên kết
-        document.querySelector('.user-menu').classList.toggle('active');
-    });
+<th:block th:replace="~{fragments-admin::script}">
 
-    // Đóng menu khi nhấp ra ngoài
-    document.addEventListener('click', function(event) {
-        const isClickInsideUserArea = document.querySelector('.user-area').contains(event.target);
-        if (!isClickInsideUserArea) {
-            document.querySelector('.user-menu').classList.remove('active');
-        }
-    });
-</script>
+</th:block>
+
+<!--<script>-->
+<!--    // Toggle menu khi nhấp vào avatar-->
+<!--    document.querySelector('#avatarToggle').addEventListener('click', function (event) {-->
+<!--        event.preventDefault(); // Ngăn chặn hành vi mặc định của liên kết-->
+<!--        document.querySelector('.user-menu').classList.toggle('active');-->
+<!--    });-->
+
+<!--    // Đóng menu khi nhấp ra ngoài-->
+<!--    document.addEventListener('click', function(event) {-->
+<!--        const isClickInsideUserArea = document.querySelector('.user-area').contains(event.target);-->
+<!--        if (!isClickInsideUserArea) {-->
+<!--            document.querySelector('.user-menu').classList.remove('active');-->
+<!--        }-->
+<!--    });-->
+
+<!--</script>-->
+<th:block layout:fragment="bottom_link"></th:block>
+
 </body>
 </html>

@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface AddressShippingRepository extends JpaRepository<AddressShipping, Long> {
     List<AddressShipping> findAllByCustomer_Account_Id(Long accountId);
-    // dấu ấn rồng thiêng Hồ Văn Trình - PH34394
+
 }

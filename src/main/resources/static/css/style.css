@@ -1,0 +1,442 @@
+.text-uppercase1 {
+  font-size: 3rem; /* Kích thước chữ lớn */
+  text-transform: uppercase; /* Viết hoa chữ */
+  font-weight: bold; /* Chữ đậm */
+}
+
+.btn-link {
+  color: #000;
+  font-weight: bold;
+}
+
+.btn-link:hover {
+  color: #555; /* Màu chữ đậm hơn khi hover */
+  text-decoration: underline; /* Gạch chân khi hover */
+}
+
+.text-uppercase2 {
+  color: #000; /* Màu chữ đen */
+  font-weight: bold; /* Chữ đậm */
+  text-transform: uppercase; /* Chữ in hoa */
+  text-decoration: none; /* Loại bỏ gạch chân */
+  background-color: transparent; /* Nền trong suốt */
+  border: none; /* Loại bỏ viền nút */
+  padding: 0; /* Loại bỏ padding để giống với văn bản */
+}
+
+.text-uppercase2:hover {
+  color: #555; /* Màu chữ đậm hơn khi hover */
+  text-decoration: underline; /* Gạch chân khi hover */
+}
+
+/* Slider container */
+.slider {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  margin: auto;
+}
+
+/* Slide container */
+.slides {
+  display: flex;
+  transition: transform 0.5s ease-in-out; /* Hiệu ứng trượt mượt */
+}
+
+/* Slide item */
+.slide {
+  flex: 0 0 25%; /* Mỗi slide chiếm 25% chiều rộng */
+  box-sizing: border-box;
+  padding: 10px;
+  text-align: center;
+}
+
+/* Product container */
+/* Container của sản phẩm */
+.product-item {
+  position: relative; /* Đặt vị trí tương đối để căn chỉnh chữ nằm đè lên ảnh */
+  overflow: hidden; /* Ẩn phần vượt ngoài của ảnh */
+  border-radius: 10px; /* Bo góc mềm mại */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Hiệu ứng đổ bóng */
+  transition: transform 0.3s ease-in-out;
+}
+
+.product-item:hover {
+  transform: scale(1.05); /* Phóng to toàn bộ sản phẩm khi hover */
+}
+
+/* Hình ảnh sản phẩm */
+.product-item .image-holder img {
+  width: 100%;
+  height: auto;
+  transition: transform 0.3s ease-in-out; /* Hiệu ứng phóng to ảnh */
+}
+
+/* Khi hover vào sản phẩm, ảnh phóng to */
+.product-item:hover .image-holder img {
+  transform: scale(1.1);
+}
+
+/* Chữ đè lên ảnh */
+.product-title {
+  position: absolute; /* Đặt chữ đè lên ảnh */
+  bottom: 10%; /* Căn ở vị trí cách đáy ảnh 10% */
+  left: 50%; /* Căn giữa theo chiều ngang */
+  transform: translateX(-50%); /* Đưa tâm chữ vào giữa */
+  z-index: 2; /* Đảm bảo chữ nằm trên ảnh */
+  font-size: 18px; /* Kích thước chữ */
+  font-weight: bold; /* In đậm chữ */
+  color: #000;
+  background-color: rgba(0, 0, 0, 0.6); /* Nền đen mờ */
+  padding: 5px 10px; /* Khoảng cách bên trong chữ */
+  border-radius: 5px; /* Bo góc mềm mại */
+  opacity: 1; /* Luôn hiển thị chữ */
+  transition: transform 0.3s ease-in-out; /* Hiệu ứng phóng to chữ */
+}
+
+/* Khi hover, chữ phóng to */
+.product-item:hover .product-title {
+  transform: translateX(-50%) scale(1.2); /* Phóng to chữ khi hover */
+}
+
+/* Giá sản phẩm */
+.product-price {
+  text-align: center;
+  font-size: 14px;
+  color: #555;
+  margin-top: 10px;
+}
+
+
+/* Giá sản phẩm (không thay đổi khi hover) */
+.product-price {
+  text-align: center;
+  font-size: 14px;
+  color: #555;
+  margin-top: 10px;
+}
+
+
+button.prev,
+button.next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  z-index: 10;
+  border-radius: 50%;
+  font-size: 18px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s ease;
+}
+
+
+button.next:after {
+  transform: rotate(-45deg); /* Mũi tên phải */
+}
+
+button.prev:after {
+  transform: rotate(135deg); /* Mũi tên trái */
+}
+
+button.prev:hover,
+button.next:hover {
+  background: rgba(0, 0, 0, 0.8); /* Màu khi hover */
+}
+
+/* Mũi tên trái */
+button.prev::before {
+  content: '\276E'; /* Ký tự Unicode cho mũi tên trái */
+  font-size: 16px;
+  color: #fff;
+}
+
+/* Mũi tên phải */
+button.next::before {
+  content: '\276F'; /* Ký tự Unicode cho mũi tên phải */
+  font-size: 16px;
+  color: #fff;
+}
+
+button.prev {
+  left: 10px; /* Căn lề trái */
+}
+
+button.next {
+  right: 10px; /* Căn lề phải */
+}
+
+
+/* Khôi phục hiển thị bộ lọc sản phẩm */
+.filter-button {
+  display: inline-block;
+  padding: 8px 16px;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  color: #000;
+  text-transform: uppercase;
+  cursor: pointer;
+  margin: 5px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.filter-button:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+/* Vùng chứa tổng thể */
+.collection {
+  background-color: #f8f9fa; /* Màu nền sáng - tương ứng với bg-light */
+  position: relative;
+  padding: 3rem 0; /* Khoảng cách trên và dưới (py-5) */
+}
+
+/* Tiêu đề lớn */
+.collection .title-xlarge {
+  font-size: 3rem; /* Kích thước chữ lớn */
+  text-transform: uppercase; /* Viết hoa chữ */
+  font-weight: bold; /* Chữ đậm */
+}
+
+/* Bố cục các mục trong collection */
+.collection .collection-item {
+  display: flex;
+  flex-wrap: wrap; /* Đảm bảo các cột nằm ngang và xuống dòng khi hẹp */
+  margin: 2rem 0; /* Khoảng cách giữa các mục */
+}
+
+/* Ảnh sản phẩm */
+.collection .image-holder img {
+  width: 100%;
+  height: auto;
+  object-fit: cover; /* Cắt ảnh vừa khung nếu cần */
+  border-radius: 10px; /* Bo góc ảnh */
+}
+
+/* Nội dung text */
+.collection .collection-content {
+  padding: 2rem; /* Khoảng cách trong nội dung */
+  margin: 1rem;
+  background-color: #fff; /* Nền trắng */
+  border-radius: 10px; /* Bo góc nền */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ */
+}
+
+/* Tiêu đề phần Classic Winter Collection */
+.collection .element-title {
+  text-transform: uppercase; /* Viết hoa chữ */
+  font-weight: bold; /* Chữ đậm */
+  margin-bottom: 1rem; /* Khoảng cách dưới tiêu đề */
+  font-size: 2rem; /* Kích thước tiêu đề */
+  color: #333; /* Màu chữ đậm */
+}
+
+/* Nút mua sắm */
+.collection .btn {
+  background-color: #343a40; /* Màu nền đen tối (btn-dark) */
+  color: #fff; /* Chữ trắng */
+  text-transform: uppercase; /* Chữ hoa */
+  border: none; /* Loại bỏ viền */
+  padding: 0.5rem 1.5rem; /* Khoảng cách trong nút */
+  border-radius: 5px; /* Bo góc nhẹ */
+  text-align: center; /* Căn giữa chữ */
+  transition: background-color 0.3s ease-in-out; /* Hiệu ứng chuyển màu */
+}
+
+/* Hiệu ứng khi hover vào nút */
+.collection .btn:hover {
+  background-color: #212529; /* Màu nền tối hơn khi hover */
+}
+
+/* Phần Instagram */
+.instagram {
+  position: relative;
+  background-color: #f8f9fa; /* Màu nền sáng */
+  padding-top: 50px; /* Khoảng cách phía trên */
+  padding-bottom: 100px; /* Khoảng cách phía dưới để có đủ chỗ cho nút */
+}
+
+/* Hình ảnh Instagram */
+.instagram .insta-item {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.instagram .insta-item img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 5px; /* Bo góc hình ảnh */
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Hiệu ứng khi hover hình ảnh */
+.instagram .insta-item img:hover {
+  transform: scale(1.05); /* Phóng to nhẹ */
+}
+
+/* Lớp phủ mờ khi hover */
+.instagram .insta-item a:after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4); /* Lớp phủ đen mờ */
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.instagram .insta-item a:hover:after {
+  opacity: 1; /* Hiện lớp phủ khi hover */
+}
+
+/* Nút Follow */
+.instagram .btn {
+  position: absolute;
+  bottom: -40px; /* Đặt nút cách hình ảnh một khoảng nhỏ */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #000; /* Nút màu đen */
+  color: #fff;
+  padding: 10px 30px;
+  border: none;
+  font-size: 14px;
+  text-transform: uppercase;
+  border-radius: 5px; /* Bo góc nút */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Đổ bóng nhẹ */
+  transition: background-color 0.3s ease-in-out;
+}
+
+.instagram .btn:hover {
+  background-color: #333; /* Màu nút tối hơn khi hover */
+}
+
+/* Phần chính */
+.categories {
+  padding: 50px 0; /* Khoảng cách trên dưới */
+  background-color: #f8f9fa; /* Màu nền nhạt */
+}
+
+/* Danh mục - Item */
+.cat-item {
+  position: relative;
+  margin-bottom: 30px; /* Khoảng cách giữa các mục */
+  text-align: center; /* Căn giữa nội dung */
+}
+
+.cat-item .image-holder img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px; /* Bo góc hình ảnh */
+  transition: transform 0.3s ease-in-out; /* Hiệu ứng phóng to */
+}
+
+/* Hiệu ứng phóng to khi hover */
+.cat-item .image-holder img:hover {
+  transform: scale(1.1); /* Phóng to hình ảnh */
+}
+
+
+
+/* Căn chỉnh tiêu đề New Collections */
+/* Tiêu đề chính New Collections */
+.new-collections-title {
+  text-align: center;
+  font-family: 'Playfair Display', serif; /* Font chữ sang trọng */
+  font-size: 3.5rem; /* Kích thước lớn */
+  font-weight: 700; /* Đậm */
+  color: #000; /* Màu chữ đen */
+  margin-top: 50px; /* Khoảng cách phía trên */
+  margin-bottom: 20px; /* Khoảng cách phía dưới */
+  line-height: 1.2; /* Tăng khoảng cách dòng */
+}
+
+/* Nội dung mô tả bên dưới */
+.new-collections-description {
+  text-align: center;
+  font-family: 'Roboto', sans-serif; /* Font chữ hiện đại */
+  font-size: 1.2rem; /* Kích thước vừa phải */
+  color: #555; /* Màu chữ xám nhạt */
+  max-width: 800px; /* Giới hạn chiều rộng nội dung */
+  margin: 0 auto 40px; /* Căn giữa và tạo khoảng cách dưới */
+  line-height: 1.8; /* Tăng khoảng cách dòng */
+}
+
+/* Tổng quan */
+.container {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  color: #333;
+  padding: 20px;
+}
+
+.container ul {
+  list-style-type: disc;
+  padding-left: 20px;
+  margin-bottom: 20px;
+}
+
+.container ul li {
+  margin-bottom: 10px;
+}
+
+/* Đoạn văn */
+.container p {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+/* Bảng hoặc ví dụ minh họa */
+.container ul ul {
+  list-style-type: circle;
+  margin-top: 10px;
+  padding-left: 20px;
+}
+
+/* Sidebar */
+.side-menu {
+  border: 1px solid #ddd;
+  padding: 15px;
+  background: #f9f9f9;
+}
+
+.side-menu h4 {
+  font-size: 20px;
+  color: #111;
+  border-bottom: 2px solid #007bff;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+}
+
+.side-menu ul {
+  list-style: none;
+  padding: 0;
+}
+
+.side-menu ul li {
+  margin-bottom: 10px;
+}
+
+.side-menu ul li a {
+  text-decoration: none;
+  color: #007bff;
+  transition: color 0.3s;
+}
+
+.side-menu ul li a:hover {
+  color: #0056b3;
+}
+
+
+

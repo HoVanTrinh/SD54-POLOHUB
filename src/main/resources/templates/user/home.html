@@ -3,7 +3,7 @@
       layout:decorate="~{user/layout-user.html}"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <body>
-<h1>Dấu ấn rồng thiêng Hồ Văn Trình - PH34394</h1>
+<h1>Hồ Văn Trình</h1>
 <a th:href="@{/user-login}" th:unless="${#authorization.expression('isAuthenticated()')}">Đăng nhập</a>
 <br>
 <a th:href="@{/admin-login}" th:unless="${#authorization.expression('isAuthenticated()')}">admin Đăng nhập</a>
