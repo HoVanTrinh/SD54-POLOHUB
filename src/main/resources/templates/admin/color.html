@@ -11,18 +11,18 @@
 <body>
 <div layout:fragment="content">
 
-    <h4>Quản lý kích cỡ</h4>
-<!--    <a href="/admin/size-create" class="btn btn-success my-3 float-right"><i class="fa fa-plus-square"></i> <span>Thêm cỡ mới</span></a>-->
+    <h4>Quản lý màu sắc</h4>
+
     <div class="alert alert-success" th:if="${successMessage}" th:text="${successMessage}"></div>
     <table class="table my-3">
         <thead class="thead-light">
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Mã cỡ
-<!--                <a th:href="@{/admin/size-all(page=0, sort='id,asc')}" class="sort-link">↑</a>-->
-<!--                <a th:href="@{/admin/size-all(page=0, sort='id,desc')}" class="sort-link">↓</a>-->
+            <th scope="col">Mã màu
+<!--                <a th:href="@{/admin/color-list(page=0, sort='id,asc')}" class="sort-link">↑</a>-->
+<!--                <a th:href="@{/admin/color-list(page=0, sort='id,desc')}" class="sort-link">↓</a>-->
             </th>
-            <th scope="col">Tên cỡ</th>
+            <th scope="col">Tên màu</th>
             <th scope="col">Thao tác</th>
         </tr>
         </thead>
@@ -32,53 +32,47 @@
             <td th:text="${items.code}">Mark</td>
             <td th:text="${items.name}"></td>
             <td>
-                <a href="/admin/size-create"><i class="fa fa-plus-square"></i></a>
-                <a th:href="@{'/admin/size-detail/'+${items.id}}"><i class="fa ti-pencil-alt"></i></a>
-                <a th:data-link="'/admin/size-delete/'+${items.id}"class="delete-btn cursor-pointer"><i class="fa fa-trash-o"></i></a>
-<!--                <a th:href="@{'/admin/size-delete/' + ${items.id}}"><i class="fa fa-trash-o"></i>-->
-<!--                </a>-->
-
+                <a href="/admin/color-create"><i class="fa fa-plus-square"></i></a>
+                <!--                <a th:data-link="'/admin/color-delete/'+${items.id}" class="delete-btn cursor-pointer"><i class="fa fa-trash-o"></i></a>-->
+                <a th:href="@{'/admin/edit-color/'+${items.id}}"><i class="fa ti-pencil-alt"></i></a>
             </td>
-
         </tr>
         </tbody>
     </table>
     <div class="clearfix float-right">
         <ul class="pagination">
             <li th:classappend="${items.hasPrevious() ? '' : 'disabled'}" class="page-item">
-                <a th:href="@{/admin/size-all(page=0, sort=${sortField + ',' + (sortDirection == 'asc' ? 'desc' : 'asc')})}"
+                <a th:href="@{/admin/color-list(page=0, sort=${sortField + ',' + (sortDirection == 'asc' ? 'desc' : 'asc')})}"
                    class="page-link">
                     <i class="fas fa-angle-double-left"></i>
                 </a>
             </li>
             <li th:classappend="${items.hasPrevious() ? '' : 'disabled'}" class="page-item">
-                <a th:href="@{/admin/size-all(page=${items.number - 1}, sort=${sortField + ',' + (sortDirection == 'asc' ? 'desc' : 'asc')})}"
+                <a th:href="@{/admin/color-list(page=${items.number - 1}, sort=${sortField + ',' + (sortDirection == 'asc' ? 'desc' : 'asc')})}"
                    class="page-link">
                     <i class="fas fa-angle-left"></i>
                 </a>
             </li>
             <li th:classappend="${items.hasNext() ? '' : 'disabled'}" class="page-item">
-                <a th:href="@{/admin/size-all(page=${items.number + 1}, sort=${sortField + ',' + (sortDirection == 'asc' ? 'desc' : 'asc')})}"
+                <a th:href="@{/admin/color-list(page=${items.number + 1}, sort=${sortField + ',' + (sortDirection == 'asc' ? 'desc' : 'asc')})}"
                    class="page-link">
                     <i class="fas fa-angle-right"></i>
                 </a>
             </li>
             <li th:classappend="${items.hasNext() ? '' : 'disabled'}" class="page-item">
-                <a th:href="@{/admin/size-all(page=${items.totalPages - 1}, sort=${sortField + ',' + (sortDirection == 'asc' ? 'desc' : 'asc')})}"
+                <a th:href="@{/admin/color-list(page=${items.totalPages - 1}, sort=${sortField + ',' + (sortDirection == 'asc' ? 'desc' : 'asc')})}"
                    class="page-link">
                     <i class="fas fa-angle-double-right"></i>
                 </a>
             </li>
         </ul>
     </div>
-
-
     <script>
         $(document).ready(function () {
             $('.delete-btn').on('click', function (e) {
                 Swal.fire({
                     title: "Xác nhận?",
-                    text: `Bạn chắc chắn muốn xóa kích cỡ này`,
+                    text: `Bạn chắc chắn muốn xóa màu này`,
                     icon: "warning",
                     showCancelButton: true,
                     cancelButtonText: 'Hủy',
@@ -93,9 +87,7 @@
                 });
             })
         })
-
     </script>
 </div>
 </body>
 </html>
-

@@ -268,6 +268,351 @@
 <!--</body>-->
 <!--</html>-->
 
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org" lang="en" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">-->
+<!--<head th:replace="~{fragments-admin::page_head('Admin page')}">-->
+<!--    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500&display=swap" rel="stylesheet">-->
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">-->
+<!--    <th:block layout:fragment="head_link"></th:block>-->
+<!--    <style>-->
+<!--        /* Font chữ chính cho toàn bộ trang */-->
+<!--        body {-->
+<!--            font-family: 'Roboto', sans-serif;-->
+<!--            background-color: #0b0b0b;-->
+<!--            margin: 0;-->
+<!--            padding: 0;-->
+<!--        }-->
+
+<!--        /* Sidebar với màu xanh lá cây */-->
+<!--        #left-panel {-->
+<!--            background-color: #4caf50; /* Màu xanh lá cây */-->
+<!--            color: #0b0b0b;-->
+<!--        }-->
+<!--        #left-panel .navbar-brand,-->
+<!--        #left-panel .menu-icon {-->
+<!--            color: #0b0b0b;-->
+<!--        }-->
+<!--        #left-panel .nav > li > a {-->
+<!--            padding: 15px 20px;-->
+<!--            border-bottom: 1px solid #0b0b0b; /* Màu viền tối hơn */-->
+<!--            transition: background-color 0.3s ease;-->
+<!--            color: #ececf6; /* Màu chữ */-->
+<!--            /*#3e8e41*/-->
+<!--        }-->
+<!--        #left-panel .nav > li > a:hover {-->
+<!--            background-color: #388e3c; /* Màu nền khi hover */-->
+<!--        }-->
+<!--        #left-panel .nav > li:hover > a {-->
+<!--            background-color: #388e3c; /* Màu nền khi hover trên thẻ li */-->
+<!--        }-->
+<!--        #left-panel .menu-title {-->
+<!--            padding: 10px 20px;-->
+<!--            font-size: 14px;-->
+<!--            text-transform: uppercase;-->
+<!--            letter-spacing: 1px;-->
+<!--            color: #e0e0e0; /* Màu chữ cho tiêu đề */-->
+<!--        }-->
+<!--        #left-panel .sub-menu {-->
+<!--            background-color: #66bb6a; /* Màu nền cho submenu */-->
+<!--        }-->
+<!--        #left-panel .sub-menu a {-->
+<!--            padding-left: 40px;-->
+<!--            color: #0b0b0b; /* Màu chữ cho các mục con */-->
+<!--        }-->
+<!--        #left-panel .sub-menu a:hover {-->
+<!--            background-color: #4caf50; /* Màu nền khi hover trên các mục con */-->
+<!--        }-->
+
+<!--        /* Header: nền sáng, chữ tối */-->
+<!--        #header {-->
+<!--            background-color: #ffffff;-->
+<!--            border-bottom: 1px solid #e0e0e0;-->
+<!--            padding: 10px 20px;-->
+<!--        }-->
+<!--        #header .menutoggle {-->
+<!--            font-size: 20px;-->
+<!--            color: #333;-->
+<!--        }-->
+
+<!--        /* Phần User Profile với avatar bo tròn và dropdown mượt */-->
+<!--        .user-area {-->
+<!--            display: flex;-->
+<!--            align-items: center;-->
+<!--            justify-content: flex-end;-->
+<!--            position: relative;-->
+<!--        }-->
+<!--        .user-area span {-->
+<!--            margin-right: 10px;-->
+<!--            font-weight: 500;-->
+<!--            color: #333;-->
+<!--        }-->
+<!--        .user-avatar {-->
+<!--            cursor: pointer;-->
+<!--            border-radius: 50%;-->
+<!--            height: 40px;-->
+<!--            width: 40px;-->
+<!--            border: 2px solid #4caf50; /* Màu xanh lá cây */-->
+<!--            transition: transform 0.3s ease;-->
+<!--        }-->
+<!--        .user-avatar:hover {-->
+<!--            transform: scale(1.05);-->
+<!--        }-->
+<!--        .user-menu {-->
+<!--            display: none;-->
+<!--            position: absolute;-->
+<!--            top: 55px;-->
+<!--            right: 10px;-->
+<!--            background-color: #ffffff;-->
+<!--            border: 1px solid #cccccc;-->
+<!--            border-radius: 5px;-->
+<!--            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);-->
+<!--            z-index: 10;-->
+<!--            width: 160px;-->
+<!--        }-->
+<!--        .user-menu.active {-->
+<!--            display: block;-->
+<!--            animation: fadeIn 0.3s;-->
+<!--        }-->
+<!--        .user-menu a {-->
+<!--            display: block;-->
+<!--            padding: 12px 15px;-->
+<!--            color: #333;-->
+<!--            text-decoration: none;-->
+<!--            font-size: 14px;-->
+<!--            transition: background-color 0.3s ease;-->
+<!--        }-->
+<!--        .user-menu a:hover {-->
+<!--            background-color: #f0f0f0;-->
+<!--        }-->
+<!--        @keyframes fadeIn {-->
+<!--            from { opacity: 0; }-->
+<!--            to { opacity: 1; }-->
+<!--        }-->
+
+<!--        /* Content: tạo khoảng cách và nền sáng */-->
+<!--        #left-panel {-->
+<!--            margin-left: 240px;-->
+<!--            background-color: #f7f7f7;-->
+<!--            min-height: 100vh;-->
+<!--        }-->
+<!--        .content {-->
+<!--            padding: 20px;-->
+<!--        }-->
+
+<!--        /* Các card sản phẩm nếu có (để tạo điểm nhấn cho áo polo) */-->
+<!--        .product-card {-->
+<!--            background-color: #fff;-->
+<!--            border: 1px solid #e0e0e0;-->
+<!--            border-radius: 5px;-->
+<!--            overflow: hidden;-->
+<!--            box-shadow: 0px 2px 6px rgba(0,0,0,0.1);-->
+<!--            transition: transform 0.3s ease, box-shadow 0.3s ease;-->
+<!--        }-->
+<!--        .product-card:hover {-->
+<!--            transform: scale(1.02);-->
+<!--            box-shadow: 0px 4px 12px rgba(0,0,0,0.15);-->
+<!--        }-->
+<!--        .product-card img {-->
+<!--            width: 100%;-->
+<!--        }-->
+<!--        .product-card .card-body {-->
+<!--            padding: 15px;-->
+<!--        }-->
+
+<!--        .sub-menu {-->
+<!--            display: none; /* Mặc định không hiển thị submenu */-->
+<!--        }-->
+<!--        .sub-menu.active {-->
+<!--            display: block; /* Hiển thị khi có lớp active */-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<aside id="left-panel" class="left-panel" style="background: black">-->
+<!--    <nav class="navbar navbar-expand-sm navbar-default" style="background: black">-->
+<!--        <div class="navbar-header">-->
+<!--&lt;!&ndash;            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu"&ndash;&gt;-->
+<!--&lt;!&ndash;                    aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">&ndash;&gt;-->
+<!--&lt;!&ndash;                <i class="fa fa-bars"></i>&ndash;&gt;-->
+<!--&lt;!&ndash;            </button>&ndash;&gt;-->
+<!--            <a class="navbar-brand" href="/" style="padding: 10px;">-->
+<!--                <img th:src="@{/}" alt="Logo">-->
+<!--            </a>-->
+<!--            <a class="navbar-brand hidden" href="/">-->
+<!--                <img th:src="@{/}" alt="Logo">-->
+<!--            </a>-->
+<!--        </div>-->
+<!--        <div id="main-menu" class="main-menu collapse navbar-collapse">-->
+<!--            <ul class="nav navbar-nav">-->
+<!--                <li class="active">-->
+<!--                    <a th:href="@{/admin}"> <i class="menu-icon fas fa-home"></i>Trang chủ </a>-->
+<!--                </li>-->
+<!--                <li class="active">-->
+<!--                    <a th:href="@{/}"> <i class="menu-icon fa fa-shopping-bag"></i>Bán hàng tại quầy </a>-->
+<!--                </li>-->
+<!--                <h3 class="menu-title">QUẢN LÝ</h3>-->
+<!--                <ul class="menu">-->
+<!--                    <li class="menu-item-has-children dropdown">-->
+<!--                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+<!--                            <i class="menu-icon fa fa-laptop"></i>Quản lý sản phẩm-->
+<!--                        </a>-->
+<!--                        <ul class="sub-menu children dropdown-menu" style="background: black">-->
+<!--                            <li style="display: none;"><i class="fas fa-tshirt"></i><a th:href="@{/}" style="color: black;">Sản phẩm</a></li>-->
+<!--                            <li style="display: none;"><i class="fas fa-palette"></i><a th:href="@{/admin/color-list}" style="color: black;">Màu sắc</a></li>-->
+<!--                            <li style="display: none;"><i class="fab fa-cotton-bureau"></i><a th:href="@{/}" style="color: black;">Chất liệu</a></li>-->
+<!--                            <li style="display: none;"><i class="fas fa-ruler"></i><a th:href="@{/admin/size-all}" style="color: black;">Kích cỡ</a></li>-->
+<!--                            <li style="display: none;"><i class="far fa-copyright"></i><a th:href="@{/}" style="color: black;">Nhãn hàng</a></li>-->
+<!--                        </ul>-->
+<!--                    </li>-->
+<!--                    <li class="menu-item-has-children dropdown">-->
+<!--                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+<!--                            <i class="menu-icon fa fa-table"></i>Quản lý hóa đơn-->
+<!--                        </a>-->
+<!--                        <ul class="sub-menu children dropdown-menu" style="background: black">-->
+<!--                            <li style="display: none;"><i class="fas fa-file-invoice"></i><a th:href="@{/}">Hóa đơn</a></li>-->
+<!--                            <li style="display: none;"><i class="fas fa-exchange-alt"></i><a th:href="@{/}">Đổi trả</a></li>-->
+<!--                        </ul>-->
+<!--                    </li>-->
+<!--                    <li class="menu-item-has-children dropdown">-->
+<!--                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+<!--                            <i class="menu-icon fa fa-american-sign-language-interpreting"></i>Công cụ khuyến mãi</a>-->
+<!--                        <ul class="sub-menu children dropdown-menu" style="background: black">-->
+<!--                            <li style="display: none;"><i class="fa fa-hand-peace-o"></i><a th:href="@{/}">Mã giảm giá</a></li>-->
+<!--                            <li style="display: none;"><i class="fas fa-tag"></i><a th:href="@{/}">Giảm giá sản phẩm</a></li>-->
+<!--                        </ul>-->
+<!--                    </li>-->
+<!--                    <li class="menu-item-has-children dropdown">-->
+<!--                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+<!--                            <i class="menu-icon fas fa-project-diagram"></i>Thống kê</a>-->
+<!--                        <ul class="sub-menu children dropdown-menu" style="background: black">-->
+<!--                            <li style="display: none;"><i class="fas fa-chart-line"></i><a th:href="@{/}">Doanh Thu</a></li>-->
+<!--                            <li style="display: none;"><i class="fas fa-chart-pie"></i><a th:href="@{/}">Sản phẩm</a></li>-->
+<!--                        </ul>-->
+<!--                    </li>-->
+<!--                    <li class="menu-item-has-children dropdown">-->
+<!--                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+<!--                            <i class="menu-icon fa fa-user"></i>Quản lý tài khoản</a>-->
+<!--                        <ul class="sub-menu children dropdown-menu" style="background: black">-->
+<!--                            <li style="display: none;"><i class="fas fa-chart-line"></i><a th:href="@{/}">Nhân Viên</a></li>-->
+<!--                            <li style="display: none;"><i class="fas fa-chart-pie"></i><a th:href="@{/}">Khách Hàng</a></li>-->
+<!--                        </ul>-->
+<!--                    </li>-->
+<!--                    <h3 class="menu-title">Công cụ khác</h3>-->
+<!--                    <li class="menu-item-has-children dropdown">-->
+<!--                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">-->
+<!--                            <i class="menu-icon fa fa-glass"></i>Khác</a>-->
+<!--                        <ul class="sub-menu children dropdown-menu" style="background: black">-->
+<!--                            <li style="display: none;"><i class="menu-icon fa fa-sign-in"></i><a th:href="@{/user_logout}">Đăng xuất</a></li>-->
+<!--                            <li style="display: none;"><i class="menu-icon fa fa-paper-plane"></i><a th:href="@{/}">Cập nhật thông tin</a></li>-->
+<!--                        </ul>-->
+<!--                    </li>-->
+<!--                </ul>-->
+
+<!--            </ul>-->
+<!--        </div>&lt;!&ndash; /.navbar-collapse &ndash;&gt;-->
+<!--    </nav>-->
+<!--</aside>-->
+
+<!--<div id="right-panel" class="right-panel">-->
+<!--    &lt;!&ndash; Header &ndash;&gt;-->
+<!--    <header id="header" class="header">-->
+<!--        <div class="col-sm-7">-->
+<!--            <a id="menuToggle1" class="menutoggle pull-left1"></a>-->
+<!--&lt;!&ndash;            <i class="fa-solid fa-thumbs-up"></i>&ndash;&gt;-->
+<!--        </div>-->
+<!--        <div class="col-sm-5">-->
+<!--            <div class="user-area dropdown float-right" style="margin-right: 10px">-->
+<!--                <span>abc@gmail.com</span>-->
+<!--                <a class="dropdown-toggle" id="avatarToggle">-->
+<!--                    <img class="user-avatar" src="https://png.pngtree.com/png-clipart/20210608/ourlarge/pngtree-dark-gray-simple-avatar-png-image_3418404.jpg" alt="User Avatar">-->
+<!--                </a>-->
+<!--                <ul class="user-menu" id="userMenu" style="display: none;">-->
+<!--                    <li><a class="nav-link" th:href="@{/}"><i class="fa fa-user"></i> Trang khách</a></li>-->
+<!--                    <li><a class="nav-link" th:href="@{/user_logout}"><i class="fa fa-power-off"></i> Đăng xuất</a></li>-->
+<!--                </ul>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </header>-->
+
+<!--    <div class="content p-4">-->
+<!--        <div layout:fragment="content">-->
+<!--            &lt;!&ndash; Nội dung trang quản trị &ndash;&gt;-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--<th:block th:replace="~{fragments-admin::script}"></th:block>-->
+
+<!--<script>-->
+<!--    // dong mở avaver-->
+<!--    document.addEventListener("DOMContentLoaded", function() {-->
+<!--        // Lấy phần tử hình ảnh người dùng và menu-->
+<!--        const avatarToggle = document.getElementById('avatarToggle');-->
+<!--        const userMenu = document.getElementById('userMenu');-->
+
+<!--        // Thiết lập sự kiện click cho hình ảnh người dùng-->
+<!--        avatarToggle.addEventListener('click', function(event) {-->
+<!--            event.preventDefault(); // Ngăn chặn hành động mặc định-->
+<!--            // Đảo ngược hiển thị menu-->
+<!--            if (userMenu.style.display === "none" || userMenu.style.display === "") {-->
+<!--                userMenu.style.display = "block";-->
+<!--            } else {-->
+<!--                userMenu.style.display = "none";-->
+<!--            }-->
+<!--        });-->
+<!--    });-->
+<!--    // Toggle menu khi nhấp vào avatar-->
+<!--    document.querySelector('#avatarToggle').addEventListener('click', function (event) {-->
+<!--        event.preventDefault();-->
+<!--        document.querySelector('.user-menu').classList.toggle('active');-->
+<!--    });-->
+<!--    // Đóng menu khi nhấp ra ngoài-->
+<!--    document.addEventListener('click', function(event) {-->
+<!--        const isClickInsideUserArea = document.querySelector('.user-area').contains(event.target);-->
+<!--        if (!isClickInsideUserArea) {-->
+<!--            document.querySelector('.user-menu').classList.remove('active');-->
+<!--        }-->
+<!--    });-->
+
+<!--    document.addEventListener('DOMContentLoaded', function () {-->
+<!--        const dropdowns = document.querySelectorAll('.dropdown-toggle');-->
+
+<!--        dropdowns.forEach(dropdown => {-->
+<!--            dropdown.addEventListener('click', function(event) {-->
+<!--                event.preventDefault(); // Ngăn chặn hành động mặc định-->
+
+<!--                const subMenu = this.nextElementSibling; // Lấy <ul> ngay sau <a>-->
+
+<!--                // Kiểm tra lớp active để hiện hoặc ẩn submenu-->
+<!--                const isActive = subMenu.classList.contains('active');-->
+
+<!--                // Ẩn tất cả các submenu trước khi hiện submenu hiện tại-->
+<!--                document.querySelectorAll('.sub-menu').forEach(item => {-->
+<!--                    item.classList.remove('active');-->
+<!--                    item.querySelectorAll('li').forEach(li => {-->
+<!--                        li.style.display = 'none'; // Ẩn tất cả mục con-->
+<!--                    });-->
+<!--                });-->
+
+<!--                if (!isActive) {-->
+<!--                    subMenu.classList.add('active');-->
+
+<!--                    // Hiện lần lượt từng mục con-->
+<!--                    const items = subMenu.querySelectorAll('li');-->
+<!--                    items.forEach((item, index) => {-->
+<!--                        setTimeout(() => {-->
+<!--                            item.style.display = 'block'; // Hiển thị từng mục con-->
+<!--                        }, index * 100); // Thay đổi số millisecond này để điều chỉnh độ trễ-->
+<!--                    });-->
+<!--                }-->
+<!--            });-->
+<!--        });-->
+<!--    });-->
+<!--</script>-->
+<!--<th:block layout:fragment="bottom_link"></th:block>-->
+<!--</body>-->
+<!--</html>-->
+
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head th:replace="~{fragments-admin::page_head('Admin page')}">
@@ -278,162 +623,102 @@
         /* Font chữ chính cho toàn bộ trang */
         body {
             font-family: 'Roboto', sans-serif;
-            background-color: #f7f7f7;
+            background-color: #eef2f3; /* Màu nền nhẹ nhàng */
             margin: 0;
             padding: 0;
         }
 
-        /* Sidebar với màu xanh lá cây */
+        /* Sidebar với màu xanh lam nhẹ */
         #left-panel {
-            background-color: #4caf50; /* Màu xanh lá cây */
-            color: #0b0b0b;
+            background-color: #3a6073; /* Xanh lam đậm hơn một chút */
+            color: #ffffff;
         }
         #left-panel .navbar-brand,
         #left-panel .menu-icon {
-            color: #0b0b0b;
+            color: #ffffff;
         }
         #left-panel .nav > li > a {
             padding: 15px 20px;
-            border-bottom: 1px solid #3e8e41; /* Màu viền tối hơn */
+            border-bottom: 1px solid #2c4b5a; /* Viền tối hơn */
             transition: background-color 0.3s ease;
-            color: #0b0b0b; /* Màu chữ */
+            color: #ffffff;
         }
         #left-panel .nav > li > a:hover {
-            background-color: #388e3c; /* Màu nền khi hover */
-        }
-        #left-panel .nav > li:hover > a {
-            background-color: #388e3c; /* Màu nền khi hover trên thẻ li */
+            background-color: #2c4b5a; /* Xanh lam đậm hơn khi hover */
         }
         #left-panel .menu-title {
-            padding: 10px 20px;
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #e0e0e0; /* Màu chữ cho tiêu đề */
+            color: #d1e8f0;
         }
         #left-panel .sub-menu {
-            background-color: #66bb6a; /* Màu nền cho submenu */
+            background-color: #5a7684;
         }
         #left-panel .sub-menu a {
-            padding-left: 40px;
-            color: #0b0b0b; /* Màu chữ cho các mục con */
+            color: #ffffff;
         }
         #left-panel .sub-menu a:hover {
-            background-color: #4caf50; /* Màu nền khi hover trên các mục con */
+            background-color: #3a6073;
         }
 
         /* Header: nền sáng, chữ tối */
         #header {
             background-color: #ffffff;
-            border-bottom: 1px solid #e0e0e0;
+            border-bottom: 1px solid #dfe6e9;
             padding: 10px 20px;
         }
         #header .menutoggle {
             font-size: 20px;
-            color: #333;
+            color: #2d3436;
         }
 
-        /* Phần User Profile với avatar bo tròn và dropdown mượt */
-        .user-area {
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            position: relative;
-        }
+        /* User Profile */
         .user-area span {
-            margin-right: 10px;
-            font-weight: 500;
-            color: #333;
+            color: #2d3436;
         }
         .user-avatar {
-            cursor: pointer;
-            border-radius: 50%;
-            height: 40px;
-            width: 40px;
-            border: 2px solid #4caf50; /* Màu xanh lá cây */
-            transition: transform 0.3s ease;
-        }
-        .user-avatar:hover {
-            transform: scale(1.05);
+            border: 2px solid #3a6073;
         }
         .user-menu {
-            display: none;
-            position: absolute;
-            top: 55px;
-            right: 10px;
             background-color: #ffffff;
-            border: 1px solid #cccccc;
-            border-radius: 5px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-            z-index: 10;
-            width: 160px;
-        }
-        .user-menu.active {
-            display: block;
-            animation: fadeIn 0.3s;
+            border: 1px solid #b2bec3;
         }
         .user-menu a {
-            display: block;
-            padding: 12px 15px;
-            color: #333;
-            text-decoration: none;
-            font-size: 14px;
-            transition: background-color 0.3s ease;
+            color: #2d3436;
         }
         .user-menu a:hover {
-            background-color: #f0f0f0;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+            background-color: #dfe6e9;
         }
 
-        /* Content: tạo khoảng cách và nền sáng */
-        #left-panel {
-            margin-left: 240px;
-            background-color: #f7f7f7;
-            min-height: 100vh;
-        }
+        /* Content */
         .content {
-            padding: 20px;
+            background-color: #ffffff;
         }
 
-        /* Các card sản phẩm nếu có (để tạo điểm nhấn cho áo polo) */
+        /* Card sản phẩm */
         .product-card {
-            background-color: #fff;
-            border: 1px solid #e0e0e0;
-            border-radius: 5px;
-            overflow: hidden;
-            box-shadow: 0px 2px 6px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background-color: #ffffff;
+            border: 1px solid #dfe6e9;
         }
         .product-card:hover {
-            transform: scale(1.02);
-            box-shadow: 0px 4px 12px rgba(0,0,0,0.15);
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
         }
-        .product-card img {
-            width: 100%;
-        }
-        .product-card .card-body {
-            padding: 15px;
+        .navbar-nav li a:hover {
+            background: #8B5E3B;
+            color: #FFFFFF;
+            transition: 0.3s;
         }
 
-        .sub-menu {
-            display: none; /* Mặc định không hiển thị submenu */
-        }
-        .sub-menu.active {
-            display: block; /* Hiển thị khi có lớp active */
-        }
+
     </style>
+
 </head>
 <body>
-<aside id="left-panel" class="left-panel" style="background: coral">
-    <nav class="navbar navbar-expand-sm navbar-default" style="background: coral">
+<aside id="left-panel" class="left-panel" style="background: #ececf6; color: #FFFFFF;">
+    <nav class="navbar navbar-expand-sm navbar-default" style="background: #C8A27C;">
         <div class="navbar-header">
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu"
-                    aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">
-                <i class="fa fa-bars"></i>
-            </button>
+<!--            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu"-->
+<!--                    aria-controls="main-menu" aria-expanded="false" aria-label="Toggle navigation">-->
+<!--                <i class="fa fa-bars" style="color: #FFFFFF;"></i>-->
+<!--            </button>-->
             <a class="navbar-brand" href="/" style="padding: 10px;">
                 <img th:src="@{/}" alt="Logo">
             </a>
@@ -444,69 +729,83 @@
         <div id="main-menu" class="main-menu collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li class="active">
-                    <a th:href="@{/admin}"> <i class="menu-icon fas fa-home"></i>Trang chủ </a>
+                    <a th:href="@{/admin}" style="color: #FFFFFF; font-weight: bold;">
+                        <i class="menu-icon fas fa-home"></i> Trang chủ
+                    </a>
                 </li>
                 <li class="active">
-                    <a th:href="@{/}"> <i class="menu-icon fa fa-shopping-bag"></i>Bán hàng tại quầy </a>
+                    <a th:href="@{/admin}" style="color: #FFFFFF; font-weight: bold;">
+                        <i class="menu-icon fa fa-shopping-bag"></i> Bán hàng
+                    </a>
                 </li>
-                <h3 class="menu-title">QUẢN LÝ</h3>
+                <h3 class="menu-title" style="color: #FFFFFF;">QUẢN LÝ</h3>
                 <ul class="menu">
                     <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="menu-icon fa fa-laptop"></i>Quản lý sản phẩm
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                           style="color: #FFFFFF; font-weight: bold;">
+                            <i class="menu-icon fa fa-laptop"></i> Quản lý sản phẩm
                         </a>
-                        <ul class="sub-menu children dropdown-menu" style="background: coral">
-                            <li style="display: none;"><i class="fas fa-tshirt"></i><a th:href="@{/}" style="color: black;">Sản phẩm</a></li>
-                            <li style="display: none;"><i class="fas fa-palette"></i><a th:href="@{/}" style="color: black;">Màu sắc</a></li>
-                            <li style="display: none;"><i class="fab fa-cotton-bureau"></i><a th:href="@{/}" style="color: black;">Chất liệu</a></li>
-                            <li style="display: none;"><i class="fas fa-ruler"></i><a th:href="@{/admin/size-all}" style="color: black;">Kích cỡ</a></li>
-                            <li style="display: none;"><i class="far fa-copyright"></i><a th:href="@{/}" style="color: black;">Nhãn hàng</a></li>
+                        <ul class="sub-menu children dropdown-menu" style="background: #A67C52;">
+                            <li><a th:href="@{/admin}" style="color: #FFFFFF; font-weight: bold;"><i class="fas fa-box"></i> Sản phẩm</a></li>
+                            <li><a th:href="@{/admin/color-list}" style="color: #FFFFFF; font-weight: bold;"><i class="fas fa-palette"></i> Màu sắc</a></li>
+                            <li><a th:href="@{/admin}" style="color: #FFFFFF; font-weight: bold;"><i class="fas fa-cube"></i> Chất liệu</a></li>
+                            <li><a th:href="@{/admin/size-all}" style="color: #FFFFFF; font-weight: bold;"><i class="fas fa-ruler"></i> Kích cỡ</a></li>
+                            <li><a th:href="@{/admin}" style="color: #FFFFFF; font-weight: bold;"><i class="fas fa-tags"></i> Nhãn hàng</a></li>
                         </ul>
                     </li>
+
+<!--                    <li class="menu-item-has-children dropdown">-->
+<!--                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"-->
+<!--                           style="color: #FFFFFF; font-weight: bold;">-->
+<!--                            <i class="menu-icon fa fa-table"></i> Quản lý hóa đơn-->
+<!--                        </a>-->
+<!--                        <ul class="sub-menu children dropdown-menu" style="background: #A67C52;">-->
+<!--                            <li><a th:href="@{/admin}" style="color: #FFFFFF; font-weight: bold;"><i class="fas fa-receipt"></i> Hóa đơn</a></li>-->
+<!--                            <li><a th:href="@{/admin}" style="color: #FFFFFF; font-weight: bold;"><i class="fas fa-exchange-alt"></i> Đổi trả</a></li>-->
+<!--                        </ul>-->
+<!--                    </li>-->
                     <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="menu-icon fa fa-table"></i>Quản lý hóa đơn
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                           style="color: #FFFFFF; font-weight: bold;">
+                            <i class="menu-icon fa fa-american-sign-language-interpreting"></i> Quản lý khuyến mãi
                         </a>
-                        <ul class="sub-menu children dropdown-menu" style="background: coral">
-                            <li style="display: none;"><i class="fas fa-file-invoice"></i><a th:href="@{/}">Hóa đơn</a></li>
-                            <li style="display: none;"><i class="fas fa-exchange-alt"></i><a th:href="@{/}">Đổi trả</a></li>
+                        <ul class="sub-menu children dropdown-menu" style="background: #A67C52;">
+                            <li><a th:href="@{/admin}" style="color: #FFFFFF; font-weight: bold;"><i class="fas fa-tags"></i> Mã giảm giá</a></li>
+                            <li><a th:href="@{/admin}" style="color: #FFFFFF; font-weight: bold;"><i class="fas fa-percentage"></i> Giảm giá sản phẩm</a></li>
                         </ul>
                     </li>
+<!--                    <li class="menu-item-has-children dropdown">-->
+<!--                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"-->
+<!--                           style="color: #FFFFFF; font-weight: bold;">-->
+<!--                            <i class="menu-icon fas fa-project-diagram"></i> Thống kê-->
+<!--                        </a>-->
+<!--                        <ul class="sub-menu children dropdown-menu" style="background: #A67C52;">-->
+<!--                            <li><a th:href="@{/admin}" style="color: #FFFFFF; font-weight: bold;"><i class="fas fa-chart-line"></i> Doanh Thu</a></li>-->
+<!--                            <li><a th:href="@{/admin}" style="color: #FFFFFF; font-weight: bold;"><i class="fas fa-boxes"></i> Sản phẩm</a></li>-->
+<!--                        </ul>-->
+<!--                    </li>-->
                     <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="menu-icon fa fa-american-sign-language-interpreting"></i>Công cụ khuyến mãi</a>
-                        <ul class="sub-menu children dropdown-menu" style="background: coral">
-                            <li style="display: none;"><i class="fa fa-hand-peace-o"></i><a th:href="@{/}">Mã giảm giá</a></li>
-                            <li style="display: none;"><i class="fas fa-tag"></i><a th:href="@{/}">Giảm giá sản phẩm</a></li>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                           style="color: #FFFFFF; font-weight: bold;">
+                            <i class="menu-icon fa fa-user"></i> Quản lý tài khoản
+                        </a>
+                        <ul class="sub-menu children dropdown-menu" style="background: #A67C52;">
+                            <li><a th:href="@{/admin}" style="color: #FFFFFF; font-weight: bold;"><i class="fas fa-user-tie"></i> Nhân Viên</a></li>
+                            <li><a th:href="@{/admin}" style="color: #FFFFFF; font-weight: bold;"><i class="fas fa-users"></i> Khách Hàng</a></li>
                         </ul>
                     </li>
+                    <h3 class="menu-title" style="color: #FFFFFF;">More</h3>
                     <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="menu-icon fas fa-project-diagram"></i>Thống kê</a>
-                        <ul class="sub-menu children dropdown-menu" style="background: coral">
-                            <li style="display: none;"><i class="fas fa-chart-line"></i><a th:href="@{/}">Doanh Thu</a></li>
-                            <li style="display: none;"><i class="fas fa-chart-pie"></i><a th:href="@{/}">Sản phẩm</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="menu-icon fa fa-user"></i>Quản lý tài khoản</a>
-                        <ul class="sub-menu children dropdown-menu" style="background: coral">
-                            <li style="display: none;"><i class="fas fa-chart-line"></i><a th:href="@{/}">Nhân Viên</a></li>
-                            <li style="display: none;"><i class="fas fa-chart-pie"></i><a th:href="@{/}">Khách Hàng</a></li>
-                        </ul>
-                    </li>
-                    <h3 class="menu-title">Công cụ khác</h3>
-                    <li class="menu-item-has-children dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="menu-icon fa fa-glass"></i>Khác</a>
-                        <ul class="sub-menu children dropdown-menu" style="background: coral">
-                            <li style="display: none;"><i class="menu-icon fa fa-sign-in"></i><a th:href="@{/user_logout}">Đăng xuất</a></li>
-                            <li style="display: none;"><i class="menu-icon fa fa-paper-plane"></i><a th:href="@{/}">Cập nhật thông tin</a></li>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                           style="color: #FFFFFF; font-weight: bold;">
+                            <i class="menu-icon fa fa-glass"></i> Khác
+                        </a>
+                        <ul class="sub-menu children dropdown-menu" style="background: #A67C52;">
+                            <li><a th:href="@{/user_logout}" style="color: #FFFFFF; font-weight: bold;"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a></li>
+<!--                            <li><a th:href="@{/admin}" style="color: #FFFFFF; font-weight: bold;"><i class="fas fa-user-edit"></i> Cập nhật thông tin</a></li>-->
                         </ul>
                     </li>
                 </ul>
-
             </ul>
         </div><!-- /.navbar-collapse -->
     </nav>
@@ -516,18 +815,19 @@
     <!-- Header -->
     <header id="header" class="header">
         <div class="col-sm-7">
-            <a id="menuToggle" class="menutoggle pull-left"><i class="fa-solid fa-thumbs-up"></i></a>
+            <a id="menuToggle1" class="menutoggle pull-left1"></a>
+            <!--            <i class="fa-solid fa-thumbs-up"></i>-->
         </div>
         <div class="col-sm-5">
-            <div class="user-area dropdown float-right">
+            <div class="user-area dropdown float-right" style="margin-right: 10px">
                 <span>abc@gmail.com</span>
                 <a class="dropdown-toggle" id="avatarToggle">
                     <img class="user-avatar" src="https://png.pngtree.com/png-clipart/20210608/ourlarge/pngtree-dark-gray-simple-avatar-png-image_3418404.jpg" alt="User Avatar">
                 </a>
-                <div class="user-menu">
-                    <a class="nav-link" th:href="@{/}"><i class="fa fa-user"></i> Trang khách</a>
-                    <a class="nav-link" th:href="@{/user_logout}"><i class="fa fa-power-off"></i> Đăng xuất</a>
-                </div>
+                <ul class="user-menu" id="userMenu" style="display: none;">
+                    <li><a class="nav-link" th:href="@{/}"><i class="fa fa-user"></i> Trang khách</a></li>
+                    <li><a class="nav-link" th:href="@{/user_logout}"><i class="fa fa-power-off"></i> Đăng xuất</a></li>
+                </ul>
             </div>
         </div>
     </header>
@@ -542,6 +842,23 @@
 <th:block th:replace="~{fragments-admin::script}"></th:block>
 
 <script>
+    // dong mở avaver
+    document.addEventListener("DOMContentLoaded", function() {
+        // Lấy phần tử hình ảnh người dùng và menu
+        const avatarToggle = document.getElementById('avatarToggle');
+        const userMenu = document.getElementById('userMenu');
+
+        // Thiết lập sự kiện click cho hình ảnh người dùng
+        avatarToggle.addEventListener('click', function(event) {
+            event.preventDefault(); // Ngăn chặn hành động mặc định
+            // Đảo ngược hiển thị menu
+            if (userMenu.style.display === "none" || userMenu.style.display === "") {
+                userMenu.style.display = "block";
+            } else {
+                userMenu.style.display = "none";
+            }
+        });
+    });
     // Toggle menu khi nhấp vào avatar
     document.querySelector('#avatarToggle').addEventListener('click', function (event) {
         event.preventDefault();
@@ -583,7 +900,7 @@
                     items.forEach((item, index) => {
                         setTimeout(() => {
                             item.style.display = 'block'; // Hiển thị từng mục con
-                        }, index * 300); // Thay đổi số millisecond này để điều chỉnh độ trễ
+                        }, index * 100); // Thay đổi số millisecond này để điều chỉnh độ trễ
                     });
                 }
             });

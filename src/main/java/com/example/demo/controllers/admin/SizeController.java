@@ -8,6 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
@@ -99,6 +101,22 @@ public class SizeController {
             return null;
         }
     }
+// Handle the creation of a new size
+//@PostMapping("/size-create")
+//public String createSize(@ModelAttribute Size size, Model model) {
+//    sizeService.save(size);
+//    model.addAttribute("successMessage", "Kích cỡ đã được thêm thành công!");
+//    return "redirect:/admin/size-all"; // redirect to the sizes list page after successful creation
+//}
+//
+//    // Handle the update of an existing size
+//    @PostMapping("/size-update/{id}")
+//    public String updateSize(@PathVariable Long id, @ModelAttribute Size size, Model model) {
+//        size.setId(id); // Update the ID for the object
+//        sizeService.updateSize(size);
+//        model.addAttribute("successMessage", "Kích cỡ đã được cập nhật thành công!");
+//        return "redirect:/admin/size-all"; // redirect to the sizes list page after successful update
+//    }
 
     @GetMapping("/size-delete/{id}")
     public String delete(@PathVariable("id") Long id, Model model){
@@ -106,4 +124,6 @@ public class SizeController {
         model.addAttribute("successMessage", "Xóa kích cỡ thành công");
         return "redirect:/admin/size-all";
     }
+
+
 }
