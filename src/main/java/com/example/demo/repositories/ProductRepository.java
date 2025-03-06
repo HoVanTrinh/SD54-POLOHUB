@@ -1,5 +1,8 @@
 package com.example.demo.repositories;
 
+import com.example.demo.dto.Statistic.BestSellerProduct;
+import com.example.demo.dto.Statistic.ProductStatistic;
+import com.example.demo.dto.product.ProductSearchDto;
 import com.example.demo.entities.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -20,6 +23,42 @@ public interface ProductRepository extends JpaRepository<Product, Long>, JpaSpec
 
     Page<Product> findAllByStatus(int status, Pageable pageable);
     Page<Product> findAllByStatusAndDeleteFlag(int status, boolean deleteFlag, Pageable pageable);
+
+    @Query(value = "SELECT p.id as id, " +
+            "p.code as code, " +
+            "p.name as name, " +
+            "br.name as brandName, " +
+            "mt.name as materialName, " +
+            "p.price as price " +
+            "FROM Product p " +
+            "INNER JOIN Brand br ON br.id = p.brand.id " +
+            "INNER JOIN Material mt ON mt.id = p.material.id " +
+            "WHERE (:productName IS NULL OR p.name LIKE %:productName%) " +
+            "AND p.deleteFlag = false")
+    Page<Product> searchProductName(String productName, Pageable pageable);
+
+    @Query(value = "SELECT p.id as idSanPham, p.code as maSanPham, p.name as tenSanPham, " +
+            "p.brand.name as nhanHang, p.material.name as chatLieu, p.status as trangThai " +
+            "FROM Product p " +
+            "WHERE (COALESCE(:maSanPham, '') = '' OR p.code LIKE CONCAT('%', :maSanPham, '%')) " +
+            "AND (COALESCE(:tenSanPham, '') = '' OR p.name LIKE CONCAT('%', :tenSanPham, '%')) " +
+            "AND (:nhanHang IS NULL OR p.brand.id = :nhanHang) " +
+            "AND (:chatLieu IS NULL OR p.material.id = :chatLieu) " +
+            "AND (:trangThai IS NULL OR p.status = :trangThai) " +
+            "AND p.deleteFlag = false")
+    Page<ProductSearchDto> listSearchProduct(String maSanPham, String tenSanPham, Long nhanHang, Long chatLieu, Integer trangThai, Pageable pageable);
+
+    @Query(value = "SELECT p.id as idSanPham,p.code as maSanPham,p.name as tenSanPham,p.brand.name as nhanHang,p.material.name as chatLieu,p.status as trangThai FROM Product p where p.deleteFlag = false")
+    Page<ProductSearchDto> getAll(Pageable pageable);
+
+    Page<Product> findAllByDeleteFlagFalse(Pageable pageable);
+
+    @Query("select p from Product p join ProductDetail pd on p.id = pd.product.id where pd.id = :productDetaiLId")
+    Product findByProductDetail_Id(Long productDetaiLId);
+
+    Product findTopByOrderByIdDesc();
+
+
 
 
 
