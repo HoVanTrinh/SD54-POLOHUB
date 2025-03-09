@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{admin/admin-layout.html}" xmlns:sec="http://www.w3.org/1999/xhtml">
+      layout:decorate="~{admin/admin-layout.html}" xmlns:sec="http://www.w3.org/1999/xhtml"
+      xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Danh sách sản phẩm</title>
@@ -96,6 +97,7 @@
         </tr>
         </tbody>
     </table>
+
     <div class="clearfix float-right">
         <ul class="pagination">
             <li th:classappend="${items.hasPrevious() ? '' : 'disabled'}" class="page-item">
