@@ -51,7 +51,7 @@
         <div class="wrap-menu-desktop">
             <nav class="limiter-menu-desktop p-l-45">
                 <!-- Logo desktop -->
-                <a th:href="@{/}" class="logo">
+                <a th:href="@{/images/logo_1.png}" class="logo">
                     <img src="images/icons/logo-02.png" alt="IMG-LOGO">
                 </a>
                 <!-- Menu desktop -->
@@ -100,7 +100,7 @@
         <!-- Logo mobile -->
         <div class="logo-mobile">
             <a th:href="@{/}">
-                <img th:src="@{/images/icons/logo-01.png}" alt="IMG-LOGO">
+                <img th:src="@{/images/logo_1.png}" alt="IMG-LOGO">
             </a>
         </div>
         <!-- Icon header -->
@@ -123,7 +123,7 @@
     <div class="menu-mobile">
         <ul class="main-menu-m">
             <li>
-<!--                <a th:href="@{/}">Home</a>-->
+                <!--                <a th:href="@{/}">Home</a>-->
                 <ul class="sub-menu-m">
                     <li><a th:href="@{/}">Homepage 1</a></li>
                     <li><a th:href="@{/home-02}">Homepage 2</a></li>
@@ -378,7 +378,7 @@
     <!--New Collection-->
     <section id="custom-carousel" class="bg-light py-5">
         <div class="container">
-           // sửa lại thành slide kiếm ảnh có áo polo đẹp vào
+            // sửa lại thành slide kiếm ảnh có áo polo đẹp vào
 
         </div>
     </section>
@@ -454,7 +454,7 @@
                             </div>
                             <div class="category-content">
                                 <div class="product-button">
-                                    <a href="product?page=0&gender=1" class="btn btn-common text-uppercase2">Áo phông nam</a>
+                                    <a href="product?page=0&gender=1" class="btn btn-common text-uppercase2">Áo Polo Nam</a>
                                 </div>
                             </div>
                         </div>
@@ -468,7 +468,7 @@
                             </div>
                             <div class="category-content">
                                 <div class="product-button">
-                                    <a href="product?page=0&gender=2" class="btn btn-common text-uppercase2">Áo phông nữ</a>
+                                    <a href="product?page=0&gender=2" class="btn btn-common text-uppercase2">Áo Polo Nữ</a>
                                 </div>
                             </div>
                         </div>
@@ -482,7 +482,7 @@
                             </div>
                             <div class="category-content">
                                 <div class="product-button">
-                                    <a href="product?page=0&gender=3" class="btn btn-common text-uppercase2">Áo phông unisex</a>
+                                    <a href="product?page=0&gender=3" class="btn btn-common text-uppercase2">Áo Polo Unisex</a>
                                 </div>
                             </div>
                         </div>
@@ -499,7 +499,7 @@
                 <div class="col-md-6 p-b-30 m-lr-auto">
                     <!-- Block1 -->
                     <div class="block1 wrap-pic-w">
-                        <img th:src="@{'/images/banner-04.jpg'}" alt="IMG-BANNER">
+                        <img style="width: 500px ; height: 500px" th:src="@{/images/sp1nu.jpg}" alt="IMG-BANNER">
 
                         <a href="/product?page=0&gender=2"
                            class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
@@ -525,7 +525,7 @@
                 <div class="col-md-6 p-b-30 m-lr-auto">
                     <!-- Block1 -->
                     <div class="block1 wrap-pic-w">
-                        <img th:src="@{'/images/sp3.jpg'}" alt="IMG-BANNER">
+                        <img style="width: 500px ; height: 500px" th:src="@{/images/sp1nam.jpg}" alt="IMG-BANNER">
 
                         <a href="product?page=0&gender=1"
                            class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
@@ -548,857 +548,569 @@
                     </div>
                 </div>
 
-                <div class="col-md-6 col-lg-4 p-b-30 m-lr-auto">
-                    <!-- Block1 -->
-                    <div class="block1 wrap-pic-w">
-                        <img th:src="@{'/images/banner1.png'}" alt="IMG-BANNER">
+                <!--Hàng mới-->
+                <!--    <section id="new-arrivals" class="new-arrival product-carousel py-5 position-relative overflow-hidden">-->
+                <!--        <div class="container">-->
+                <!--            &lt;!&ndash; Tiêu đề &ndash;&gt;-->
+                <!--            <div class="d-flex flex-wrap justify-content-between align-items-center mt-5 mb-3">-->
+                <!--                <h4 class="text-uppercase1">Hàng Mới</h4>-->
+                <!--                <a href="/product" class="btn-link">Xem tất cả sản phẩm</a>-->
+                <!--            </div>-->
 
-                        <a href="/product"
-                           class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
-                            <div class="block1-txt-child1 flex-col-l">
-								<span class="block1-name ltext-102 trans-04 p-b-8">
-									Trẻ trung
-								</span>
+                <!--            &lt;!&ndash; Slider &ndash;&gt;-->
+                <!--            <div class="slider">-->
+                <!--                <div class="slides">-->
+                <!--                    <div th:each="product : ${newestProducts}" class="slide">-->
+                <!--                        <div class="product-item">-->
+                <!--                            <div class="image-holder">-->
+                <!--                                <a th:href="@{'/product-detail/' + ${product.code}}">-->
+                <!--                                    <img th:src="@{'/images/' + ${product.imageUrl}}" alt="Product Image" class="product-image img-fluid">-->
+                <!--                                </a>-->
+                <!--                                <div class="product-content">-->
+                <!--                                    <h5 class="product-title">-->
+                <!--                                        <a th:href="@{'/product-detail/' + ${product.code}}" th:text="${product.name}">Product Name</a>-->
+                <!--                                    </h5>-->
+                <!--                                </div>-->
+                <!--                            </div>-->
+                <!--                        </div>-->
+                <!--                    </div>-->
+                <!--                </div>-->
 
-                                <span class="block1-info stext-102 trans-04">
-									Năng động
-								</span>
-                            </div>
+                <!--                &lt;!&ndash; Navigation Buttons &ndash;&gt;-->
+                <!--                <button class="prev"></button>-->
+                <!--                <button class="next"></button>-->
+                <!--            </div>-->
+                <!--        </div>-->
+                <!--    </section>-->
 
-                            <div class="block1-txt-child2 p-b-4 trans-05">
-                                <div class="block1-link stext-101 cl0 trans-09">
-                                    Mua sắm
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+                <!--Collection-->
+                <!--    <section class="collection bg-light position-relative py-5">-->
+                <!--        <div class="container">-->
+                <!--            <div class="row">-->
+                <!--                <div class="title-xlarge text-uppercase txt-fx domino">Bộ Sưu Tập</div>-->
+                <!--                <div class="collection-item d-flex flex-wrap my-5">-->
+                <!--                    <div class="col-md-6 column-container">-->
+                <!--                        <div class="image-holder">-->
+                <!--                            <img src="images/single-image-2.jpg" alt="collection" class="product-image img-fluid">-->
+                <!--                        </div>-->
+                <!--                    </div>-->
+                <!--                    <div class="col-md-6 column-container bg-white">-->
+                <!--                        <div class="collection-content p-5 m-0 m-md-5">-->
+                <!--                            <h3 class="element-title text-uppercase">Bộ Sưu Tập Áo Phông Mới</h3>-->
+                <!--                            <p>Khám phá bộ sưu tập áo phông mới nhất của chúng tôi. Thiết kế tối giản, chất liệu thân thiện với môi trường, phù hợp với mọi phong cách.</p>-->
+                <!--                            <p>Mỗi chiếc áo phông trong bộ sưu tập đều mang một câu chuyện riêng, được thiết kế để tôn lên cá tính của bạn.</p>-->
+                <!--                            <a href="/product" class="btn btn-dark text-uppercase mt-3">Khám Phá Ngay</a>-->
+                <!--                        </div>-->
+                <!--                    </div>-->
+                <!--                </div>-->
+                <!--            </div>-->
+                <!--        </div>-->
+                <!--    </section>-->
 
-                <div class="col-md-6 col-lg-4 p-b-30 m-lr-auto">
-                    <!-- Block1 -->
-                    <div class="block1 wrap-pic-w">
-                        <img th:src="@{'/images/sp4.jpg'}" alt="IMG-BANNER">
+                <!--Hàng Bán Chạy-->
+                <!--    <section id="top-selling-products" class="new-arrival product-carousel py-5 position-relative overflow-hidden">-->
+                <!--        <div class="container">-->
+                <!--            &lt;!&ndash; Tiêu đề và nút "View All Products" &ndash;&gt;-->
+                <!--            <div class="d-flex flex-wrap justify-content-between align-items-center mt-5 mb-3">-->
+                <!--                <h4 class="text-uppercase1">Mặt Hàng Bán Chạy</h4>-->
+                <!--                <a href="/product" class="btn-link">Xem tất cả sản phẩm</a>-->
+                <!--            </div>-->
 
-                        <a href="/product"
-                           class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
-                            <div class="block1-txt-child1 flex-col-l">
-                                <span class="block1-name ltext-102 trans-04 p-b-8">
-                                    Phong cách
-                                </span>
-                                <span class="block1-info stext-102 trans-04">
-                                    Mùa Xuân 2024
-                                </span>
-                            </div>
+                <!--            &lt;!&ndash; Slider &ndash;&gt;-->
+                <!--            <div class="slider">-->
+                <!--                <div class="slides">-->
+                <!--                    &lt;!&ndash; Loop sản phẩm từ server &ndash;&gt;-->
+                <!--                    <div class="slide" th:each="product : ${topProducts}">-->
+                <!--                        <div class="product-item">-->
+                <!--                            <div class="image-holder">-->
+                <!--                                <a th:href="@{'/product-detail/' + ${product.code}}">-->
+                <!--                                    <img th:src="@{'/images/' + ${product.imageUrl}}" alt="Product Image" class="product-image img-fluid">-->
+                <!--                                </a>-->
+                <!--                                <div class="product-content">-->
+                <!--                                    <h5 class="product-title">-->
+                <!--                                        <a th:href="@{'/product-detail/' + ${product.code}}" th:text="${product.name}">Product Name</a>-->
+                <!--                                    </h5>-->
+                <!--                                </div>-->
+                <!--                            </div>-->
+                <!--                        </div>-->
+                <!--                    </div>-->
+                <!--                </div>-->
 
-                            <div class="block1-txt-child2 p-b-4 trans-05">
-                                <div class="block1-link stext-101 cl0 trans-09">
-                                    Mua sắm
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
+                <!--                &lt;!&ndash; Navigation Buttons &ndash;&gt;-->
+                <!--                <button class="prev"></button>-->
+                <!--                <button class="next"></button>-->
+                <!--            </div>-->
+                <!--        </div>-->
+                <!--    </section>-->
 
-                <div class="col-md-6 col-lg-4 p-b-30 m-lr-auto">
-                    <!-- Block1 -->
-                    <div class="block1 wrap-pic-w">
-                        <img th:src="@{/images/sp5.jpg}" alt="IMG-BANNER">
+                <!--    &lt;!&ndash;Hàng Có Thể Thích&ndash;&gt;-->
+                <!--    <section id="related-products" class="new-arrival product-carousel py-5 position-relative overflow-hidden">-->
+                <!--        <div class="container">-->
+                <!--            &lt;!&ndash; Tiêu đề và nút "View All Products" &ndash;&gt;-->
+                <!--            <div class="d-flex flex-wrap justify-content-between align-items-center mt-5 mb-3">-->
+                <!--                <h4 class="text-uppercase1">Bạn Cũng Có Thể Thích</h4>-->
+                <!--                <a href="/product" class="btn-link">Xem tất cả sản phẩm</a>-->
+                <!--            </div>-->
 
-                        <a href="/product"
-                           class="block1-txt ab-t-l s-full flex-col-l-sb p-lr-38 p-tb-34 trans-03 respon3">
-                            <div class="block1-txt-child1 flex-col-l">
-								<span class="block1-name ltext-102 trans-04 p-b-8">
-									Năng động
-								</span>
+                <!--            &lt;!&ndash; Slider &ndash;&gt;-->
+                <!--            <div class="slider">-->
+                <!--                <div class="slides">-->
+                <!--                    &lt;!&ndash; Slide 1 &ndash;&gt;-->
+                <!--                    <div class="slide">-->
+                <!--                        <div class="product-item">-->
+                <!--                            <div class="image-holder">-->
+                <!--                                <a href="#">-->
+                <!--                                    <img src="/images/product-11.jpg" alt="Baggy Shirt" class="product-image img-fluid">-->
+                <!--                                </a>-->
+                <!--                                <div class="product-content">-->
+                <!--                                    <h5 class="product-title">-->
+                <!--                                        <a href="#">Baggy Shirt</a>-->
+                <!--                                    </h5>-->
+                <!--                                </div>-->
+                <!--                            </div>-->
+                <!--                        </div>-->
+                <!--                    </div>-->
+                <!--                    &lt;!&ndash; Slide 2 &ndash;&gt;-->
+                <!--                    <div class="slide">-->
+                <!--                        <div class="product-item">-->
+                <!--                            <div class="image-holder">-->
+                <!--                                <a href="#">-->
+                <!--                                    <img src="/images/product-13.jpg" alt="Cotton Off-White Shirt" class="product-image img-fluid">-->
+                <!--                                </a>-->
+                <!--                                <div class="product-content">-->
+                <!--                                    <h5 class="product-title">-->
+                <!--                                        <a href="#">Cotton Off-White Shirt</a>-->
+                <!--                                    </h5>-->
+                <!--                                </div>-->
+                <!--                            </div>-->
+                <!--                        </div>-->
+                <!--                    </div>-->
+                <!--                    &lt;!&ndash; Slide 3 &ndash;&gt;-->
+                <!--                    <div class="slide">-->
+                <!--                        <div class="product-item">-->
+                <!--                            <div class="image-holder">-->
+                <!--                                <a href="#">-->
+                <!--                                    <img src="/images/product-14.jpg" alt="Crop Sweater" class="product-image img-fluid">-->
+                <!--                                </a>-->
+                <!--                                <div class="product-content">-->
+                <!--                                    <h5 class="product-title">-->
+                <!--                                        <a href="#">Crop Sweater</a>-->
+                <!--                                    </h5>-->
+                <!--                                </div>-->
+                <!--                            </div>-->
+                <!--                        </div>-->
+                <!--                    </div>-->
+                <!--                    &lt;!&ndash; Slide 4 &ndash;&gt;-->
+                <!--                    <div class="slide">-->
+                <!--                        <div class="product-item">-->
+                <!--                            <div class="image-holder">-->
+                <!--                                <a href="#">-->
+                <!--                                    <img src="/images/product-16.jpg" alt="Crop Sweater" class="product-image img-fluid">-->
+                <!--                                </a>-->
+                <!--                                <div class="product-content">-->
+                <!--                                    <h5 class="product-title">-->
+                <!--                                        <a href="#">Crop Sweater</a>-->
+                <!--                                    </h5>-->
+                <!--                                </div>-->
+                <!--                            </div>-->
+                <!--                        </div>-->
+                <!--                    </div>-->
+                <!--                    &lt;!&ndash; Slide 5 &ndash;&gt;-->
+                <!--                    <div class="slide">-->
+                <!--                        <div class="product-item">-->
+                <!--                            <div class="image-holder">-->
+                <!--                                <a href="#">-->
+                <!--                                    <img src="/images/product-min-01.jpg" alt="Crop Sweater" class="product-image img-fluid">-->
+                <!--                                </a>-->
+                <!--                                <div class="product-content">-->
+                <!--                                    <h5 class="product-title">-->
+                <!--                                        <a href="#">Crop Sweater</a>-->
+                <!--                                    </h5>-->
+                <!--                                </div>-->
+                <!--                            </div>-->
+                <!--                        </div>-->
+                <!--                    </div>-->
+                <!--                </div>-->
 
-                                <span class="block1-info stext-102 trans-04">
-									Mùa xuân 2024
-								</span>
-                            </div>
+                <!--                &lt;!&ndash; Navigation Buttons &ndash;&gt;-->
+                <!--                <button class="prev"></button>-->
+                <!--                <button class="next"></button>-->
+                <!--            </div>-->
+                <!--        </div>-->
+                <!--    </section>-->
 
-                            <div class="block1-txt-child2 p-b-4 trans-05">
-                                <div class="block1-link stext-101 cl0 trans-09">
-                                    Mua sắm
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+                <!--Scirpt của các mặt hàng-->
+                <script>
+                    const sliders = document.querySelectorAll('.slider'); // Lấy tất cả sliders
 
+                    sliders.forEach((slider) => {
+                        const slides = slider.querySelector('.slides');
+                        const slide = slider.querySelectorAll('.slide');
+                        const prev = slider.querySelector('.prev');
+                        const next = slider.querySelector('.next');
 
-    <!--Hàng mới-->
-    <section id="new-arrivals" class="new-arrival product-carousel py-5 position-relative overflow-hidden">
-        <div class="container">
-            <!-- Tiêu đề -->
-            <div class="d-flex flex-wrap justify-content-between align-items-center mt-5 mb-3">
-                <h4 class="text-uppercase1">Hàng Mới</h4>
-                <a href="/product" class="btn-link">Xem tất cả sản phẩm</a>
-            </div>
+                        let currentIndex = 0; // Vị trí bắt đầu
 
-            <!-- Slider -->
-            <div class="slider">
-                <div class="slides">
-                    <div th:each="product : ${newestProducts}" class="slide">
-                        <div class="product-item">
-                            <div class="image-holder">
-                                <a th:href="@{'/product-detail/' + ${product.code}}">
-                                    <img th:src="@{'/images/' + ${product.imageUrl}}" alt="Product Image" class="product-image img-fluid">
-                                </a>
-                                <div class="product-content">
-                                    <h5 class="product-title">
-                                        <a th:href="@{'/product-detail/' + ${product.code}}" th:text="${product.name}">Product Name</a>
-                                    </h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                        function showSlide(index) {
+                            const totalSlides = slide.length;
+                            const visibleSlides = 4; // Số lượng slide hiển thị đồng thời
+                            const maxIndex = totalSlides - visibleSlides;
 
-                <!-- Navigation Buttons -->
-                <button class="prev"></button>
-                <button class="next"></button>
-            </div>
-        </div>
-    </section>
+                            if (index < 0) {
+                                currentIndex = 0;
+                            } else if (index > maxIndex) {
+                                currentIndex = maxIndex;
+                            } else {
+                                currentIndex = index;
+                            }
 
-    <!--Collection-->
-    <section class="collection bg-light position-relative py-5">
-        <div class="container">
-            <div class="row">
-                <div class="title-xlarge text-uppercase txt-fx domino">Bộ Sưu Tập</div>
-                <div class="collection-item d-flex flex-wrap my-5">
-                    <div class="col-md-6 column-container">
-                        <div class="image-holder">
-                            <img src="images/single-image-2.jpg" alt="collection" class="product-image img-fluid">
-                        </div>
-                    </div>
-                    <div class="col-md-6 column-container bg-white">
-                        <div class="collection-content p-5 m-0 m-md-5">
-                            <h3 class="element-title text-uppercase">Bộ Sưu Tập Áo Phông Mới</h3>
-                            <p>Khám phá bộ sưu tập áo phông mới nhất của chúng tôi. Thiết kế tối giản, chất liệu thân thiện với môi trường, phù hợp với mọi phong cách.</p>
-                            <p>Mỗi chiếc áo phông trong bộ sưu tập đều mang một câu chuyện riêng, được thiết kế để tôn lên cá tính của bạn.</p>
-                            <a href="/product" class="btn btn-dark text-uppercase mt-3">Khám Phá Ngay</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+                            const offset = -currentIndex * (100 / visibleSlides);
+                            slides.style.transform = `translateX(${offset}%)`;
+                        }
 
-    <!--Hàng Bán Chạy-->
-    <section id="top-selling-products" class="new-arrival product-carousel py-5 position-relative overflow-hidden">
-        <div class="container">
-            <!-- Tiêu đề và nút "View All Products" -->
-            <div class="d-flex flex-wrap justify-content-between align-items-center mt-5 mb-3">
-                <h4 class="text-uppercase1">Mặt Hàng Bán Chạy</h4>
-                <a href="/product" class="btn-link">Xem tất cả sản phẩm</a>
-            </div>
+                        // Gắn sự kiện cho các nút
+                        next.addEventListener('click', () => {
+                            showSlide(currentIndex + 1);
+                        });
 
-            <!-- Slider -->
-            <div class="slider">
-                <div class="slides">
-                    <!-- Loop sản phẩm từ server -->
-                    <div class="slide" th:each="product : ${topProducts}">
-                        <div class="product-item">
-                            <div class="image-holder">
-                                <a th:href="@{'/product-detail/' + ${product.code}}">
-                                    <img th:src="@{'/images/' + ${product.imageUrl}}" alt="Product Image" class="product-image img-fluid">
-                                </a>
-                                <div class="product-content">
-                                    <h5 class="product-title">
-                                        <a th:href="@{'/product-detail/' + ${product.code}}" th:text="${product.name}">Product Name</a>
-                                    </h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                        prev.addEventListener('click', () => {
+                            showSlide(currentIndex - 1);
+                        });
 
-                <!-- Navigation Buttons -->
-                <button class="prev"></button>
-                <button class="next"></button>
-            </div>
-        </div>
-    </section>
+                        showSlide(currentIndex); // Hiển thị slide đầu tiên
+                    });
 
-    <!--Hàng Có Thể Thích-->
-    <section id="related-products" class="new-arrival product-carousel py-5 position-relative overflow-hidden">
-        <div class="container">
-            <!-- Tiêu đề và nút "View All Products" -->
-            <div class="d-flex flex-wrap justify-content-between align-items-center mt-5 mb-3">
-                <h4 class="text-uppercase1">Bạn Cũng Có Thể Thích</h4>
-                <a href="/product" class="btn-link">Xem tất cả sản phẩm</a>
-            </div>
+                </script>
 
-            <!-- Slider -->
-            <div class="slider">
-                <div class="slides">
-                    <!-- Slide 1 -->
-                    <div class="slide">
-                        <div class="product-item">
-                            <div class="image-holder">
-                                <a href="#">
-                                    <img src="/images/product-11.jpg" alt="Baggy Shirt" class="product-image img-fluid">
-                                </a>
-                                <div class="product-content">
-                                    <h5 class="product-title">
-                                        <a href="#">Baggy Shirt</a>
-                                    </h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Slide 2 -->
-                    <div class="slide">
-                        <div class="product-item">
-                            <div class="image-holder">
-                                <a href="#">
-                                    <img src="/images/product-13.jpg" alt="Cotton Off-White Shirt" class="product-image img-fluid">
-                                </a>
-                                <div class="product-content">
-                                    <h5 class="product-title">
-                                        <a href="#">Cotton Off-White Shirt</a>
-                                    </h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Slide 3 -->
-                    <div class="slide">
-                        <div class="product-item">
-                            <div class="image-holder">
-                                <a href="#">
-                                    <img src="/images/product-14.jpg" alt="Crop Sweater" class="product-image img-fluid">
-                                </a>
-                                <div class="product-content">
-                                    <h5 class="product-title">
-                                        <a href="#">Crop Sweater</a>
-                                    </h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Slide 4 -->
-                    <div class="slide">
-                        <div class="product-item">
-                            <div class="image-holder">
-                                <a href="#">
-                                    <img src="/images/product-16.jpg" alt="Crop Sweater" class="product-image img-fluid">
-                                </a>
-                                <div class="product-content">
-                                    <h5 class="product-title">
-                                        <a href="#">Crop Sweater</a>
-                                    </h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Slide 5 -->
-                    <div class="slide">
-                        <div class="product-item">
-                            <div class="image-holder">
-                                <a href="#">
-                                    <img src="/images/product-min-01.jpg" alt="Crop Sweater" class="product-image img-fluid">
-                                </a>
-                                <div class="product-content">
-                                    <h5 class="product-title">
-                                        <a href="#">Crop Sweater</a>
-                                    </h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <script>
+                    var urlCurr = /*[[${url}]]*/ 'abc';
 
-                <!-- Navigation Buttons -->
-                <button class="prev"></button>
-                <button class="next"></button>
-            </div>
-        </div>
-    </section>
+                    $('.filter-order-buy').find('.filter-link').on('click', function (e) {
+                        $('.filter-order-buy').find('.filter-link').removeClass('filter-link-active')
+                        $(this).addClass('filter-link-active')
+                    })
 
-    <!--Scirpt của các mặt hàng-->
-    <script>
-        const sliders = document.querySelectorAll('.slider'); // Lấy tất cả sliders
-
-        sliders.forEach((slider) => {
-            const slides = slider.querySelector('.slides');
-            const slide = slider.querySelectorAll('.slide');
-            const prev = slider.querySelector('.prev');
-            const next = slider.querySelector('.next');
-
-            let currentIndex = 0; // Vị trí bắt đầu
-
-            function showSlide(index) {
-                const totalSlides = slide.length;
-                const visibleSlides = 4; // Số lượng slide hiển thị đồng thời
-                const maxIndex = totalSlides - visibleSlides;
-
-                if (index < 0) {
-                    currentIndex = 0;
-                } else if (index > maxIndex) {
-                    currentIndex = maxIndex;
-                } else {
-                    currentIndex = index;
-                }
-
-                const offset = -currentIndex * (100 / visibleSlides);
-                slides.style.transform = `translateX(${offset}%)`;
-            }
-
-            // Gắn sự kiện cho các nút
-            next.addEventListener('click', () => {
-                showSlide(currentIndex + 1);
-            });
-
-            prev.addEventListener('click', () => {
-                showSlide(currentIndex - 1);
-            });
-
-            showSlide(currentIndex); // Hiển thị slide đầu tiên
-        });
-
-    </script>
+                    $('.filter-price').find('.filter-link').on('click', function (e) {
+                        $('.filter-price').find('.filter-link').removeClass('filter-link-active')
+                        $(this).addClass('filter-link-active')
+                    })
 
 
-    <!--Instagram-->
-    <section class="instagram position-relative">
-        <div class="container">
-            <!-- Nút Follow nằm trên ảnh -->
-            <a href="#" class="btn">Theo dõi Instagram</a>
+                    var url = '?page=0'
+                    $('#filter-btn').on('click', function () {
+                        var orderBy = $(".filter-order-buy").find('.filter-link-active').attr('data-sort')
+                        var dataMinPrice = $(".filter-price").find('.filter-link-active').attr('data-min-price')
+                        var dataMaxPrice = $(".filter-price").find('.filter-link-active').attr('data-max-price')
 
-            <!-- Hình ảnh Instagram -->
-            <div class="row g-0">
-                <div class="col-6 col-sm-4 col-md-2">
-                    <div class="insta-item">
-                        <a href="#" target="_blank">
-                            <img src="images/insta-item1.jpg" alt="Instagram">
-                        </a>
-                    </div>
-                </div>
-                <div class="col-6 col-sm-4 col-md-2">
-                    <div class="insta-item">
-                        <a href="#" target="_blank">
-                            <img src="images/insta-item2.jpg" alt="Instagram">
-                        </a>
-                    </div>
-                </div>
-                <div class="col-6 col-sm-4 col-md-2">
-                    <div class="insta-item">
-                        <a href="#" target="_blank">
-                            <img src="images/insta-item3.jpg" alt="instagram" class="insta-image img-fluid">
-                        </a>
-                    </div>
-                </div>
-                <div class="col-6 col-sm-4 col-md-2">
-                    <div class="insta-item">
-                        <a href="#" target="_blank">
-                            <img src="images/insta-item4.jpg" alt="instagram" class="insta-image img-fluid">
-                        </a>
-                    </div>
-                </div>
-                <div class="col-6 col-sm-4 col-md-2">
-                    <div class="insta-item">
-                        <a href="#" target="_blank">
-                            <img src="images/insta-item5.jpg" alt="instagram" class="insta-image img-fluid">
-                        </a>
-                    </div>
-                </div>
-                <div class="col-6 col-sm-4 col-md-2">
-                    <div class="insta-item">
-                        <a href="#" target="_blank">
-                            <img src="images/insta-item6.jpg" alt="instagram" class="insta-image img-fluid">
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+                        if (orderBy) {
+                            url += '&sort=' + orderBy
+                        }
+                        if (dataMinPrice) {
+                            url += '&minPrice=' + dataMinPrice
+                        }
+                        if (dataMaxPrice) {
+                            url += '&maxPrice=' + dataMaxPrice
+                        }
 
-    <script>
-        var urlCurr = /*[[${url}]]*/ 'abc';
+                        window.location.href = url
+                    })
+                    $('#search-btn').on('click', function () {
+                        if ($("#search-product-input").val()) {
+                            url += '&keyword=' + $("#search-product-input").val()
+                            window.location.href = url
+                        }
+                    })
 
-        $('.filter-order-buy').find('.filter-link').on('click', function (e) {
-            $('.filter-order-buy').find('.filter-link').removeClass('filter-link-active')
-            $(this).addClass('filter-link-active')
-        })
+                    $('.filter-gender').on('click', function () {
+                        let newURL = urlCurr.replace(/&gender=[^&]/, '');
 
-        $('.filter-price').find('.filter-link').on('click', function (e) {
-            $('.filter-price').find('.filter-link').removeClass('filter-link-active')
-            $(this).addClass('filter-link-active')
-        })
-
-
-        var url = '?page=0'
-        $('#filter-btn').on('click', function () {
-            var orderBy = $(".filter-order-buy").find('.filter-link-active').attr('data-sort')
-            var dataMinPrice = $(".filter-price").find('.filter-link-active').attr('data-min-price')
-            var dataMaxPrice = $(".filter-price").find('.filter-link-active').attr('data-max-price')
-
-            if (orderBy) {
-                url += '&sort=' + orderBy
-            }
-            if (dataMinPrice) {
-                url += '&minPrice=' + dataMinPrice
-            }
-            if (dataMaxPrice) {
-                url += '&maxPrice=' + dataMaxPrice
-            }
-
-            window.location.href = url
-        })
-        $('#search-btn').on('click', function () {
-            if ($("#search-product-input").val()) {
-                url += '&keyword=' + $("#search-product-input").val()
-                window.location.href = url
-            }
-        })
-
-        $('.filter-gender').on('click', function () {
-            let newURL = urlCurr.replace(/&gender=[^&]/, '');
-
-            var dataGenderEl = $(".filter-gender").find('button.how-active1').attr('data-filter')
-            if (dataGenderEl) {
-                newURL += '&gender=' + dataGenderEl
-            }
-            window.location.href = '?page=0' + newURL
-        })
-    </script>
-</div>
-
-
-<!-- Footer -->
-<footer class="bg3 p-t-75 p-b-32">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-6 col-lg-3 p-b-50">
-                <h4 class="stext-301 cl0 p-b-30">
-                    Loại quần áo
-                </h4>
-
-                <ul>
-                    <li class="p-b-10">
-                        <a href="/getshop" class="stext-107 cl7 hov-cl1 trans-04">
-                            Nữ
-                        </a>
-                    </li>
-
-                    <li class="p-b-10">
-                        <a href="/getshop" class="stext-107 cl7 hov-cl1 trans-04">
-                            Nam
-                        </a>
-                    </li>
-
-                    <li class="p-b-10">
-                        <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-                            Shoes
-                        </a>
-                    </li>
-
-                    <li class="p-b-10">
-                        <a href="/product" class="stext-107 cl7 hov-cl1 trans-04">
-                            Đồng hồ
-                        </a>
-                    </li>
-                </ul>
+                        var dataGenderEl = $(".filter-gender").find('button.how-active1').attr('data-filter')
+                        if (dataGenderEl) {
+                            newURL += '&gender=' + dataGenderEl
+                        }
+                        window.location.href = '?page=0' + newURL
+                    })
+                </script>
             </div>
 
-            <div class="col-sm-6 col-lg-3 p-b-50">
-                <h4 class="stext-301 cl0 p-b-30">
-                    Trợ giúp
-                </h4>
-
-                <ul>
-                    <li class="p-b-10">
-                        <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-                            Theo dõi đơn hàng
-                        </a>
-                    </li>
-
-                    <li class="p-b-10">
-                        <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-                            Returns
-                        </a>
-                    </li>
-
-                    <li class="p-b-10">
-                        <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-                            Shipping
-                        </a>
-                    </li>
-
-                    <li class="p-b-10">
-                        <a href="#" class="stext-107 cl7 hov-cl1 trans-04">
-                            FAQs
-                        </a>
-                    </li>
-                </ul>
-            </div>
-
-            <div class="col-sm-6 col-lg-3 p-b-50">
-                <h4 class="stext-301 cl0 p-b-30">
-                    GET IN TOUCH
-                </h4>
-
-                <p class="stext-107 cl7 size-201">
-                    Any questions? Let us know in store at 8th floor, 379 Hudson St, New York, NY 10018 or call us on
-                    (+1) 96 716 6879
-                </p>
-
-                <div class="p-t-27">
-                    <a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
-                        <i class="fa fa-facebook"></i>
-                    </a>
-
-                    <a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
-                        <i class="fa fa-instagram"></i>
-                    </a>
-
-                    <a href="#" class="fs-18 cl7 hov-cl1 trans-04 m-r-16">
-                        <i class="fa fa-pinterest-p"></i>
-                    </a>
-                </div>
-            </div>
-
-            <div class="col-sm-6 col-lg-3 p-b-50">
-                <h4 class="stext-301 cl0 p-b-30">
-                    Newsletter
-                </h4>
-
-                <form>
-                    <div class="wrap-input1 w-full p-b-4">
-                        <input class="input1 bg-none plh1 stext-107 cl7" type="text" name="email"
-                               placeholder="email@example.com">
-                        <div class="focus-input1 trans-04"></div>
-                    </div>
-
-                    <div class="p-t-18">
-                        <button class="flex-c-m stext-101 cl0 size-103 bg1 bor1 hov-btn2 p-lr-15 trans-04">
-                            Subscribe
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-        <div class="p-t-40">
-            <div class="flex-c-m flex-w p-b-18">
-                <a href="#" class="m-all-1">
-                    <img src="images/icons/icon-pay-01.png" alt="ICON-PAY">
-                </a>
-
-                <a href="#" class="m-all-1">
-                    <img src="images/icons/icon-pay-02.png" alt="ICON-PAY">
-                </a>
-
-                <a href="#" class="m-all-1">
-                    <img src="images/icons/icon-pay-03.png" alt="ICON-PAY">
-                </a>
-
-                <a href="#" class="m-all-1">
-                    <img src="images/icons/icon-pay-04.png" alt="ICON-PAY">
-                </a>
-
-                <a href="#" class="m-all-1">
-                    <img src="images/icons/icon-pay-05.png" alt="ICON-PAY">
-                </a>
-            </div>
-
-            <p class="stext-107 cl6 txt-center">
-                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                Copyright &copy;<script>document.write(new Date().getFullYear());</script>
-                All rights reserved | Made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a
-                    href="https://colorlib.com" target="_blank">Colorlib</a> &amp; distributed by <a
-                    href="https://themewagon.com" target="_blank">ThemeWagon</a>
-                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-
-            </p>
-        </div>
-    </div>
-</footer>
-
-
-<!-- Back to top -->
-<div class="btn-back-to-top" id="myBtn">
+            <!-- Back to top -->
+            <div class="btn-back-to-top" id="myBtn">
 		<span class="symbol-btn-back-to-top">
 			<i class="zmdi zmdi-chevron-up"></i>
 		</span>
-</div>
+            </div>
 
-<!-- Modal1 -->
-<div class="wrap-modal1 js-modal1 p-t-60 p-b-20">
-    <div class="overlay-modal1 js-hide-modal1"></div>
+            <!-- Modal1 -->
+            <div class="wrap-modal1 js-modal1 p-t-60 p-b-20">
+                <div class="overlay-modal1 js-hide-modal1"></div>
 
-    <div class="container">
-        <div class="bg0 p-t-60 p-b-30 p-lr-15-lg how-pos3-parent">
-            <button class="how-pos3 hov3 trans-04 js-hide-modal1">
-                <img src="images/icons/icon-close.png" alt="CLOSE">
-            </button>
+                <div class="container">
+                    <div class="bg0 p-t-60 p-b-30 p-lr-15-lg how-pos3-parent">
+                        <button class="how-pos3 hov3 trans-04 js-hide-modal1">
+                            <img src="images/icons/icon-close.png" alt="CLOSE">
+                        </button>
 
-            <div class="row">
-                <div class="col-md-6 col-lg-7 p-b-30">
-                    <div class="p-l-25 p-r-30 p-lr-0-lg">
-                        <div class="wrap-slick3 flex-sb flex-w">
-                            <div class="wrap-slick3-dots"></div>
-                            <div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
+                        <div class="row">
+                            <div class="col-md-6 col-lg-7 p-b-30">
+                                <div class="p-l-25 p-r-30 p-lr-0-lg">
+                                    <div class="wrap-slick3 flex-sb flex-w">
+                                        <div class="wrap-slick3-dots"></div>
+                                        <div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
 
-                            <div class="slick3 gallery-lb">
-                                <div class="item-slick3" data-thumb="images/product-detail-01.jpg">
-                                    <div class="wrap-pic-w pos-relative">
-                                        <img src="images/product-detail-01.jpg" alt="IMG-PRODUCT">
+                                        <div class="slick3 gallery-lb">
+                                            <div class="item-slick3" data-thumb="images/product-detail-01.jpg">
+                                                <div class="wrap-pic-w pos-relative">
+                                                    <img src="images/product-detail-01.jpg" alt="IMG-PRODUCT">
 
-                                        <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
-                                           href="images/product-detail-01.jpg">
-                                            <i class="fa fa-expand"></i>
-                                        </a>
-                                    </div>
-                                </div>
+                                                    <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
+                                                       href="images/product-detail-01.jpg">
+                                                        <i class="fa fa-expand"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
 
-                                <div class="item-slick3" data-thumb="images/product-detail-02.jpg">
-                                    <div class="wrap-pic-w pos-relative">
-                                        <img src="images/product-detail-02.jpg" alt="IMG-PRODUCT">
+                                            <div class="item-slick3" data-thumb="images/product-detail-02.jpg">
+                                                <div class="wrap-pic-w pos-relative">
+                                                    <img src="images/product-detail-02.jpg" alt="IMG-PRODUCT">
 
-                                        <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
-                                           href="images/product-detail-02.jpg">
-                                            <i class="fa fa-expand"></i>
-                                        </a>
-                                    </div>
-                                </div>
+                                                    <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
+                                                       href="images/product-detail-02.jpg">
+                                                        <i class="fa fa-expand"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
 
-                                <div class="item-slick3" data-thumb="images/product-detail-03.jpg">
-                                    <div class="wrap-pic-w pos-relative">
-                                        <img src="images/product-detail-03.jpg" alt="IMG-PRODUCT">
+                                            <div class="item-slick3" data-thumb="images/product-detail-03.jpg">
+                                                <div class="wrap-pic-w pos-relative">
+                                                    <img src="images/product-detail-03.jpg" alt="IMG-PRODUCT">
 
-                                        <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
-                                           href="images/product-detail-03.jpg">
-                                            <i class="fa fa-expand"></i>
-                                        </a>
+                                                    <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
+                                                       href="images/product-detail-03.jpg">
+                                                        <i class="fa fa-expand"></i>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="col-md-6 col-lg-5 p-b-30">
-                    <div class="p-r-50 p-t-5 p-lr-0-lg">
-                        <h4 class="mtext-105 cl2 js-name-detail p-b-14">
-                            Lightweight Jacket
-                        </h4>
+                            <div class="col-md-6 col-lg-5 p-b-30">
+                                <div class="p-r-50 p-t-5 p-lr-0-lg">
+                                    <h4 class="mtext-105 cl2 js-name-detail p-b-14">
+                                        Lightweight Jacket
+                                    </h4>
 
-                        <span class="mtext-106 cl2">
+                                    <span class="mtext-106 cl2">
 								$58.79
 							</span>
 
-                        <p class="stext-102 cl3 p-t-23">
-                            Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare
-                            feugiat.
-                        </p>
+                                    <p class="stext-102 cl3 p-t-23">
+                                        Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare
+                                        feugiat.
+                                    </p>
 
-                        <!--  -->
-                        <div class="p-t-33">
-                            <div class="flex-w flex-r-m p-b-10">
-                                <div class="size-203 flex-c-m respon6">
-                                    Size
-                                </div>
+                                    <!--  -->
+                                    <div class="p-t-33">
+                                        <div class="flex-w flex-r-m p-b-10">
+                                            <div class="size-203 flex-c-m respon6">
+                                                Size
+                                            </div>
 
-                                <div class="size-204 respon6-next">
-                                    <div class="rs1-select2 bor8 bg0">
-                                        <select class="js-select2" name="time">
-                                            <option>Choose an option</option>
-                                            <option>Size S</option>
-                                            <option>Size M</option>
-                                            <option>Size L</option>
-                                            <option>Size XL</option>
-                                        </select>
-                                        <div class="dropDownSelect2"></div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="flex-w flex-r-m p-b-10">
-                                <div class="size-203 flex-c-m respon6">
-                                    Color
-                                </div>
-
-                                <div class="size-204 respon6-next">
-                                    <div class="rs1-select2 bor8 bg0">
-                                        <select class="js-select2" name="time">
-                                            <option>Choose an option</option>
-                                            <option>Red</option>
-                                            <option>Blue</option>
-                                            <option>White</option>
-                                            <option>Grey</option>
-                                        </select>
-                                        <div class="dropDownSelect2"></div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="flex-w flex-r-m p-b-10">
-                                <div class="size-204 flex-w flex-m respon6-next">
-                                    <div class="wrap-num-product flex-w m-r-20 m-tb-10">
-                                        <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
-                                            <i class="fs-16 zmdi zmdi-minus"></i>
+                                            <div class="size-204 respon6-next">
+                                                <div class="rs1-select2 bor8 bg0">
+                                                    <select class="js-select2" name="time">
+                                                        <option>Choose an option</option>
+                                                        <option>Size S</option>
+                                                        <option>Size M</option>
+                                                        <option>Size L</option>
+                                                        <option>Size XL</option>
+                                                    </select>
+                                                    <div class="dropDownSelect2"></div>
+                                                </div>
+                                            </div>
                                         </div>
 
-                                        <input class="mtext-104 cl3 txt-center num-product" type="number"
-                                               name="num-product" value="1">
+                                        <div class="flex-w flex-r-m p-b-10">
+                                            <div class="size-203 flex-c-m respon6">
+                                                Color
+                                            </div>
 
-                                        <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
-                                            <i class="fs-16 zmdi zmdi-plus"></i>
+                                            <div class="size-204 respon6-next">
+                                                <div class="rs1-select2 bor8 bg0">
+                                                    <select class="js-select2" name="time">
+                                                        <option>Choose an option</option>
+                                                        <option>Red</option>
+                                                        <option>Blue</option>
+                                                        <option>White</option>
+                                                        <option>Grey</option>
+                                                    </select>
+                                                    <div class="dropDownSelect2"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="flex-w flex-r-m p-b-10">
+                                            <div class="size-204 flex-w flex-m respon6-next">
+                                                <div class="wrap-num-product flex-w m-r-20 m-tb-10">
+                                                    <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
+                                                        <i class="fs-16 zmdi zmdi-minus"></i>
+                                                    </div>
+
+                                                    <input class="mtext-104 cl3 txt-center num-product" type="number"
+                                                           name="num-product" value="1">
+
+                                                    <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
+                                                        <i class="fs-16 zmdi zmdi-plus"></i>
+                                                    </div>
+                                                </div>
+
+                                                <button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+                                                    Add to cart
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
 
-                                    <button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
-                                        Add to cart
-                                    </button>
+                                    <!--  -->
+                                    <div class="flex-w flex-m p-l-100 p-t-40 respon7">
+                                        <div class="flex-m bor9 p-r-10 m-r-11">
+                                            <a href="#"
+                                               class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100"
+                                               data-tooltip="Add to Wishlist">
+                                                <i class="zmdi zmdi-favorite"></i>
+                                            </a>
+                                        </div>
+
+                                        <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
+                                           data-tooltip="Facebook">
+                                            <i class="fa fa-facebook"></i>
+                                        </a>
+
+                                        <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
+                                           data-tooltip="Twitter">
+                                            <i class="fa fa-twitter"></i>
+                                        </a>
+
+                                        <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
+                                           data-tooltip="Google Plus">
+                                            <i class="fa fa-google-plus"></i>
+                                        </a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-
-                        <!--  -->
-                        <div class="flex-w flex-m p-l-100 p-t-40 respon7">
-                            <div class="flex-m bor9 p-r-10 m-r-11">
-                                <a href="#"
-                                   class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100"
-                                   data-tooltip="Add to Wishlist">
-                                    <i class="zmdi zmdi-favorite"></i>
-                                </a>
-                            </div>
-
-                            <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
-                               data-tooltip="Facebook">
-                                <i class="fa fa-facebook"></i>
-                            </a>
-
-                            <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
-                               data-tooltip="Twitter">
-                                <i class="fa fa-twitter"></i>
-                            </a>
-
-                            <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
-                               data-tooltip="Google Plus">
-                                <i class="fa fa-google-plus"></i>
-                            </a>
                         </div>
                     </div>
                 </div>
+
             </div>
-        </div>
-    </div>
-
-</div>
 
 
-<!--===============================================================================================-->
-<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
-<!--===============================================================================================-->
-<script src="vendor/animsition/js/animsition.min.js"></script>
-<!--===============================================================================================-->
-<script src="vendor/bootstrap/js/popper.js"></script>
-<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
-<!--===============================================================================================-->
-<script src="vendor/select2/select2.min.js"></script>
-<script>
-    $(".js-select2").each(function () {
-        $(this).select2({
-            minimumResultsForSearch: 20,
-            dropdownParent: $(this).next('.dropDownSelect2')
-        });
-    })
-</script>
-<!--===============================================================================================-->
-<script src="vendor/daterangepicker/moment.min.js"></script>
-<script src="vendor/daterangepicker/daterangepicker.js"></script>
-<!--===============================================================================================-->
-<script src="vendor/slick/slick.min.js"></script>
-<script src="js/slick-custom.js"></script>
-<!--===============================================================================================-->
-<script src="vendor/parallax100/parallax100.js"></script>
-<script>
-    $('.parallax100').parallax100();
-</script>
-<!--===============================================================================================-->
-<script src="vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
-<script>
-    $('.gallery-lb').each(function () { // the containers for all your galleries
-        $(this).magnificPopup({
-            delegate: 'a', // the selector for gallery item
-            type: 'image',
-            gallery: {
-                enabled: true
-            },
-            mainClass: 'mfp-fade'
-        });
-    });
-</script>
-<!--===============================================================================================-->
-<script src="vendor/isotope/isotope.pkgd.min.js"></script>
-<!--===============================================================================================-->
-<script src="vendor/sweetalert/sweetalert.min.js"></script>
+            <!--===============================================================================================-->
+            <script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+            <!--===============================================================================================-->
+            <script src="vendor/animsition/js/animsition.min.js"></script>
+            <!--===============================================================================================-->
+            <script src="vendor/bootstrap/js/popper.js"></script>
+            <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+            <!--===============================================================================================-->
+            <script src="vendor/select2/select2.min.js"></script>
+            <script>
+                $(".js-select2").each(function () {
+                    $(this).select2({
+                        minimumResultsForSearch: 20,
+                        dropdownParent: $(this).next('.dropDownSelect2')
+                    });
+                })
+            </script>
+            <!--===============================================================================================-->
+            <script src="vendor/daterangepicker/moment.min.js"></script>
+            <script src="vendor/daterangepicker/daterangepicker.js"></script>
+            <!--===============================================================================================-->
+            <script src="vendor/slick/slick.min.js"></script>
+            <script src="js/slick-custom.js"></script>
+            <!--===============================================================================================-->
+            <script src="vendor/parallax100/parallax100.js"></script>
+            <script>
+                $('.parallax100').parallax100();
+            </script>
+            <!--===============================================================================================-->
+            <script src="vendor/MagnificPopup/jquery.magnific-popup.min.js"></script>
+            <script>
+                $('.gallery-lb').each(function () { // the containers for all your galleries
+                    $(this).magnificPopup({
+                        delegate: 'a', // the selector for gallery item
+                        type: 'image',
+                        gallery: {
+                            enabled: true
+                        },
+                        mainClass: 'mfp-fade'
+                    });
+                });
+            </script>
+            <!--===============================================================================================-->
+            <script src="vendor/isotope/isotope.pkgd.min.js"></script>
+            <!--===============================================================================================-->
+            <script src="vendor/sweetalert/sweetalert.min.js"></script>
 
-<script>
-    $('.js-addwish-b2').on('click', function (e) {
-        e.preventDefault();
-    });
+            <script>
+                $('.js-addwish-b2').on('click', function (e) {
+                    e.preventDefault();
+                });
 
-    $('.js-addwish-b2').each(function () {
-        var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
-        $(this).on('click', function () {
-            swal(nameProduct, "is added to wishlist !", "success");
+                $('.js-addwish-b2').each(function () {
+                    var nameProduct = $(this).parent().parent().find('.js-name-b2').html();
+                    $(this).on('click', function () {
+                        swal(nameProduct, "is added to wishlist !", "success");
 
-            $(this).addClass('js-addedwish-b2');
-            $(this).off('click');
-        });
-    });
+                        $(this).addClass('js-addedwish-b2');
+                        $(this).off('click');
+                    });
+                });
 
-    $('.js-addwish-detail').each(function () {
-        var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
+                $('.js-addwish-detail').each(function () {
+                    var nameProduct = $(this).parent().parent().parent().find('.js-name-detail').html();
 
-        $(this).on('click', function () {
-            swal(nameProduct, "is added to wishlist !", "success");
+                    $(this).on('click', function () {
+                        swal(nameProduct, "is added to wishlist !", "success");
 
-            $(this).addClass('js-addedwish-detail');
-            $(this).off('click');
-        });
-    });
+                        $(this).addClass('js-addedwish-detail');
+                        $(this).off('click');
+                    });
+                });
 
-    /*---------------------------------------------*/
+                /*---------------------------------------------*/
 
-    $('.js-addcart-detail').each(function () {
-        var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
-        $(this).on('click', function () {
-            swal(nameProduct, "is added to cart !", "success");
-        });
-    });
-</script>
-<!--===============================================================================================-->
-<script src="vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-<script>
-    $('.js-pscroll').each(function () {
-        $(this).css('position', 'relative');
-        $(this).css('overflow', 'hidden');
-        var ps = new PerfectScrollbar(this, {
-            wheelSpeed: 1,
-            scrollingThreshold: 1000,
-            wheelPropagation: false,
-        });
+                $('.js-addcart-detail').each(function () {
+                    var nameProduct = $(this).parent().parent().parent().parent().find('.js-name-detail').html();
+                    $(this).on('click', function () {
+                        swal(nameProduct, "is added to cart !", "success");
+                    });
+                });
+            </script>
+            <!--===============================================================================================-->
+            <script src="vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+            <script>
+                $('.js-pscroll').each(function () {
+                    $(this).css('position', 'relative');
+                    $(this).css('overflow', 'hidden');
+                    var ps = new PerfectScrollbar(this, {
+                        wheelSpeed: 1,
+                        scrollingThreshold: 1000,
+                        wheelPropagation: false,
+                    });
 
-        $(window).on('resize', function () {
-            ps.update();
-        })
-    });
-</script>
+                    $(window).on('resize', function () {
+                        ps.update();
+                    })
+                });
+            </script>
 
-<!--===============================================================================================-->
+            <!--===============================================================================================-->
 
 
-<!--===============================================================================================-->
-<script src="js/main.js"></script>
+            <!--===============================================================================================-->
+            <script src="js/main.js"></script>
 
 </body>
 </html>

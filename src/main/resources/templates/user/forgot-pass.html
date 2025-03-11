@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{user/layout-user.html}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div layout:fragment="content">
+
+    <!-- Content page -->
+    <section class="bg0 p-b-60">
+        <div class="container" style="background: #4caf50">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div th:if="${errorMessage}" class="alert alert-danger">
+                        <p th:text="${errorMessage}"></p>
+                    </div>
+                    <form class="mt-5 px-4 pt-4 pb-6 shadow-sm border" th:action="@{/reset-page}" method="post" id="login-form">
+                        <div class="text-center">
+                            <h2 class="h2 pd-4">Quên mật khẩu</h2>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Nhập email của bạn để đặt lại mật khẩu</label>
+                            <input type="text" class="form-control" id="email" name="email" placeholder="Địa chỉ email">
+                            <span class="error text-danger text-sm"></span>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Đặt lại mật khẩu</button>
+
+                        <div class="forgot-password mt-3">
+                            <a href="/user-login" class="float-right">Đăng nhập</a>
+                        </div>
+                        <div class="signup-link mt-2 col-8">
+                            <p>Bạn chưa có tài khoản? <a th:href="@{/register}">Đăng ký ngay!</a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Back to top -->
+    <div class="btn-back-to-top" id="myBtn">
+		<span class="symbol-btn-back-to-top">
+			<i class="zmdi zmdi-chevron-up"></i>
+		</span>
+    </div>
+    <script>
+        $(document).ready(function () {
+            Validator({
+                form: '#login-form',
+                formGroupSelector: '.form-group',
+                errorSelector: '.error',
+                rules: [
+                    Validator.isRequired('#email', 'Vui lòng nhập email'),
+                    Validator.maxLength('#email', 100),
+                    Validator.isEmail('#email')
+                ]
+            });
+        })
+    </script>
+
+</div>
+</body>
+</html>

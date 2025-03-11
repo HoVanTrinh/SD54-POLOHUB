@@ -6,6 +6,8 @@
     <title>Login</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <!-- jQuery and Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
@@ -14,6 +16,7 @@
         body {
             background-color: #f8f9fa; /* Lighter background for better contrast */
         }
+
         .login-container {
             max-width: 400px; /* Set max width for the form */
             margin: auto; /* Center the form */
@@ -22,24 +25,30 @@
             border-radius: 8px; /* Rounded corners */
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Subtle shadow */
         }
+
         .forgot-password {
             text-align: right; /* Right align for better layout */
         }
+
         .btn-back-to-top {
             position: fixed;
             bottom: 20px;
             right: 20px;
             display: none; /* Initially hidden */
         }
+
+        .input-group-text {
+            background-color: #007bff; /* Change background color of icons */
+            color: white; /* Change icon color */
+        }
     </style>
 </head>
 <body>
 <div layout:fragment="content">
     <section class="bg-light p-b-60">
-        <div class="container">
+        <div class="container" style="background: #4caf50">
             <div class="row justify-content-center">
-                <form class="login-container mt-5 shadow-sm border" th:action="@{/perform_login}" method="post" id="login-form"
-                      th:object="${user}">
+                <form class="login-container mt-5 shadow-sm border" th:action="@{/perform_login}" method="post" id="login-form" th:object="${user}">
                     <h2 class="text-center">Đăng Nhập</h2>
                     <div th:if="${errorMessage}" class="alert alert-danger">
                         <p th:text="${errorMessage}"></p>
@@ -49,14 +58,20 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="email">Email:</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Địa chỉ email"
-                               th:field="*{email}" required maxlength="100">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                            </div>
+                            <input type="email" class="form-control" id="email" name="email" placeholder="Địa chỉ email" th:field="*{email}" required maxlength="100">
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label for="password">Mật khẩu:</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Mật khẩu"
-                               th:field="*{password}" required minlength="6" maxlength="50">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                            </div>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Mật khẩu" th:field="*{password}" required minlength="6" maxlength="50">
+                        </div>
                     </div>
 
                     <div class="form-check">
@@ -74,7 +89,7 @@
                         <a href="/forgot-pass">Quên mật khẩu?</a>
                     </div>
                     <div class="signup-link mt-2 text-center">
-                        <p>Bạn chưa có tài khoản? <a th:href="@{#}">Đăng ký ngay!</a></p>
+                        <p>Bạn chưa có tài khoản? <a th:href="@{/register}">Đăng ký ngay!</a></p>
                     </div>
                 </form>
             </div>

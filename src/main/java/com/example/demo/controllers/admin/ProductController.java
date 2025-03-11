@@ -1,5 +1,6 @@
 package com.example.demo.controllers.admin;
 
+
 import com.example.demo.dto.product.CreateProductDetailsForm;
 import com.example.demo.dto.product.ProductSearchDto;
 import com.example.demo.entities.*;
@@ -30,7 +31,7 @@ import java.util.UUID;
 @Controller
 @RequestMapping("/admin")
 public class ProductController {
-    @Value("upload-image/")
+    @Value("${upload.directory}")
     private String uploadDirectory; // Đường dẫn đến thư mục lưu ảnh, được cấu hình trong application.properties
     @Autowired
     private ProductService productService;
@@ -53,6 +54,9 @@ public class ProductController {
 
     @Autowired
     private ImageService imageService;
+
+    @Autowired
+    FileUploadUtil fileUploadUtil;
     @GetMapping("/product-all")
     public String getAllProduct(Model model,
                                 @RequestParam(name = "page", defaultValue = "0") int page,
