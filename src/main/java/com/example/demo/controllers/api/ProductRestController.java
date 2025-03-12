@@ -7,12 +7,12 @@ import com.example.demo.services.ProductService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class ProductRestController{
@@ -50,5 +50,12 @@ public class ProductRestController{
     @GetMapping("/api/products/{detailId}/productDetail")
     public ProductDto getByProductDetailId(@PathVariable Long detailId) {
         return productService.getByProductDetailId(detailId);
+    }
+    @GetMapping("/api/check-product-name")
+    @ResponseBody
+    public ResponseEntity<Map<String, Boolean>> checkProductName(@RequestParam String name) {
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("exists", productService.existsByName(name));
+        return ResponseEntity.ok(response);
     }
 }

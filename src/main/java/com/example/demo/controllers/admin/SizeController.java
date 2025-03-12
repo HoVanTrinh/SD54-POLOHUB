@@ -60,14 +60,19 @@ public class SizeController {
     @PostMapping("/size-save")
     public String addSize(Model model, @Validated @ModelAttribute("Size") Size size, RedirectAttributes redirectAttributes) {
         try {
+            if(sizeService.existsByName(size.getName())){
+                redirectAttributes.addFlashAttribute("duplicateName","Kích cỡ đã tồn tại");
+                return "redirect:/admin/size-create";
+            }
             Size sizeNew = sizeService.createSize(size);
             redirectAttributes.addFlashAttribute("successMessage", "Thêm kích cỡ mới thành công");
+            return "redirect:/admin/size-all";
         }
         catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
             return "redirect:/admin/size-create";
         }
-        return "redirect:/admin/size-all";
+
     }
 
     @PostMapping("/size-update/{id}")

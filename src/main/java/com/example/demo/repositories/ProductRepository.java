@@ -20,7 +20,7 @@ public interface ProductRepository extends JpaRepository<Product, Long>, JpaSpec
     Page<Product> getAllByName(String name, Pageable pageable);
 
     boolean existsByCode(String code);
-
+    boolean existsByName(String name);
     Page<Product> findAllByStatus(int status, Pageable pageable);
     Page<Product> findAllByStatusAndDeleteFlag(int status, boolean deleteFlag, Pageable pageable);
 
@@ -38,7 +38,7 @@ public interface ProductRepository extends JpaRepository<Product, Long>, JpaSpec
     Page<Product> searchProductName(String productName, Pageable pageable);
 
     @Query(value = "SELECT p.id as idSanPham, p.code as maSanPham, p.name as tenSanPham, " +
-            "p.brand.name as nhanHang, p.material.name as chatLieu, p.status as trangThai " +
+            "p.brand.name as nhanHang, p.material.name as chatLieu ,p.status as trangThai " +
             "FROM Product p " +
             "WHERE (COALESCE(:maSanPham, '') = '' OR p.code LIKE CONCAT('%', :maSanPham, '%')) " +
             "AND (COALESCE(:tenSanPham, '') = '' OR p.name LIKE CONCAT('%', :tenSanPham, '%')) " +

@@ -82,6 +82,7 @@
         </div>
     </form>
     <div class="alert alert-danger" th:if="${errorMessage}" th:text="${errorMessage}"></div>
+    <div th:if="${duplicateName != null}" th:text="${duplicateName}" class="alert alert-danger ml-2 py-2 px-2"></div>
     <script>
         $(document).ready(function () {
             Validator({
@@ -94,6 +95,30 @@
                     Validator.maxLength('#name', 40),
                     Validator.maxLength('#code', 20),
                 ]
+            });
+        });
+        $(document).ready(function () {
+            $('#brand-form').on('submit', function (event) {
+                event.preventDefault(); // Ngăn chặn việc gửi mẫu mặc định
+
+                const brandName = $('#name').val();
+
+                $.ajax({
+                    type: 'GET',
+                    url: '/api/check-brand-name',
+                    data: { name: brandName },
+                    success: function (response) {
+                        if (response.exists) {
+                            $('.error').text('Tên nhãn hàng đã tồn tại');
+                        } else {
+                            // Nếu không có trùng lặp, gửi mẫu
+                            this.submit(); // bạn có thể cần tham chiếu đúng đến mẫu hoặc xử lý gửi theo cách khác
+                        }
+                    },
+                    error: function () {
+                        $('.error').text('Có lỗi xảy ra khi kiểm tra tên nhãn hàng');
+                    }
+                });
             });
         });
     </script>

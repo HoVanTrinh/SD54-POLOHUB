@@ -19,7 +19,7 @@ public interface ColorRepo extends JpaRepository<Color, Long> {
     List<Color> findColorsByProductAndSize(Product product, Size size);
 
     boolean existsByCode(String code);
-
+    boolean existsByName(String name);
     List<Color> findAllByDeleteFlagFalse();
     Page<Color> findAllByDeleteFlagFalse(Pageable pageable);
 }

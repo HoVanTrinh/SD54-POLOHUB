@@ -22,7 +22,7 @@ public interface ProductService {
 
     Product delete(Long id);
 
-
+    boolean existsByName(String name);
     Product getProductByCode(String code);
 
     boolean existsByCode(String code);

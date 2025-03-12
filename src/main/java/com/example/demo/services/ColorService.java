@@ -32,4 +32,5 @@ public interface ColorService {
     List<Color> getColorsByProductIdAndSizeId(Long productId, Long sizeId) throws NotFoundException;
 
     ColorDto createColorApi(ColorDto colorDto);
+    boolean existsByName(String name);
 }

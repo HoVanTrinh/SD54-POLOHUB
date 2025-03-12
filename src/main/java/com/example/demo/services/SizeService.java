@@ -14,7 +14,7 @@ public interface SizeService {
     Page<Size> getAllSize(Pageable pageable);
 
     Size save(Size size);
-
+    boolean existsByName(String name);
     Size createSize(Size size);
     Size updateSize(Size size);
 

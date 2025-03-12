@@ -77,4 +77,8 @@ public class MaterialServiceImpl implements MaterialService {
         Material materialNew = materialRepository.save(material);
         return new MaterialDto(materialNew.getId(), material.getCode(), material.getName());
     }
+    @Override
+    public boolean existsByName(String name) {
+        return materialRepository.existsByName(name);
+    }
 }

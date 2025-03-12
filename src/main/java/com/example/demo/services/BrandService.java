@@ -22,6 +22,6 @@ public interface BrandService {
     List<Brand> getAll();
 
     BrandDto createBrandApi(BrandDto brandDto);
-
+    boolean existsByName(String name);
     boolean existsById(Long id);
 }

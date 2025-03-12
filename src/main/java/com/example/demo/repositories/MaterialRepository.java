@@ -10,7 +10,7 @@ import java.util.List;
 public interface MaterialRepository extends JpaRepository<Material, Long> {
     boolean existsByCode(String code);
     List<Material> findAllByDeleteFlagFalse();
-
+    boolean existsByName(String name);
     Page<Material> findAllByDeleteFlagFalse(Pageable pageable);
 }
 

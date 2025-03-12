@@ -109,9 +109,10 @@
                 <div class="form-group col-md-6">
                     <label>Tên sản phẩm</label>
                     <span class="red_require"> *</span>
-                    <input type="text" class="form-control" th:field="*{name}" placeholder="Mời nhập tên sản phẩm">
+                    <input type="text"  class="form-control" th:field="*{name}" placeholder="Mời nhập tên sản phẩm">
                     <span class="error"></span>
                 </div>
+
                 <div class="form-group col-md-6">
                     <div class="select-container">
                         <label>Nhãn hàng</label>
@@ -120,7 +121,7 @@
                             <option th:value="${brand.id}" th:each="brand: ${listBrand}"
                                     th:text="${brand.name}"></option>
                         </select>
-                        <span id="add-brand" class="plus-icon"><i class="fas fa-plus"></i></span>
+<!--                        <span id="add-brand" class="plus-icon"><i class="fas fa-plus"></i></span>-->
                     </div>
                 </div>
             </div>
@@ -133,7 +134,7 @@
                             <option th:value="${material.id}" th:each="material: ${listMaterial}"
                                     th:text="${material.name}"></option>
                         </select>
-                        <span id="add-material" class="plus-icon"><i class="fas fa-plus"></i></span>
+<!--                        <span id="add-material" class="plus-icon"><i class="fas fa-plus"></i></span>-->
                     </div>
 
                 </div>
@@ -169,6 +170,7 @@
 
     </form>
     <div th:if="${duplicateCode!=null}" th:text="${duplicateCode}" class="alert alert-danger ml-2 py-2 px-2"></div>
+    <div th:if="${duplicateName != null}" th:text="${duplicateName}" class="alert alert-danger ml-2 py-2 px-2"></div>
     <script th:inline="javascript">
         $(document).ready(function () {
             $('#add-brand').on('click', function () {
@@ -282,7 +284,53 @@
                 ]
             });
         });
+
+        // const inputField = document.getElementById('product-name');
+        //
+        // // Thêm sự kiện 'input' để thêm nội dung vào sau "Áo Polo"
+        // inputField.addEventListener('input', function() {
+        //     // Lưu trữ giá trị hiện tại
+        //     const currentValue = inputField.value;
+        //
+        //     // Nếu giá trị hiện tại không bắt đầu bằng "Áo Polo", đặt lại
+        //     if (!currentValue.startsWith('Áo Polo')) {
+        //         inputField.value = 'Áo Polo ' + (currentValue.replace('Áo Polo ', '').trim());
+        //     }
+        // });
+        //
+        // // Thêm sự kiện 'focus' để không xóa "Áo Polo" khi bắt đầu nhập
+        // inputField.addEventListener('focus', function() {
+        //     if (inputField.value === 'Áo Polo') {
+        //         inputField.value = 'Áo Polo '; // Thêm khoảng trắng để tiếp tục nhập
+        //     }
+        // });
+
+        $(document).ready(function () {
+            $('#formProduct1').on('submit', function (event) {
+                event.preventDefault(); // Ngăn chặn việc gửi mẫu mặc định
+
+                const productName = $('#name').val();
+
+                $.ajax({
+                    type: 'GET',
+                    url: '/api/check-product-name',
+                    data: { name: productName },
+                    success: function (response) {
+                        if (response.exists) {
+                            $('.error').text('Tên sản phẩm đã tồn tại');
+                        } else {
+                            // Nếu không có trùng lặp, gửi mẫu
+                            this.submit(); // bạn có thể cần tham chiếu đúng đến mẫu hoặc xử lý gửi theo cách khác
+                        }
+                    },
+                    error: function () {
+                        $('.error').text('Có lỗi xảy ra khi kiểm tra tên sản phẩm');
+                    }
+                });
+            });
+        });
     </script>
+
 </div>
 </body>
 </html>

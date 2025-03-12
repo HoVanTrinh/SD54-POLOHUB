@@ -102,19 +102,37 @@ public class ProductController {
         return "/admin/product-create";
     }
 
-    @PostMapping("/product-create/save-part1")
-    public String handlePart1(@ModelAttribute("product") Product product, HttpSession session, Model model, RedirectAttributes redirectAttributes) {
-        if(productService.existsByCode(product.getCode())) {
-            redirectAttributes.addFlashAttribute("duplicateCode", "Mã sản phẩm đã tồn tại");
-            return "redirect:/admin/product-create";
-        }
-        String randomString = UUID.randomUUID().toString();
-
-        session.setAttribute("randomCreateKey", randomString);
-
-        session.setAttribute("createProductPart1" + randomString, product);
-        return "redirect:/admin/product-create/part2";
+//    @PostMapping("/product-create/save-part1")
+//    public String handlePart1(@ModelAttribute("product") Product product, HttpSession session, Model model, RedirectAttributes redirectAttributes) {
+//        if(productService.existsByCode(product.getCode())) {
+//            redirectAttributes.addFlashAttribute("duplicateCode", "Mã sản phẩm đã tồn tại");
+//            return "redirect:/admin/product-create";
+//        }
+//        String randomString = UUID.randomUUID().toString();
+//
+//        session.setAttribute("randomCreateKey", randomString);
+//
+//        session.setAttribute("createProductPart1" + randomString, product);
+//        return "redirect:/admin/product-create/part2";
+//    }
+@PostMapping("/product-create/save-part1")
+public String handlePart1(@ModelAttribute("product") Product product, HttpSession session, Model model, RedirectAttributes redirectAttributes) {
+    if (productService.existsByCode(product.getCode())) {
+        redirectAttributes.addFlashAttribute("duplicateCode", "Mã sản phẩm đã tồn tại");
+        return "redirect:/admin/product-create";
     }
+
+    // Kiểm tra nếu tên sản phẩm đã tồn tại
+    if (productService.existsByName(product.getName())) {
+        redirectAttributes.addFlashAttribute("duplicateName", "Tên sản phẩm đã tồn tại");
+        return "redirect:/admin/product-create";
+    }
+
+    String randomString = UUID.randomUUID().toString();
+    session.setAttribute("randomCreateKey", randomString);
+    session.setAttribute("createProductPart1" + randomString, product);
+    return "redirect:/admin/product-create/part2";
+}
 
     @GetMapping("/product-create/part2")
     public String viewAddProductPart2(Model model, HttpSession session) {
@@ -174,6 +192,7 @@ public class ProductController {
         if(product == null) {
             return "/error/404";
         }
+
         model.addAttribute("action", "/admin/product-edit/save-part1");
         model.addAttribute("product", product);
         return "admin/product-edit";
@@ -186,7 +205,9 @@ public class ProductController {
         session.setAttribute("randomUpdateKey", randomString);
 
         session.setAttribute("editProductPart1" + randomString, product);
-        return "redirect:/admin/product-edit/part2";
+
+            return "redirect:/admin/product-edit/part2";
+
     }
 
     @GetMapping("/product-edit/part2")

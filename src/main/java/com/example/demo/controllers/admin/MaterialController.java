@@ -60,15 +60,19 @@ public class MaterialController {
     @PostMapping("/material-save")
     public String addMaterial(Model model, @Validated @ModelAttribute("Material") Material material, RedirectAttributes redirectAttributes) {
         try {
+            if(materialService.existsByName(material.getName())){
+                redirectAttributes.addFlashAttribute("duplicateName", "Tên chất liệu đã tồn tại");
+                return "redirect:/admin/material-create";
+            }
             materialService.createMaterial(material);
             redirectAttributes.addFlashAttribute("successMessage", "Thêm chất liệu mới thành công");
-
+            return "redirect:/admin/material-all";
         }
         catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
             return "redirect:/admin/material-create";
         }
-        return "redirect:/admin/material-all";
+
     }
 
     @PostMapping("/material-update/{id}")

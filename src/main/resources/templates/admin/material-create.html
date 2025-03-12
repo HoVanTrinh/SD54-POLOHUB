@@ -64,6 +64,7 @@
         </form>
     </div>
     <div class="alert alert-danger mt-3" th:if="${errorMessage}" th:text="${errorMessage}"></div>
+    <div th:if="${duplicateName != null}" th:text="${duplicateName}" class="alert alert-danger ml-2 py-2 px-2"></div>
     <script>
         $(document).ready(function () {
             Validator({
@@ -76,6 +77,30 @@
                     Validator.maxLength('#name', 30),
                     Validator.maxLength('#code', 20),
                 ]
+            });
+        });
+        $(document).ready(function () {
+            $('#material-form').on('submit', function (event) {
+                event.preventDefault(); // Ngăn chặn việc gửi mẫu mặc định
+
+                const materialName = $('#name').val();
+
+                $.ajax({
+                    type: 'GET',
+                    url: '/api/check-material-name',
+                    data: { name: materialName },
+                    success: function (response) {
+                        if (response.exists) {
+                            $('.error').text('Tên chất liệu đã tồn tại');
+                        } else {
+                            // Nếu không có trùng lặp, gửi mẫu
+                            this.submit(); // bạn có thể cần tham chiếu đúng đến mẫu hoặc xử lý gửi theo cách khác
+                        }
+                    },
+                    error: function () {
+                        $('.error').text('Có lỗi xảy ra khi kiểm tra tên chất liệu');
+                    }
+                });
             });
         });
     </script>

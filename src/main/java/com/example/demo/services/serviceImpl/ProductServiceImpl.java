@@ -269,5 +269,9 @@ public class ProductServiceImpl implements ProductService {
         productDto.setProductDetailDtos(productDetailDtoList);
         return productDto;
     }
+    @Override
+    public boolean existsByName(String name) {
+        return productRepository.existsByName(name);
+    }
 
 }

@@ -57,16 +57,25 @@ public class BrandController {
 
 
     @PostMapping("/brand-save")
-    public String addBrand(RedirectAttributes redirectAttributes, @Validated @ModelAttribute("Brand") Brand brand) {
+    public String addBrand(RedirectAttributes redirectAttributes,
+                           @Validated @ModelAttribute("Brand") Brand brand) {
         try {
+            // Check if the brand name already exists before proceeding
+            if (brandService.existsByName(brand.getName())) {
+                redirectAttributes.addFlashAttribute("duplicateName", "Tên nhãn hàng đã tồn tại");
+                return "redirect:/admin/brand-create"; // Redirect to create page on duplicate name
+            }
+
+            // Attempt to create a new brand if it does not exist
             brandService.createBrand(brand);
             redirectAttributes.addFlashAttribute("successMessage", "Thêm nhãn hàng mới thành công");
+            return "redirect:/admin/brand-all"; // Redirect to the brand list upon success
 
-        }catch (Exception e) {
+        } catch (Exception e) {
+            // Handle other exceptions, if any
             redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
-            return "redirect:/admin/brand-create";
+            return "redirect:/admin/brand-create"; // Redirect back to the creation page
         }
-        return "redirect:/admin/brand-all";
     }
 
     @PostMapping("/brand-update/{id}")

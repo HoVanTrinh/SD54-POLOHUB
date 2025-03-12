@@ -109,5 +109,9 @@ public class BrandServiceImpl implements BrandService {
         brandDto.setName(brand.getName());
         return brandDto;
     }
+    @Override
+    public boolean existsByName(String name) {
+   return brandRepository.existsByName(name);
+    }
 
 }

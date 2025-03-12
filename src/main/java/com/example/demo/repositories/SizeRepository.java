@@ -25,6 +25,7 @@ public interface SizeRepository extends JpaRepository<Size, Long> {
     Page<Size> findAllByDeleteFlagFalse(Pageable pageable);
 
     boolean existsByCodeAndDeleteFlagFalse(String code);
+    boolean existsByName(String name);
 
     Size findByCodeAndDeleteFlagTrue(String code);
     // Thêm phương thức để tìm đối tượng Size theo tên

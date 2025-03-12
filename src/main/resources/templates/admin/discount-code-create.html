@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/admin-layout.html}">
+<head>
+    <meta charset="UTF-8">
+    <title>Thông tin mã giảm giá</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+</head>
+<body>
+<div layout:fragment="content" class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="text-center mb-4">Thông tin mã giảm giá</h2>
+                    <div class="alert alert-danger" th:if="${message != null}" th:text="${message}"></div>
+                    <form method="POST" id="discount-code-form" th:action="${action}" th:object="${DiscountCode}">
+                        <input type="hidden" th:field="*{id}">
+                        <div class="form-row mt-3">
+                            <div class="form-group col-sm-6">
+                                <label for="code">Mã giảm giá <span class="red_require">*</span></label>
+                                <input type="text" class="form-control" th:field="*{code}" id="code" placeholder="">
+                                <span class="error"></span>
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <label for="startDate">Ngày áp dụng <span class="red_require">*</span></label>
+                                <input type="date" class="form-control" th:field="*{startDate}" id="startDate">
+                                <span class="error"></span>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-sm-6">
+                                <label for="endDate">Ngày kết thúc <span class="red_require">*</span></label>
+                                <input type="date" class="form-control" th:field="*{endDate}" id="endDate">
+                                <span class="error"></span>
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <label>Phương thức giảm <span class="red_require">*</span></label>
+                                <div class="form-check">
+                                    <input type="radio" class="form-check-input custom-radio" th:field="*{type}" th:value="1" id="type1" th:checked="${DiscountCode.type == 1}">
+                                    <label class="form-check-label" for="type1">Giảm theo phần trăm</label>
+                                    <input type="radio" class="form-check-input custom-radio" th:field="*{type}" th:value="2" id="type2" th:checked="${DiscountCode.type == 2}">
+                                    <label class="form-check-label" for="type2">Giảm theo tiền</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-row mt-3">
+                            <div class="form-group col-sm-6" id="discount-by-money">
+                                <label for="discountAmount">Số tiền giảm (đ) <span class="red_require">*</span></label>
+                                <input type="text" class="form-control" th:field="*{discountAmount}" id="discountAmount" placeholder="VD: 10000">
+                                <span class="error"></span>
+                            </div>
+                            <div class="form-group col-sm-6" id="discount-by-percent">
+                                <label for="percentage">Phần trăm giảm (%) <span class="red_require">*</span></label>
+                                <input type="text" class="form-control" th:field="*{percentage}" id="percentage" placeholder="VD: 20">
+                                <span class="error"></span>
+                            </div>
+                        </div>
+                        <div class="form-row mt-3">
+                            <div class="form-group col-sm-6" id="max-amount-by-percent">
+                                <label for="maximumAmount">Số tiền giảm tối đa (đ) <span class="red_require">*</span></label>
+                                <input type="text" class="form-control" th:field="*{maximumAmount}" id="maximumAmount" placeholder="VD: 20000">
+                                <span class="error"></span>
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <label for="minimumAmountInCart">Số tiền áp dụng cho đơn tối thiểu từ (đ) <span class="red_require">*</span></label>
+                                <input type="text" class="form-control" th:field="*{minimumAmountInCart}" id="minimumAmountInCart" placeholder="VD: 100000">
+                                <span class="error"></span>
+                            </div>
+                        </div>
+                        <div class="form-row mt-3">
+                            <div class="form-group col-sm-6">
+                                <label for="maximumUsage">Số lượng tối đa <span class="red_require">*</span></label>
+                                <input type="text" class="form-control" th:field="*{maximumUsage}" id="maximumUsage" placeholder="VD: 123">
+                                <span class="error"></span>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-end mt-4">
+                            <a th:href="@{/admin-only/discount-code}" class="btn btn-outline-danger mr-2">Hủy</a>
+                            <button type="submit" class="btn btn-custom">Lưu</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+    <script th:inline="javascript">
+        $(document).ready(function () {
+            var type = /*[[${DiscountCode.type}]]*/ '';
+            $("#discount-by-money").hide();
+            $("#discountAmount").prop('disabled', true);
+            if(type == 2) {
+                $("#discount-by-percent").hide();
+                $("#max-amount-by-percent").hide();
+                $("#discount-by-money").show();
+                $("#discountAmount").prop('disabled', false);
+                $('#percentage').prop('disabled', true);
+                $('#maximumAmount').prop('disabled', true);
+            }
+
+            $("#type1").on("click", function () {
+                $("#discount-by-money").hide();
+                $("#discount-by-percent").show();
+                $("#max-amount-by-percent").show();
+                $("#discountAmount").prop('disabled', true);
+                $('#percentage').prop('disabled', false);
+                $('#maximumAmount').prop('disabled', false);
+            });
+
+            $("#type2").on("click", function () {
+                $("#discount-by-money").show();
+                $("#discount-by-percent").hide();
+                $("#max-amount-by-percent").hide();
+                $("#discountAmount").prop('disabled', false);
+                $('#percentage').prop('disabled', true);
+                $('#maximumAmount').prop('disabled', true);
+            });
+
+            Validator({
+                form: '#discount-code-form',
+                formGroupSelector: '.form-group',
+                errorSelector: '.error',
+                rules: [
+                    Validator.isRequired('#code', 'Vui lòng nhập mã giảm giá'),
+                    Validator.isRequired('#startDate', 'Vui lòng nhập ngày bắt đầu'),
+                    Validator.isRequired('#endDate', 'Vui lòng nhập ngày kết thúc'),
+                    Validator.isRequired('#maximumUsage', "Vui lòng nhập số lượng tối đa"),
+                    Validator.isRequired('#discountAmount', "Vui lòng nhập số tiền giảm giá"),
+                    Validator.isRequired('#minimumAmountInCart', "Vui lòng nhập số tiền áp dụng cho đơn tối thiểu"),
+                    Validator.isRequired('#percentage', 'Vui lòng nhập phần trăm giảm'),
+                    Validator.isRequired('#maximumAmount', 'Vui lòng nhập số tiền giảm tối đa mỗi đơn'),
+                    Validator.maxLength('#code', 50),
+                    Validator.isValidStartDateEndDate('#startDate', () =>  {
+                        return document.querySelector('#discount-code-form #endDate').value;
+                    }, 'Ngày áp dụng phải nhỏ hơn ngày kết thúc')
+                ]
+            });
+
+            $("#percentage").on('input', function () {
+                if(parseInt($(this).val()) > 90) {
+                    $(this).val(90);
+                }
+            });
+
+            $("#maximumAmount").on('input', function () {
+                let value = $(this).val();  // Lấy giá trị nhập vào dưới dạng chuỗi
+
+                if (isNaN(value) || value < 0) {  // Nếu không phải là số hoặc là số âm
+                    $(this).val('');  // Xóa giá trị không hợp lệ
+                    $(this).siblings('.error').text('Số tiền giảm tối đa phải là một số dương');  // Hiển thị lỗi
+                } else {
+                    $(this).siblings('.error').text('');  // Xóa thông báo lỗi nếu hợp lệ
+                }
+            });
+
+            $("#discountAmount").on('input', function () {
+                let value = $(this).val(); // Lấy giá trị nhập vào
+
+                if (isNaN(value) || value < 0 || !Number.isInteger(Number(value))) {
+                    // Nếu không phải số, là số âm hoặc không phải số nguyên
+                    $(this).val(''); // Xóa giá trị không hợp lệ
+                    $(this).siblings('.error').text('Số tiền giảm phải là số nguyên dương'); // Hiển thị lỗi
+                } else {
+                    $(this).siblings('.error').text(''); // Xóa thông báo lỗi nếu hợp lệ
+                }
+            });
+
+            $("#minimumAmountInCart").on('input', function () {
+                let value = $(this).val();  // Lấy giá trị nhập vào dưới dạng chuỗi
+
+                if (isNaN(value) || value < 0) {  // Nếu không phải là số hoặc là số âm
+                    $(this).val('');  // Xóa giá trị không hợp lệ
+                    $(this).siblings('.error').text('Số tiền áp dụng tối thiểu phải là một số dương');  // Hiển thị lỗi
+                } else {
+                    $(this).siblings('.error').text('');  // Xóa thông báo lỗi nếu hợp lệ
+                }
+            });
+
+            $("#maximumUsage").on('input', function () {
+                let value = $(this).val();  // Lấy giá trị nhập vào dưới dạng chuỗi
+
+                if (isNaN(value) || value < 0 || !Number.isInteger(Number(value))) {
+                    // Kiểm tra nếu không phải số, là số âm, hoặc không phải số nguyên
+                    $(this).val('');  // Xóa giá trị không hợp lệ
+                    $(this).siblings('.error').text('Số lượng tối đa phải là một số nguyên dương');  // Hiển thị lỗi
+                } else {
+                    $(this).siblings('.error').text('');  // Xóa thông báo lỗi nếu hợp lệ
+                }
+            });
+            $("#percentage").on('input', function () {
+                let value = $(this).val();  // Lấy giá trị nhập vào dưới dạng chuỗi
+
+                // Kiểm tra nếu giá trị không phải là số hợp lệ hoặc là số âm
+                if (isNaN(value) || value < 0) {
+                    $(this).val('');  // Xóa giá trị nếu không phải là số hợp lệ
+                    $(this).siblings('.error').text('Phần trăm giảm giá phải là một số dương');  // Thông báo lỗi
+                } else if (value > 90) {  // Kiểm tra nếu giá trị lớn hơn 98%
+                    $(this).val(90);  // Giới hạn giá trị tối đa là 98
+                    $(this).siblings('.error').text('Phần trăm giảm giá không được lớn hơn 98%');
+                } else {
+                    $(this).siblings('.error').text('');  // Xóa thông báo lỗi nếu nhập đúng
+                }
+            });
+        });
+    </script>
+</div>
+</body>
+</html>

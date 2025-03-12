@@ -8,4 +8,5 @@ import java.util.List;
 public interface BrandRepository extends JpaRepository<Brand, Long> {
     boolean existsByCode(String code);
     List<Brand> findAllByDeleteFlagFalse();
+    boolean existsByName(String name);
 }

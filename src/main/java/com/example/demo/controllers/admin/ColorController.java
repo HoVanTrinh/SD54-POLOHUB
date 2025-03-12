@@ -60,14 +60,19 @@ public class ColorController {
     @PostMapping("/color-save")
     public String addColor(RedirectAttributes redirectAttributes, @Validated @ModelAttribute("Color") Color color) {
         try {
+            if(colorService.existsByName(color.getName())){
+                redirectAttributes.addFlashAttribute("duplicateName", "Màu đã tồn tại");
+                return "redirect:/admin/color-create";
+            }
             colorService.createColor(color);
             redirectAttributes.addFlashAttribute("successMessage", "Thêm màu mới thành công");
+            return "redirect:/admin/color-list";
         }
         catch (Exception e) {
             redirectAttributes.addFlashAttribute("errorMessage", e.getMessage());
             return "redirect:/admin/color-create";
         }
-        return "redirect:/admin/color-list";
+
     }
 
     @PostMapping("/color-update/{id}")

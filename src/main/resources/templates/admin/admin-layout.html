@@ -100,8 +100,8 @@
 
 </head>
 <body>
-<aside id="left-panel" class="left-panel" style="background: white;">
-    <nav class="navbar navbar-expand-sm navbar-default" style="background: white">
+<aside id="left-panel" class="left-panel" style="background: black;">
+    <nav class="navbar navbar-expand-sm navbar-default" style="background: black">
         <div class="navbar-header">
             <a class="navbar-brand" href="/" style="padding: 10px;">
                 <img th:src="@{/images/logo_1.png}" alt="Logo">
@@ -118,7 +118,7 @@
                     </a>
                 </li>
                 <li class="active">
-                    <a th:href="@{/admin}" style=" font-weight: bold;">
+                    <a th:href="@{/admin/pos}" style=" font-weight: bold;">
                          Bán hàng tại cửa hàng
                     </a>
                 </li>
@@ -129,7 +129,7 @@
                            style="; font-weight: bold;">
                              Quản lý sản phẩm
                         </a>
-                        <ul class="sub-menu children dropdown-menu" style="background: white;">
+                        <ul class="sub-menu children dropdown-menu" style="background: black;">
                             <li><a th:href="@{/admin/product-all}" style=" font-weight: bold;"> Sản phẩm</a></li>
                             <li><a th:href="@{/admin/color-list}" style=" font-weight: bold;"> Màu sắc</a></li>
                             <li><a th:href="@{/admin/material-all}" style=" font-weight: bold;"> Chất liệu</a></li>
@@ -144,7 +144,7 @@
                            style=" font-weight: bold;">
                              Quản lý khuyến mãi
                         </a>
-                        <ul class="sub-menu children dropdown-menu" style="background: white">
+                        <ul class="sub-menu children dropdown-menu" style="background: black">
                             <li><a th:href="@{/admin-only/discount-code}" style=" font-weight: bold;"> Mã giảm giá</a></li>
                             <li><a th:href="@{/admin-only/product-discount}" style=" font-weight: bold;"> Giảm giá sản phẩm</a></li>
                         </ul>
@@ -154,10 +154,10 @@
                            style="color: black; font-weight: bold;">
                              Thống kê
                         </a>
-                        <ul class="sub-menu children dropdown-menu" style="background: white">
+                        <ul class="sub-menu children dropdown-menu" style="background: black">
 <!--                            <li><a th:href="@{/admin}" style="color: #FFFFFF; font-weight: bold;"><i class="fas fa-chart-line"></i> Doanh Thu</a></li>-->
                             <li><a th:href="@{/admin}" style=" font-weight: bold;"> Sản phẩm</a></li>
-                            <li><a th:href="@{/admin}" style=" font-weight: bold;"> Hóa đơn</a></li>
+                            <li><a th:href="@{/admin/bill-list}" style=" font-weight: bold;"> Hóa đơn</a></li>
                         </ul>
                     </li>
                     <li class="menu-item-has-children dropdown">
@@ -165,9 +165,10 @@
                            style=" font-weight: bold;">
                              Quản lý tài khoản
                         </a>
-                        <ul class="sub-menu children dropdown-menu" style="background: white">
-                            <li><a th:href="@{/admin}" style=" font-weight: bold;"> Nhân Viên</a></li>
-                            <li><a th:href="@{/admin}" style="font-weight: bold;"> Khách Hàng</a></li>
+                        <ul class="sub-menu children dropdown-menu" style="background: black">
+                            <li><a th:href="@{/admin-only/account-management}" style="font-weight: bold;">Tài Khoản ALL</a> </li>
+                            <li><a th:href="@{/admin-only/account-employee}" style=" font-weight: bold;"> Nhân Viên</a></li>
+                            <li><a th:href="@{/admin-only/account-user}" style="font-weight: bold;"> Khách Hàng</a></li>
                         </ul>
                     </li>
                     <h3 class="menu-title" style="">More</h3>
@@ -176,7 +177,7 @@
                            style=" font-weight: bold;">
                              Khác
                         </a>
-                        <ul class="sub-menu children dropdown-menu" style="background: white">
+                        <ul class="sub-menu children dropdown-menu" style="background: black">
                             <li><a th:href="@{/user_logout}" style=" font-weight: bold;"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a></li>
 <!--                            <li><a th:href="@{/admin}" style="color: #FFFFFF; font-weight: bold;"><i class="fas fa-user-edit"></i> Cập nhật thông tin</a></li>-->
                         </ul>
