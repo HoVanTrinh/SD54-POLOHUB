@@ -1,9 +1,6 @@
 package com.example.demo.repositories;
 
-import com.example.demo.dto.Bill.BillDetailDtoInterface;
-import com.example.demo.dto.Bill.BillDetailProduct;
-import com.example.demo.dto.Bill.BillDtoInterface;
-import com.example.demo.dto.Bill.InStoreInvoiceDetail;
+import com.example.demo.dto.Bill.*;
 import com.example.demo.dto.Statistic.OrderStatistic;
 import com.example.demo.entities.Bill;
 import com.example.demo.entities.enumClass.BillStatus;
@@ -23,16 +20,18 @@ import java.util.List;
 
 @Repository
 public interface BillRepository extends JpaRepository<Bill, Long>, JpaSpecificationExecutor<Bill> {
-    @Query(value = "SELECT DISTINCT b.id AS maHoaDon, b.code AS maDinhDanh, a.name AS hoVaTen, a.phoneNumber AS soDienThoai, " +
-            "b.createDate AS ngayTao, b.amount AS tongTien, b.status AS trangThai, b.invoiceType AS loaiDon, " +
-            "pm.name AS hinhThucThanhToan, pmt.orderId AS maGiaoDich " +
-            "FROM Bill b " +
-            "JOIN Payment pmt ON b.id = pmt.bill.id " +
-            "LEFT JOIN Customer a ON b.customer.id = a.id " +
-            "LEFT JOIN BillDetail bd ON b.id = bd.bill.id " +
-            "LEFT JOIN PaymentMethod pm ON b.paymentMethod.id = pm.id " +
-            "WHERE b.status = 'CHO_XAC_NHAN'", nativeQuery = true)
-    Page<BillDtoInterface> listBill(Pageable pageable);
+
+@Query(value = "SELECT DISTINCT b.id AS maHoaDon,b.code AS maDinhDanh, a.name AS hoVaTen, a.phoneNumber " +
+        "AS soDienThoai,b.createDate AS ngayTao, b.amount AS tongTien, b.status AS trangThai, b.invoiceType " +
+        "AS loaiDon, pm.name AS hinhThucThanhToan " +
+        "FROM Bill b " +
+        "JOIN Payment pmt on b.id = pmt.bill.id " +
+        "LEFT JOIN Customer a ON b.customer.id = a.id " +
+        "LEFT JOIN BillDetail bd ON b.id = bd.bill.id " +
+        "LEFT JOIN PaymentMethod pm ON b.paymentMethod.id = pm.id  WHERE b.status = 'CHO_XAC_NHAN'")
+Page<BillDtoInterface> listBill(Pageable pageable);
+
+
     @Query(value = "SELECT DISTINCT b.id AS maHoaDon, b.code AS maDinhDanh, a.name AS hoVaTen, a.phoneNumber AS soDienThoai, " +
             "b.createDate AS ngayTao, b.amount AS tongTien, b.status AS trangThai, b.invoiceType AS loaiDon, " +
             "pm.name AS hinhThucThanhToan " +

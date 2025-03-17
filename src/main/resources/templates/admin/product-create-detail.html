@@ -83,7 +83,7 @@
                             <select class="form-select color-select" th:field="*{productDetailList[__${iterStat.index}__].color}">
                                 <option th:each="color: ${listColor}" th:value="${color.id}" th:text="${color.name}"></option>
                             </select>
-                            <span class="plus-icon"><i class="add-color fas fa-plus"></i></span>
+
                         </div>
                     </div>
                     <div class="form-group col-md-2">
@@ -137,6 +137,137 @@
         <a href="/admin/product-all" class="btn btn-secondary m-1 rounded"><i class="fa fa-mail-reply (alias)"></i>
             <span>Hủy</span></a>
     </form>
+    <style>
+        /* Căn chỉnh form tổng thể */
+        .form-table {
+            border-radius: 10px;
+            padding: 15px;
+            background: #f8f9fa;
+            margin-bottom: 15px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Làm đẹp các input */
+        .form-control, .form-select {
+            border-radius: 6px;
+            border: 1px solid #ced4da;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.2);
+        }
+
+        /* Làm đẹp nút */
+        .btn {
+            padding: 8px 16px;
+            font-size: 14px;
+            font-weight: bold;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .btn-primary {
+            background: #007bff;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: #0056b3;
+        }
+
+        .btn-danger {
+            background: #dc3545;
+            border: none;
+        }
+
+        .btn-danger:hover {
+            background: #bd2130;
+        }
+
+        /* Hình ảnh sản phẩm */
+        .selected-files img {
+            border-radius: 5px;
+            border: 2px solid #ddd;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .selected-files img:hover {
+            transform: scale(1.05);
+            border-color: #007bff;
+        }
+
+        /* Nút xóa ảnh */
+        .delete-img-btn {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            cursor: pointer;
+            font-size: 18px;
+            color: red;
+        }
+
+        .image-upload {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            background-color: transparent; /* Xóa màu nền đen */
+        }
+
+        .image-upload:hover {
+            border-color: #ff6b6b; /* Đổi màu viền khi hover */
+            background-color: rgba(255, 107, 107, 0.1);
+        }
+
+        .label-select-img {
+            font-size: 30px;
+            color: #007bff;
+            transition: color 0.3s ease-in-out;
+        }
+
+        .image-upload:hover .label-select-img {
+            color: #ff6b6b;
+        }
+
+        /* Ẩn input file nhưng vẫn giữ chức năng chọn ảnh */
+        #file-input {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+            left: 0;
+            top: 0;
+            z-index: 2;
+        }
+
+        .label-select-img {
+            font-size: 30px;
+            color: #007bff; /* Màu chữ */
+            transition: color 0.3s ease-in-out;
+            background: none; /* Xóa nền đen */
+            border: none; /* Xóa viền */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .label-select-img:hover {
+            color: #ff6b6b; /* Đổi màu khi hover */
+        }
+
+
+    </style>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js" th:inline="javascript"></script>

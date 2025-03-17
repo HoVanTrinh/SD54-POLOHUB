@@ -1,3 +1,112 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"-->
+<!--      layout:decorate="~{admin/admin-layout.html}">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Thông tin Chất Liệu</title>-->
+<!--    <style>-->
+<!--        .form-container {-->
+<!--            background: #fff;-->
+<!--            padding: 20px;-->
+<!--            border-radius: 8px;-->
+<!--            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);-->
+<!--        }-->
+<!--        .form-group label {-->
+<!--            font-weight: bold;-->
+<!--        }-->
+<!--        .btn-primary {-->
+<!--            background-color: #007bff;-->
+<!--            border-color: #007bff;-->
+<!--            transition: 0.3s;-->
+<!--        }-->
+<!--        .btn-primary:hover {-->
+<!--            background-color: #0056b3;-->
+<!--        }-->
+<!--        .btn-secondary {-->
+<!--            background-color: #6c757d;-->
+<!--            border-color: #6c757d;-->
+<!--            transition: 0.3s;-->
+<!--        }-->
+<!--        .btn-secondary:hover {-->
+<!--            background-color: #545b62;-->
+<!--        }-->
+<!--        .error {-->
+<!--            color: red;-->
+<!--            font-size: 0.875rem;-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div layout:fragment="content">-->
+<!--    <h4 class="text-center text-primary my-3">Thông tin chất liệu</h4>-->
+<!--    <div class="form-container">-->
+<!--        <form th:object="${Material}" method="post" th:action="${action}" id="material-form">-->
+<!--            <div class="form-row">-->
+<!--                <div class="form-group col-md-6">-->
+<!--                    <label>Mã chất liệu<span class="red_require"> *</span></label>-->
+<!--                    <input type="text" class="form-control" th:field="*{code}" placeholder="Nhập mã chất liệu">-->
+<!--                    <span class="error"></span>-->
+<!--                </div>-->
+<!--                <div class="form-group col-md-6">-->
+<!--                    <label>Tên chất liệu<span class="red_require"> *</span></label>-->
+<!--                    <input type="text" class="form-control" th:field="*{name}" placeholder="Nhập tên chất liệu">-->
+<!--                    <span class="error"></span>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="text-center mt-3">-->
+<!--                <button type="submit" class="btn btn-primary m-1">-->
+<!--                    <i class="fa ti-save"></i> Lưu lại-->
+<!--                </button>-->
+<!--                <a href="/admin/material-all" class="btn btn-secondary m-1">-->
+<!--                    <i class="fa fa-mail-reply (alias)"></i> <span>Hủy bỏ</span>-->
+<!--                </a>-->
+<!--            </div>-->
+<!--        </form>-->
+<!--    </div>-->
+<!--    <div class="alert alert-danger mt-3" th:if="${errorMessage}" th:text="${errorMessage}"></div>-->
+<!--    <div th:if="${duplicateName != null}" th:text="${duplicateName}" class="alert alert-danger ml-2 py-2 px-2"></div>-->
+<!--    <script>-->
+<!--        $(document).ready(function () {-->
+<!--            Validator({-->
+<!--                form: '#material-form',-->
+<!--                formGroupSelector: '.form-group',-->
+<!--                errorSelector: '.error',-->
+<!--                rules: [-->
+<!--                    Validator.isRequired('#code', 'Vui lòng nhập mã chất liệu'),-->
+<!--                    Validator.isRequired('#name', 'Vui lòng nhập tên chất liệu'),-->
+<!--                    Validator.maxLength('#name', 30),-->
+<!--                    Validator.maxLength('#code', 20),-->
+<!--                ]-->
+<!--            });-->
+<!--        });-->
+<!--        $(document).ready(function () {-->
+<!--            $('#material-form').on('submit', function (event) {-->
+<!--                event.preventDefault(); // Ngăn chặn việc gửi mẫu mặc định-->
+
+<!--                const materialName = $('#name').val();-->
+
+<!--                $.ajax({-->
+<!--                    type: 'GET',-->
+<!--                    url: '/api/check-material-name',-->
+<!--                    data: { name: materialName },-->
+<!--                    success: function (response) {-->
+<!--                        if (response.exists) {-->
+<!--                            $('.error').text('Tên chất liệu đã tồn tại');-->
+<!--                        } else {-->
+<!--                            // Nếu không có trùng lặp, gửi mẫu-->
+<!--                            this.submit(); // bạn có thể cần tham chiếu đúng đến mẫu hoặc xử lý gửi theo cách khác-->
+<!--                        }-->
+<!--                    },-->
+<!--                    error: function () {-->
+<!--                        $('.error').text('Có lỗi xảy ra khi kiểm tra tên chất liệu');-->
+<!--                    }-->
+<!--                });-->
+<!--            });-->
+<!--        });-->
+<!--    </script>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{admin/admin-layout.html}">
@@ -10,26 +119,38 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            margin: auto;
         }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
         .form-group label {
             font-weight: bold;
         }
+
         .btn-primary {
             background-color: #007bff;
             border-color: #007bff;
             transition: 0.3s;
         }
+
         .btn-primary:hover {
             background-color: #0056b3;
         }
+
         .btn-secondary {
             background-color: #6c757d;
             border-color: #6c757d;
             transition: 0.3s;
         }
+
         .btn-secondary:hover {
             background-color: #545b62;
         }
+
         .error {
             color: red;
             font-size: 0.875rem;
@@ -41,30 +162,27 @@
     <h4 class="text-center text-primary my-3">Thông tin chất liệu</h4>
     <div class="form-container">
         <form th:object="${Material}" method="post" th:action="${action}" id="material-form">
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label>Mã chất liệu<span class="red_require"> *</span></label>
-                    <input type="text" class="form-control" th:field="*{code}" placeholder="Nhập mã chất liệu">
-                    <span class="error"></span>
-                </div>
-                <div class="form-group col-md-6">
-                    <label>Tên chất liệu<span class="red_require"> *</span></label>
-                    <input type="text" class="form-control" th:field="*{name}" placeholder="Nhập tên chất liệu">
-                    <span class="error"></span>
-                </div>
+            <div class="form-group">
+                <label>Mã chất liệu<span class="red_require"> *</span></label>
+                <input type="text" class="form-control" th:field="*{code}" placeholder="Nhập mã chất liệu">
+                <span class="error"></span>
+            </div>
+            <div class="form-group">
+                <label>Tên chất liệu<span class="red_require"> *</span></label>
+                <input type="text" class="form-control" th:field="*{name}" placeholder="Nhập tên chất liệu">
+                <span class="error"></span>
             </div>
             <div class="text-center mt-3">
                 <button type="submit" class="btn btn-primary m-1">
                     <i class="fa ti-save"></i> Lưu lại
                 </button>
                 <a href="/admin/material-all" class="btn btn-secondary m-1">
-                    <i class="fa fa-mail-reply (alias)"></i> <span>Hủy bỏ</span>
+                    <i class="fa fa-mail-reply"></i> <span>Hủy bỏ</span>
                 </a>
             </div>
         </form>
     </div>
     <div class="alert alert-danger mt-3" th:if="${errorMessage}" th:text="${errorMessage}"></div>
-    <div th:if="${duplicateName != null}" th:text="${duplicateName}" class="alert alert-danger ml-2 py-2 px-2"></div>
     <script>
         $(document).ready(function () {
             Validator({
@@ -77,30 +195,6 @@
                     Validator.maxLength('#name', 30),
                     Validator.maxLength('#code', 20),
                 ]
-            });
-        });
-        $(document).ready(function () {
-            $('#material-form').on('submit', function (event) {
-                event.preventDefault(); // Ngăn chặn việc gửi mẫu mặc định
-
-                const materialName = $('#name').val();
-
-                $.ajax({
-                    type: 'GET',
-                    url: '/api/check-material-name',
-                    data: { name: materialName },
-                    success: function (response) {
-                        if (response.exists) {
-                            $('.error').text('Tên chất liệu đã tồn tại');
-                        } else {
-                            // Nếu không có trùng lặp, gửi mẫu
-                            this.submit(); // bạn có thể cần tham chiếu đúng đến mẫu hoặc xử lý gửi theo cách khác
-                        }
-                    },
-                    error: function () {
-                        $('.error').text('Có lỗi xảy ra khi kiểm tra tên chất liệu');
-                    }
-                });
             });
         });
     </script>

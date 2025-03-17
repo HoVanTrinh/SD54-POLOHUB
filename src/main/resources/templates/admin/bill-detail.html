@@ -19,15 +19,15 @@
                             <div class="float-end mr-4">
                                 <!-- Add class 'active' to progress -->
                                 <div class="track"
-                                     th:if="${ billdetail.trangThaiDonHang != T(com.example.datn.entities.enumClass.BillStatus).HUY}">
+                                     th:if="${ billdetail.trangThaiDonHang != T(com.example.demo.entities.enumClass.BillStatus).HUY}">
                                     <!-- Step 1: Chờ xác nhận -->
                                     <div class="step"
                                          th:classappend="${
-                 (billdetail.trangThaiDonHang == T(com.example.datn.entities.enumClass.BillStatus).CHO_XAC_NHAN ||
-                 billdetail.trangThaiDonHang == T(com.example.datn.entities.enumClass.BillStatus).CHO_GIAO_HANG ||
-                 billdetail.trangThaiDonHang == T(com.example.datn.entities.enumClass.BillStatus).CHO_LAY_HANG ||
-                 billdetail.trangThaiDonHang == T(com.example.datn.entities.enumClass.BillStatus).THAT_BAI ||
-                 billdetail.trangThaiDonHang == T(com.example.datn.entities.enumClass.BillStatus).HOAN_THANH ? 'active' : 'd-none')}">
+                 (billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).CHO_XAC_NHAN ||
+                 billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).CHO_GIAO_HANG ||
+                 billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).CHO_LAY_HANG ||
+                 billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).THAT_BAI ||
+                 billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).HOAN_THANH ? 'active' : 'd-none')}">
             <span class="icon">
                 <!-- Icon -->
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 256 256">
@@ -40,7 +40,7 @@
                                     <!-- Step 2: Chờ hàng về -->
                                     <div class="step"
                                          th:classappend="${
-                                         billdetail.trangThaiDonHang == T(com.example.datn.entities.enumClass.BillStatus).CHO_HANG_VE  ? 'active' : 'd-none'}"
+                                         billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).CHO_HANG_VE  ? 'active' : 'd-none'}"
                                     >
             <span class="icon">
                 <svg class="w-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path fill="#ffffff" d="M383.5 192c.3-5.3 .5-10.6 .5-16c0-51-15.9-96-40.2-127.6C319.5 16.9 288.2 0 256 0s-63.5 16.9-87.8 48.4C143.9 80 128 125 128 176c0 5.4 .2 10.7 .5 16L240 192l0 128-32 0c-7 0-13.7 1.5-19.7 4.2L68.2 192l28.3 0c-.3-5.3-.5-10.6-.5-16c0-64 22.2-121.2 57.1-159.3C62 49.3 18.6 122.6 4.2 173.6C1.5 183.1 9 192 18.9 192l6 0L165.2 346.3c-3.3 6.5-5.2 13.9-5.2 21.7l0 96c0 26.5 21.5 48 48 48l96 0c26.5 0 48-21.5 48-48l0-96c0-7.8-1.9-15.2-5.2-21.7L487.1 192l6 0c9.9 0 17.4-8.9 14.7-18.4C493.4 122.6 450 49.3 358.9 16.7C393.8 54.8 416 112.1 416 176c0 5.4-.2 10.7-.5 16l28.3 0L323.7 324.2c-6-2.7-12.7-4.2-19.7-4.2l-32 0 0-128 111.5 0z"/></svg>            </span>
@@ -50,10 +50,10 @@
                                     <!-- Step 3: Chờ lấy hàng -->
                                     <div class="step"
                                          th:classappend="${
-                         billdetail.trangThaiDonHang == T(com.example.datn.entities.enumClass.BillStatus).CHO_GIAO_HANG ||
-                         billdetail.trangThaiDonHang == T(com.example.datn.entities.enumClass.BillStatus).CHO_LAY_HANG ||
-                         billdetail.trangThaiDonHang == T(com.example.datn.entities.enumClass.BillStatus).THAT_BAI ||
-                         billdetail.trangThaiDonHang == T(com.example.datn.entities.enumClass.BillStatus).HOAN_THANH ? 'active' : ''}">
+                         billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).CHO_GIAO_HANG ||
+                         billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).CHO_LAY_HANG ||
+                         billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).THAT_BAI ||
+                         billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).HOAN_THANH ? 'active' : ''}">
                     <span class="icon">
                         <!-- Icon -->
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
@@ -73,9 +73,9 @@
                                     <!-- Step 4: Chờ giao hàng -->
                                     <div class="step"
                                          th:classappend="${
-                 billdetail.trangThaiDonHang == T(com.example.datn.entities.enumClass.BillStatus).CHO_GIAO_HANG ||
-                 billdetail.trangThaiDonHang == T(com.example.datn.entities.enumClass.BillStatus).THAT_BAI ||
-                 billdetail.trangThaiDonHang == T(com.example.datn.entities.enumClass.BillStatus).HOAN_THANH ? 'active' : ''}">
+                 billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).CHO_GIAO_HANG ||
+                 billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).THAT_BAI ||
+                 billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).HOAN_THANH ? 'active' : ''}">
             <span class="icon">
                 <!-- Icon -->
                 <i class="fa fa-truck"></i>
@@ -86,8 +86,8 @@
                                     <!-- Step 5: Hoàn thành -->
                                     <div class="step"
                                          th:classappend="${
-                 billdetail.trangThaiDonHang == T(com.example.datn.entities.enumClass.BillStatus).THAT_BAI ||
-                 billdetail.trangThaiDonHang == T(com.example.datn.entities.enumClass.BillStatus).HOAN_THANH ? 'active' : ''}">
+                 billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).THAT_BAI ||
+                 billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).HOAN_THANH ? 'active' : ''}">
             <span class="icon">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                     <path fill="currentColor" d="M19 13c.7 0 1.37...Z"/>
@@ -98,7 +98,7 @@
                                 </div>
 
                                 <!-- ĐÃ HỦY -->
-                                <div th:if="${billdetail.trangThaiDonHang == T(com.example.datn.entities.enumClass.BillStatus).HUY}">
+                                <div th:if="${billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).HUY}">
                                     <div class="text-danger font-weight-bold border rounded p-2 border-danger">
                                         ĐÃ HỦY
                                     </div>
@@ -229,10 +229,10 @@
                                 Loại đơn :
                                 <h5 style="color: rgb(21, 219, 153)">
                                         <span
-                                                th:if="${billdetail.loaiHoaDon == T(com.example.datn.entities.enumClass.InvoiceType).OFFLINE}">Tại
+                                                th:if="${billdetail.loaiHoaDon == T(com.example.demo.entities.enumClass.InvoiceType).OFFLINE}">Tại
                                             quầy</span>
                                     <span
-                                            th:if="${billdetail.loaiHoaDon == T(com.example.datn.entities.enumClass.InvoiceType).ONLINE}">Online</span>
+                                            th:if="${billdetail.loaiHoaDon == T(com.example.demo.entities.enumClass.InvoiceType).ONLINE}">Online</span>
                                 </h5>
                             </div>
                         </div>
@@ -346,9 +346,9 @@
                                 <input type="hidden" name="trangThaiDonHang" value="HUY"/>
                                 <button type="button" class="cancel-btn btn btn-danger rounded"
                                         style="float: right; margin-bottom: 10px"
-                                        th:if="${billdetail.trangThaiDonHang != T(com.example.datn.entities.enumClass.BillStatus).CHO_HANG_VE &&
-                       billdetail.trangThaiDonHang == T(com.example.datn.entities.enumClass.BillStatus).CHO_XAC_NHAN ||
-                       billdetail.trangThaiDonHang == T(com.example.datn.entities.enumClass.BillStatus).CHO_LAY_HANG}">
+                                        th:if="${billdetail.trangThaiDonHang != T(com.example.demo.entities.enumClass.BillStatus).CHO_HANG_VE &&
+                       billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).CHO_XAC_NHAN ||
+                       billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).CHO_LAY_HANG}">
                                     <i class="far fa-times-circle"></i>&nbsp;Hủy đơn này
                                 </button>
                             </form>
@@ -356,12 +356,12 @@
                             <form th:action="@{'/admin/update-bill-status/' + ${billdetail.maDonHang}}" method="get">
                                 <div th:data-status="${billdetail.trangThaiDonHang}" class="btn-update-status mt-2"
                                      style="max-width: 180px"
-                                     th:if="${billdetail.trangThaiDonHang != T(com.example.datn.entities.enumClass.BillStatus).HUY &&
-                     billdetail.trangThaiDonHang != T(com.example.datn.entities.enumClass.BillStatus).HOAN_THANH}">
+                                     th:if="${billdetail.trangThaiDonHang != T(com.example.demo.entities.enumClass.BillStatus).HUY &&
+                     billdetail.trangThaiDonHang != T(com.example.demo.entities.enumClass.BillStatus).HOAN_THANH}">
 
                                     <!-- Chờ xác nhận -->
                                     <span class="btn btn-secondary text-wrap rounded"
-                                          th:if="${billdetail.trangThaiDonHang == T(com.example.datn.entities.enumClass.BillStatus).CHO_XAC_NHAN}"
+                                          th:if="${billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).CHO_XAC_NHAN}"
                                           data-status="CHO_XAC_NHAN"
                                           data-out-of-stock="${billdetail.isOutOfStock}">
     <i class="far fa-check-square text-wrap"></i>&nbsp; Xác nhận, duyệt đơn này
@@ -369,13 +369,13 @@
 
                                     <!-- Chờ lấy hàng -->
                                     <span class="btn btn-primary text-wrap rounded"
-                                          th:if="${billdetail.trangThaiDonHang == T(com.example.datn.entities.enumClass.BillStatus).CHO_LAY_HANG}">
+                                          th:if="${billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).CHO_LAY_HANG}">
                 <i class="far fa-check-square text-wrap"></i>&nbsp; Xác nhận chuyển cho shipper
             </span>
 
                                     <!-- Chờ hàng về -->
                                     <span class="btn btn-warning text-wrap rounded"
-                                          th:if="${billdetail.trangThaiDonHang == T(com.example.datn.entities.enumClass.BillStatus).CHO_HANG_VE}">
+                                          th:if="${billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).CHO_HANG_VE}">
                 <i class="far fa-check-square text-wrap"></i>&nbsp; Xác nhận hàng đã về kho, duyệt đơn này
             </span>
                                     <!-- Nút hủy cho trạng thái "Chờ hàng về" -->
@@ -384,14 +384,14 @@
                                         <input type="hidden" name="trangThaiDonHang" value="HUY"/>
                                         <button type="button" class="cancel-btn btn btn-danger rounded mt-4"
                                                 style="float: right; margin-bottom: 10px"
-                                                th:if="${billdetail.trangThaiDonHang == T(com.example.datn.entities.enumClass.BillStatus).CHO_HANG_VE}">
+                                                th:if="${billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).CHO_HANG_VE}">
                                             <i class="far fa-times-circle"></i>&nbsp; Hủy đơn này
                                         </button>
                                     </form>
 
                                     <!-- Chờ giao hàng -->
                                     <span class="btn btn-success text-wrap rounded"
-                                          th:if="${billdetail.trangThaiDonHang == T(com.example.datn.entities.enumClass.BillStatus).CHO_GIAO_HANG}">
+                                          th:if="${billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).CHO_GIAO_HANG}">
                 <i class="far fa-check-square"></i> Giao hàng thành công
             </span>
 
@@ -401,7 +401,7 @@
                                         <input type="hidden" name="trangThaiDonHang" value="THAT_BAI"/>
                                         <button type="button" class="failed-btn btn btn-danger rounded mt-4"
                                                 style="float: right; margin-bottom: 10px"
-                                                th:if="${billdetail.trangThaiDonHang == T(com.example.datn.entities.enumClass.BillStatus).CHO_GIAO_HANG}">
+                                                th:if="${billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).CHO_GIAO_HANG}">
                                             <i class="far fa-times-circle"></i>&nbsp; Giao hàng thất bại
                                         </button>
                                     </form>

@@ -119,32 +119,7 @@
             border-color: #f33a58;
         }
 
-        /* input[type='number']::-webkit-inner-spin-button,
-        input[type='number']::-webkit-outer-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
 
-        .custom-number-input input:focus {
-            outline: none !important;
-        }
-
-        .custom-number-input button:focus {
-            outline: none !important;
-        }
-
-        .add-customer-form {
-            display: none;
-        }
-
-        .customer-item {
-            cursor: pointer;
-        }
-
-        .customer-item.active {
-            background-color: #00ccff;
-            color: #fff;
-        } */
     </style>
 </head>
 
@@ -227,14 +202,14 @@
                 </svg>
             </a>
         </div>
-        <div class="ml-4 mr-2 cursor-pointer hover:bg-black/[.54] rounded-lg" id="enable-camera-button">
-                <span>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 256 256">
-                        <path fill="white"
-                              d="M232 48v40a8 8 0 0 1-16 0V56h-32a8 8 0 0 1 0-16h40a8 8 0 0 1 8 8ZM72 200H40v-32a8 8 0 0 0-16 0v40a8 8 0 0 0 8 8h40a8 8 0 0 0 0-16Zm152-40a8 8 0 0 0-8 8v32h-32a8 8 0 0 0 0 16h40a8 8 0 0 0 8-8v-40a8 8 0 0 0-8-8ZM32 96a8 8 0 0 0 8-8V56h32a8 8 0 0 0 0-16H32a8 8 0 0 0-8 8v40a8 8 0 0 0 8 8Zm48-16a8 8 0 0 0-8 8v80a8 8 0 0 0 16 0V88a8 8 0 0 0-8-8Zm104 88V88a8 8 0 0 0-16 0v80a8 8 0 0 0 16 0Zm-40-88a8 8 0 0 0-8 8v80a8 8 0 0 0 16 0V88a8 8 0 0 0-8-8Zm-32 0a8 8 0 0 0-8 8v80a8 8 0 0 0 16 0V88a8 8 0 0 0-8-8Z"/>
-                    </svg>
-                </span>
-        </div>
+<!--        <div class="ml-4 mr-2 cursor-pointer hover:bg-black/[.54] rounded-lg" id="enable-camera-button">-->
+<!--                <span>-->
+<!--                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 256 256">-->
+<!--                        <path fill="white"-->
+<!--                              d="M232 48v40a8 8 0 0 1-16 0V56h-32a8 8 0 0 1 0-16h40a8 8 0 0 1 8 8ZM72 200H40v-32a8 8 0 0 0-16 0v40a8 8 0 0 0 8 8h40a8 8 0 0 0 0-16Zm152-40a8 8 0 0 0-8 8v32h-32a8 8 0 0 0 0 16h40a8 8 0 0 0 8-8v-40a8 8 0 0 0-8-8ZM32 96a8 8 0 0 0 8-8V56h32a8 8 0 0 0 0-16H32a8 8 0 0 0-8 8v40a8 8 0 0 0 8 8Zm48-16a8 8 0 0 0-8 8v80a8 8 0 0 0 16 0V88a8 8 0 0 0-8-8Zm104 88V88a8 8 0 0 0-16 0v80a8 8 0 0 0 16 0Zm-40-88a8 8 0 0 0-8 8v80a8 8 0 0 0 16 0V88a8 8 0 0 0-8-8Zm-32 0a8 8 0 0 0-8 8v80a8 8 0 0 0 16 0V88a8 8 0 0 0-8-8Z"/>-->
+<!--                    </svg>-->
+<!--                </span>-->
+<!--        </div>-->
         <div class="tab-container" data-tab-number="1">
             <div class="tab-list">
                 <div  data-tab-number="1" class="tab active font-bold relative cursor-pointer">
@@ -402,7 +377,7 @@
                     </div>
                 </div>
                 <div class="selected-customer active mt-2 border border-blue-400 rounded-md">
-                    <span class="font-bold italic text-gray-500">--Khách lẻ--</span>
+<!--                    <span class="font-bold italic text-gray-500">&#45;&#45;Khách lẻ&#45;&#45;</span>-->
                 </div>
             </div>
             <div class=" mb-3">
@@ -413,15 +388,15 @@
                     <h5 class="all-price font-bold text-2xl">0</h5>
                 </div>
             </div>
-            <div class=" mb-3">
-                <div class="col">
-                    <h5>Voucher: </h5>
-                </div>
-                <div class="col">
-                    <h6 class="text-red-500 cursor-pointer voucher-choose-btn">Click vào để chọn</h6>
-                    <div class="selected-voucher active"></div>
-                </div>
-            </div>
+<!--            <div class=" mb-3">-->
+<!--                <div class="col">-->
+<!--                    <h5>Voucher: </h5>-->
+<!--                </div>-->
+<!--                <div class="col">-->
+<!--                    <h6 class="text-red-500 cursor-pointer voucher-choose-btn">Click vào để chọn</h6>-->
+<!--                    <div class="selected-voucher active"></div>-->
+<!--                </div>-->
+<!--            </div>-->
 
 
             <div id="voucher-modal" tabindex="-1" aria-hidden="true"
@@ -637,7 +612,7 @@
                     $('table').append(body)
 
                     var selectedCustomer = $(`<div class="selected-customer mt-2 border border-blue-400 rounded-md hidden">
-<span class="font-bold italic text-gray-500">--Khách lẻ--</span>
+<span class="font-bold italic text-gray-500"></span>
 </div>`)
                     $('.search-customer-container').append(selectedCustomer)
                     // Bắt sự kiện click trên tab mới
@@ -1421,20 +1396,6 @@
                 });
 
 
-                // Cấu trúc
-                // {
-                //     "id": 15,
-                //     "code": "123",
-                //     "detail": null,
-                //     "type": 2,
-                //     "percentage": null,
-                //     "maximumAmount": null,
-                //     "status": 1,
-                //     "startDate": "2024-12-01T17:00:00.000+00:00",
-                //     "endDate": "2024-12-30T17:00:00.000+00:00",
-                //     "discountAmount": 1234,
-                //     "minimumAmountInCart": 12346,
-                //     "maximumUsage": 100
                 // }
                 async function loadVoucher() {
                     return new Promise((resolve, reject) => {
@@ -1694,30 +1655,30 @@
                                 }
                             }).showToast();
 
-                            //Lấy bill vừa lưu
-                            var generateUrl = `/admin/generate-pdf/${data.billId}`;
-                            // Fetch the HTML content from the controller
-                            await fetch(generateUrl)
-                                .then(response => response.text())
-                                .then(htmlContent => {
-
-                                    // Config máy in
-                                    var printWindow = window.open('', '', 'width=800,height=1000');
-                                    printWindow.document.open();
-
-                                    printWindow.document.write(htmlContent);
-                                    printWindow.document.close();
-                                    printWindow.print();
-
-                                })
-                                .catch(error => {
-                                    $('#loading-overlay').hide();
-                                    Swal.fire({
-                                        title: "Lỗi",
-                                        text: "Lỗi export pdf phía server",
-                                        icon: "error"
-                                    });
-                                });
+                            // //Lấy bill vừa lưu
+                            // var generateUrl = `/admin/generate-pdf/${data.billId}`;
+                            // // Fetch the HTML content from the controller
+                            // await fetch(generateUrl)
+                            //     .then(response => response.text())
+                            //     .then(htmlContent => {
+                            //
+                            //         // Config máy in
+                            //         var printWindow = window.open('', '', 'width=800,height=1000');
+                            //         printWindow.document.open();
+                            //
+                            //         printWindow.document.write(htmlContent);
+                            //         printWindow.document.close();
+                            //         printWindow.print();
+                            //
+                            //     })
+                            //     .catch(error => {
+                            //         $('#loading-overlay').hide();
+                            //         Swal.fire({
+                            //             title: "Lỗi",
+                            //             text: "Lỗi export pdf phía server",
+                            //             icon: "error"
+                            //         });
+                            //     });
                         },
                         error: function (xhr, status, error) {
                             $('#loading-overlay').hide();

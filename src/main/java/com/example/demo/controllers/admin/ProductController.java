@@ -89,16 +89,18 @@ public class ProductController {
         model.addAttribute("sortDirection", sortDirection);
         model.addAttribute("sortField", sortField);
         model.addAttribute("items", listProducts);
+
         return "admin/product";
     }
 
     @GetMapping("/product-create")
     public String viewAddProduct(Model model, HttpSession session) {
         Product product = new Product();
-
+         product.setName("Áo Polo Nam");
 
         model.addAttribute("action", "/admin/product-create/save-part1");
         model.addAttribute("product", product);
+
         return "/admin/product-create";
     }
 
