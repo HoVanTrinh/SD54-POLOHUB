@@ -8,6 +8,6 @@ public interface ProductSearchDto {
     String getNhanHang();
     String getChatLieu();
     String getTheLoai();
-
+    Integer getQuantity();
     String getTrangThai();
 }

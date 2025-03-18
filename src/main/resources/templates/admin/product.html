@@ -69,7 +69,7 @@
                 <a th:href="@{/admin/product-all(page=0, sort=${sortField == 'chatLieu' && sortDirection == 'asc' ? 'chatLieu,desc' : 'chatLieu,asc'}, maSanPham=${maSanPham}, tenSanPham=${tenSanPham}, nhanHang=${nhanHang}, chatLieu=${chatLieu}, theLoai=${theLoai}, trangThai=${trangThai})}" class="sort-link"></a>
                 <a th:href="@{/admin/product-all(page=0, sort=${sortField == 'chatLieu' && sortDirection == 'desc' ? 'chatLieu,asc' : 'chatLieu,desc'}, maSanPham=${maSanPham}, tenSanPham=${tenSanPham}, nhanHang=${nhanHang}, chatLieu=${chatLieu}, theLoai=${theLoai}, trangThai=${trangThai})}" class="sort-link"></a>
             </th>
-
+            <th scope="col">Số Lượng</th>
             <th scope="col">Trạng thái</th>
             <th scope="col">Chức năng</th>
         </tr>
@@ -82,6 +82,7 @@
             </td>
             <td th:text="${item.nhanHang}"></td>
             <td th:text="${item.chatLieu}"></td>
+            <td th:text="${item.quantity}"></td>
             <td>
                 <span th:switch="${item.trangThai}">
                 <span th:case="0">Đang khởi tạo</span>

@@ -136,14 +136,11 @@ public class ProductServiceImpl implements ProductService {
         return page;
     }
 
-    @Override
-    public Page<ProductSearchDto> listSearchProduct(String maSanPham, String tenSanPham, Long nhanHang, Long chatLieu, Long theLoai, Integer trangThai, Pageable pageable) {
-        return null;
-    }
+
 
     @Override
-    public Page<ProductSearchDto> listSearchProduct(String maSanPham, String tenSanPham, Long nhanHang, Long chatLieu, Integer trangThai, Pageable pageable) {
-        Page<ProductSearchDto> productSearchDtos = productRepository.listSearchProduct(maSanPham,tenSanPham,nhanHang,chatLieu,trangThai,pageable);
+    public Page<ProductSearchDto> listSearchProduct(String maSanPham, String tenSanPham, Long nhanHang, Long chatLieu,Integer trangThai,Integer quantity, Pageable pageable) {
+        Page<ProductSearchDto> productSearchDtos = productRepository.listSearchProduct(maSanPham,tenSanPham,nhanHang,chatLieu,trangThai,quantity,pageable);
         return productSearchDtos;
     }
 
@@ -273,5 +270,6 @@ public class ProductServiceImpl implements ProductService {
     public boolean existsByName(String name) {
         return productRepository.existsByName(name);
     }
+
 
 }

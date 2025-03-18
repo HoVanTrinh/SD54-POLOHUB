@@ -4,6 +4,7 @@ import com.example.demo.dto.product.ProductDto;
 import com.example.demo.dto.product.ProductSearchDto;
 import com.example.demo.dto.product.SearchProductDto;
 import com.example.demo.entities.Product;
+import com.example.demo.repositories.ProductDetailRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ProductService {
+
     Page<Product> getAllProduct(Pageable pageable0);
 
     Page<ProductSearchDto> getAll(Pageable pageable);
@@ -29,9 +31,9 @@ public interface ProductService {
 
     Page<Product> search(String productName, Pageable pageable);
 
-    Page<ProductSearchDto> listSearchProduct(String maSanPham,String tenSanPham,Long nhanHang,Long chatLieu,Long theLoai,Integer trangThai,Pageable pageable);
 
-    Page<ProductSearchDto> listSearchProduct(String maSanPham, String tenSanPham, Long nhanHang, Long chatLieu, Integer trangThai, Pageable pageable);
+
+    Page<ProductSearchDto> listSearchProduct(String maSanPham, String tenSanPham, Long nhanHang, Long chatLieu, Integer trangThai,Integer quantity,Pageable pageable);
 
     Page<Product> getAllByStatus(int status, Pageable pageable);
 

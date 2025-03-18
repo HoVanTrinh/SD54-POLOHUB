@@ -57,42 +57,94 @@ public class ProductController {
 
     @Autowired
     FileUploadUtil fileUploadUtil;
-    @GetMapping("/product-all")
-    public String getAllProduct(Model model,
-                                @RequestParam(name = "page", defaultValue = "0") int page,
-                                @RequestParam(name = "sort", defaultValue = "createDate,desc") String sortField,
-                                @RequestParam(name = "maSanPham", required = false) String maSanPham,
-                                @RequestParam(name = "tenSanPham", required = false) String tenSanPham,
-                                @RequestParam(name = "nhanHang", required = false) Long nhanHang,
-                                @RequestParam(name = "chatLieu", required = false) Long chatLieu,
-                                @RequestParam(name = "trangThai", required = false) Integer trangThai) {
+//    @GetMapping("/product-all")
+//    public String getAllProduct(Model model,
+//                                @RequestParam(name = "page", defaultValue = "0") int page,
+//                                @RequestParam(name = "sort", defaultValue = "createDate,desc") String sortField,
+//                                @RequestParam(name = "maSanPham", required = false) String maSanPham,
+//                                @RequestParam(name = "tenSanPham", required = false) String tenSanPham,
+//                                @RequestParam(name = "nhanHang", required = false) Long nhanHang,
+//                                @RequestParam(name = "chatLieu", required = false) Long chatLieu,
+//                                @RequestParam(name = "trangThai", required = false) Integer trangThai,
+//                                @RequestParam(name = "quantity", required = false) Integer quantity
+//                               )
+//                                 {
+//
+//        int pageSize = 8;
+//        String[] sortParams = sortField.split(",");
+//        String sortFieldName = sortParams[0];
+//        Sort.Direction sortDirection = Sort.Direction.ASC;
+//
+//        if (sortParams.length > 1 && sortParams[1].equalsIgnoreCase("desc")) {
+//            sortDirection = Sort.Direction.DESC;
+//        }
+//
+//        Sort sort = Sort.by(sortDirection, sortFieldName);
+//        Pageable pageable = PageRequest.of(page, pageSize, sort);
+//
+//        Page<ProductSearchDto> listProducts = productService.listSearchProduct(maSanPham, tenSanPham, nhanHang, chatLieu, trangThai,quantity,pageable);
+//                                     // Tính tổng số lượng từ danh sách sản phẩm
+//
+//
+//        model.addAttribute("maSanPham", maSanPham);
+//        model.addAttribute("tenSanPham", tenSanPham);
+//        model.addAttribute("nhanHang", nhanHang);
+//        model.addAttribute("chatLieu", chatLieu);
+//        model.addAttribute("quantity", quantity);
+//        model.addAttribute("trangThai", trangThai);
+//        model.addAttribute("sortDirection", sortDirection);
+//        model.addAttribute("sortField", sortField);
+//        model.addAttribute("items", listProducts);
+//
+//
+//        return "admin/product";
+//    }
+@GetMapping("/product-all")
+public String getAllProduct(Model model,
+                            @RequestParam(name = "page", defaultValue = "0") int page,
+                            @RequestParam(name = "sort", defaultValue = "createDate,desc") String sortField,
+                            @RequestParam(name = "maSanPham", required = false) String maSanPham,
+                            @RequestParam(name = "tenSanPham", required = false) String tenSanPham,
+                            @RequestParam(name = "nhanHang", required = false) Long nhanHang,
+                            @RequestParam(name = "chatLieu", required = false) Long chatLieu,
+                            @RequestParam(name = "trangThai", required = false) Integer trangThai,
+                            @RequestParam(name = "quantity", required = false) Integer quantity) {
 
-        int pageSize = 8;
-        String[] sortParams = sortField.split(",");
-        String sortFieldName = sortParams[0];
-        Sort.Direction sortDirection = Sort.Direction.ASC;
+    int pageSize = 8;
+    String[] sortParams = sortField.split(",");
+    String sortFieldName = sortParams[0];
+    Sort.Direction sortDirection = Sort.Direction.ASC;
 
-        if (sortParams.length > 1 && sortParams[1].equalsIgnoreCase("desc")) {
-            sortDirection = Sort.Direction.DESC;
-        }
-
-        Sort sort = Sort.by(sortDirection, sortFieldName);
-        Pageable pageable = PageRequest.of(page, pageSize, sort);
-
-        Page<ProductSearchDto> listProducts = productService.listSearchProduct(maSanPham, tenSanPham, nhanHang, chatLieu, trangThai, pageable);
-
-        model.addAttribute("maSanPham", maSanPham);
-        model.addAttribute("tenSanPham", tenSanPham);
-        model.addAttribute("nhanHang", nhanHang);
-        model.addAttribute("chatLieu", chatLieu);
-        model.addAttribute("trangThai", trangThai);
-        model.addAttribute("sortDirection", sortDirection);
-        model.addAttribute("sortField", sortField);
-        model.addAttribute("items", listProducts);
-
-        return "admin/product";
+    if (sortParams.length > 1 && sortParams[1].equalsIgnoreCase("desc")) {
+        sortDirection = Sort.Direction.DESC;
     }
 
+    Sort sort = Sort.by(sortDirection, sortFieldName);
+    Pageable pageable = PageRequest.of(page, pageSize, sort);
+
+    // Tìm kiếm sản phẩm bằng các tham số từ request
+    Page<ProductSearchDto> listProducts = productService.listSearchProduct(maSanPham, tenSanPham, nhanHang, chatLieu, trangThai, quantity, pageable);
+
+    // Tính tổng số lượng từ danh sách sản phẩm
+    long totalQuantity = listProducts.getContent()
+            .stream()
+            .mapToLong(ProductSearchDto::getQuantity) // Giả sử ProductSearchDto có phương thức getQuantity
+            .sum();
+
+    // Thêm các thuộc tính vào model để sử dụng trong view
+    model.addAttribute("maSanPham", maSanPham);
+    model.addAttribute("tenSanPham", tenSanPham);
+    model.addAttribute("nhanHang", nhanHang);
+    model.addAttribute("chatLieu", chatLieu);
+    model.addAttribute("quantity", quantity);
+    model.addAttribute("trangThai", trangThai);
+    model.addAttribute("sortDirection", sortDirection);
+    model.addAttribute("sortField", sortField);
+    model.addAttribute("items", listProducts);
+    model.addAttribute("totalQuantity", totalQuantity); // Thêm tổng số lượng vào model
+
+    return "admin/product"; // Trả về view tương ứng
+}
     @GetMapping("/product-create")
     public String viewAddProduct(Model model, HttpSession session) {
         Product product = new Product();
