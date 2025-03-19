@@ -14,7 +14,7 @@ public class MvcConfig implements WebMvcConfigurer {
         exposeDirectory("uploads", registry);
 
         // Đăng ký thư mục "upload-barcode" để có thể truy cập qua HTTP
-        exposeDirectory("upload-barcode", registry);
+        exposeDirectory("image-barcode", registry);
     }
 
     @Override

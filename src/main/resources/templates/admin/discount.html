@@ -1,3 +1,473 @@
+<!--&lt;!&ndash;<!DOCTYPE html>&ndash;&gt;-->
+<!--&lt;!&ndash;<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"&ndash;&gt;-->
+<!--&lt;!&ndash;      layout:decorate="~{admin/admin-layout.html}">&ndash;&gt;-->
+<!--&lt;!&ndash;<head>&ndash;&gt;-->
+<!--&lt;!&ndash;    <meta charset="UTF-8">&ndash;&gt;-->
+<!--&lt;!&ndash;    <title>Title</title>&ndash;&gt;-->
+<!--&lt;!&ndash;    <th:block layout:fragment="head_link">&ndash;&gt;-->
+<!--&lt;!&ndash;    </th:block>&ndash;&gt;-->
+<!--&lt;!&ndash;</head>&ndash;&gt;-->
+<!--&lt;!&ndash;<body>&ndash;&gt;-->
+<!--&lt;!&ndash;<div id="app" layout:fragment="content">&ndash;&gt;-->
+<!--&lt;!&ndash;    <h4>Mã giảm giá</h4>&ndash;&gt;-->
+
+<!--&lt;!&ndash;    <div class="my-3">&ndash;&gt;-->
+<!--&lt;!&ndash;        <div class="form-row">&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="form-group col-md-2">&ndash;&gt;-->
+<!--&lt;!&ndash;                <label for="code">Mã giảm giá</label>&ndash;&gt;-->
+<!--&lt;!&ndash;                <input type="text" class="form-control" id="code" name="code" placeholder="OAS123" th:value="${dataSearch.code}">&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;            <div class="form-group col-md-2">&ndash;&gt;-->
+<!--&lt;!&ndash;                <label>Ngày áp dụng</label>&ndash;&gt;-->
+<!--&lt;!&ndash;                <input type="date" class="form-control" id="startDate", name="startDate" th:value="${#dates.format(dataSearch.startDate, 'yyyy-MM-dd')}">&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="form-group col-md-2">&ndash;&gt;-->
+<!--&lt;!&ndash;                <label>Ngày kết thúc</label>&ndash;&gt;-->
+<!--&lt;!&ndash;                <input type="date" class="form-control" id="endDate" name="endDate"  th:value="${#dates.format(dataSearch.endDate, 'yyyy-MM-dd')}">&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="form-group col-md-2">&ndash;&gt;-->
+<!--&lt;!&ndash;                <label>Trạng thái</label>&ndash;&gt;-->
+<!--&lt;!&ndash;                <select class="form-control" id="status" th:value="${dataSearch.status}">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <option value="">Tất cả</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <option value="1" th:selected="${dataSearch.status == 1}">Đang hoạt động</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <option value="0" th:selected="${dataSearch.status == 0}">Đã đóng</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <option value="2" th:selected="${dataSearch.status == 2}">Đã hết hạn</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                </select>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="form-group col-md-2">&ndash;&gt;-->
+<!--&lt;!&ndash;                <label>Loại giảm giá</label>&ndash;&gt;-->
+<!--&lt;!&ndash;                <select class="form-control" id="discountCodeType" th:value="${dataSearch.discountCodeType}">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <option value="">Tất cả</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <option value="1" th:selected="${dataSearch.discountCodeType == 1}">Theo phần trăm</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <option value="2" th:selected="${dataSearch.discountCodeType == 2}">Giảm thẳng</option>&ndash;&gt;-->
+<!--&lt;!&ndash;                </select>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;        <button type="button" id="search-btn" class="btn btn-primary m-1"><i class="fa fa-search"></i> Tìm kiếm</button>&ndash;&gt;-->
+<!--&lt;!&ndash;        <a th:href="@{/admin-only/discount-code}" class="btn btn-secondary m-1">&ndash;&gt;-->
+<!--&lt;!&ndash;            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M2.57 3h18.86l-6.93 9.817V21h-5v-8.183L2.57 3Zm3.86 2l5.07 7.183V19h1v-6.817L17.57 5H6.43Zm11.45 8.465L20 15.586l2.122-2.121l1.414 1.414L21.415 17l2.121 2.122l-1.414 1.414L20 18.414l-2.12 2.122l-1.415-1.415l2.121-2.12l-2.121-2.122l1.414-1.414Z"/></svg>&ndash;&gt;-->
+<!--&lt;!&ndash;            Hủy bỏ&ndash;&gt;-->
+<!--&lt;!&ndash;        </a>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;    <div class="alert alert-success" th:if="${message != null}" th:text="${message}"></div>&ndash;&gt;-->
+<!--&lt;!&ndash;    <table class="table my-3">&ndash;&gt;-->
+<!--&lt;!&ndash;        <thead class="thead-light">&ndash;&gt;-->
+<!--&lt;!&ndash;        <tr>&ndash;&gt;-->
+<!--&lt;!&ndash;            <th scope="col">#</th>&ndash;&gt;-->
+<!--&lt;!&ndash;            <th scope="col">Mã giảm giá</th>&ndash;&gt;-->
+<!--&lt;!&ndash;            &lt;!&ndash;            <th scope="col">Tên mã giảm giá</th>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;            <th scope="col">Ngày áp dụng</th>&ndash;&gt;-->
+<!--&lt;!&ndash;            <th scope="col">Ngày hết hạn</th>&ndash;&gt;-->
+<!--&lt;!&ndash;            <th scope="col">Kiểu</th>&ndash;&gt;-->
+<!--&lt;!&ndash;            <th scope="col">Giá trị giảm</th>&ndash;&gt;-->
+<!--&lt;!&ndash;            <th scope="col">Còn</th>&ndash;&gt;-->
+<!--&lt;!&ndash;            <th scope="col">Trạng thái</th>&ndash;&gt;-->
+<!--&lt;!&ndash;            <th>Công cụ</th>&ndash;&gt;-->
+<!--&lt;!&ndash;        </tr>&ndash;&gt;-->
+<!--&lt;!&ndash;        </thead>&ndash;&gt;-->
+<!--&lt;!&ndash;        <tbody>&ndash;&gt;-->
+<!--&lt;!&ndash;        <tr th:each="discountCode, iStat : ${discountCodes}">&ndash;&gt;-->
+<!--&lt;!&ndash;            <th scope="row" th:text="${iStat.count}"></th>&ndash;&gt;-->
+<!--&lt;!&ndash;            <td th:text="${discountCode.code}"></td>&ndash;&gt;-->
+<!--&lt;!&ndash;            &lt;!&ndash;            <td th:text="${discountCode.detail}" class="text-truncate" style="max-width: 150px"></td>&ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;            <td th:text="${#dates.format(discountCode.startDate, 'dd/MM/yyyy')}"></td>&ndash;&gt;-->
+<!--&lt;!&ndash;            <td th:text="${#dates.format(discountCode.endDate, 'dd/MM/yyyy')}"></td>&ndash;&gt;-->
+<!--&lt;!&ndash;            <td th:if="${discountCode.getType() == 1}">Phần trăm</td>&ndash;&gt;-->
+<!--&lt;!&ndash;            <td th:if="${discountCode.getType() == 2}">Số tiền</td>&ndash;&gt;-->
+<!--&lt;!&ndash;            <td th:if="${discountCode.getType() == 1}" th:text="${discountCode.getPercentage() + '%'}"></td>&ndash;&gt;-->
+<!--&lt;!&ndash;            <td th:if="${discountCode.getType() == 2}" th:text="${#numbers.formatDecimal(discountCode.getDiscountAmount(), 0, 'POINT', 0, 'COMMA')}"></td>&ndash;&gt;-->
+<!--&lt;!&ndash;            <td th:text="${discountCode.maximumUsage}"></td>&ndash;&gt;-->
+
+<!--&lt;!&ndash;            <td th:if="${discountCode.status == 0}">&ndash;&gt;-->
+<!--&lt;!&ndash;                <span class="border border-danger text-danger rounded px-1">Đã đóng</span>&ndash;&gt;-->
+<!--&lt;!&ndash;            </td>&ndash;&gt;-->
+<!--&lt;!&ndash;            <td th:if="${discountCode.status == 1}">&ndash;&gt;-->
+
+<!--&lt;!&ndash;                <span th:unless="${discountCode.endDate.before(#dates.createNow())}"   class="border border-success text-success rounded px-1">Hoạt động</span>&ndash;&gt;-->
+<!--&lt;!&ndash;                <span class="border border-danger text-danger rounded px-1" th:if="${discountCode.endDate.before(#dates.createNow())} ">Đã hết hạn</span>&ndash;&gt;-->
+
+<!--&lt;!&ndash;            </td>&ndash;&gt;-->
+
+<!--&lt;!&ndash;            <td>&ndash;&gt;-->
+<!--&lt;!&ndash;                <form th:if="${discountCode.status == 1}" th:action="@{/admin/update-discount-status/0}" method="post" class="form-close-discount d-inline" >&ndash;&gt;-->
+<!--&lt;!&ndash;                    <input type="hidden" name="id" th:value="${discountCode.id}">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <button type="submit" class="border-0 bg-transparent close-btn cursor-pointer" title="Đóng mã giảm giá">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path fill="red" d="M2.93 17.07A10 10 0 1 1 17.07 2.93A10 10 0 0 1 2.93 17.07zm1.41-1.41A8 8 0 1 0 15.66 4.34A8 8 0 0 0 4.34 15.66zm9.9-8.49L11.41 10l2.83 2.83l-1.41 1.41L10 11.41l-2.83 2.83l-1.41-1.41L8.59 10L5.76 7.17l1.41-1.41L10 8.59l2.83-2.83l1.41 1.41z"/></svg>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </button>&ndash;&gt;-->
+<!--&lt;!&ndash;                </form>&ndash;&gt;-->
+
+<!--&lt;!&ndash;                <form th:if="${discountCode.status == 0}" th:action="@{/admin/update-discount-status/1}" method="post" class="form-open-discount d-inline" >&ndash;&gt;-->
+<!--&lt;!&ndash;                    <input type="hidden" name="id" th:value="${discountCode.id}">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <button type="submit" class="border-0 bg-transparent close-btn cursor-pointer" title="Mở mã giảm giá">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 512 512"><path fill="none" stroke="green" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M384 224v184a40 40 0 0 1-40 40H104a40 40 0 0 1-40-40V168a40 40 0 0 1 40-40h167.48M336 64h112v112M224 288L440 72"/></svg>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </button>&ndash;&gt;-->
+<!--&lt;!&ndash;                </form>&ndash;&gt;-->
+
+<!--&lt;!&ndash;                <a th:href="@{'/admin-only/discount-code-edit/' + ${discountCode.id}}" class="cursor-pointer">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="m7 17.013l4.413-.015l9.632-9.54c.378-.378.586-.88.586-1.414s-.208-1.036-.586-1.414l-1.586-1.586c-.756-.756-2.075-.752-2.825-.003L7 12.583v4.43zM18.045 4.458l1.589 1.583l-1.597 1.582l-1.586-1.585l1.594-1.58zM9 13.417l6.03-5.973l1.586 1.586l-6.029 5.971L9 15.006v-1.589z"/><path fill="currentColor" d="M5 21h14c1.103 0 2-.897 2-2v-8.668l-2 2V19H8.158c-.026 0-.053.01-.079.01c-.033 0-.066-.009-.1-.01H5V5h6.847l2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2z"/></svg>&ndash;&gt;-->
+<!--&lt;!&ndash;                </a>&ndash;&gt;-->
+<!--&lt;!&ndash;            </td>&ndash;&gt;-->
+<!--&lt;!&ndash;        </tr>&ndash;&gt;-->
+
+<!--&lt;!&ndash;        </tbody>&ndash;&gt;-->
+<!--&lt;!&ndash;    </table>&ndash;&gt;-->
+<!--&lt;!&ndash;    <a th:href="@{'/admin-only/discount-code-create'}" class="btn btn-primary btn-sm">Thêm</a>&ndash;&gt;-->
+<!--&lt;!&ndash;    <div class="box-footer clearfix">&ndash;&gt;-->
+<!--&lt;!&ndash;        <ul class="pagination pagination-sm justify-content-end" th:if="${totalPage > 0}">&ndash;&gt;-->
+<!--&lt;!&ndash;            &lt;!&ndash; Previous &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;            <li th:if="${currentPage > 1}" class="page-item">&ndash;&gt;-->
+<!--&lt;!&ndash;                <a class="page-link" href="javascript:void(0)"&ndash;&gt;-->
+<!--&lt;!&ndash;                   th:onclick="'changePage(' + (${currentPage - 1}) + ')'"&ndash;&gt;-->
+<!--&lt;!&ndash;                   aria-label="Previous">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <span aria-hidden="true">«</span>&ndash;&gt;-->
+<!--&lt;!&ndash;                </a>&ndash;&gt;-->
+<!--&lt;!&ndash;            </li>&ndash;&gt;-->
+
+<!--&lt;!&ndash;            &lt;!&ndash; Số Trang &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;            <li th:each="i : ${#numbers.sequence(1, totalPage)}" class="page-item"&ndash;&gt;-->
+<!--&lt;!&ndash;                th:classappend="${currentPage == i ? 'active' : ''}">&ndash;&gt;-->
+<!--&lt;!&ndash;                <a class="page-link" href="javascript:void(0)"&ndash;&gt;-->
+<!--&lt;!&ndash;                   th:onclick="'changePage(' + ${i} + ')'"&ndash;&gt;-->
+<!--&lt;!&ndash;                   th:text="${i}"></a>&ndash;&gt;-->
+<!--&lt;!&ndash;            </li>&ndash;&gt;-->
+
+<!--&lt;!&ndash;            &lt;!&ndash; Next &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;            <li th:if="${currentPage < totalPage}" class="page-item">&ndash;&gt;-->
+<!--&lt;!&ndash;                <a class="page-link" href="javascript:void(0)"&ndash;&gt;-->
+<!--&lt;!&ndash;                   th:onclick="'changePage(' + (${currentPage + 1}) + ')'"&ndash;&gt;-->
+<!--&lt;!&ndash;                   aria-label="Next">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <span aria-hidden="true">»</span>&ndash;&gt;-->
+<!--&lt;!&ndash;                </a>&ndash;&gt;-->
+<!--&lt;!&ndash;            </li>&ndash;&gt;-->
+<!--&lt;!&ndash;        </ul>&ndash;&gt;-->
+
+
+<!--&lt;!&ndash;        <script>&ndash;&gt;-->
+<!--&lt;!&ndash;            function changePage(page) {&ndash;&gt;-->
+<!--&lt;!&ndash;                const params = new URLSearchParams(window.location.search);&ndash;&gt;-->
+<!--&lt;!&ndash;                params.set('page', page); // Cập nhật tham số `page`&ndash;&gt;-->
+<!--&lt;!&ndash;                window.location.search = params.toString(); // Reload với URL mới&ndash;&gt;-->
+<!--&lt;!&ndash;            }&ndash;&gt;-->
+<!--&lt;!&ndash;        </script>&ndash;&gt;-->
+
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" th:inline="javascript"></script>&ndash;&gt;-->
+<!--&lt;!&ndash;    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>&ndash;&gt;-->
+<!--&lt;!&ndash;    <script src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.2/jquery.twbsPagination.min.js"></script>&ndash;&gt;-->
+<!--&lt;!&ndash;    <script th:inline="javascript">&ndash;&gt;-->
+<!--&lt;!&ndash;        var totalPage = /*[[${totalPage}]]*/ '';&ndash;&gt;-->
+<!--&lt;!&ndash;        var currentPage = /*[[${currentPage}]]*/ '';&ndash;&gt;-->
+
+<!--&lt;!&ndash;        $(".form-close-discount").on('submit', function (e) {&ndash;&gt;-->
+<!--&lt;!&ndash;            e.preventDefault();&ndash;&gt;-->
+<!--&lt;!&ndash;            var form = this; // select the form&ndash;&gt;-->
+
+<!--&lt;!&ndash;            Swal.fire({&ndash;&gt;-->
+<!--&lt;!&ndash;                title: 'Đóng mã giảm giá',&ndash;&gt;-->
+<!--&lt;!&ndash;                text: 'Bạn chắc chắc muốn đóng mã giảm giá này?',&ndash;&gt;-->
+<!--&lt;!&ndash;                icon: 'warning',&ndash;&gt;-->
+<!--&lt;!&ndash;                showCancelButton: true,&ndash;&gt;-->
+<!--&lt;!&ndash;                cancelButtonText: 'Hủy',&ndash;&gt;-->
+<!--&lt;!&ndash;                confirmButtonText: 'Xác nhận',&ndash;&gt;-->
+<!--&lt;!&ndash;                reverseButtons: true&ndash;&gt;-->
+<!--&lt;!&ndash;            }).then(async (result) => {&ndash;&gt;-->
+<!--&lt;!&ndash;                if (result.isConfirmed) {&ndash;&gt;-->
+<!--&lt;!&ndash;                    form.submit()&ndash;&gt;-->
+<!--&lt;!&ndash;                }&ndash;&gt;-->
+<!--&lt;!&ndash;            })&ndash;&gt;-->
+<!--&lt;!&ndash;        });&ndash;&gt;-->
+
+<!--&lt;!&ndash;        // Generate URL based on current location and parameters&ndash;&gt;-->
+<!--&lt;!&ndash;        let baseUrl = new URL(window.location.href);&ndash;&gt;-->
+<!--&lt;!&ndash;        let searchParams = new URLSearchParams(baseUrl.search);&ndash;&gt;-->
+
+<!--&lt;!&ndash;        $('#search-btn').on('click', function () {&ndash;&gt;-->
+<!--&lt;!&ndash;            searchParams.set('page', 1); // reset page to 1 on new search&ndash;&gt;-->
+<!--&lt;!&ndash;            debugger&ndash;&gt;-->
+<!--&lt;!&ndash;            let code = $('#code').val().trim();&ndash;&gt;-->
+<!--&lt;!&ndash;            let startDate = $("#startDate").val();&ndash;&gt;-->
+<!--&lt;!&ndash;            let endDate = $("#endDate").val();&ndash;&gt;-->
+<!--&lt;!&ndash;            let status = $("#status").val();&ndash;&gt;-->
+<!--&lt;!&ndash;            let discountCodeType = $("#discountCodeType").val();&ndash;&gt;-->
+
+<!--&lt;!&ndash;            if (startDate && endDate && startDate >= endDate) {&ndash;&gt;-->
+<!--&lt;!&ndash;                Swal.fire({&ndash;&gt;-->
+<!--&lt;!&ndash;                    text: 'Ngày bắt đầu phải nhỏ hơn ngày kết thúc',&ndash;&gt;-->
+<!--&lt;!&ndash;                    icon: 'error'&ndash;&gt;-->
+<!--&lt;!&ndash;                });&ndash;&gt;-->
+<!--&lt;!&ndash;                return;&ndash;&gt;-->
+<!--&lt;!&ndash;            }&ndash;&gt;-->
+
+<!--&lt;!&ndash;            searchParams.set('code', code);&ndash;&gt;-->
+<!--&lt;!&ndash;            searchParams.set('startDate', startDate);&ndash;&gt;-->
+<!--&lt;!&ndash;            searchParams.set('endDate', endDate);&ndash;&gt;-->
+<!--&lt;!&ndash;            searchParams.set('status', status);&ndash;&gt;-->
+<!--&lt;!&ndash;            searchParams.set('discountCodeType', discountCodeType);&ndash;&gt;-->
+
+<!--&lt;!&ndash;            window.location.href = baseUrl.pathname + '?' + searchParams.toString();&ndash;&gt;-->
+<!--&lt;!&ndash;        });&ndash;&gt;-->
+
+<!--&lt;!&ndash;        $('#pagination').twbsPagination({&ndash;&gt;-->
+<!--&lt;!&ndash;            startPage: parseInt(currentPage) + 1,&ndash;&gt;-->
+<!--&lt;!&ndash;            totalPages: parseInt(totalPage),&ndash;&gt;-->
+<!--&lt;!&ndash;            visiblePages: 5,&ndash;&gt;-->
+<!--&lt;!&ndash;            first: '<i class="fas fa-angle-double-left"></i>',&ndash;&gt;-->
+<!--&lt;!&ndash;            next: '<i class="fas fa-angle-left"></i>',&ndash;&gt;-->
+<!--&lt;!&ndash;            prev: '<i class="fas fa-angle-right"></i>',&ndash;&gt;-->
+<!--&lt;!&ndash;            last: '<i class="fas fa-angle-double-right"></i>',&ndash;&gt;-->
+<!--&lt;!&ndash;            initiateStartPageClick: false,&ndash;&gt;-->
+
+<!--&lt;!&ndash;            onPageClick: function (event, page) {&ndash;&gt;-->
+<!--&lt;!&ndash;                searchParams.set('page', page - 1); // page is 1-indexed in twbsPagination&ndash;&gt;-->
+<!--&lt;!&ndash;                window.location.href = baseUrl.pathname + '?' + searchParams.toString();&ndash;&gt;-->
+<!--&lt;!&ndash;            }&ndash;&gt;-->
+<!--&lt;!&ndash;        });&ndash;&gt;-->
+<!--&lt;!&ndash;    </script>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;</body>&ndash;&gt;-->
+<!--&lt;!&ndash;</html>&ndash;&gt;-->
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"-->
+<!--      layout:decorate="~{admin/admin-layout.html}">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Title</title>-->
+<!--    <th:block layout:fragment="head_link">-->
+<!--    </th:block>-->
+<!--    <style>-->
+<!--        button:hover{-->
+<!--            background-color: #9da0a8;-->
+<!--        }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div id="app" layout:fragment="content">-->
+<!--    <h4>Mã giảm giá</h4>-->
+
+<!--    <div class="my-3">-->
+<!--        <div class="form-row">-->
+<!--            <div class="form-group col-md-2">-->
+<!--                <label for="code">Mã giảm giá</label>-->
+<!--                <input type="text" class="form-control" id="code" name="code" placeholder="OAS123" th:value="${dataSearch.code}">-->
+<!--            </div>-->
+
+<!--            <div class="form-group col-md-2">-->
+<!--                <label>Ngày áp dụng</label>-->
+<!--                <input type="date" class="form-control" id="startDate", name="startDate" th:value="${#dates.format(dataSearch.startDate, 'yyyy-MM-dd')}">-->
+<!--            </div>-->
+<!--            <div class="form-group col-md-2">-->
+<!--                <label>Ngày kết thúc</label>-->
+<!--                <input type="date" class="form-control" id="endDate" name="endDate"  th:value="${#dates.format(dataSearch.endDate, 'yyyy-MM-dd')}">-->
+<!--            </div>-->
+<!--            <div class="form-group col-md-2">-->
+<!--                <label>Trạng thái</label>-->
+<!--                <select class="form-control" id="status" th:value="${dataSearch.status}">-->
+<!--                    <option value="">Tất cả</option>-->
+<!--                    <option value="1" th:selected="${dataSearch.status == 1}">Đang hoạt động</option>-->
+<!--                    <option value="0" th:selected="${dataSearch.status == 0}">Đã đóng</option>-->
+<!--                    <option value="2" th:selected="${dataSearch.status == 2}">Đã hết hạn</option>-->
+<!--                </select>-->
+<!--            </div>-->
+<!--            <div class="form-group col-md-2">-->
+<!--                <label>Loại giảm giá</label>-->
+<!--                <select class="form-control" id="discountCodeType" th:value="${dataSearch.discountCodeType}">-->
+<!--                    <option value="">Tất cả</option>-->
+<!--                    <option value="1" th:selected="${dataSearch.discountCodeType == 1}">Theo phần trăm</option>-->
+<!--                    <option value="2" th:selected="${dataSearch.discountCodeType == 2}">Giảm thẳng</option>-->
+<!--                </select>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <button type="button" id="search-btn" class="btn btn-primary m-1"><i class="fa fa-search"></i> Tìm kiếm</button>-->
+<!--        <a th:href="@{/admin-only/discount-code}" class="btn btn-outline-danger">-->
+<!--            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-octagon-fill" viewBox="0 0 16 16">-->
+<!--                <path d="M11.46.146A.5.5 0 0 0 11.107 0H4.893a.5.5 0 0 0-.353.146L.146 4.54A.5.5 0 0 0 0 4.893v6.214a.5.5 0 0 0 .146.353l4.394 4.394a.5.5 0 0 0 .353.146h6.214a.5.5 0 0 0 .353-.146l4.394-4.394a.5.5 0 0 0 .146-.353V4.893a.5.5 0 0 0-.146-.353zm-6.106 4.5L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 1 1 .708-.708"/>-->
+<!--            </svg>-->
+<!--            Hủy bỏ-->
+<!--        </a>-->
+<!--    </div>-->
+
+<!--    <div class="alert alert-success" th:if="${message != null}" th:text="${message}"></div>-->
+<!--    <table class="table my-3">-->
+<!--        <thead class="thead-light">-->
+<!--        <tr>-->
+<!--            <th scope="col">#</th>-->
+<!--            <th scope="col">Mã giảm giá</th>-->
+<!--            &lt;!&ndash;            <th scope="col">Tên mã giảm giá</th>&ndash;&gt;-->
+<!--            <th scope="col">Ngày áp dụng</th>-->
+<!--            <th scope="col">Ngày hết hạn</th>-->
+<!--            <th scope="col">Kiểu</th>-->
+<!--            <th scope="col">Giá trị giảm</th>-->
+<!--            <th scope="col">Còn</th>-->
+<!--            <th scope="col">Trạng thái</th>-->
+<!--            <th>Công cụ</th>-->
+<!--        </tr>-->
+<!--        </thead>-->
+<!--        <tbody>-->
+<!--        <tr th:each="discountCode, iStat : ${discountCodes}">-->
+<!--            <th scope="row" th:text="${iStat.count}"></th>-->
+<!--            <td th:text="${discountCode.code}"></td>-->
+<!--            &lt;!&ndash;            <td th:text="${discountCode.detail}" class="text-truncate" style="max-width: 150px"></td>&ndash;&gt;-->
+<!--            <td th:text="${#dates.format(discountCode.startDate, 'dd/MM/yyyy')}"></td>-->
+<!--            <td th:text="${#dates.format(discountCode.endDate, 'dd/MM/yyyy')}"></td>-->
+<!--            <td th:if="${discountCode.getType() == 1}">Phần trăm</td>-->
+<!--            <td th:if="${discountCode.getType() == 2}">Số tiền</td>-->
+<!--            <td th:if="${discountCode.getType() == 1}" th:text="${discountCode.getPercentage() + '%'}"></td>-->
+<!--            <td th:if="${discountCode.getType() == 2}" th:text="${#numbers.formatDecimal(discountCode.getDiscountAmount(), 0, 'POINT', 0, 'COMMA')}"></td>-->
+<!--            <td th:text="${discountCode.maximumUsage}"></td>-->
+
+<!--            <td th:if="${discountCode.status == 0}">-->
+<!--                <span class="border border-danger text-danger rounded px-1">Đã đóng</span>-->
+<!--            </td>-->
+<!--            <td th:if="${discountCode.status == 1}">-->
+
+<!--                <span th:unless="${discountCode.endDate.before(#dates.createNow())}"   class="border border-success text-success rounded px-1">Hoạt động</span>-->
+<!--                <span class="border border-danger text-danger rounded px-1" th:if="${discountCode.endDate.before(#dates.createNow())} ">Đã hết hạn</span>-->
+
+<!--            </td>-->
+
+<!--            <td>-->
+<!--                <form th:if="${discountCode.status == 1}" th:action="@{/admin/update-discount-status/0}" method="post" class="form-close-discount d-inline" >-->
+<!--                    <input type="hidden" name="id" th:value="${discountCode.id}">-->
+<!--                    <button type="submit" class="border-0 bg-transparent close-btn cursor-pointer" title="Đóng mã giảm giá">-->
+<!--                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><path fill="red" d="M2.93 17.07A10 10 0 1 1 17.07 2.93A10 10 0 0 1 2.93 17.07zm1.41-1.41A8 8 0 1 0 15.66 4.34A8 8 0 0 0 4.34 15.66zm9.9-8.49L11.41 10l2.83 2.83l-1.41 1.41L10 11.41l-2.83 2.83l-1.41-1.41L8.59 10L5.76 7.17l1.41-1.41L10 8.59l2.83-2.83l1.41 1.41z"/></svg>-->
+<!--                    </button>-->
+<!--                </form>-->
+
+<!--                <form th:if="${discountCode.status == 0}" th:action="@{/admin/update-discount-status/1}" method="post" class="form-open-discount d-inline" >-->
+<!--                    <input type="hidden" name="id" th:value="${discountCode.id}">-->
+<!--                    <button type="submit" class="border-0 bg-transparent close-btn cursor-pointer" title="Mở mã giảm giá">-->
+<!--                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 512 512"><path fill="none" stroke="green" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M384 224v184a40 40 0 0 1-40 40H104a40 40 0 0 1-40-40V168a40 40 0 0 1 40-40h167.48M336 64h112v112M224 288L440 72"/></svg>-->
+<!--                    </button>-->
+<!--                </form>-->
+
+<!--                <a th:href="@{'/admin-only/discount-code-edit/' + ${discountCode.id}}" class="cursor-pointer">-->
+<!--                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="m7 17.013l4.413-.015l9.632-9.54c.378-.378.586-.88.586-1.414s-.208-1.036-.586-1.414l-1.586-1.586c-.756-.756-2.075-.752-2.825-.003L7 12.583v4.43zM18.045 4.458l1.589 1.583l-1.597 1.582l-1.586-1.585l1.594-1.58zM9 13.417l6.03-5.973l1.586 1.586l-6.029 5.971L9 15.006v-1.589z"/><path fill="currentColor" d="M5 21h14c1.103 0 2-.897 2-2v-8.668l-2 2V19H8.158c-.026 0-.053.01-.079.01c-.033 0-.066-.009-.1-.01H5V5h6.847l2-2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2z"/></svg>-->
+<!--                </a>-->
+<!--            </td>-->
+<!--        </tr>-->
+
+<!--        </tbody>-->
+<!--    </table>-->
+<!--    <a th:href="@{'/admin-only/discount-code-create'}" class="btn btn-primary btn-sm">Thêm</a>-->
+<!--    <div class="box-footer clearfix">-->
+<!--        <ul class="pagination pagination-sm justify-content-end" th:if="${totalPage > 0}">-->
+<!--            &lt;!&ndash; Previous &ndash;&gt;-->
+<!--            <li th:if="${currentPage > 1}" class="page-item">-->
+<!--                <a class="page-link" href="javascript:void(0)"-->
+<!--                   th:onclick="'changePage(' + (${currentPage - 1}) + ')'"-->
+<!--                   aria-label="Previous">-->
+<!--                    <span aria-hidden="true">«</span>-->
+<!--                </a>-->
+<!--            </li>-->
+
+<!--            &lt;!&ndash; Số Trang &ndash;&gt;-->
+<!--            <li th:each="i : ${#numbers.sequence(1, totalPage)}" class="page-item"-->
+<!--                th:classappend="${currentPage == i ? 'active' : ''}">-->
+<!--                <a class="page-link" href="javascript:void(0)"-->
+<!--                   th:onclick="'changePage(' + ${i} + ')'"-->
+<!--                   th:text="${i}"></a>-->
+<!--            </li>-->
+
+<!--            &lt;!&ndash; Next &ndash;&gt;-->
+<!--            <li th:if="${currentPage < totalPage}" class="page-item">-->
+<!--                <a class="page-link" href="javascript:void(0)"-->
+<!--                   th:onclick="'changePage(' + (${currentPage + 1}) + ')'"-->
+<!--                   aria-label="Next">-->
+<!--                    <span aria-hidden="true">»</span>-->
+<!--                </a>-->
+<!--            </li>-->
+<!--        </ul>-->
+
+
+<!--        <script>-->
+<!--            function changePage(page) {-->
+<!--                const params = new URLSearchParams(window.location.search);-->
+<!--                params.set('page', page); // Cập nhật tham số `page`-->
+<!--                window.location.search = params.toString(); // Reload với URL mới-->
+<!--            }-->
+<!--        </script>-->
+
+<!--    </div>-->
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" th:inline="javascript"></script>-->
+<!--    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>-->
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/twbs-pagination/1.4.2/jquery.twbsPagination.min.js"></script>-->
+<!--    <script th:inline="javascript">-->
+<!--        var totalPage = /*[[${totalPage}]]*/ '';-->
+<!--        var currentPage = /*[[${currentPage}]]*/ '';-->
+
+<!--        $(".form-close-discount").on('submit', function (e) {-->
+<!--            e.preventDefault();-->
+<!--            var form = this; // select the form-->
+
+<!--            Swal.fire({-->
+<!--                title: 'Đóng mã giảm giá',-->
+<!--                text: 'Bạn chắc chắc muốn đóng mã giảm giá này?',-->
+<!--                icon: 'warning',-->
+<!--                showCancelButton: true,-->
+<!--                cancelButtonText: 'Hủy',-->
+<!--                confirmButtonText: 'Xác nhận',-->
+<!--                reverseButtons: true-->
+<!--            }).then(async (result) => {-->
+<!--                if (result.isConfirmed) {-->
+<!--                    form.submit()-->
+<!--                }-->
+<!--            })-->
+<!--        });-->
+
+<!--        // Generate URL based on current location and parameters-->
+<!--        let baseUrl = new URL(window.location.href);-->
+<!--        let searchParams = new URLSearchParams(baseUrl.search);-->
+
+<!--        $('#search-btn').on('click', function () {-->
+<!--            searchParams.set('page', 1); // reset page to 1 on new search-->
+<!--            debugger-->
+<!--            let code = $('#code').val().trim();-->
+<!--            let startDate = $("#startDate").val();-->
+<!--            let endDate = $("#endDate").val();-->
+<!--            let status = $("#status").val();-->
+<!--            let discountCodeType = $("#discountCodeType").val();-->
+
+<!--            if (startDate && endDate && startDate >= endDate) {-->
+<!--                Swal.fire({-->
+<!--                    text: 'Ngày bắt đầu phải nhỏ hơn ngày kết thúc',-->
+<!--                    icon: 'error'-->
+<!--                });-->
+<!--                return;-->
+<!--            }-->
+
+<!--            searchParams.set('code', code);-->
+<!--            searchParams.set('startDate', startDate);-->
+<!--            searchParams.set('endDate', endDate);-->
+<!--            searchParams.set('status', status);-->
+<!--            searchParams.set('discountCodeType', discountCodeType);-->
+
+<!--            window.location.href = baseUrl.pathname + '?' + searchParams.toString();-->
+<!--        });-->
+
+<!--        $('#pagination').twbsPagination({-->
+<!--            startPage: parseInt(currentPage) + 1,-->
+<!--            totalPages: parseInt(totalPage),-->
+<!--            visiblePages: 5,-->
+<!--            first: '<i class="fas fa-angle-double-left"></i>',-->
+<!--            next: '<i class="fas fa-angle-left"></i>',-->
+<!--            prev: '<i class="fas fa-angle-right"></i>',-->
+<!--            last: '<i class="fas fa-angle-double-right"></i>',-->
+<!--            initiateStartPageClick: false,-->
+
+<!--            onPageClick: function (event, page) {-->
+<!--                searchParams.set('page', page - 1); // page is 1-indexed in twbsPagination-->
+<!--                window.location.href = baseUrl.pathname + '?' + searchParams.toString();-->
+<!--            }-->
+<!--        });-->
+<!--    </script>-->
+<!--</div>-->
+
+<!--</body>-->
+<!--</html>-->
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{admin/admin-layout.html}">
@@ -9,6 +479,325 @@
 </head>
 <body>
 <div id="app" layout:fragment="content">
+    <style>
+
+        /* Tổng thể */
+        .my-3 {
+            background: linear-gradient(135deg, #1e1e1e, #292929);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .my-3:hover {
+            transform: scale(1.02);
+        }
+
+        /* Tiêu đề */
+        h4 {
+            font-size: 1.6rem;
+            font-weight: bold;
+            color: #333;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 0 5px rgba(255, 255, 255, 0.6);
+            position: relative;
+        }
+
+        h4::after {
+            content: "";
+            display: block;
+            width: 50px;
+            height: 3px;
+            background: #00f7ff;
+            margin-top: 5px;
+        }
+
+        /* Nhóm form */
+        .form-group label {
+            font-weight: 700;
+            color: #e0e0e0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        /* Input & Select */
+        .form-control {
+            background: #333;
+            border: 2px solid transparent;
+            border-radius: 8px;
+            padding: 4px;
+            color: #f0f0f0;
+            transition: all 0.3s ease-in-out;
+
+        }
+
+        .form-control:focus {
+            border-color: #00f7ff;
+            box-shadow: 0 0 12px rgba(0, 247, 255, 0.5);
+            transform: scale(1.05);
+        }
+
+        /* Button tìm kiếm */
+        #search-btn {
+            background: linear-gradient(90deg, #00f7ff, #007bff);
+            border: none;
+            font-weight: bold;
+            padding: 12px 24px;
+            border-radius: 8px;
+            transition: 0.3s ease-in-out;
+            box-shadow: 0 4px 12px rgba(0, 247, 255, 0.3);
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #search-btn::before {
+            content: "";
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 10%, transparent 70%);
+            top: -50%;
+            left: -50%;
+            transition: transform 0.3s;
+        }
+
+        #search-btn:hover::before {
+            transform: translate(50%, 50%);
+        }
+
+        #search-btn:hover {
+            background: linear-gradient(90deg, #007bff, #0056b3);
+            transform: scale(1.1);
+        }
+
+        /* Button hủy bỏ */
+        .btn-secondary {
+            background: linear-gradient(135deg, #444, #222);
+            border: none;
+            font-weight: bold;
+            padding: 12px 24px;
+            border-radius: 8px;
+            transition: 0.3s ease-in-out;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+            text-transform: uppercase;
+            width: 140px; /* Cố định chiều rộng bằng với nút Tìm kiếm */
+            text-align: center;
+            justify-content: center;
+        }
+
+        .btn-secondary:hover {
+            background: linear-gradient(135deg, #666, #333);
+            transform: scale(1.05);
+        }
+
+        /* Biểu tượng trong nút */
+        .btn-secondary svg {
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .btn-secondary:hover svg {
+            transform: rotate(180deg);
+        }
+
+        /* Tùy chỉnh bảng */
+        .table {
+            border-collapse: collapse;
+            width: 100%;
+            border-radius: 10px;
+            overflow: hidden; /* Để bo góc áp dụng đúng */
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Header bảng */
+        .thead-light th {
+            background-color: #343a40; /* Màu tối hơn để header nổi bật */
+            color: white;
+            text-transform: uppercase;
+            padding: 12px;
+            text-align: left;
+        }
+
+        /* Các dòng trong bảng */
+        .table tbody tr {
+            border-bottom: 1px solid #ddd;
+            transition: background 0.3s ease-in-out;
+        }
+
+        /* Hover vào hàng sẽ đổi màu */
+        .table tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        /* Ô trạng thái */
+        .border {
+            font-weight: bold;
+            padding: 5px 8px;
+            border-radius: 5px;
+        }
+
+        /* Căn giữa icon trong nút */
+        button svg {
+            vertical-align: middle;
+        }
+
+        /* Tùy chỉnh nút */
+        button.close-btn {
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        button.close-btn:hover {
+            transform: scale(1.1);
+            opacity: 0.8;
+        }
+
+        /* Hiệu ứng nút khi di chuột */
+        .cursor-pointer {
+            transition: transform 0.2s ease, color 0.2s ease;
+        }
+
+        .cursor-pointer:hover {
+            transform: scale(1.1);
+            color: #007bff;
+        }
+
+        /* Căn chỉnh icon sửa */
+        a.cursor-pointer svg {
+            fill: #ffc107; /* Màu vàng */
+        }
+
+        a.cursor-pointer:hover svg {
+            fill: #ff9800;
+        }
+
+        /* Căn chỉnh nội dung cột */
+        td, th {
+            padding: 10px;
+            vertical-align: middle;
+        }
+
+        /* Nút "Thêm" to, dài và đẹp hơn */
+        .btn.btn-primary.btn-sm {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            border: none;
+            font-size: 18px;
+            font-weight: bold;
+            padding: 14px 30px; /* Tăng kích thước */
+            border-radius: 12px; /* Bo góc mềm mại */
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase; /* Viết hoa chữ */
+            letter-spacing: 1px;
+        }
+
+        /* Hiệu ứng hover: sáng hơn, nhô lên */
+        .btn.btn-primary.btn-sm:hover {
+            background: linear-gradient(135deg, #0056b3, #003f7f);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Hiệu ứng click: nhỏ lại */
+        .btn.btn-primary.btn-sm:active {
+            transform: scale(0.95);
+        }
+
+        /* Thêm hiệu ứng ánh sáng chạy qua khi hover */
+        .btn.btn-primary.btn-sm::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: skewX(-30deg);
+            transition: all 0.5s;
+        }
+
+        .btn.btn-primary.btn-sm:hover::after {
+            left: 100%;
+        }
+
+
+        .btn.btn-primary.btn-sm:hover {
+            background: linear-gradient(135deg, #0056b3, #004093);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn.btn-primary.btn-sm:active {
+            transform: scale(0.95);
+        }
+
+        /* Pagination đẹp hơn */
+        .pagination {
+            display: flex;
+            gap: 5px;
+            padding: 10px;
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .pagination .page-item {
+            transition: all 0.3s;
+        }
+
+        .pagination .page-link {
+            color: #007bff;
+            font-weight: bold;
+            padding: 8px 14px;
+            border-radius: 50%;
+            transition: all 0.3s ease-in-out;
+            border: 2px solid transparent;
+            background: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .pagination .page-link:hover {
+            background: #007bff;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .pagination .page-item.active .page-link {
+            background: linear-gradient(135deg, #007bff, #004093);
+            color: white;
+            border: 2px solid #004093;
+            transform: scale(1.1);
+        }
+
+        /* Hiệu ứng bấm vào */
+        .pagination .page-link:active {
+            transform: scale(0.9);
+        }
+
+        /* Tùy chỉnh mũi tên Previous và Next */
+        .pagination .page-item:first-child .page-link,
+        .pagination .page-item:last-child .page-link {
+            border-radius: 12px;
+            font-size: 18px;
+        }
+
+    </style>
+
     <h4>Mã giảm giá</h4>
 
     <div class="my-3">

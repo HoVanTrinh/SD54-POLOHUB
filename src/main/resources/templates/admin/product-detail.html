@@ -6,9 +6,187 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-
 <body>
 <div layout:fragment="content">
+    <style>
+        /* Định dạng chung cho phần thông tin sản phẩm */
+        .product-detail-section{
+            background: #f0f8ff; /* Màu nền xanh nhạt */
+            border: 2px solid #007bff; /* Viền xanh */
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Tiêu đề */
+        .heading h5 {
+            color: #0056b3; /* Màu chữ xanh đậm */
+            font-weight: bold;
+        }
+
+        /* Định dạng cho từng thông tin sản phẩm */
+        .spec-item {
+            background: #ffffff; /* Màu nền trắng */
+            border: 1px solid #ddd; /* Viền nhẹ */
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 10px;
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+
+        /* Hover hiệu ứng */
+        .spec-item:hover {
+            background: #e6f2ff; /* Màu nền khi hover */
+            border-color: #0056b3; /* Viền đậm hơn khi hover */
+        }
+
+        /* Icon trong từng mục */
+        .spec-icon i {
+            color: #007bff; /* Màu xanh cho icon */
+            font-size: 18px;
+        }
+
+        /* Tiêu đề của mỗi mục */
+        .spec-title {
+            font-weight: bold;
+            color: #333; /* Màu chữ đậm */
+        }
+
+        /* Giá trị sản phẩm */
+        .spec-value {
+            color: #28a745; /* Màu xanh lá nổi bật */
+            font-weight: bold;
+        }
+
+        /* Badge trạng thái sản phẩm */
+        .badge {
+            padding: 5px 10px;
+            font-size: 14px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        /* Màu sắc theo trạng thái */
+        .badge-success {
+            background: #28a745;
+            color: #fff;
+        }
+
+        .badge-danger {
+            background: #dc3545;
+            color: #fff;
+        }
+
+        .text-primary {
+            color: #007bff !important;
+        }
+
+
+        /*bottom*/
+
+        /* Tiêu đề danh sách */
+        .heading h5 {
+            color: #0056b3; /* Màu chữ xanh đậm */
+            font-weight: bold;
+        }
+
+        /* Định dạng cho từng phiên bản */
+        .version-item {
+            background: #ffffff; /* Màu nền trắng */
+            border: 1px solid #ddd; /* Viền nhẹ */
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+
+        /* Hover hiệu ứng */
+        .version-item:hover {
+            background: #e6f2ff; /* Màu nền khi hover */
+            border-color: #0056b3; /* Viền đậm hơn khi hover */
+        }
+
+        /* Icon thông tin */
+        .version-item i {
+            color: #007bff; /* Màu xanh */
+            font-size: 18px;
+        }
+
+        /* Màu chữ phiên bản */
+        .version-item .text-dark {
+            color: #333; /* Màu chữ tối */
+        }
+
+        /* Định dạng nội dung trong từng phiên bản */
+        .version-item p {
+            color: #555; /* Màu chữ trung tính */
+            margin-bottom: 8px;
+        }
+
+        /* Giá trị của sản phẩm */
+        .version-item span {
+            color: #28a745; /* Màu xanh lá nổi bật */
+            font-weight: bold;
+        }
+
+        /* Nút hiển thị mã QR */
+        .display-qr-btn {
+            color: #007bff;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .display-qr-btn:hover {
+            color: #0056b3;
+            text-decoration: underline;
+        }
+
+        /* Container hiển thị mã QR */
+        .qrcode-container {
+            display: none;
+            background: #fff;
+            padding: 10px;
+            border: 1px solid #ccc;
+            margin-top: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        /* Hình ảnh mã QR */
+        .barcode-img {
+            max-width: 100%;
+            height: auto;
+            border: 2px solid #007bff;
+            border-radius: 5px;
+        }
+
+        /* Nút in mã QR */
+        .print-qr {
+            background: #007bff;
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 5px;
+            display: inline-block;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .print-qr:hover {
+            background: #0056b3;
+        }
+
+        /* Nút đóng mã QR */
+        .close-qr {
+            font-size: 20px;
+            color: red;
+            cursor: pointer;
+            display: block;
+            margin-top: 5px;
+        }
+
+
+    </style>
     <div id="overlay"></div>
     <div class="d-flex align-items-center justify-content-between action-top">
         <div class="breadcrum align-items-center">
@@ -22,10 +200,7 @@
             </a>
         </div>
         <div class="MuiBox-root jss1136">
-            <!--                <a class="btn btn-outline-danger" id="delete-btn" th:href="@{'/admin/product-delete/' + ${product.id}}">-->
-            <!--                    <span class="">Xoá-->
-            <!--                    </span>-->
-            <!--                </a>-->
+
 
         </div>
     </div>
@@ -47,14 +222,14 @@
                     <div class="spec-item">
                         <span class="spec-icon"><i class="fa fa-id-card-o" aria-hidden="true"></i></span>
                         <span class="spec-title">Mã sản phẩm</span>
-                        <span class="spec-value" th:text="${product.code}"></span>
+                        &nbsp;<span class="custom-info spec-value font-weight-bold" th:text="${product.code}"></span>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="spec-item">
                         <span class="spec-icon"><i class="fa fa-tags" aria-hidden="true"></i></span>
                         <span class="spec-title">Nhãn hàng</span>
-                        <span class="spec-value" th:text="${product.brand.name}">
+                        &nbsp;<span class="spec-value font-weight-bold" th:text="${product.brand.name}">
 
                             </span>
                         </span>
@@ -64,7 +239,7 @@
                     <div class="spec-item">
                         <span class="spec-icon"><i class="fa fa-magic"></i></span>
                         <span class="spec-title">Chất liệu</span>
-                        <span class="spec-value" th:text="${product.material.name}"></span>
+                        &nbsp;<span class="spec-value font-weight-bold" th:text="${product.material.name}"></span>
                     </div>
                 </div>
 
@@ -72,14 +247,14 @@
                     <div class="spec-item">
                         <span class="spec-icon"><i class="fa fa-calendar"></i></span>
                         <span class="spec-title">Ngày tạo</span>
-                        <span class="spec-value" th:text="${#temporals.format(product.createDate, 'dd-MM-yyyy HH:mm')}"></span>
+                        &nbsp;<span class="spec-value font-weight-bold" th:text="${#temporals.format(product.createDate, 'dd-MM-yyyy HH:mm')}"></span>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="spec-item">
                         <span class="spec-icon"><i class="fa fa-calendar"></i></span>
                         <span class="spec-title">Ngày cập nhật cuối cùng</span>
-                        <span class="spec-value" th:text="${#temporals.format(product.updatedDate, 'dd-MM-yyyy HH:mm')}"></span>
+                        &nbsp;<span class="spec-value font-weight-bold" th:text="${#temporals.format(product.updatedDate, 'dd-MM-yyyy HH:mm')}"></span>
                     </div>
                 </div>
             </div>
@@ -102,7 +277,7 @@
     <div class="product-detail-section">
         <div class="product-info-container">
             <div class="heading">
-                <h5>Danh sách các phiên bảnx</h5>
+                <h5>Danh sách các phiên bản</h5>
             </div>
             <div class="version-list">
                 <div class="version-item" th:each="version, iter: ${productDetails}">
@@ -120,7 +295,7 @@
                     </div>
                     <div class="qrcode-container">
                         <div>
-                            <img th:src="'/upload-barcode/' + ${version.getBarcode()} +'.png'" alt="" class="barcode-img">
+                            <img th:src="'/image-barcode/' + ${version.getBarcode()} +'.png'" alt="" class="barcode-img">
                         </div>
                         <div th:data-barcode="${version.getBarcode()}" class="print-qr btn btn-primary text-center mb-2">In mã</div>
                         <span class="close-qr cursor-pointer font-weight-bold">&times;</span>
@@ -147,7 +322,7 @@
             document.body.appendChild(iframe);
 
             // Set the iframe source to the specified URL
-            iframe.src = `/upload-barcode/${barcode}.png`;
+            iframe.src = `/image-barcode/${barcode}.png`;
 
             // Wait for the iframe to load and then print
             iframe.onload = function() {

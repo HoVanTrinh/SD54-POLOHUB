@@ -1,3 +1,426 @@
+<!--&lt;!&ndash;<!DOCTYPE html>&ndash;&gt;-->
+<!--&lt;!&ndash;<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{admin/admin-layout.html}">&ndash;&gt;-->
+<!--&lt;!&ndash;<head>&ndash;&gt;-->
+<!--&lt;!&ndash;    <meta charset="UTF-8">&ndash;&gt;-->
+<!--&lt;!&ndash;    <title>Thông tin mã giảm giá</title>&ndash;&gt;-->
+<!--&lt;!&ndash;    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">&ndash;&gt;-->
+
+<!--&lt;!&ndash;</head>&ndash;&gt;-->
+<!--&lt;!&ndash;<body>&ndash;&gt;-->
+<!--&lt;!&ndash;<div layout:fragment="content" class="container mt-5">&ndash;&gt;-->
+<!--&lt;!&ndash;    <div class="row justify-content-center">&ndash;&gt;-->
+<!--&lt;!&ndash;        <div class="col-lg-8">&ndash;&gt;-->
+<!--&lt;!&ndash;            <div class="card">&ndash;&gt;-->
+<!--&lt;!&ndash;                <div class="card-body">&ndash;&gt;-->
+<!--&lt;!&ndash;                    <h2 class="card-title text-center mb-4">Thông tin mã giảm giá</h2>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <div class="alert alert-danger" th:if="${message != null}" th:text="${message}"></div>&ndash;&gt;-->
+<!--&lt;!&ndash;                    <form method="POST" id="discount-code-form" th:action="${action}" th:object="${DiscountCode}">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <input type="hidden" th:field="*{id}">&ndash;&gt;-->
+<!--&lt;!&ndash;                        <div class="form-row">&ndash;&gt;-->
+<!--&lt;!&ndash;                            <div class="form-group col-sm-6">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <label for="code">Mã giảm giá <span class="red_require">*</span></label>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <input type="text" class="form-control" th:field="*{code}" id="code" placeholder="VD: BIRTHDAY2023">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <span class="error"></span>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <div class="form-group col-sm-6">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <label for="startDate">Ngày áp dụng <span class="red_require">*</span></label>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <input type="date" class="form-control" th:field="*{startDate}" id="startDate">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <span class="error"></span>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <div class="form-row">&ndash;&gt;-->
+<!--&lt;!&ndash;                            <div class="form-group col-sm-6">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <label for="endDate">Ngày kết thúc <span class="red_require">*</span></label>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <input type="date" class="form-control" th:field="*{endDate}" id="endDate">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <span class="error"></span>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <div class="form-group col-sm-6">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <label>Phương thức giảm <span class="red_require">*</span></label>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <div class="form-check">&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <input type="radio" class="form-check-input custom-radio" th:field="*{type}" th:value="1" id="type1" th:checked="${DiscountCode.type == 1}">&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <label class="form-check-label" for="type1">Giảm theo phần trăm</label>&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <input type="radio" class="form-check-input custom-radio" th:field="*{type}" th:value="2" id="type2" th:checked="${DiscountCode.type == 2}">&ndash;&gt;-->
+<!--&lt;!&ndash;                                    <label class="form-check-label" for="type2">Giảm theo tiền</label>&ndash;&gt;-->
+<!--&lt;!&ndash;                                </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <div class="form-row">&ndash;&gt;-->
+<!--&lt;!&ndash;                            <div class="form-group col-sm-6" id="discount-by-money">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <label for="discountAmount">Số tiền giảm (đ) <span class="red_require">*</span></label>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <input type="text" class="form-control" th:field="*{discountAmount}" id="discountAmount" placeholder="VD: 10000">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <span class="error"></span>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <div class="form-group col-sm-6" id="discount-by-percent">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <label for="percentage">Phần trăm giảm (%) <span class="red_require">*</span></label>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <input type="text" class="form-control" th:field="*{percentage}" id="percentage" placeholder="VD: 20">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <span class="error"></span>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <div class="form-row">&ndash;&gt;-->
+<!--&lt;!&ndash;                            <div class="form-group col-sm-6" id="max-amount-by-percent">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <label for="maximumAmount">Số tiền giảm tối đa (đ) <span class="red_require">*</span></label>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <input type="text" class="form-control" th:field="*{maximumAmount}" id="maximumAmount" placeholder="VD: 20000">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <span class="error"></span>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <div class="form-group col-sm-6">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <label for="minimumAmountInCart">Số tiền áp dụng cho đơn tối thiểu từ (đ) <span class="red_require">*</span></label>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <input type="text" class="form-control" th:field="*{minimumAmountInCart}" id="minimumAmountInCart" placeholder="VD: 100000">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <span class="error"></span>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <div class="form-row">&ndash;&gt;-->
+<!--&lt;!&ndash;                            <div class="form-group col-sm-6">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <label for="maximumUsage">Số lượng tối đa <span class="red_require">*</span></label>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <input type="text" class="form-control" th:field="*{maximumUsage}" id="maximumUsage" placeholder="VD: 123">&ndash;&gt;-->
+<!--&lt;!&ndash;                                <span class="error"></span>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <div class="d-flex justify-content-end mt-4">&ndash;&gt;-->
+<!--&lt;!&ndash;                            <a th:href="@{/admin-only/discount-code}" class="btn btn-outline-danger mr-2">Hủy</a>&ndash;&gt;-->
+<!--&lt;!&ndash;                            <button type="submit" class="btn btn-custom">Lưu</button>&ndash;&gt;-->
+<!--&lt;!&ndash;                        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </form>&ndash;&gt;-->
+<!--&lt;!&ndash;                </div>&ndash;&gt;-->
+<!--&lt;!&ndash;            </div>&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+<!--&lt;!&ndash;    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>&ndash;&gt;-->
+<!--&lt;!&ndash;    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>&ndash;&gt;-->
+
+<!--&lt;!&ndash;    <script th:inline="javascript">&ndash;&gt;-->
+<!--&lt;!&ndash;        $(document).ready(function () {&ndash;&gt;-->
+<!--&lt;!&ndash;            var type = /*[[${DiscountCode.type}]]*/ '';&ndash;&gt;-->
+<!--&lt;!&ndash;            $("#discount-by-money").hide();&ndash;&gt;-->
+<!--&lt;!&ndash;            $("#discountAmount").prop('disabled', true);&ndash;&gt;-->
+<!--&lt;!&ndash;            if(type == 2) {&ndash;&gt;-->
+<!--&lt;!&ndash;                $("#discount-by-percent").hide();&ndash;&gt;-->
+<!--&lt;!&ndash;                $("#max-amount-by-percent").hide();&ndash;&gt;-->
+<!--&lt;!&ndash;                $("#discount-by-money").show();&ndash;&gt;-->
+<!--&lt;!&ndash;                $("#discountAmount").prop('disabled', false);&ndash;&gt;-->
+<!--&lt;!&ndash;                $('#percentage').prop('disabled', true);&ndash;&gt;-->
+<!--&lt;!&ndash;                $('#maximumAmount').prop('disabled', true);&ndash;&gt;-->
+<!--&lt;!&ndash;            }&ndash;&gt;-->
+
+<!--&lt;!&ndash;            $("#type1").on("click", function () {&ndash;&gt;-->
+<!--&lt;!&ndash;                $("#discount-by-money").hide();&ndash;&gt;-->
+<!--&lt;!&ndash;                $("#discount-by-percent").show();&ndash;&gt;-->
+<!--&lt;!&ndash;                $("#max-amount-by-percent").show();&ndash;&gt;-->
+<!--&lt;!&ndash;                $("#discountAmount").prop('disabled', true);&ndash;&gt;-->
+<!--&lt;!&ndash;                $('#percentage').prop('disabled', false);&ndash;&gt;-->
+<!--&lt;!&ndash;                $('#maximumAmount').prop('disabled', false);&ndash;&gt;-->
+<!--&lt;!&ndash;            });&ndash;&gt;-->
+
+<!--&lt;!&ndash;            $("#type2").on("click", function () {&ndash;&gt;-->
+<!--&lt;!&ndash;                $("#discount-by-money").show();&ndash;&gt;-->
+<!--&lt;!&ndash;                $("#discount-by-percent").hide();&ndash;&gt;-->
+<!--&lt;!&ndash;                $("#max-amount-by-percent").hide();&ndash;&gt;-->
+<!--&lt;!&ndash;                $("#discountAmount").prop('disabled', false);&ndash;&gt;-->
+<!--&lt;!&ndash;                $('#percentage').prop('disabled', true);&ndash;&gt;-->
+<!--&lt;!&ndash;                $('#maximumAmount').prop('disabled', true);&ndash;&gt;-->
+<!--&lt;!&ndash;            });&ndash;&gt;-->
+
+<!--&lt;!&ndash;            Validator({&ndash;&gt;-->
+<!--&lt;!&ndash;                form: '#discount-code-form',&ndash;&gt;-->
+<!--&lt;!&ndash;                formGroupSelector: '.form-group',&ndash;&gt;-->
+<!--&lt;!&ndash;                errorSelector: '.error',&ndash;&gt;-->
+<!--&lt;!&ndash;                rules: [&ndash;&gt;-->
+<!--&lt;!&ndash;                    Validator.isRequired('#code', 'Vui lòng nhập mã giảm giá'),&ndash;&gt;-->
+<!--&lt;!&ndash;                    Validator.isRequired('#startDate', 'Vui lòng nhập ngày bắt đầu'),&ndash;&gt;-->
+<!--&lt;!&ndash;                    Validator.isRequired('#endDate', 'Vui lòng nhập ngày kết thúc'),&ndash;&gt;-->
+<!--&lt;!&ndash;                    Validator.isRequired('#maximumUsage', "Vui lòng nhập số lượng tối đa"),&ndash;&gt;-->
+<!--&lt;!&ndash;                    Validator.isRequired('#discountAmount', "Vui lòng nhập số tiền giảm giá"),&ndash;&gt;-->
+<!--&lt;!&ndash;                    Validator.isRequired('#minimumAmountInCart', "Vui lòng nhập số tiền áp dụng cho đơn tối thiểu"),&ndash;&gt;-->
+<!--&lt;!&ndash;                    Validator.isRequired('#percentage', 'Vui lòng nhập phần trăm giảm'),&ndash;&gt;-->
+<!--&lt;!&ndash;                    Validator.isRequired('#maximumAmount', 'Vui lòng nhập số tiền giảm tối đa mỗi đơn'),&ndash;&gt;-->
+<!--&lt;!&ndash;                    Validator.maxLength('#code', 50),&ndash;&gt;-->
+<!--&lt;!&ndash;                    Validator.isValidStartDateEndDate('#startDate', () =>  {&ndash;&gt;-->
+<!--&lt;!&ndash;                        return document.querySelector('#discount-code-form #endDate').value;&ndash;&gt;-->
+<!--&lt;!&ndash;                    }, 'Ngày áp dụng phải nhỏ hơn ngày kết thúc')&ndash;&gt;-->
+<!--&lt;!&ndash;                ]&ndash;&gt;-->
+<!--&lt;!&ndash;            });&ndash;&gt;-->
+
+<!--&lt;!&ndash;            $("#percentage").on('input', function () {&ndash;&gt;-->
+<!--&lt;!&ndash;                if(parseInt($(this).val()) > 90) {&ndash;&gt;-->
+<!--&lt;!&ndash;                    $(this).val(90);&ndash;&gt;-->
+<!--&lt;!&ndash;                }&ndash;&gt;-->
+<!--&lt;!&ndash;            });&ndash;&gt;-->
+
+<!--&lt;!&ndash;            $("#maximumAmount").on('input', function () {&ndash;&gt;-->
+<!--&lt;!&ndash;                let value = $(this).val();  // Lấy giá trị nhập vào dưới dạng chuỗi&ndash;&gt;-->
+
+<!--&lt;!&ndash;                if (isNaN(value) || value < 0) {  // Nếu không phải là số hoặc là số âm&ndash;&gt;-->
+<!--&lt;!&ndash;                    $(this).val('');  // Xóa giá trị không hợp lệ&ndash;&gt;-->
+<!--&lt;!&ndash;                    $(this).siblings('.error').text('Số tiền giảm tối đa phải là một số dương');  // Hiển thị lỗi&ndash;&gt;-->
+<!--&lt;!&ndash;                } else {&ndash;&gt;-->
+<!--&lt;!&ndash;                    $(this).siblings('.error').text('');  // Xóa thông báo lỗi nếu hợp lệ&ndash;&gt;-->
+<!--&lt;!&ndash;                }&ndash;&gt;-->
+<!--&lt;!&ndash;            });&ndash;&gt;-->
+
+<!--&lt;!&ndash;            $("#discountAmount").on('input', function () {&ndash;&gt;-->
+<!--&lt;!&ndash;                let value = $(this).val(); // Lấy giá trị nhập vào&ndash;&gt;-->
+
+<!--&lt;!&ndash;                if (isNaN(value) || value < 0 || !Number.isInteger(Number(value))) {&ndash;&gt;-->
+<!--&lt;!&ndash;                    // Nếu không phải số, là số âm hoặc không phải số nguyên&ndash;&gt;-->
+<!--&lt;!&ndash;                    $(this).val(''); // Xóa giá trị không hợp lệ&ndash;&gt;-->
+<!--&lt;!&ndash;                    $(this).siblings('.error').text('Số tiền giảm phải là số nguyên dương'); // Hiển thị lỗi&ndash;&gt;-->
+<!--&lt;!&ndash;                } else {&ndash;&gt;-->
+<!--&lt;!&ndash;                    $(this).siblings('.error').text(''); // Xóa thông báo lỗi nếu hợp lệ&ndash;&gt;-->
+<!--&lt;!&ndash;                }&ndash;&gt;-->
+<!--&lt;!&ndash;            });&ndash;&gt;-->
+
+<!--&lt;!&ndash;            $("#minimumAmountInCart").on('input', function () {&ndash;&gt;-->
+<!--&lt;!&ndash;                let value = $(this).val();  // Lấy giá trị nhập vào dưới dạng chuỗi&ndash;&gt;-->
+
+<!--&lt;!&ndash;                if (isNaN(value) || value < 0) {  // Nếu không phải là số hoặc là số âm&ndash;&gt;-->
+<!--&lt;!&ndash;                    $(this).val('');  // Xóa giá trị không hợp lệ&ndash;&gt;-->
+<!--&lt;!&ndash;                    $(this).siblings('.error').text('Số tiền áp dụng tối thiểu phải là một số dương');  // Hiển thị lỗi&ndash;&gt;-->
+<!--&lt;!&ndash;                } else {&ndash;&gt;-->
+<!--&lt;!&ndash;                    $(this).siblings('.error').text('');  // Xóa thông báo lỗi nếu hợp lệ&ndash;&gt;-->
+<!--&lt;!&ndash;                }&ndash;&gt;-->
+<!--&lt;!&ndash;            });&ndash;&gt;-->
+
+<!--&lt;!&ndash;            $("#maximumUsage").on('input', function () {&ndash;&gt;-->
+<!--&lt;!&ndash;                let value = $(this).val();  // Lấy giá trị nhập vào dưới dạng chuỗi&ndash;&gt;-->
+
+<!--&lt;!&ndash;                if (isNaN(value) || value < 0 || !Number.isInteger(Number(value))) {&ndash;&gt;-->
+<!--&lt;!&ndash;                    // Kiểm tra nếu không phải số, là số âm, hoặc không phải số nguyên&ndash;&gt;-->
+<!--&lt;!&ndash;                    $(this).val('');  // Xóa giá trị không hợp lệ&ndash;&gt;-->
+<!--&lt;!&ndash;                    $(this).siblings('.error').text('Số lượng tối đa phải là một số nguyên dương');  // Hiển thị lỗi&ndash;&gt;-->
+<!--&lt;!&ndash;                } else {&ndash;&gt;-->
+<!--&lt;!&ndash;                    $(this).siblings('.error').text('');  // Xóa thông báo lỗi nếu hợp lệ&ndash;&gt;-->
+<!--&lt;!&ndash;                }&ndash;&gt;-->
+<!--&lt;!&ndash;            });&ndash;&gt;-->
+<!--&lt;!&ndash;            $("#percentage").on('input', function () {&ndash;&gt;-->
+<!--&lt;!&ndash;                let value = $(this).val();  // Lấy giá trị nhập vào dưới dạng chuỗi&ndash;&gt;-->
+
+<!--&lt;!&ndash;                // Kiểm tra nếu giá trị không phải là số hợp lệ hoặc là số âm&ndash;&gt;-->
+<!--&lt;!&ndash;                if (isNaN(value) || value < 0) {&ndash;&gt;-->
+<!--&lt;!&ndash;                    $(this).val('');  // Xóa giá trị nếu không phải là số hợp lệ&ndash;&gt;-->
+<!--&lt;!&ndash;                    $(this).siblings('.error').text('Phần trăm giảm giá phải là một số dương');  // Thông báo lỗi&ndash;&gt;-->
+<!--&lt;!&ndash;                } else if (value > 90) {  // Kiểm tra nếu giá trị lớn hơn 98%&ndash;&gt;-->
+<!--&lt;!&ndash;                    $(this).val(90);  // Giới hạn giá trị tối đa là 98&ndash;&gt;-->
+<!--&lt;!&ndash;                    $(this).siblings('.error').text('Phần trăm giảm giá không được lớn hơn 98%');&ndash;&gt;-->
+<!--&lt;!&ndash;                } else {&ndash;&gt;-->
+<!--&lt;!&ndash;                    $(this).siblings('.error').text('');  // Xóa thông báo lỗi nếu nhập đúng&ndash;&gt;-->
+<!--&lt;!&ndash;                }&ndash;&gt;-->
+<!--&lt;!&ndash;            });&ndash;&gt;-->
+<!--&lt;!&ndash;        });&ndash;&gt;-->
+<!--&lt;!&ndash;    </script>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--&lt;!&ndash;</body>&ndash;&gt;-->
+<!--&lt;!&ndash;</html>&ndash;&gt;-->
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{admin/admin-layout.html}">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Thông tin mã giảm giá</title>-->
+<!--    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">-->
+
+<!--</head>-->
+<!--<body>-->
+<!--<div layout:fragment="content" class="container mt-5">-->
+<!--    <div class="row justify-content-center">-->
+<!--        <div class="col-lg-8">-->
+<!--            <div class="card">-->
+<!--                <div class="card-body">-->
+<!--                    <h2 class="card-title text-center mb-4">Thông tin mã giảm giá</h2>-->
+<!--                    <div class="alert alert-danger" th:if="${message != null}" th:text="${message}"></div>-->
+<!--                    <form method="POST" id="discount-code-form" th:action="${action}" th:object="${DiscountCode}">-->
+<!--                        <input type="hidden" th:field="*{id}">-->
+<!--                        <div class="form-row">-->
+<!--                            <div class="form-group col-sm-6">-->
+<!--                                <label for="code">Mã giảm giá <span class="red_require">*</span></label>-->
+<!--                                <input type="text" class="form-control" th:field="*{code}" id="code" placeholder="VD: BIRTHDAY2023">-->
+<!--                                <span class="error"></span>-->
+<!--                            </div>-->
+<!--                            <div class="form-group col-sm-6">-->
+<!--                                <label for="startDate">Ngày áp dụng <span class="red_require">*</span></label>-->
+<!--                                <input type="date" class="form-control" th:field="*{startDate}" id="startDate">-->
+<!--                                <span class="error"></span>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="form-row">-->
+<!--                            <div class="form-group col-sm-6">-->
+<!--                                <label for="endDate">Ngày kết thúc <span class="red_require">*</span></label>-->
+<!--                                <input type="date" class="form-control" th:field="*{endDate}" id="endDate">-->
+<!--                                <span class="error"></span>-->
+<!--                            </div>-->
+<!--                            <div class="form-group col-sm-6">-->
+<!--                                <label>Phương thức giảm <span class="red_require">*</span></label>-->
+<!--                                <div class="form-check">-->
+<!--                                    <input type="radio" class="form-check-input custom-radio" th:field="*{type}" th:value="1" id="type1" th:checked="${DiscountCode.type == 1}">-->
+<!--                                    <label class="form-check-label" for="type1">Giảm theo phần trăm</label>-->
+<!--                                    <input type="radio" class="form-check-input custom-radio" th:field="*{type}" th:value="2" id="type2" th:checked="${DiscountCode.type == 2}">-->
+<!--                                    <label class="form-check-label" for="type2">Giảm theo tiền</label>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="form-row">-->
+<!--                            <div class="form-group col-sm-6" id="discount-by-money">-->
+<!--                                <label for="discountAmount">Số tiền giảm (đ) <span class="red_require">*</span></label>-->
+<!--                                <input type="text" class="form-control" th:field="*{discountAmount}" id="discountAmount" placeholder="VD: 10000">-->
+<!--                                <span class="error"></span>-->
+<!--                            </div>-->
+<!--                            <div class="form-group col-sm-6" id="discount-by-percent">-->
+<!--                                <label for="percentage">Phần trăm giảm (%) <span class="red_require">*</span></label>-->
+<!--                                <input type="text" class="form-control" th:field="*{percentage}" id="percentage" placeholder="VD: 20">-->
+<!--                                <span class="error"></span>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="form-row">-->
+<!--                            <div class="form-group col-sm-6" id="max-amount-by-percent">-->
+<!--                                <label for="maximumAmount">Số tiền giảm tối đa (đ) <span class="red_require">*</span></label>-->
+<!--                                <input type="text" class="form-control" th:field="*{maximumAmount}" id="maximumAmount" placeholder="VD: 20000">-->
+<!--                                <span class="error"></span>-->
+<!--                            </div>-->
+<!--                            <div class="form-group col-sm-6">-->
+<!--                                <label for="minimumAmountInCart">Số tiền áp dụng cho đơn tối thiểu từ (đ) <span class="red_require">*</span></label>-->
+<!--                                <input type="text" class="form-control" th:field="*{minimumAmountInCart}" id="minimumAmountInCart" placeholder="VD: 100000">-->
+<!--                                <span class="error"></span>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="form-row">-->
+<!--                            <div class="form-group col-sm-6">-->
+<!--                                <label for="maximumUsage">Số lượng tối đa <span class="red_require">*</span></label>-->
+<!--                                <input type="text" class="form-control" th:field="*{maximumUsage}" id="maximumUsage" placeholder="VD: 123">-->
+<!--                                <span class="error"></span>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="d-flex justify-content-end mt-4">-->
+<!--                            <a th:href="@{/admin-only/discount-code}" class="btn btn-outline-danger mr-2">Hủy</a>-->
+<!--                            <button type="submit" class="btn btn-custom">Lưu</button>-->
+<!--                        </div>-->
+<!--                    </form>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>-->
+<!--    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>-->
+
+<!--    <script th:inline="javascript">-->
+<!--        $(document).ready(function () {-->
+<!--            var type = /*[[${DiscountCode.type}]]*/ '';-->
+<!--            $("#discount-by-money").hide();-->
+<!--            $("#discountAmount").prop('disabled', true);-->
+<!--            if(type == 2) {-->
+<!--                $("#discount-by-percent").hide();-->
+<!--                $("#max-amount-by-percent").hide();-->
+<!--                $("#discount-by-money").show();-->
+<!--                $("#discountAmount").prop('disabled', false);-->
+<!--                $('#percentage').prop('disabled', true);-->
+<!--                $('#maximumAmount').prop('disabled', true);-->
+<!--            }-->
+
+<!--            $("#type1").on("click", function () {-->
+<!--                $("#discount-by-money").hide();-->
+<!--                $("#discount-by-percent").show();-->
+<!--                $("#max-amount-by-percent").show();-->
+<!--                $("#discountAmount").prop('disabled', true);-->
+<!--                $('#percentage').prop('disabled', false);-->
+<!--                $('#maximumAmount').prop('disabled', false);-->
+<!--            });-->
+
+<!--            $("#type2").on("click", function () {-->
+<!--                $("#discount-by-money").show();-->
+<!--                $("#discount-by-percent").hide();-->
+<!--                $("#max-amount-by-percent").hide();-->
+<!--                $("#discountAmount").prop('disabled', false);-->
+<!--                $('#percentage').prop('disabled', true);-->
+<!--                $('#maximumAmount').prop('disabled', true);-->
+<!--            });-->
+
+<!--            Validator({-->
+<!--                form: '#discount-code-form',-->
+<!--                formGroupSelector: '.form-group',-->
+<!--                errorSelector: '.error',-->
+<!--                rules: [-->
+<!--                    Validator.isRequired('#code', 'Vui lòng nhập mã giảm giá'),-->
+<!--                    Validator.isRequired('#startDate', 'Vui lòng nhập ngày bắt đầu'),-->
+<!--                    Validator.isRequired('#endDate', 'Vui lòng nhập ngày kết thúc'),-->
+<!--                    Validator.isRequired('#maximumUsage', "Vui lòng nhập số lượng tối đa"),-->
+<!--                    Validator.isRequired('#discountAmount', "Vui lòng nhập số tiền giảm giá"),-->
+<!--                    Validator.isRequired('#minimumAmountInCart', "Vui lòng nhập số tiền áp dụng cho đơn tối thiểu"),-->
+<!--                    Validator.isRequired('#percentage', 'Vui lòng nhập phần trăm giảm'),-->
+<!--                    Validator.isRequired('#maximumAmount', 'Vui lòng nhập số tiền giảm tối đa mỗi đơn'),-->
+<!--                    Validator.maxLength('#code', 50),-->
+<!--                    Validator.isValidStartDateEndDate('#startDate', () =>  {-->
+<!--                        return document.querySelector('#discount-code-form #endDate').value;-->
+<!--                    }, 'Ngày áp dụng phải nhỏ hơn ngày kết thúc')-->
+<!--                ]-->
+<!--            });-->
+
+<!--            $("#percentage").on('input', function () {-->
+<!--                if(parseInt($(this).val()) > 90) {-->
+<!--                    $(this).val(90);-->
+<!--                }-->
+<!--            });-->
+
+<!--            $("#maximumAmount").on('input', function () {-->
+<!--                let value = $(this).val();  // Lấy giá trị nhập vào dưới dạng chuỗi-->
+
+<!--                if (isNaN(value) || value < 0) {  // Nếu không phải là số hoặc là số âm-->
+<!--                    $(this).val('');  // Xóa giá trị không hợp lệ-->
+<!--                    $(this).siblings('.error').text('Số tiền giảm tối đa phải là một số dương');  // Hiển thị lỗi-->
+<!--                } else {-->
+<!--                    $(this).siblings('.error').text('');  // Xóa thông báo lỗi nếu hợp lệ-->
+<!--                }-->
+<!--            });-->
+
+<!--            $("#discountAmount").on('input', function () {-->
+<!--                let value = $(this).val(); // Lấy giá trị nhập vào-->
+
+<!--                if (isNaN(value) || value < 0 || !Number.isInteger(Number(value))) {-->
+<!--                    // Nếu không phải số, là số âm hoặc không phải số nguyên-->
+<!--                    $(this).val(''); // Xóa giá trị không hợp lệ-->
+<!--                    $(this).siblings('.error').text('Số tiền giảm phải là số nguyên dương'); // Hiển thị lỗi-->
+<!--                } else {-->
+<!--                    $(this).siblings('.error').text(''); // Xóa thông báo lỗi nếu hợp lệ-->
+<!--                }-->
+<!--            });-->
+
+<!--            $("#minimumAmountInCart").on('input', function () {-->
+<!--                let value = $(this).val();  // Lấy giá trị nhập vào dưới dạng chuỗi-->
+
+<!--                if (isNaN(value) || value < 0) {  // Nếu không phải là số hoặc là số âm-->
+<!--                    $(this).val('');  // Xóa giá trị không hợp lệ-->
+<!--                    $(this).siblings('.error').text('Số tiền áp dụng tối thiểu phải là một số dương');  // Hiển thị lỗi-->
+<!--                } else {-->
+<!--                    $(this).siblings('.error').text('');  // Xóa thông báo lỗi nếu hợp lệ-->
+<!--                }-->
+<!--            });-->
+
+<!--            $("#maximumUsage").on('input', function () {-->
+<!--                let value = $(this).val();  // Lấy giá trị nhập vào dưới dạng chuỗi-->
+
+<!--                if (isNaN(value) || value < 0 || !Number.isInteger(Number(value))) {-->
+<!--                    // Kiểm tra nếu không phải số, là số âm, hoặc không phải số nguyên-->
+<!--                    $(this).val('');  // Xóa giá trị không hợp lệ-->
+<!--                    $(this).siblings('.error').text('Số lượng tối đa phải là một số nguyên dương');  // Hiển thị lỗi-->
+<!--                } else {-->
+<!--                    $(this).siblings('.error').text('');  // Xóa thông báo lỗi nếu hợp lệ-->
+<!--                }-->
+<!--            });-->
+<!--            $("#percentage").on('input', function () {-->
+<!--                let value = $(this).val();  // Lấy giá trị nhập vào dưới dạng chuỗi-->
+
+<!--                // Kiểm tra nếu giá trị không phải là số hợp lệ hoặc là số âm-->
+<!--                if (isNaN(value) || value < 0) {-->
+<!--                    $(this).val('');  // Xóa giá trị nếu không phải là số hợp lệ-->
+<!--                    $(this).siblings('.error').text('Phần trăm giảm giá phải là một số dương');  // Thông báo lỗi-->
+<!--                } else if (value > 90) {  // Kiểm tra nếu giá trị lớn hơn 98%-->
+<!--                    $(this).val(90);  // Giới hạn giá trị tối đa là 98-->
+<!--                    $(this).siblings('.error').text('Phần trăm giảm giá không được lớn hơn 98%');-->
+<!--                } else {-->
+<!--                    $(this).siblings('.error').text('');  // Xóa thông báo lỗi nếu nhập đúng-->
+<!--                }-->
+<!--            });-->
+<!--        });-->
+<!--    </script>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->
+
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{admin/admin-layout.html}">
 <head>
@@ -8,6 +431,155 @@
 </head>
 <body>
 <div layout:fragment="content" class="container mt-5">
+
+    <style>
+
+        /* Định dạng toàn bộ card */
+        .card {
+            background: linear-gradient(135deg, #1e3c72, #2a5298); /* Gradient xanh đậm */
+            border-radius: 16px;
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        /* Hiệu ứng khi hover card */
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 12px 25px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Tiêu đề form */
+        h2.text-center {
+            color: #fff;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background: linear-gradient(90deg, #f8ff00, #3ad59f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Form control - hiệu ứng border đổi màu khi focus */
+        .form-control {
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            transition: all 0.3s ease-in-out;
+            background-color: rgba(255, 255, 255, 0.2);
+            color: #fff;
+        }
+
+        .form-control:focus {
+            border-color: #f8ff00;
+            box-shadow: 0 0 10px rgba(248, 255, 0, 0.8);
+            background-color: rgba(255, 255, 255, 0.4);
+        }
+
+        /* Placeholder màu trắng */
+        ::placeholder {
+            color: #fff;
+            opacity: 0.8;
+        }
+
+        /* Label */
+        label {
+            font-weight: bold;
+            color: #f8ff00;
+        }
+
+        /* Radio button */
+        .custom-radio {
+            transform: scale(1.2);
+            margin-right: 5px;
+        }
+
+        /* Nút Hủy */
+        .btn-outline-danger {
+            border: 2px solid #ff4d4d;
+            color: #ff4d4d;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 10px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .btn-outline-danger:hover {
+            background-color: #ff4d4d;
+            color: #fff;
+            box-shadow: 0px 0px 10px rgba(255, 77, 77, 0.8);
+        }
+
+        /* Nút Lưu */
+        .btn-custom {
+            background: linear-gradient(135deg, #3ad59f, #f8ff00);
+            color: #000;
+            font-weight: bold;
+            padding: 12px 25px;
+            border-radius: 12px;
+            transition: all 0.3s ease-in-out;
+            border: none;
+            box-shadow: 0px 6px 15px rgba(58, 213, 159, 0.5);
+        }
+
+        .btn-custom:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 10px 20px rgba(248, 255, 0, 0.6);
+        }
+
+        .btn-custom:active {
+            transform: scale(0.95);
+        }
+
+        /* Hiệu ứng input error */
+        .error {
+            color: #ff4d4d;
+            font-size: 14px;
+            font-weight: bold;
+            margin-top: 5px;
+        }
+
+        /* Tạo hiệu ứng đổi màu khi chọn */
+        .form-check-input {
+            display: none; /* Ẩn radio gốc */
+        }
+
+        /* Đặt các radio button trong cùng một dòng */
+        .form-check {
+            display: flex;
+            align-items: center;
+            gap: 15px; /* Khoảng cách giữa hai nút */
+        }
+
+        .form-check-label {
+            font-size: 16px;
+            font-weight: bold;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease-in-out;
+            display: inline-block;
+            text-align: center;
+            margin-right: 10px;
+        }
+
+        /* Hiệu ứng hover */
+        .form-check-label:hover {
+            background: rgba(255, 255, 255, 0.4);
+            color: #f8ff00;
+            box-shadow: 0 0 10px rgba(255, 255, 0, 0.8);
+        }
+
+        /* Khi radio được chọn */
+        .form-check-input:checked + .form-check-label {
+            background: linear-gradient(135deg, #3ad59f, #f8ff00);
+            color: #000;
+            box-shadow: 0 0 15px rgba(248, 255, 0, 0.8);
+        }
+
+
+    </style>
+
     <div class="row justify-content-center">
         <div class="col-lg-8">
             <div class="card">
