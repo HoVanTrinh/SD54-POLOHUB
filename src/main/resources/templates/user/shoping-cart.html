@@ -157,10 +157,10 @@
                                     <i class="fa fa-tags" aria-hidden="true"></i>
                                     Chọn mã giảm giá
                                 </span>
-                            <!--                            <div-->
-                            <!--                                    class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">-->
-                            <!--                                Update Cart-->
-                            <!--                            </div>-->
+<!--                                                        <div-->
+<!--                                                                class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">-->
+<!--                                                            Update Cart-->
+<!--                                                        </div>-->
                         </span>
                         <div id="selected-voucher" class="p-l-2" data-selected="">
 
@@ -346,7 +346,7 @@
                         </div>
                     </div>
                     <div class="mb-5">
-                        <span class="text-danger font-weight-bold" style="font-size: 20px">Lưu ý: Chỉ ship trong khu vực Hà Nội, phí ship khách tự trả</span>
+                        <span class="text-danger font-weight-bold" style="font-size: 20px">Lưu ý: Chỉ ship trong khu vực Nghệ AN, phí ship(30k) khách tự trả</span>
                     </div>
                     <label class="checkbox d-flex">
                         <input type="checkbox" class="mr-2" id="term">
@@ -375,10 +375,15 @@
                 <div class="modal-body">
                     <p>1. Người mua đã thanh toán bằng cách phương thức thanh toán hợp lệ nhưng không nhận được sản
                         phẩm, sản phẩm bị lỗi hoặc bị hư hại, sai sản phẩm, không ưng ý.</p>
+                    <p>2. Có thể gửi yêu cầu trả hàng/hoàn tiền trong vòng 7 ngày kể từ lúc đơn hàng được cập nhật giao
+                        hàng thành công.</p>
                     <p>3. Tất cả các yêu cầu trả hànghoàn tiền phải được thực hiện trên web hoặc liên hệ trực tiếp tới
                         cửa hàng</p>
                     <p>4. Phí gửi hàng lại do người mua trả</p>
+                    <p>5. Mỗi hóa đơn chỉ được đổi trả 1 lần</p>
                     <p>6. Chỉ hỗ trợ đổi size, đổi màu, đổi sản phẩm bằng hoặc hơn giá</p>
+                    <p>7. Người mua đóng gói và gửi trả sản phẩm bao gồm toàn bộ phụ kiện đi kèm, hóa đơn, tem phiếu bảo
+                        hành (nếu có) và sản phẩm phải trong tình trạng nguyên vẹn như khi nhận hàng.</p>
                     <p>8. Người mua bắt buộc phải quay video hoặc chụp lại ảnh sản phẩm ngay khi nhận được và trong lúc
                         đóng gói hàng trả về để làm bằng chứng đối chiếu/khiếu nại về sau.</p>
 
@@ -542,7 +547,7 @@
                 street: '',
                 ward: '',
                 district: '',
-                province: 'Hà Nội',
+                province: 'Nghệ An',
 
             }
 
@@ -623,7 +628,7 @@
                     $.ajax({
                         type: 'GET',
                         dataType: "json",
-                        url: `https://api.vnappmob.com/api/v2/province/district/01`,
+                        url: `https://api.vnappmob.com/api/v2/province/district/40`,
                         success: function (data) {
                             district = data.results.map(item => ({value: item.district_id, label: item.district_name}))
                             loadDistrictSelect(data)
@@ -636,7 +641,7 @@
             $.ajax({
                 type: 'GET',
                 dataType: "json",
-                url: `https://api.vnappmob.com/api/v2/province/district/01`,
+                url: `https://api.vnappmob.com/api/v2/province/district/40`,
                 success: function (data) {
                     district = data.results.map(item => ({value: item.district_id, label: item.district_name}))
                     loadDistrictSelect(data)
@@ -676,30 +681,59 @@
                 row.find('.total-money').text(formatNumber(subtotal) + ' VND');
             }
 
+            // function calculateVoucherPrice() {
+            //     if (voucherChoosed) {
+            //         if (voucherChoosed.percentage) {
+            //             var voucherPriceLast;
+            //             var totalMoney = removeAnyNonDigit($('#sub-total').text())
+            //             var value = parseFloat(totalMoney) * voucherChoosed.percentage / 100
+            //             if (value > voucherChoosed.maximumAmount) {
+            //                 voucherPriceLast = voucherChoosed.maximumAmount
+            //             } else {
+            //                 voucherPriceLast = Math.round(value)
+            //             }
+            //             $("#voucher-pic").text(formatNumber(voucherPriceLast))
+            //         } else {
+            //             if (voucherChoosed.discountAmount) {
+            //                 $("#voucher-pic").text(formatNumber(voucherChoosed.discountAmount))
+            //
+            //             }
+            //         }
+            //     } else {
+            //         $("#voucher-pic").text('0')
+            //
+            //     }
+            // }
             function calculateVoucherPrice() {
+                // Kiểm tra xem voucher đã được chọn hay chưa
                 if (voucherChoosed) {
+                    let voucherPriceLast;
+
+                    // Lấy giá trị tổng tiền từ phần tử #sub-total
+                    var totalMoney = removeAnyNonDigit($('#sub-total').text());
+
+                    // Kiểm tra loại voucher
                     if (voucherChoosed.percentage) {
-                        var voucherPriceLast;
-                        var totalMoney = removeAnyNonDigit($('#sub-total').text())
-                        var value = parseFloat(totalMoney) * voucherChoosed.percentage / 100
+                        // Tính giá trị giảm giá theo phần trăm
+                        var value = parseFloat(totalMoney) * voucherChoosed.percentage / 100;
+                        // Kiểm tra xem giá trị giảm giá có vượt quá mức tối đa không
                         if (value > voucherChoosed.maximumAmount) {
-                            voucherPriceLast = voucherChoosed.maximumAmount
+                            voucherPriceLast = voucherChoosed.maximumAmount;
                         } else {
-                            voucherPriceLast = Math.round(value)
+                            voucherPriceLast = Math.round(value);
                         }
-                        $("#voucher-pic").text(formatNumber(voucherPriceLast))
-                    } else {
-                        if (voucherChoosed.discountAmount) {
-                            $("#voucher-pic").text(formatNumber(voucherChoosed.discountAmount))
-
-                        }
+                    } else if (voucherChoosed.discountAmount) {
+                        // Nếu voucher là một khoản giảm giá cố định
+                        voucherPriceLast = voucherChoosed.discountAmount;
                     }
-                } else {
-                    $("#voucher-pic").text('0')
 
+                    // Cập nhật hiển thị cho giá trị giảm giá
+                    $("#voucher-pic").text(formatNumber(voucherPriceLast));
+                } else {
+                    // Nếu không có voucher nào được chọn
+                    $("#voucher-pic").text('0');
                 }
             }
-
             function calculateTotal() {
                 var total = 0;
 
@@ -819,6 +853,7 @@
                     row.find(".num-product").val(500)
                     return
                 }
+
                 $('#selected-voucher').html('')
                 $('#selected-voucher').attr('data-selected', "")
                 voucherChoosed = null
@@ -828,50 +863,221 @@
                 calculateTotal();
                 updateToServer(row, row.find(".num-product").val())
             });
+            // // voucher từ đây // Hồ Văn Trình
+            // function loadVouchers() {
+            //     var voucherModalBody = $('.modal-body'); // Chọn phần thân modal
+            //     voucherModalBody.empty(); // Xóa nội dung cũ
+            //
+            //     // Duyệt qua danh sách voucher để tạo các phần tử HTML
+            //     voucherList.forEach(function (voucher) {
+            //         var amountDis = voucher.type === 2
+            //             ? `${formatNumber(voucher.discountAmount)} VND`
+            //             : `${voucher.percentage} %`;
+            //
+            //         var html = `
+            // <div data-voucher-id="${voucher.id}" class="d-flex border border-primary rounded align-items-center cursor-pointer voucher-item mb-2">
+            //     <div class="col-sm-3 d-flex justify-content-center align-items-center" style="background-color: rgb(219 234 254); height: 80px">
+            //         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+            //             <path fill="currentColor" d="M12.79 21L3 11.21v2c0 .53.21 1.04.59 1.41l7.79 7.79c.78.78 2.05.78 2.83 0l6.21-6.21c.78-.78.78-2.05 0-2.83L12.79 21z"></path>
+            //             <path fill="currentColor" d="M11.38 17.41c.78.78 2.05.78 2.83 0l6.21-6.21c.78-.78.78-2.05 0-2.83L12.63.58A2.04 2.04 0 0 0 11.21 0H5C3.9 0 3 .9 3 2v6.21c0 .53.21 1.04.59 1.41l7.79 7.79zM7.25 3a1.25 1.25 0 1 1 0 2.5a1.25 1.25 0 0 1 0-2.5z"></path>
+            //         </svg>
+            //     </div>
+            //     <div class="col-sm-9">
+            //         <div class="w-full">
+            //             <p class="font-weight-bold amount-dis">Giảm <span>${amountDis}</span></p>
+            //             <div>
+            //                 <span class="mr-4 amount-mini">${'Cho đơn từ ' + formatNumber(voucher.minimumAmountInCart) + ' VND'}</span>
+            //                 <span class="amount-max">${voucher.type === 1 ? 'Giảm tối đa ' + formatNumber(voucher.maximumAmount) + ' VND' : ''}</span>
+            //             </div>
+            //         </div>
+            //     </div>
+            // </div>`;
+            //
+            //         voucherModalBody.append(html); // Thêm voucher vào modal
+            //     });
+            // }
+            // $(".voucher-item").on('click', function () {
+            //     var voucherId = $(this).attr('data-voucher-id')
+            //     voucherChoosed = voucherList.find(item => item.id == voucherId)
+            //     var amountDis = $(this).find('.amount-dis').text()
+            //     var amountMin = $(this).find('.amount-mini').text()
+            //     var amountMax = $(this).find('.amount-max').text()
+            //
+            //     if (parseFloat(voucherChoosed.minimumAmountInCart) > parseFloat(removeAnyNonDigit($('#sub-total').text()))) {
+            //         Swal.fire({
+            //             title: "Voucher",
+            //             text: "Giá trị đơn hàng không đủ để áp dụng voucher này",
+            //             icon: "error"
+            //         });
+            //         return;
+            //     }
+            //     var html = `<div class="d-flex align-items-center border border-primary rounded" style="width: 300px">
+            //                     <div class="col-sm-3 d-flex justify-content-center align-items-center mr-2" style="background-color: rgb(219 234 254); height: 80px">
+            //                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12.79 21L3 11.21v2c0 .53.21 1.04.59 1.41l7.79 7.79c.78.78 2.05.78 2.83 0l6.21-6.21c.78-.78.78-2.05 0-2.83L12.79 21z"></path><path fill="currentColor" d="M11.38 17.41c.78.78 2.05.78 2.83 0l6.21-6.21c.78-.78.78-2.05 0-2.83L12.63.58A2.04 2.04 0 0 0 11.21 0H5C3.9 0 3 .9 3 2v6.21c0 .53.21 1.04.59 1.41l7.79 7.79zM7.25 3a1.25 1.25 0 1 1 0 2.5a1.25 1.25 0 0 1 0-2.5z"></path></svg>
+            //                     </div>
+            //                     <div>
+            //                         <h5 class="font-weight-bold">${amountDis}</h5>
+            //                         <p>${amountMin}</p>
+            //                         <span>${amountMax}</span>
+            //                     </div>
+            //                     <span id="remove-voucher" class="cursor-pointer ml-5">&times;</span>
+            //                 </div>`
+            //
+            //     $('#selected-voucher').html(html)
+            //     $('#selected-voucher').attr('data-selected', voucherId)
+            //     $("#remove-voucher").on('click', function () {
+            //         $('#selected-voucher').attr('data-selected', "")
+            //         $('#selected-voucher').html('')
+            //         voucherChoosed = null
+            //         calculateVoucherPrice()
+            //         calculateTotal()
+            //     })
+            //
+            //     $('#exampleModalCenter').modal('hide')
+            //
+            //
+            //     calculateVoucherPrice()
+            //     calculateTotal()
+            // })
+            //
+            // $(document).ready(function () {
+            //     // Gọi API để lấy danh sách voucher
+            //     $.ajax({
+            //         type: 'GET',
+            //         url: '/api/private/discount-code-valid', // Địa chỉ API để lấy voucher
+            //         success: function (response) {
+            //             console.log(response); // Kiểm tra dữ liệu nhận được
+            //             if (response && response.content) {
+            //                 voucherList = response.content; // Lấy danh sách mã giảm giá từ thuộc tính content
+            //                 loadVouchers(); // Gọi hàm để hiển thị voucher
+            //             } else {
+            //                 console.error('Dữ liệu không hợp lệ:', response);
+            //                 Swal.fire({
+            //                     icon: 'error',
+            //                     title: 'Lỗi',
+            //                     text: 'Dữ liệu không hợp lệ!'
+            //                 });
+            //             }
+            //         },
+            //         error: function (xhr, status, error) {
+            //             console.error('Error fetching vouchers:', error);
+            //             Swal.fire({
+            //                 icon: 'error',
+            //                 title: 'Lỗi',
+            //                 text: 'Không thể tải danh sách voucher, vui lòng thử lại sau!'
+            //             });
+            //         }
+            //     });
+            // });
+            function loadVouchers() {
+                var voucherModalBody = $('.modal-body'); // Chọn phần thân modal
+                voucherModalBody.empty(); // Xóa nội dung cũ
 
-            $(".voucher-item").on('click', function () {
-                var voucherId = $(this).attr('data-voucher-id')
-                voucherChoosed = voucherList.find(item => item.id == voucherId)
-                var amountDis = $(this).find('.amount-dis').text()
-                var amountMin = $(this).find('.amount-mini').text()
-                var amountMax = $(this).find('.amount-max').text()
-                if (parseFloat(voucherChoosed.minimumAmountInCart) > parseFloat(removeAnyNonDigit($('#sub-total').text()))) {
-                    Swal.fire({
-                        title: "Voucher",
-                        text: "Giá trị đơn hàng không đủ để áp dụng voucher này",
-                        icon: "error"
+                // Duyệt qua danh sách voucher để tạo các phần tử HTML
+                voucherList.forEach(function (voucher) {
+                    var amountDis = voucher.type === 2
+                        ? `${formatNumber(voucher.discountAmount)} VND`
+                        : `${voucher.percentage} %`;
+
+                    var html = `
+            <div data-voucher-id="${voucher.id}" class="d-flex border border-primary rounded align-items-center cursor-pointer voucher-item mb-2">
+                <div class="col-sm-3 d-flex justify-content-center align-items-center" style="background-color: rgb(219 234 254); height: 80px">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M12.79 21L3 11.21v2c0 .53.21 1.04.59 1.41l7.79 7.79c.78.78 2.05.78 2.83 0l6.21-6.21c.78-.78.78-2.05 0-2.83L12.79 21z"></path>
+                        <path fill="currentColor" d="M11.38 17.41c.78.78 2.05.78 2.83 0l6.21-6.21c.78-.78.78-2.05 0-2.83L12.63.58A2.04 2.04 0 0 0 11.21 0H5C3.9 0 3 .9 3 2v6.21c0 .53.21 1.04.59 1.41l7.79 7.79zM7.25 3a1.25 1.25 0 1 1 0 2.5a1.25 1.25 0 0 1 0-2.5z"></path>
+                    </svg>
+                </div>
+                <div class="col-sm-9">
+                    <div class="w-full">
+                        <p class="font-weight-bold amount-dis">Giảm <span>${amountDis}</span></p>
+                        <div>
+                            <span class="mr-4 amount-mini">${'Cho đơn từ ' + formatNumber(voucher.minimumAmountInCart) + ' VND'}</span>
+                            <span class="amount-max">${voucher.type === 1 ? 'Giảm tối đa ' + formatNumber(voucher.maximumAmount) + ' VND' : ''}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>`;
+
+                    voucherModalBody.append(html); // Thêm voucher vào modal
+                });
+
+                // Gán sự kiện click cho các phần tử voucher-item
+                $(".voucher-item").on('click', function () {
+                    var voucherId = $(this).data('voucher-id');
+                    voucherChoosed = voucherList.find(item => item.id == voucherId);
+                    var amountDis = $(this).find('.amount-dis').text();
+                    var amountMin = $(this).find('.amount-mini').text();
+                    var amountMax = $(this).find('.amount-max').text();
+
+                    if (parseFloat(voucherChoosed.minimumAmountInCart) > parseFloat(removeAnyNonDigit($('#sub-total').text()))) {
+                        Swal.fire({
+                            title: "Voucher",
+                            text: "Giá trị đơn hàng không đủ để áp dụng voucher này",
+                            icon: "error"
+                        });
+                        return;
+                    }
+
+                    var html = `<div class="d-flex align-items-center border border-primary rounded" style="width: 300px">
+                        <div class="col-sm-3 d-flex justify-content-center align-items-center mr-2" style="background-color: rgb(219 234 254); height: 80px">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12.79 21L3 11.21v2c0 .53.21 1.04.59 1.41l7.79 7.79c.78.78 2.05.78 2.83 0l6.21-6.21c.78-.78.78-2.05 0-2.83L12.79 21z"></path><path fill="currentColor" d="M11.38 17.41c.78.78 2.05.78 2.83 0l6.21-6.21c.78-.78.78-2.05 0-2.83L12.63.58A2.04 2.04 0 0 0 11.21 0H5C3.9 0 3 .9 3 2v6.21c0 .53.21 1.04.59 1.41l7.79 7.79zM7.25 3a1.25 1.25 0 1 1 0 2.5a1.25 1.25 0 0 1 0-2.5z"></path></svg>
+                        </div>
+                        <div>
+                            <h5 class="font-weight-bold">${amountDis}</h5>
+                            <p>${amountMin}</p>
+                            <span>${amountMax}</span>
+                        </div>
+                        <span id="remove-voucher" class="cursor-pointer ml-5">&times;</span>
+                    </div>`;
+
+                    $('#selected-voucher').html(html);
+                    $('#selected-voucher').attr('data-selected', voucherId);
+
+                    // Gán sự kiện xóa voucher
+                    $("#remove-voucher").on('click', function () {
+                        $('#selected-voucher').attr('data-selected', "");
+                        $('#selected-voucher').html('<p>Chưa chọn mã giảm giá</p>');
+                        voucherChoosed = null;
+                        calculateVoucherPrice();
+                        calculateTotal();
                     });
-                    return;
-                }
-                var html = `<div class="d-flex align-items-center border border-primary rounded" style="width: 300px">
-                                <div class="col-sm-3 d-flex justify-content-center align-items-center mr-2" style="background-color: rgb(219 234 254); height: 80px">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12.79 21L3 11.21v2c0 .53.21 1.04.59 1.41l7.79 7.79c.78.78 2.05.78 2.83 0l6.21-6.21c.78-.78.78-2.05 0-2.83L12.79 21z"></path><path fill="currentColor" d="M11.38 17.41c.78.78 2.05.78 2.83 0l6.21-6.21c.78-.78.78-2.05 0-2.83L12.63.58A2.04 2.04 0 0 0 11.21 0H5C3.9 0 3 .9 3 2v6.21c0 .53.21 1.04.59 1.41l7.79 7.79zM7.25 3a1.25 1.25 0 1 1 0 2.5a1.25 1.25 0 0 1 0-2.5z"></path></svg>
-                                </div>
-                                <div>
-                                    <h5 class="font-weight-bold">${amountDis}</h5>
-                                    <p>${amountMin}</p>
-                                    <span>${amountMax}</span>
-                                </div>
-                                <span id="remove-voucher" class="cursor-pointer ml-5">&times;</span>
-                            </div>`
 
-                $('#selected-voucher').html(html)
-                $('#selected-voucher').attr('data-selected', voucherId)
-                $("#remove-voucher").on('click', function () {
-                    $('#selected-voucher').attr('data-selected', "")
-                    $('#selected-voucher').html('')
-                    voucherChoosed = null
-                    calculateVoucherPrice()
-                    calculateTotal()
-                })
+                    $('#exampleModalCenter').modal('hide');
 
-                $('#exampleModalCenter').modal('hide')
+                    calculateVoucherPrice();
+                    calculateTotal();
+                });
+            }
 
-
-                calculateVoucherPrice()
-                calculateTotal()
-            })
-
+            $(document).ready(function () {
+                // Gọi API để lấy danh sách voucher
+                $.ajax({
+                    type: 'GET',
+                    url: '/api/private/discount-code-valid', // Địa chỉ API để lấy voucher
+                    success: function (response) {
+                        console.log(response); // Kiểm tra dữ liệu nhận được
+                        if (response && response.content) {
+                            voucherList = response.content; // Lấy danh sách mã giảm giá từ thuộc tính content
+                            loadVouchers(); // Gọi hàm để hiển thị voucher
+                        } else {
+                            console.error('Dữ liệu không hợp lệ:', response);
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Lỗi',
+                                text: 'Dữ liệu không hợp lệ!'
+                            });
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Error fetching vouchers:', error);
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Lỗi',
+                            text: 'Không thể tải danh sách voucher, vui lòng thử lại sau!'
+                        });
+                    }
+                });
+            });
             var checkbox = $('#term');
             var submitBtn = $('#submitBtn');
 
