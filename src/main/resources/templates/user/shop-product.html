@@ -26,15 +26,15 @@
                         Nam
                     </a>
 
-                    <a href="/product?gender=2" th:classappend="${dataFilter.gender == '2'} ? 'how-active1'"
-                       class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5">
-                        Nữ
-                    </a>
+<!--                    <a href="/product?gender=2" th:classappend="${dataFilter.gender == '2'} ? 'how-active1'"-->
+<!--                       class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5">-->
+<!--                        Nữ-->
+<!--                    </a>-->
 
-                    <a href="/product?gender=3" th:classappend="${dataFilter.gender == '3'} ? 'how-active1'"
-                       class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5">
-                        Unisex
-                    </a>
+<!--                    <a href="/product?gender=3" th:classappend="${dataFilter.gender == '3'} ? 'how-active1'"-->
+<!--                       class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5">-->
+<!--                        Unisex-->
+<!--                    </a>-->
 
                 </div>
 
@@ -169,25 +169,19 @@
             <div class="row isotope-grid">
                 <div class="col-sm-6 col-md-3 col-lg-2 p-b-35 isotope-item women" th:each="product: ${products}">
                     <!-- Block2 -->
-<!--                    <div class="block2" style="position: relative">-->
-<!--                        <div class="ribbon" th:if="${product.discounted}">-->
-<!--                            <span class="ribbon1"><span>Sale</span></span>-->
-<!--                        </div>-->
                     <div class="block2" style="position: relative">
                         <div class="ribbon" th:if="${product.discounted}">
-                            <span class="ribbon1"><span>Limited Time Offer!</span></span>
+                            <span class="ribbon1"><span>Sale</span></span>
                         </div>
-                        <!-- Your product content goes here -->
-                    </div>
-                    <div class="block2-pic hov-img0" style="height: 250px">
-
+                        <div class="block2-pic hov-img0" style="height: 250px">
+                            <!--                            <img th:src="${product.image.get(0).link}" alt="IMG-PRODUCT" style="height: 100%">-->
                             <img th:src="${product.imageUrl}" alt="IMG-PRODUCT" style="height: 100%; width: 100%">
-
                             <a th:href="@{'/product-detail/' + ${product.code}}"
                                class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 " th:data-product-id="${product.id}">
                                 Chi tiết
                             </a>
                         </div>
+
                         <div class="block2-txt flex-w flex-t p-t-14">
                             <div class="block2-txt-child1 flex-col-l ">
                                 <a th:href="@{'/product-detail/' + ${product.code}}" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6" th:text="${product.name}">
@@ -280,88 +274,168 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" th:inline="javascript"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10" th:inline="javascript"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script th:inline="javascript">
-        var urlCurr = /*[[${url}]]*/ 'abc';
-        $('.category-item-filter').on('click', function () {
-            if($(this).hasClass('category-item-filter-active')) {
-                $(this).removeClass('category-item-filter-active')
-            }else {
-                $(this).addClass('category-item-filter-active')
+<script th:inline="javascript">
+    var urlCurr = /*[[${url}]]*/ 'abc';
+    $('.category-item-filter').on('click', function () {
+        if($(this).hasClass('category-item-filter-active')) {
+            $(this).removeClass('category-item-filter-active')
+        }else {
+            $(this).addClass('category-item-filter-active')
 
-            }
-        })
+        }
+    })
 
-        $('.filter-order-buy').find('.filter-link').on('click', function (e) {
-            $('.filter-order-buy').find('.filter-link').removeClass('filter-link-active')
-            $(this).addClass('filter-link-active')
-        })
+    $('.filter-order-buy').find('.filter-link').on('click', function (e) {
+        $('.filter-order-buy').find('.filter-link').removeClass('filter-link-active')
+        $(this).addClass('filter-link-active')
+    })
 
-        $('.filter-price').find('.filter-link').on('click', function (e) {
-            $('.filter-price').find('.filter-link').removeClass('filter-link-active')
-            $(this).addClass('filter-link-active')
-        })
+    $('.filter-price').find('.filter-link').on('click', function (e) {
+        $('.filter-price').find('.filter-link').removeClass('filter-link-active')
+        $(this).addClass('filter-link-active')
+    })
 
 
-        // Hiển thị giá trị mặc định
-        $("#min-price").val("$" + $("#price-slider").slider("values", 0));
-        $("#max-price").val("$" + $("#price-slider").slider("values", 1));
+    // Hiển thị giá trị mặc định
+    $("#min-price").val("$" + $("#price-slider").slider("values", 0));
+    $("#max-price").val("$" + $("#price-slider").slider("values", 1));
 
-        $('#filter-btn').on('click', function () {
-            var orderBy = $(".filter-order-buy").find('.filter-link-active').attr('data-sort')
-            var dataMinPrice = $(".filter-price").find('.filter-link-active').attr('data-min-price')
-            var dataMaxPrice = $(".filter-price").find('.filter-link-active').attr('data-max-price')
+    $('#filter-btn').on('click', function () {
+        var orderBy = $(".filter-order-buy").find('.filter-link-active').attr('data-sort')
+        var dataMinPrice = $(".filter-price").find('.filter-link-active').attr('data-min-price')
+        var dataMaxPrice = $(".filter-price").find('.filter-link-active').attr('data-max-price')
 
-            var dataCategoryEl = $('.category-item-filter-active')
-            var categoryIds = []
-            if(dataCategoryEl.length > 0) {
-                dataCategoryEl.each(function() {
-                    var dataCate = $(this); // Sử dụng $(this) thay vì $(item)
-                    var id = dataCate.attr('data-category');
-                    categoryIds.push(id);
-                });
-            }
+        var dataCategoryEl = $('.category-item-filter-active')
+        var categoryIds = []
+        if(dataCategoryEl.length > 0) {
+            dataCategoryEl.each(function() {
+                var dataCate = $(this); // Sử dụng $(this) thay vì $(item)
+                var id = dataCate.attr('data-category');
+                categoryIds.push(id);
+            });
+        }
+        let urlSearchPram=new URLSearchParams(location.search);
+        if(orderBy) {
+            urlSearchPram.set('sort',orderBy)
+        }
+        if(dataMinPrice) {
+            urlSearchPram.set('minPrice',dataMinPrice)
+        }
+        if(dataMaxPrice) {
+            urlSearchPram.set('maxPrice',dataMaxPrice)
+        }
+
+        if(categoryIds.length > 1) {
+            urlSearchPram.set('barndId',categoryIds.join(','))
+        }
+
+        if(categoryIds.length == 1) {
+            urlSearchPram.set('brandId',categoryIds[0])
+        }
+        debugger
+        window.location.href = "?"+urlSearchPram.toString()
+    })
+    $('#search-btn').on('click', function () {
+        if($("#search-product-input").val()) {
             let urlSearchPram=new URLSearchParams(location.search);
-            if(orderBy) {
-                urlSearchPram.set('sort',orderBy)
-            }
-            if(dataMinPrice) {
-                urlSearchPram.set('minPrice',dataMinPrice)
-            }
-            if(dataMaxPrice) {
-                urlSearchPram.set('maxPrice',dataMaxPrice)
-            }
+            urlSearchPram.set('keyword',$("#search-product-input").val())
+            window.location.href = "?"+urlSearchPram.toString();
+        }
+    })
 
-            if(categoryIds.length > 1) {
-                urlSearchPram.set('barndId',categoryIds.join(','))
-            }
+    $('.filter-gender').on('click', function () {
+        let newURL = urlCurr.replace(/&gender=[^&]/, '');
 
-            if(categoryIds.length == 1) {
-                urlSearchPram.set('brandId',categoryIds[0])
-            }
-            debugger
-            window.location.href = "?"+urlSearchPram.toString()
-        })
-        $('#search-btn').on('click', function () {
-            if($("#search-product-input").val()) {
-                let urlSearchPram=new URLSearchParams(location.search);
-                urlSearchPram.set('keyword',$("#search-product-input").val())
-                window.location.href = "?"+urlSearchPram.toString();
-            }
-        })
+        var dataGenderEl = $(".filter-gender").find('button.how-active1').attr('data-filter')
+        if(dataGenderEl) {
+            newURL += '&gender=' + dataGenderEl
+        }
+        window.location.href = '?page=0' + newURL
+    })
+</script>
+<!--    <script th:inline="javascript">-->
+<!--        var urlCurr = /*[[${url}]]*/ 'abc';-->
+<!--        $('.category-item-filter').on('click', function () {-->
+<!--            if($(this).hasClass('category-item-filter-active')) {-->
+<!--                $(this).removeClass('category-item-filter-active')-->
+<!--            }else {-->
+<!--                $(this).addClass('category-item-filter-active')-->
 
-        $('.filter-gender').on('click', function () {
-            let newURL = urlCurr.replace(/&gender=[^&]/, '');
+<!--            }-->
+<!--        })-->
 
-            var dataGenderEl = $(".filter-gender").find('button.how-active1').attr('data-filter')
-            if(dataGenderEl) {
-                newURL += '&gender=' + dataGenderEl
-            }
-            window.location.href = '?page=0' + newURL
-        })
-    </script>
+<!--        $('.filter-order-buy').find('.filter-link').on('click', function (e) {-->
+<!--            $('.filter-order-buy').find('.filter-link').removeClass('filter-link-active')-->
+<!--            $(this).addClass('filter-link-active')-->
+<!--        })-->
+
+<!--        $('.filter-price').find('.filter-link').on('click', function (e) {-->
+<!--            $('.filter-price').find('.filter-link').removeClass('filter-link-active')-->
+<!--            $(this).addClass('filter-link-active')-->
+<!--        })-->
+
+
+<!--        // Hiển thị giá trị mặc định-->
+<!--        $("#min-price").val("$" + $("#price-slider").slider("values", 0));-->
+<!--        $("#max-price").val("$" + $("#price-slider").slider("values", 1));-->
+
+<!--        $('#filter-btn').on('click', function () {-->
+<!--            var orderBy = $(".filter-order-buy").find('.filter-link-active').attr('data-sort')-->
+<!--            var dataMinPrice = $(".filter-price").find('.filter-link-active').attr('data-min-price')-->
+<!--            var dataMaxPrice = $(".filter-price").find('.filter-link-active').attr('data-max-price')-->
+
+<!--            var dataCategoryEl = $('.category-item-filter-active')-->
+<!--            var categoryIds = []-->
+<!--            if(dataCategoryEl.length > 0) {-->
+<!--                dataCategoryEl.each(function() {-->
+<!--                    var dataCate = $(this); // Sử dụng $(this) thay vì $(item)-->
+<!--                    var id = dataCate.attr('data-category');-->
+<!--                    categoryIds.push(id);-->
+<!--                });-->
+<!--            }-->
+<!--            let urlSearchPram=new URLSearchParams(location.search);-->
+<!--            if(orderBy) {-->
+<!--                urlSearchPram.set('sort',orderBy)-->
+<!--            }-->
+<!--            if(dataMinPrice) {-->
+<!--                urlSearchPram.set('minPrice',dataMinPrice)-->
+<!--            }-->
+<!--            if(dataMaxPrice) {-->
+<!--                urlSearchPram.set('maxPrice',dataMaxPrice)-->
+<!--            }-->
+
+<!--            if(categoryIds.length > 1) {-->
+<!--                urlSearchPram.set('barndId',categoryIds.join(','))-->
+<!--            }-->
+
+<!--            if(categoryIds.length == 1) {-->
+<!--                urlSearchPram.set('brandId',categoryIds[0])-->
+<!--            }-->
+<!--            debugger-->
+<!--            window.location.href = "?"+urlSearchPram.toString()-->
+<!--        })-->
+<!--        $('#search-btn').on('click', function () {-->
+<!--            if($("#search-product-input").val()) {-->
+<!--                let urlSearchPram=new URLSearchParams(location.search);-->
+<!--                urlSearchPram.set('keyword',$("#search-product-input").val())-->
+<!--                window.location.href = "?"+urlSearchPram.toString();-->
+<!--            }-->
+<!--        })-->
+
+<!--        $('.filter-gender').on('click', function () {-->
+<!--            let newURL = urlCurr.replace(/&gender=[^&]/, '');-->
+
+<!--            var dataGenderEl = $(".filter-gender").find('button.how-active1').attr('data-filter')-->
+<!--            if(dataGenderEl) {-->
+<!--                newURL += '&gender=' + dataGenderEl-->
+<!--            }-->
+<!--            window.location.href = '?page=0' + newURL-->
+<!--        })-->
+<!--    </script>-->
 
 
 </div>
 
 </body>
 </html>
+
