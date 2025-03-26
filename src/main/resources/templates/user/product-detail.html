@@ -38,9 +38,263 @@
 </head>
 <body>
 <div layout:fragment="content">
+    <style>
+        body{
+            font-family: Arial;
+            box-sizing: border-box;
+            margin: auto;
+        }
+        /*container*/
+        .custom-container {
+            border: 2px solid #007bff; /* Thêm viền màu xanh dương */
+            border-radius: 10px; /* Làm bo góc viền */
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef); /* Tạo hiệu ứng màu nền chuyển sắc */
+            padding: 20px; /* Thêm khoảng cách bên trong container */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Hiệu ứng bóng mờ cho container */
+            transition: all 0.3s ease-in-out; /* Hiệu ứng mượt khi hover */
+        }
+
+        .custom-container:hover {
+            background: linear-gradient(135deg, #e9ecef, #f1f1f1); /* Đổi màu nền khi hover */
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Tăng bóng mờ khi hover */
+            transform: scale(1.02); /* Phóng to nhẹ container khi hover */
+        }
+        /*tên sản phẩm*/
+        h1.mtext-105.custom-proName.cl2.js-name-detail {
+            text-align: center; /* Căn giữa chữ */
+            color: red; /* Màu chữ mặc định */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Hiệu ứng bóng chữ */
+            transition: color 0.3s ease, text-shadow 0.3s ease; /* Hiệu ứng mượt khi hover */
+        }
+
+        /* Hiệu ứng hover cho chữ */
+        h1.mtext-105.custom-proName.cl2.js-name-detail:hover {
+            color: #007bff; /* Đổi màu chữ sang xanh dương khi hover */
+            text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.4); /* Tăng bóng chữ khi hover */
+        }
+        /*    thông tin sản phẩm*/
+        /* Giá sản phẩm */
+        .mtext-106.custom-price {
+            font-size: 24px; /* Tăng kích thước chữ */
+            color: #e74c3c; /* Đổi màu chữ sang đỏ */
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Bóng chữ nhẹ */
+            background-color: #fff9c4; /* Highlight nền (vàng nhạt) */
+            padding: 5px 10px; /* Tạo khoảng cách trong highlight */
+            border-radius: 4px; /* Bo tròn góc highlight */
+            transition: color 0.3s ease, background-color 0.3s ease; /* Hiệu ứng chuyển đổi mượt */
+        }
+
+        .mtext-106.custom-price:hover {
+            color: #c0392b; /* Màu đỏ đậm hơn khi hover */
+            background-color: #ffe082; /* Highlight đậm hơn khi hover */
+            text-shadow: 3px 3px 7px rgba(0, 0, 0, 0.3); /* Tăng bóng chữ khi hover */
+        }
+
+        /* Nhãn hiệu */
+        .custom-brand {
+            font-size: 20px; /* Kích thước chữ */
+            color: #3498db; /* Màu xanh dương */
+            font-weight: bold; /* Chữ đậm */
+            text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2); /* Bóng chữ nhẹ */
+            transition: color 0.3s ease; /* Hiệu ứng mượt khi hover */
+        }
+
+        .custom-brand:hover {
+            color: #2980b9; /* Màu xanh dương đậm khi hover */
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4); /* Tăng bóng chữ khi hover */
+        }
+
+        /* Chất liệu */
+        .custom-material {
+            font-size: 18px; /* Kích thước chữ vừa phải */
+            color: #2ecc71; /* Màu xanh lá cây */
+            font-weight: bold; /* Chữ đậm */
+            transition: color 0.3s ease, text-shadow 0.3s ease; /* Hiệu ứng mượt khi hover */
+        }
+
+        .custom-material:hover {
+            color: #27ae60; /* Màu xanh lá cây đậm khi hover */
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3); /* Tăng bóng chữ khi hover */
+        }
+
+        /* Mô tả sản phẩm */
+        .stext-102.cl2.p-t-23 {
+            font-size: 16px; /* Kích thước chữ */
+            color: #555; /* Màu chữ xám đậm */
+            line-height: 1.5; /* Tăng khoảng cách dòng cho dễ đọc */
+            transition: color 0.3s ease, text-shadow 0.3s ease; /* Hiệu ứng mượt */
+        }
+
+        .stext-102.cl2.p-t-23:hover {
+            color: #222; /* Màu xám rất đậm khi hover */
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3); /* Bóng chữ khi hover */
+        }
+
+        /*    keyframe*/
+        /* Hiệu ứng mờ dần (fade-in) */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Hiệu ứng trượt từ bên trái (slide-in-left) */
+        @keyframes slideInLeft {
+            from {
+                transform: translateX(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        /* Hiệu ứng hover (nổi bật) */
+        @keyframes hoverEffect {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* Áp dụng cho các thành phần */
+        .row {
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        .col-md-6, .col-lg-7 {
+            animation: slideInLeft 1s ease-in-out;
+        }
+
+        /* Thêm hiệu ứng hover cho nút */
+        button {
+            animation: fadeIn 1.5s ease-in-out;
+            transition: transform 0.3s ease;
+        }
+
+        button:hover {
+            animation: hoverEffect 0.6s ease-in-out infinite;
+            background-color: #007bff;
+            color: white;
+        }
+
+        /* Hiệu ứng cho tiêu đề */
+        h1.mtext-105 {
+            animation: fadeIn 1.2s ease-in-out;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Hiệu ứng cho hình ảnh */
+        img {
+            animation: fadeIn 1.5s ease-in-out;
+            transition: transform 0.3s ease;
+        }
+
+        img:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        /*hiệu ứng bong bóng các kiểu*/
+
+        /* Hiệu ứng highlight cho chữ */
+        @keyframes highlightEffect {
+            0% {
+                background-color: transparent;
+                color: #000;
+            }
+            50% {
+                background-color: #ffeb3b;
+                color: #333;
+            }
+            100% {
+                background-color: transparent;
+                color: #000;
+            }
+        }
+
+        /* Hiệu ứng border chữ phát sáng */
+        @keyframes glowingBorder {
+            0% {
+                text-shadow: 0 0 5px #fff, 0 0 10px #ff8c00, 0 0 15px #ff8c00;
+            }
+            50% {
+                text-shadow: 0 0 10px #fff, 0 0 20px #ffa500, 0 0 30px #ffa500;
+            }
+            100% {
+                text-shadow: 0 0 5px #fff, 0 0 10px #ff8c00, 0 0 15px #ff8c00;
+            }
+        }
+
+        /* Áp dụng hiệu ứng cho các phần tử */
+        .row {
+            animation: bubbleEffect 3s ease-in-out infinite;
+        }
+
+        h1.mtext-105 {
+            animation: highlightEffect 2s ease-in-out infinite, glowingBorder 2s ease-in-out infinite;
+            border: 2px solid #ffa500;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        button {
+            animation: bubbleEffect 2s ease-in-out infinite;
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* Hiệu ứng hover nút */
+        button:hover {
+            background-color: #ff8c00;
+            color: #fff;
+            transform: scale(1.1);
+        }
+
+        /* Hiệu ứng bong bóng cho hình ảnh */
+        img {
+            animation: bubbleEffect 5s ease-in-out infinite;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        img:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Highlight khi hover lên giá sản phẩm */
+        .mtext-106.custom-price {
+            animation: highlightEffect 3s ease-in-out infinite;
+            font-weight: bold;
+        }
+        /*    animation cho dropdown*/
+
+        /* Style cho chữ "Kích cỡ" và "Màu sắc" */
+        .size-203, .size-204 {
+            font-size: 14px;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        /* Hover đổi màu chữ */
+        .size-203:hover, .size-204:hover {
+            color: #ff6f61;
+            cursor: pointer;
+        }
+
+    </style>
     <div id="loading-overlay">
         <div class="loading-spinner"></div>
     </div>
+    <!--menu-->
     <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true" style="z-index: 99999">
         <div class="modal-dialog" role="document">
@@ -63,12 +317,12 @@
         </div>
     </div>
     <!-- Product Detail -->
-    <section class="sec-product-detail bg0 p-t-65 p-b-60">
-        <div class="container">
+    <section class="sec-product-detail bg0 p-t-65 p-b-65">
+        <div class="container custom-container">
             <div class="row">
                 <div class="col-md-6 col-lg-7 p-b-30">
                     <div class="p-l-25 p-r-30 p-lr-0-lg">
-                        <div class="wrap-slick3 flex-sb flex-w">
+                        <div class="wrap-slick3  flex-sb flex-w">
                             <div class="wrap-slick3-dots"></div>
                             <div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
 
@@ -77,7 +331,7 @@
                                     <div class="item-slick3" th:data-thumb="'/' + ${image.link}">
                                         <div class="wrap-pic-w pos-relative">
                                             <img th:src="@{'/' + ${image.link}}" alt="IMG-PRODUCT"/>
-                                            <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
+                                            <a class="custom-img flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
                                                th:href="@{'/' + ${image.link}}">
                                                 <i class="fa fa-expand"></i>
                                             </a>
@@ -91,686 +345,490 @@
 
                 <div class="col-md-6 col-lg-5 p-b-30">
                     <div class="p-r-50 p-t-5 p-lr-0-lg">
-                        <h4 class="mtext-105 cl2 js-name-detail p-b-14" th:text="${product.name}">
-                        </h4>
+                        <h1 class="mtext-105 custom-proName cl2 js-name-detail p-b-14" th:text="${product.name}">
+                        </h1>
 
-                        <span class="mtext-106 cl2" id="price_product"
-                              th:text="${#numbers.formatDecimal(product.productDetails[0].price, 0, 'POINT', 0, 'COMMA') + ' đ'}">
+                        <hr>
 
-						</span>
-                        </span>
+                        <span>Giá: <span class="mtext-106 custom-price" id="price_product"
+                                         th:text="${#numbers.formatDecimal(product.productDetails[0].price, 0, 'POINT', 0, 'COMMA') + ' đ'}">
+						</span></span>
 
-                        <p class="stext-102 cl3 p-t-23" th:text="${product.describe}">
-                            Một kết hợp từ sự thoải mái cùng độ ấm áp trong thiết kế cổ lọ.
-                        </p>
+                        <hr>
 
-                        <p class="stext-102 cl3 p-t-23">
-                            <span><i class="fa fa-copyright"></i></span>&nbsp;Nhãn hiệu: <span class="font-weight-bold"
-                                                                                               th:text="${product.brand.name}"></span>
-                            <br>
-
-                            <span><i class="fa fa-puzzle-piece"></i></span>&nbsp;Chất liệu: <span
-                                class="font-weight-bold" th:text="${product.material.name}"></span> <br>
-                        </p>
-
+                        <span>Nhãn hiệu: </span><span class="font-weight-bold custom-brand" th:text="${product.brand.name}"></span>
+                        <hr>
+                        <span>Chất liệu: </span><span
+                            class="font-weight-bold custom-material" th:text="${product.material.name}"></span>
+                        <hr>
                         <!--  -->
-                        <div class="p-t-33">
-                            <div class="flex-w flex-r-m p-b-10">
-                                <div class="size-203 respon6">
-                                    Kích cỡ
-                                </div>
-                                <div class="size-204 respon6-next">
-                                    <div class="rs1-select2 bor8 bg0">
-                                        <select class="js-select2" name="size" id="sizeSelect">
-                                            <!--                                            <option th:value="0">Choose a size</option>-->
-                                            <!--                                            <th:block th:each="size : ${listSizes}">-->
-                                            <!--                                                <option th:value="${size.id}" th:text="${size.name}"></option>-->
-                                            <!--                                            </th:block>-->
-                                        </select>
-                                        <div class="dropDownSelect2"></div>
-                                    </div>
+                        <span>Mô tả: </span><span class="stext-102 cl2 p-t-23" th:text="${product.describe}">
+                        </span>
+                        <hr>
+                        <div class="flex-w flex-r-m ">
+                            <div class="size-203 respon6">
+                                Kích cỡ:
+                            </div>
+                            <div class="size-204 respon6-next">
+                                <div class="rs1-select2 bor8 bg0" style=" width: 150px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);">
+                                    <select class="js-select2" name="size" id="sizeSelect">
+
+                                    </select>
+                                    <div class="dropDownSelect2"></div>
                                 </div>
                             </div>
-
-                            <div class="flex-w flex-r-m p-b-10">
-                                <div class="size-203 respon6">
-                                    Màu sắc
-                                </div>
-
-                                <div class="size-204 respon6-next">
-                                    <div class="rs1-select2 bor8 bg0">
-                                        <select class="js-select2" name="time" id="colorSelect">
-                                            <!--                                            <option th:value="0">Choose a color</option>-->
-                                            <!--                                            <th:block th:each="color : ${listColors}">-->
-                                            <!--                                                <option th:value="${color.id}" th:text="${color.name}"></option>-->
-                                            <!--                                            </th:block>-->
-                                        </select>
-                                        <div class="dropDownSelect2"></div>
-                                    </div>
-                                </div>
+                        </div>
+                        <hr>
+                        <div class="flex-w flex-r-m ">
+                            <div class="size-203 respon6">
+                                Màu sắc:
                             </div>
-                            <input type="hidden" name="productDetailId" , id="productDetailId">
-                            <div class="flex-w flex-r-m p-b-10">
-                                <div class="size-204 flex-w flex-m respon6-next">
-                                    <div class="wrap-num-product flex-w m-r-20 m-tb-10">
-                                        <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
-                                            <i class="fs-16 zmdi zmdi-minus"></i>
-                                        </div>
+                            <div class="size-204 respon6-next">
+                                <div class="rs1-select2 bor8 bg0" style=" width: 150px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);">
+                                    <select class="js-select2" name="color" id="colorSelect">
 
-                                        <input class="mtext-104 cl3 txt-center num-product" type="number"
-                                               name="num-product" value="1">
-
-                                        <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
-                                            <i class="fs-16 zmdi zmdi-plus"></i>
-                                        </div>
-                                    </div>
-                                    <span class="remaning-product" style="font-size: 12px"></span>
-                                    <div class="d-flex justify-content-between mt-10">
-                                        <button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-buynow-detail mr-3">
-                                           Mua ngay
-                                        </button>
-                                        <button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
-                                          Thêm vào giỏ
-                                        </button>
-
-                                    </div>
+                                    </select>
+                                    <div class="dropDownSelect2"></div>
                                 </div>
                             </div>
                         </div>
 
-                        <!--  -->
-<!--                        <div class="flex-w flex-m p-l-100 p-t-40 respon7">-->
-<!--                            <div class="flex-m bor9 p-r-10 m-r-11">-->
-<!--                                <a href="#"-->
-<!--                                   class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100"-->
-<!--                                   data-tooltip="Add to Wishlist">-->
-<!--                                    <i class="zmdi zmdi-favorite"></i>-->
-<!--                                </a>-->
-<!--                            </div>-->
+                        <input type="hidden" name="productDetailId" , id="productDetailId">
+                        <div class="flex-w flex-r-m ">
+                            <div class="size-204 flex-w flex-m respon6-next">
 
-<!--                            <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"-->
-<!--                               data-tooltip="Facebook">-->
-<!--                                <i class="fa fa-facebook"></i>-->
-<!--                            </a>-->
+                                <div class="wrap-num-product flex-w m-r-20 m-tb-10">
+                                    <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
+                                        <i class="fs-16 zmdi zmdi-minus"></i>
+                                    </div>
 
-<!--                            <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"-->
-<!--                               data-tooltip="Twitter">-->
-<!--                                <i class="fa fa-twitter"></i>-->
-<!--                            </a>-->
+                                    <input class="mtext-104 cl3 txt-center num-product" type="number"
+                                           name="num-product" value="1">
 
-<!--                            <a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"-->
-<!--                               data-tooltip="Google Plus">-->
-<!--                                <i class="fa fa-google-plus"></i>-->
-<!--                            </a>-->
-<!--                        </div>-->
+                                    <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
+                                        <i class="fs-16 zmdi zmdi-plus"></i>
+                                    </div>
+
+                                </div>
+                                <span class="remaning-product" style="font-size: 14px"></span>
+                                <div class="d-flex justify-content-between mt-10">
+                                    <button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-buynow-detail mr-3">
+                                        Mua ngay
+                                    </button>
+                                    <button class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+                                        Thêm vào giỏ
+                                    </button>
+                                    <!--                                    <button class="btn btn-danger">Mua Ngay</button>-->
+                                    <!--                                    <button class="btn btn-success">Thêm Vào Giỏ</button>-->
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="btn-back-to-top" id="myBtn">
+
+        </div>
+        <div class="btn-back-to-top" id="myBtn">
 		<span class="symbol-btn-back-to-top">
 			<i class="zmdi zmdi-chevron-up"></i>
 		</span>
-            </div>
-
-            <!-- Modal1 -->
-            <div class="wrap-modal1 js-modal1 p-t-60 p-b-20">
-                <div class="overlay-modal1 js-hide-modal1"></div>
-
-                <div class="container">
-                    <div class="bg0 p-t-60 p-b-30 p-lr-15-lg how-pos3-parent">
-                        <button class="how-pos3 hov3 trans-04 js-hide-modal1">
-                            <img src="images/icons/icon-close.png" alt="CLOSE">
-                        </button>
-
-                        <div class="row">
-                            <div class="col-md-6 col-lg-7 p-b-30">
-                                <div class="p-l-25 p-r-30 p-lr-0-lg">
-                                    <div class="wrap-slick3 flex-sb flex-w">
-                                        <div class="wrap-slick3-dots"></div>
-                                        <div class="wrap-slick3-arrows flex-sb-m flex-w"></div>
-
-                                        <div class="slick3 gallery-lb">
-                                            <div class="item-slick3" data-thumb="images/product-detail-01.jpg">
-                                                <div class="wrap-pic-w pos-relative">
-                                                    <img src="images/product-detail-01.jpg" alt="IMG-PRODUCT">
-
-                                                    <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
-                                                       href="images/product-detail-01.jpg">
-                                                        <i class="fa fa-expand"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-
-                                            <div class="item-slick3" data-thumb="images/product-detail-02.jpg">
-                                                <div class="wrap-pic-w pos-relative">
-                                                    <img src="images/product-detail-02.jpg" alt="IMG-PRODUCT">
-
-                                                    <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
-                                                       href="images/product-detail-02.jpg">
-                                                        <i class="fa fa-expand"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-
-                                            <div class="item-slick3" data-thumb="images/product-detail-03.jpg">
-                                                <div class="wrap-pic-w pos-relative">
-                                                    <img src="images/product-detail-03.jpg" alt="IMG-PRODUCT">
-
-                                                    <a class="flex-c-m size-108 how-pos1 bor0 fs-16 cl10 bg0 hov-btn3 trans-04"
-                                                       href="images/product-detail-03.jpg">
-                                                        <i class="fa fa-expand"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6 col-lg-5 p-b-30">
-                                <div class="p-r-50 p-t-5 p-lr-0-lg">
-                                    <h4 class="mtext-105 cl2 js-name-detail p-b-14">
-
-                                    </h4>
-
-                                    <span class="mtext-106 cl2">
-								$58.79
-							</span>
-
-                                    <p class="stext-102 cl3 p-t-23">
+        </div>
 
 
-                                    <!--  -->
-                                    <div class="p-t-33">
-                                        <div class="flex-w flex-r-m p-b-10">
-                                            <div class="size-203 flex-c-m respon6">
-                                                Size
-                                            </div>
-
-                                            <div class="size-204 respon6-next">
-                                                <div class="rs1-select2 bor8 bg0">
-                                                    <select class="js-select2" name="time">
-                                                        <option>Chọn cỡ</option>
-                                                        <option>Size S</option>
-                                                        <option>Size M</option>
-                                                        <option>Size L</option>
-                                                        <option>Size XL</option>
-                                                    </select>
-                                                    <div class="dropDownSelect2"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="flex-w flex-r-m p-b-10">
-                                            <div class="size-203 flex-c-m respon6">
-                                                Color
-                                            </div>
-
-                                            <div class="size-204 respon6-next">
-                                                <div class="rs1-select2 bor8 bg0">
-                                                    <select class="js-select2" name="time">
-                                                        <option>Chọn màu</option>
-                                                        <option>Red</option>
-                                                        <option>Blue</option>
-                                                        <option>White</option>
-                                                        <option>Grey</option>
-                                                    </select>
-                                                    <div class="dropDownSelect2"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="flex-w flex-r-m p-b-10">
-                                            <div class="size-204 flex-w flex-m respon6-next">
-                                                <div class="wrap-num-product flex-w m-r-20 m-tb-10">
-                                                    <div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
-                                                        <i class="fs-16 zmdi zmdi-minus"></i>
-                                                    </div>
-
-                                                    <input class="mtext-104 cl3 txt-center num-product" type="number"
-                                                           name="num-product" value="1">
-
-                                                    <div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
-                                                        <i class="fs-16 zmdi zmdi-plus"></i>
-                                                    </div>
-                                                </div>
-
-                                                <button
-                                                        class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
-                                                    Add to cart
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <!--  -->
-                                    <div class="flex-w flex-m p-l-100 p-t-40 respon7">
-                                        <div class="flex-m bor9 p-r-10 m-r-11">
-                                            <a href="#"
-                                               class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100"
-                                               data-tooltip="Add to Wishlist">
-                                                <i class="zmdi zmdi-favorite"></i>
-                                            </a>
-                                        </div>
-
-                                        <a href="#"
-                                           class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
-                                           data-tooltip="Facebook">
-                                            <i class="fa fa-facebook"></i>
-                                        </a>
-
-                                        <a href="#"
-                                           class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
-                                           data-tooltip="Twitter">
-                                            <i class="fa fa-twitter"></i>
-                                        </a>
-
-                                        <a href="#"
-                                           class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100"
-                                           data-tooltip="Google Plus">
-                                            <i class="fa fa-google-plus"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
-                    th:inline="javascript"></script>
-            <script th:inline="javascript">
-                var productId = /*[[${product.id}]]*/ 'default-value';
-                var productCode = /*[[${product.code}]]*/ 'default-value';
-                var isUserLoggedIn = /*[[${#authorization.expression('isAuthenticated()')}]]*/ 'abc';
-                $.ajax({
-                    type: 'GET',
-                    dataType: "json",
-                    url: "/colors/" + productId + "/" + "product",
-                    success: function (data) {
-                        loadColorSelect(data)
-                    }
-                })
-
-                $.ajax({
-                    type: 'GET',
-                    dataType: "json",
-                    url: "/sizes/" + productId + "/" + "product",
-                    success: function (data) {
-                        loadSizeSelect(data)
-                    },
-                })
-
-
-                async function handleColorChange(colorId) {
-                    if ($("#colorSelect").val() == "") {
-                        enableAllColorOptions()
-                        $("#colorSelect").select2()
-                        return
-                    } else if ($("#sizeSelect").val() !== "") {
-                        loadPrice()
-                    }
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+                th:inline="javascript"></script>
+        <script th:inline="javascript">
+            var productId = /*[[${product.id}]]*/ 'default-value';
+            var productCode = /*[[${product.code}]]*/ 'default-value';
+            var isUserLoggedIn = /*[[${#authorization.expression('isAuthenticated()')}]]*/ 'abc';
+            $.ajax({
+                type: 'GET',
+                dataType: "json",
+                url: "/colors/" + productId + "/" + "product",
+                success: function (data) {
+                    loadColorSelect(data)
                 }
+            })
 
-                $(document).ready(function () {
-                    $("#sizeSelect").on('change', function (e) {
-                        var sizeId = $(this).val()
-                        handleSizeChange(sizeId)
-                    })
-
-                    $("#colorSelect").on('change', function (e) {
-                        var colorId = $(this).val()
-                        handleColorChange(colorId)
-                    })
+            $.ajax({
+                type: 'GET',
+                dataType: "json",
+                url: "/sizes/" + productId + "/" + "product",
+                success: function (data) {
+                    loadSizeSelect(data)
+                },
+            })
 
 
-                    $(".js-addcart-detail").on('click', function (e) {
-                        if (!isUserLoggedIn) {
-                            $('#loginModal').modal('show');
-                            localStorage.setItem("redirect", `/product-detail/${productCode}`)
-                        } else {
-                            addToCart();
-                        }
-                    })
+            async function handleColorChange(colorId) {
+                if ($("#colorSelect").val() == "") {
+                    enableAllColorOptions()
+                    $("#colorSelect").select2()
+                    return
+                } else if ($("#sizeSelect").val() !== "") {
+                    loadPrice()
+                }
+            }
 
-                    $(".js-buynow-detail").on('click', function (e) {
-                        if (!isUserLoggedIn) {
-                            $('#loginModal').modal('show');
-                            localStorage.setItem("redirect", `/product-detail/${productCode}`)
-                        } else {
-                            buyNow();
-                        }
-                    })
+            $(document).ready(function () {
+                $("#sizeSelect").on('change', function (e) {
+                    var sizeId = $(this).val()
+                    handleSizeChange(sizeId)
+                })
 
-                    $(document).ajaxStart(function () {
-                        $('#loading-overlay').show();
-                    });
-
-                    $(document).ajaxStop(function () {
-                        $('#loading-overlay').hide();
-                    });
+                $("#colorSelect").on('change', function (e) {
+                    var colorId = $(this).val()
+                    handleColorChange(colorId)
                 })
 
 
-                var initiallyAvailableColors = [];
-                var availableColors = [];
-
-                async function handleSizeChange(sizeId) {
-                    if ($("#sizeSelect").val() == "") {
-                        enableAllColorOptions()
-                        $("#colorSelect").select2()
-                        return
-                    } else if ($("#colorSelect").val() !== "") {
-                        loadPrice()
+                $(".js-addcart-detail").on('click', function (e) {
+                    if (!isUserLoggedIn) {
+                        $('#loginModal').modal('show');
+                        localStorage.setItem("redirect", `/product-detail/${productCode}`)
+                    } else {
+                        addToCart();
                     }
+                })
+
+                $(".js-buynow-detail").on('click', function (e) {
+                    if (!isUserLoggedIn) {
+                        $('#loginModal').modal('show');
+                        localStorage.setItem("redirect", `/product-detail/${productCode}`)
+                    } else {
+                        buyNow();
+                    }
+                })
+
+                $(document).ajaxStart(function () {
                     $('#loading-overlay').show();
-                    await $.ajax({
-                        type: 'GET',
-                        dataType: "json",
-                        url: `/colors/${productId}/product/${sizeId}/size`,
-                        success: function (data) {
-                            enableAllColorOptions();
-                            availableColors = data.map(function (color) {
-                                return color.id;
-                            });
-                            for (var i = 0; i < initiallyAvailableColors.length; i++) {
-                                if (!availableColors.includes(initiallyAvailableColors[i])) {
-                                    disableColorOption(initiallyAvailableColors[i]);
-                                }
+                });
+
+                $(document).ajaxStop(function () {
+                    $('#loading-overlay').hide();
+                });
+            })
+
+
+            var initiallyAvailableColors = [];
+            var availableColors = [];
+
+            async function handleSizeChange(sizeId) {
+                if ($("#sizeSelect").val() == "") {
+                    enableAllColorOptions()
+                    $("#colorSelect").select2()
+                    return
+                } else if ($("#colorSelect").val() !== "") {
+                    loadPrice()
+                }
+                $('#loading-overlay').show();
+                await $.ajax({
+                    type: 'GET',
+                    dataType: "json",
+                    url: `/colors/${productId}/product/${sizeId}/size`,
+                    success: function (data) {
+                        enableAllColorOptions();
+                        availableColors = data.map(function (color) {
+                            return color.id;
+                        });
+                        for (var i = 0; i < initiallyAvailableColors.length; i++) {
+                            if (!availableColors.includes(initiallyAvailableColors[i])) {
+                                disableColorOption(initiallyAvailableColors[i]);
                             }
-
-                            $('#colorSelect').select2();
                         }
-                    });
-                    $('#loading-overlay').hide()
-                }
 
-                function formatNumber(number) {
-                    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
-                }
-
-                function enableAllColorOptions() {
-                    $("#colorSelect option").removeAttr("disabled");
-                }
-
-                function disableColorOption(colorId) {
-
-                    $("#colorSelect option[value='" + colorId + "']").attr("disabled", "disabled");
-                }
-
-                function loadColorSelect(data) {
-                    var selectElement = document.getElementById("colorSelect");
-
-                    selectElement.innerHTML = '';
-
-                    var defaultOption = document.createElement("option");
-                    defaultOption.text = "Chọn màu";
-                    defaultOption.value = "";
-                    selectElement.appendChild(defaultOption);
-
-                    for (var i = 0; i < data.length; i++) {
-                        var option = document.createElement("option");
-                        option.text = data[i].name;
-                        option.value = data[i].id;
-                        selectElement.appendChild(option);
+                        $('#colorSelect').select2();
                     }
-                    // Initialize initiallyAvailableColors with the currently available colors
-                    initiallyAvailableColors = data.map(function (color) {
-                        return color.id;
-                    });
-                    availableColors = initiallyAvailableColors
+                });
+                $('#loading-overlay').hide()
+            }
 
+            function formatNumber(number) {
+                return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+            }
+
+            function enableAllColorOptions() {
+                $("#colorSelect option").removeAttr("disabled");
+            }
+
+            function disableColorOption(colorId) {
+
+                $("#colorSelect option[value='" + colorId + "']").attr("disabled", "disabled");
+            }
+
+            function loadColorSelect(data) {
+                var selectElement = document.getElementById("colorSelect");
+
+                selectElement.innerHTML = '';
+
+                var defaultOption = document.createElement("option");
+                defaultOption.text = "Chọn màu";
+                defaultOption.value = "";
+                selectElement.appendChild(defaultOption);
+
+                for (var i = 0; i < data.length; i++) {
+                    var option = document.createElement("option");
+                    option.text = data[i].name;
+                    option.value = data[i].id;
+                    selectElement.appendChild(option);
                 }
+                // Initialize initiallyAvailableColors with the currently available colors
+                initiallyAvailableColors = data.map(function (color) {
+                    return color.id;
+                });
+                availableColors = initiallyAvailableColors
 
-                function loadSizeSelect(data) {
-                    var selectElement = document.getElementById("sizeSelect");
+            }
 
-                    selectElement.innerHTML = '';
+            function loadSizeSelect(data) {
+                var selectElement = document.getElementById("sizeSelect");
 
-                    var defaultOption = document.createElement("option");
-                    defaultOption.text = "Chọn cỡ";
-                    defaultOption.value = ""
-                    selectElement.appendChild(defaultOption);
+                selectElement.innerHTML = '';
 
-                    for (var i = 0; i < data.length; i++) {
-                        var option = document.createElement("option");
-                        option.text = data[i].name;
-                        option.value = data[i].id;
-                        selectElement.appendChild(option);
-                    }
+                var defaultOption = document.createElement("option");
+                defaultOption.text = "Chọn cỡ";
+                defaultOption.value = ""
+                selectElement.appendChild(defaultOption);
+
+                for (var i = 0; i < data.length; i++) {
+                    var option = document.createElement("option");
+                    option.text = data[i].name;
+                    option.value = data[i].id;
+                    selectElement.appendChild(option);
                 }
+            }
 
-                async function loadPrice() {
-                    await $.ajax({
-                        type: 'GET',
-                        dataType: "json",
-                        url: `/productDetails/${productId}/product`,
-                        success: function (data) {
-                            const productDetail = data.find(item => item.size.id == $("#sizeSelect").val() && item.color.id == $("#colorSelect").val());
-                            loadRemainingQuantity(productDetail.quantity)
-                            if (!productDetail.discountedPrice) {
-                                $("#price_product").text(formatNumber(parseFloat(productDetail.price)) + ' đ')
-                            } else {
-                                const oldPrice = formatNumber(parseFloat(productDetail.price))
-                                const discountedPrice = formatNumber(parseFloat(productDetail.discountedPrice))
-                                $("#price_product").html(`
+            async function loadPrice() {
+                await $.ajax({
+                    type: 'GET',
+                    dataType: "json",
+                    url: `/productDetails/${productId}/product`,
+                    success: function (data) {
+                        const productDetail = data.find(item => item.size.id == $("#sizeSelect").val() && item.color.id == $("#colorSelect").val());
+                        loadRemainingQuantity(productDetail.quantity)
+                        if (!productDetail.discountedPrice) {
+                            $("#price_product").text(formatNumber(parseFloat(productDetail.price)) + ' đ')
+                        } else {
+                            const oldPrice = formatNumber(parseFloat(productDetail.price))
+                            const discountedPrice = formatNumber(parseFloat(productDetail.discountedPrice))
+                            $("#price_product").html(`
                         <span style="font-size: 12px; text-decoration: line-through">${oldPrice} đ</span>
                         <span class="mtext-106 cl2" id="price_product">${discountedPrice} đ</span>
                         `)
-                            }
-                            $("#productDetailId").val(productDetail.id)
                         }
-                    })
-                }
-
-                function loadRemainingQuantity(value) {
-                    if (value == 0) {
-                        $('.js-name-detail').append('<span style="color:red; border: 1px solid #ddd; font-size: 12px; margin-left: 8px">Hết hàng</span>')
-                    }
-                    $(".remaning-product").html(`Còn lại <span id="remaining-quantity" data-quantity="${value}">${value}</span> sản phẩm`)
-                }
-
-                $('.num-product').on('keypress', function (e) {
-                    onlyAllowNumberInput(e)
-                })
-
-                $('.num-product').on('focusout', function (e) {
-                    if ($(this).val() == "") {
-                        $(this).val(1)
+                        $("#productDetailId").val(productDetail.id)
                     }
                 })
+            }
 
-                function onlyAllowNumberInput(e) {
-                    const key = e.key;
-                    if (key === '-' || key == 0) {
-                        e.preventDefault();
-                    }
+            function loadRemainingQuantity(value) {
+                if (value == 0) {
+                    $('.js-name-detail').append('<span style="color:red; border: 1px solid #ddd; font-size: 12px; margin-left: 8px">Hết hàng</span>')
+                }
+                $(".remaning-product").html(`Còn lại <span id="remaining-quantity" data-quantity="${value}">${value}</span> sản phẩm`)
+            }
+
+            $('.num-product').on('keypress', function (e) {
+                onlyAllowNumberInput(e)
+            })
+
+            $('.num-product').on('focusout', function (e) {
+                if ($(this).val() == "") {
+                    $(this).val(1)
+                }
+            })
+
+            function onlyAllowNumberInput(e) {
+                const key = e.key;
+                if (key === '-' || key == 0) {
+                    e.preventDefault();
+                }
+            }
+
+            function checkColorAndSizeSelect() {
+                if ($("#colorSelect").val() == "" || $("#sizeSelect").val() == "") {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Lỗi',
+                        text: 'Vui lòng chọn màu sắc và kích thước trước khi thêm vào giỏ',
+                        confirmButtonText: 'Đồng ý'
+                    });
+                    return false
+                }
+                return true
+            }
+            async function addToCart() {
+                const remainingQuantity = parseInt($("#remaining-quantity").attr('data-quantity'));
+                const quantity = parseInt($('.num-product').val());
+                const nameProduct = $('.js-name-detail').text();
+                const productDetailId = $("#productDetailId").val();
+
+                if (!checkColorAndSizeSelect()) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: "Lỗi",
+                        text: "Chưa chọn màu sắc hoặc kích cỡ !",
+                        confirmButtonText: "Đồng ý"
+                    }) .then(() => {
+                        location.reload();
+                    });
+                    return Promise.reject("Chưa chọn màu hoặc kích cỡ.");
                 }
 
-                function checkColorAndSizeSelect() {
-                    if ($("#colorSelect").val() == "" || $("#sizeSelect").val() == "") {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Lỗi',
-                            text: 'Vui lòng chọn màu sắc và kích thước trước khi thêm vào giỏ',
-                            confirmButtonText: 'Đồng ý'
-                        });
-                        return false
-                    }
-                    return true
-                }
-                async function addToCart() {
-                    const remainingQuantity = parseInt($("#remaining-quantity").attr('data-quantity'));
-                    const quantity = parseInt($('.num-product').val());
-                    const nameProduct = $('.js-name-detail').text();
-                    const productDetailId = $("#productDetailId").val();
-
-                    if (!checkColorAndSizeSelect()) {
-                        Swal.fire({
-                            icon: 'error',
-                            title: "Lỗi",
-                            text: "Chưa chọn màu sắc hoặc kích cỡ !",
-                            confirmButtonText: "Đồng ý"
-                        }) .then(() => {
-                            location.reload();
-                        });
-                        return Promise.reject("Chưa chọn màu hoặc kích cỡ.");
-                    }
-
-                    if (remainingQuantity <= 0) {
-                        Swal.fire({
-                            icon: 'error',
-                            title: "Lỗi",
-                            text: "Sản phẩm với thuộc tính này đã hết hàng",
-                            confirmButtonText: "Đồng ý"
-                        }) .then(() => {
-                            location.reload();
-                        });
-                        return Promise.reject("Sản phẩm hết hàng.");
-                    }
-
-                    if (quantity > remainingQuantity) {
-                        Swal.fire({
-                            icon: 'error',
-                            title: "Lỗi",
-                            text: "Số lượng thêm vào giỏ hàng lớn hơn số lượng tồn",
-                            confirmButtonText: "Đồng ý"
-                        }) .then(() => {
-                            location.reload();
-                        });
-                        return Promise.reject("Số lượng vượt tồn kho.");
-                    }
-
-                    const dataSend = {
-                        detail: {id: productDetailId},
-                        quantity: quantity
-                    };
-
-                    try {
-                        $('#loading-overlay').show();
-
-                        const response = await $.ajax({
-                            type: 'POST',
-                            url: '/api/addToCart',
-                            contentType: "application/json; charset=utf-8",
-                            data: JSON.stringify(dataSend),
-                        });
-
-                        $('#loading-overlay').hide();
-                        Swal.fire({
-                            icon: 'success',
-                            title: "Thành công",
-                            text: nameProduct + "đã được thêm vào giỏ hang thành công ! ",
-                            confirmButtonText: "Đồng ý"
-                        }) .then(() => {
-                            location.reload();
-                        });
-
-                        if (isUserLoggedIn) {
-                            const cartData = await $.ajax({
-                                type: 'GET',
-                                url: 'http://localhost:8080/api/getAllCart',
-                                dataType: 'json',
-                            });
-
-                            $(".js-show-cart").attr("data-notify", cartData.length);
-                            localStorage.setItem("cartQuantity", cartData.length.toString());
-                        }
-
-                        return Promise.resolve(response);
-                    } catch (error) {
-                        $('#loading-overlay').hide();
-
-                        const errorMessage = error.responseJSON?.message || "Đã xảy ra lỗi khi thêm sản phẩm vào giỏ hàng.";
-                        swal("Lỗi", errorMessage, "error");
-
-                        $('.num-product').val(1);
-                        return Promise.reject(error);
-                    }
+                if (remainingQuantity <= 0) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: "Lỗi",
+                        text: "Sản phẩm với thuộc tính này đã hết hàng",
+                        confirmButtonText: "Đồng ý"
+                    }) .then(() => {
+                        location.reload();
+                    });
+                    return Promise.reject("Sản phẩm hết hàng.");
                 }
 
-
-                async function buyNow() {
-                    const remainingQuantity = parseInt($("#remaining-quantity").attr('data-quantity'));
-                    const quantity = parseInt($('.num-product').val());
-                    const nameProduct = $('.js-name-detail').text();
-                    const productDetailId = $("#productDetailId").val();
-
-                    if (!checkColorAndSizeSelect()) {
-                        Swal.fire({
-                            icon: 'error',
-                            title: "Lỗi",
-                            text: "Chưa chọn màu sắc hoặc kích cỡ !",
-                            confirmButtonText: "Đồng ý"
-                        }) .then(() => {
-                            location.reload();
-                        });
-                        return;
-                    }
-
-                    if (remainingQuantity <= 0) {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Lỗi',
-                            text: 'Sản phẩm với thuộc tính này đã hết hàng !'
-                        }) .then(() => {
-                            location.reload();
-                        });
-                        return;
-                    }
-
-                    if (quantity > remainingQuantity) {
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Lỗi',
-                            text: 'Số lượng muốn mua lớn hơn số lượng tồn !'
-                        }) .then(() => {
-                            location.reload();
-                        });
-                        return;
-                    }
-
-                    const dataSend = {
-                        detail: {id: productDetailId},
-                        quantity: quantity
-                    };
-
-                    try {
-                        $('#loading-overlay').show();
-
-                        const response = await $.ajax({
-                            type: 'POST',
-                            url: '/api/addToCart',
-                            contentType: "application/json; charset=utf-8",
-                            data: JSON.stringify(dataSend),
-                        });
-
-                        if (isUserLoggedIn) {
-                            const cartData = await $.ajax({
-                                type: 'GET',
-                                url: 'http://localhost:8080/api/getAllCart',
-                                dataType: 'json',
-                            });
-
-                            $(".js-show-cart").attr("data-notify", cartData.length);
-                            localStorage.setItem("cartQuantity", cartData.length.toString());
-                        }
-
-                        window.location.href = "/shoping-cart";
-
-                    } catch (error) {
-                        $('#loading-overlay').hide();
-
-                        const errorMessage = error.responseJSON?.message || "Đã xảy ra lỗi khi thêm sản phẩm vào giỏ hàng.";
-                        swal("Lỗi", errorMessage, "error");
-
-                        $('.num-product').val(1);
-                    }
+                if (quantity > remainingQuantity) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: "Lỗi",
+                        text: "Số lượng thêm vào giỏ hàng lớn hơn số lượng tồn",
+                        confirmButtonText: "Đồng ý"
+                    }) .then(() => {
+                        location.reload();
+                    });
+                    return Promise.reject("Số lượng vượt tồn kho.");
                 }
-            </script>
-        </div>
-    </section>
+
+                const dataSend = {
+                    detail: {id: productDetailId},
+                    quantity: quantity
+                };
+
+                try {
+                    $('#loading-overlay').show();
+
+                    const response = await $.ajax({
+                        type: 'POST',
+                        url: '/api/addToCart',
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify(dataSend),
+                    });
+
+                    $('#loading-overlay').hide();
+                    Swal.fire({
+                        icon: 'success',
+                        title: "Thành công",
+                        text: nameProduct + "đã được thêm vào giỏ hang thành công ! ",
+                        confirmButtonText: "Đồng ý"
+                    }) .then(() => {
+                        location.reload();
+                    });
+
+                    if (isUserLoggedIn) {
+                        const cartData = await $.ajax({
+                            type: 'GET',
+                            url: 'http://localhost:8080/api/getAllCart',
+                            dataType: 'json',
+                        });
+
+                        $(".js-show-cart").attr("data-notify", cartData.length);
+                        localStorage.setItem("cartQuantity", cartData.length.toString());
+                    }
+
+                    return Promise.resolve(response);
+                } catch (error) {
+                    $('#loading-overlay').hide();
+
+                    const errorMessage = error.responseJSON?.message || "Đã xảy ra lỗi khi thêm sản phẩm vào giỏ hàng.";
+                    swal("Lỗi", errorMessage, "error");
+
+                    $('.num-product').val(1);
+                    return Promise.reject(error);
+                }
+            }
+
+
+            async function buyNow() {
+                const remainingQuantity = parseInt($("#remaining-quantity").attr('data-quantity'));
+                const quantity = parseInt($('.num-product').val());
+                const nameProduct = $('.js-name-detail').text();
+                const productDetailId = $("#productDetailId").val();
+
+                if (!checkColorAndSizeSelect()) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: "Lỗi",
+                        text: "Chưa chọn màu sắc hoặc kích cỡ !",
+                        confirmButtonText: "Đồng ý"
+                    }) .then(() => {
+                        location.reload();
+                    });
+                    return;
+                }
+
+                if (remainingQuantity <= 0) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Lỗi',
+                        text: 'Sản phẩm với thuộc tính này đã hết hàng !'
+                    }) .then(() => {
+                        location.reload();
+                    });
+                    return;
+                }
+
+                if (quantity > remainingQuantity) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Lỗi',
+                        text: 'Số lượng muốn mua lớn hơn số lượng tồn !'
+                    }) .then(() => {
+                        location.reload();
+                    });
+                    return;
+                }
+
+                const dataSend = {
+                    detail: {id: productDetailId},
+                    quantity: quantity
+                };
+
+                try {
+                    $('#loading-overlay').show();
+
+                    const response = await $.ajax({
+                        type: 'POST',
+                        url: '/api/addToCart',
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify(dataSend),
+                    });
+
+                    if (isUserLoggedIn) {
+                        const cartData = await $.ajax({
+                            type: 'GET',
+                            url: 'http://localhost:8080/api/getAllCart',
+                            dataType: 'json',
+                        });
+
+                        $(".js-show-cart").attr("data-notify", cartData.length);
+                        localStorage.setItem("cartQuantity", cartData.length.toString());
+                    }
+
+                    window.location.href = "/shoping-cart";
+
+                } catch (error) {
+                    $('#loading-overlay').hide();
+
+                    const errorMessage = error.responseJSON?.message || "Đã xảy ra lỗi khi thêm sản phẩm vào giỏ hàng.";
+                    swal("Lỗi", errorMessage, "error");
+
+                    $('.num-product').val(1);
+                }
+            }
+        </script>
+</div>
+</section>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>

@@ -1,531 +1,1108 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{admin/admin-layout.html}">
 
-<head>
-    <meta charset="UTF-8"/>
-    <title>Title</title>
-</head>
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"-->
+<!--      layout:decorate="~{admin/admin-layout.html}">-->
 
-<body>
-<div layout:fragment="content">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="card" style="position: relative">
-                    <div class="card-body">
-                        <div class="invoice-title">
-                            <!--                            <h4 class="float-end font-size-15"><span class="badge bg-success font-size-12 ms-2" th:text="${billdetail.trangThaiDonHang}"></span></h4>-->
-                            <div class="float-end mr-4">
-                                <!-- Add class 'active' to progress -->
-                                <div class="track"
-                                     th:if="${ billdetail.trangThaiDonHang != T(com.example.demo.entities.enumClass.BillStatus).HUY}">
-                                    <!-- Step 1: Chờ xác nhận -->
-                                    <div class="step"
-                                         th:classappend="${
-                 (billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).CHO_XAC_NHAN ||
-                 billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).CHO_GIAO_HANG ||
-                 billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).CHO_LAY_HANG ||
-                 billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).THAT_BAI ||
-                 billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).HOAN_THANH ? 'active' : 'd-none')}">
-            <span class="icon">
-                <!-- Icon -->
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 256 256">
-                    <path fill="currentColor" d="M232 136.66A104.12...Z"/>
-                </svg>
-            </span>
-                                        <span class="text">Chờ xác nhận</span>
-                                    </div>
+<!--<head>-->
+<!--    <meta charset="UTF-8"/>-->
+<!--    <title>Title</title>-->
+<!--</head>-->
 
-                                    <!-- Step 2: Chờ hàng về -->
-                                    <div class="step"
-                                         th:classappend="${
-                                         billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).CHO_HANG_VE  ? 'active' : 'd-none'}"
-                                    >
-            <span class="icon">
-                <svg class="w-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path fill="#ffffff" d="M383.5 192c.3-5.3 .5-10.6 .5-16c0-51-15.9-96-40.2-127.6C319.5 16.9 288.2 0 256 0s-63.5 16.9-87.8 48.4C143.9 80 128 125 128 176c0 5.4 .2 10.7 .5 16L240 192l0 128-32 0c-7 0-13.7 1.5-19.7 4.2L68.2 192l28.3 0c-.3-5.3-.5-10.6-.5-16c0-64 22.2-121.2 57.1-159.3C62 49.3 18.6 122.6 4.2 173.6C1.5 183.1 9 192 18.9 192l6 0L165.2 346.3c-3.3 6.5-5.2 13.9-5.2 21.7l0 96c0 26.5 21.5 48 48 48l96 0c26.5 0 48-21.5 48-48l0-96c0-7.8-1.9-15.2-5.2-21.7L487.1 192l6 0c9.9 0 17.4-8.9 14.7-18.4C493.4 122.6 450 49.3 358.9 16.7C393.8 54.8 416 112.1 416 176c0 5.4-.2 10.7-.5 16l28.3 0L323.7 324.2c-6-2.7-12.7-4.2-19.7-4.2l-32 0 0-128 111.5 0z"/></svg>            </span>
-                                        <span class="text">Chờ hàng về</span>
-                                    </div>
+<!--<body>-->
+<!--<div layout:fragment="content">-->
 
-                                    <!-- Step 3: Chờ lấy hàng -->
-                                    <div class="step"
-                                         th:classappend="${
-                         billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).CHO_GIAO_HANG ||
-                         billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).CHO_LAY_HANG ||
-                         billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).THAT_BAI ||
-                         billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).HOAN_THANH ? 'active' : ''}">
-                    <span class="icon">
-                        <!-- Icon -->
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                            <g fill="none" stroke-width="1.5">
-                                <path fill="currentColor"
-                                      d="m2.695 7.185l9 4l.61-1.37l-9-4l-.61 1.37ZM12.75 21.5v-11h-1.5v11h1.5Zm-.445-10.315l9-4l-.61-1.37l-9 4l.61 1.37Z"/>
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                      d="M3 17.11V6.89a.6.6 0 0 1 .356-.548l8.4-3.734a.6.6 0 0 1 .488 0l8.4 3.734A.6.6 0 0 1 21 6.89v10.22a.6.6 0 0 1-.356.548l-8.4 3.734a.6.6 0 0 1-.488 0l-8.4-3.734A.6.6 0 0 1 3 17.11Z"/>
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                      d="m7.5 4.5l8.644 3.842a.6.6 0 0 1 .356.548v3.61"/>
-                            </g>
-                        </svg>
-                    </span>
-                                        <span class="text">Chờ lấy hàng</span>
-                                    </div>
+<!--    <style>-->
 
-                                    <!-- Step 4: Chờ giao hàng -->
-                                    <div class="step"
-                                         th:classappend="${
-                 billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).CHO_GIAO_HANG ||
-                 billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).THAT_BAI ||
-                 billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).HOAN_THANH ? 'active' : ''}">
-            <span class="icon">
-                <!-- Icon -->
-                <i class="fa fa-truck"></i>
-            </span>
-                                        <span class="text">Chờ giao hàng</span>
-                                    </div>
+<!--        #sakura-container {-->
+<!--            position: fixed;-->
+<!--            top: 0;-->
+<!--            left: 0;-->
+<!--            width: 100%;-->
+<!--            height: 100%;-->
+<!--            pointer-events: none;-->
+<!--            z-index: 9999;-->
+<!--        }-->
 
-                                    <!-- Step 5: Hoàn thành -->
-                                    <div class="step"
-                                         th:classappend="${
-                 billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).THAT_BAI ||
-                 billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).HOAN_THANH ? 'active' : ''}">
-            <span class="icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                    <path fill="currentColor" d="M19 13c.7 0 1.37...Z"/>
-                </svg>
-            </span>
-                                        <span class="text">Hoàn thành</span>
-                                    </div>
-                                </div>
+<!--        .sakura {-->
+<!--            position: absolute;-->
+<!--            width: 30px;-->
+<!--            height: 30px;-->
+<!--            /*background-image: url('https://image.similarpng.com/file/similarpng/very-thumbnail/2021/05/Realistic-sakura-or-cherry-blossom-Premium-vector-PNG.png'); !* Bông hoa PNG *!*/-->
+<!--            background-size: cover;-->
+<!--            background-repeat: no-repeat;-->
+<!--            opacity: 0.8;-->
+<!--            animation: fall linear infinite;-->
+<!--            filter: drop-shadow(0 0 3px rgba(255, 192, 203, 0.8)); /* hồng nhẹ xung quanh */-->
+<!--            mix-blend-mode: multiply;-->
+<!--        }-->
 
-                                <!-- ĐÃ HỦY -->
-                                <div th:if="${billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).HUY}">
-                                    <div class="text-danger font-weight-bold border rounded p-2 border-danger">
-                                        ĐÃ HỦY
-                                    </div>
-                                </div>
+<!--        @keyframes fall {-->
+<!--            0% {-->
+<!--                transform: translateY(-10px) rotate(0deg);-->
+<!--                opacity: 1;-->
+<!--            }-->
+<!--            100% {-->
+<!--                transform: translateY(100vh) rotate(360deg);-->
+<!--                opacity: 0;-->
+<!--            }-->
+<!--        }-->
 
-                                <!-- HOÀN TRẢ -->
+<!--        .thongtin-3d {-->
+<!--            perspective: 1000px;-->
+<!--        }-->
 
-                            </div>
+<!--        .thongtin-3d h2,-->
+<!--        .thongtin-3d p {-->
+<!--            max-width: 500px; /* 👈 hoặc thử 480px, 450px... tuỳ bạn */-->
+<!--            width: 100%;-->
+<!--            transform: rotateX(5deg) rotateY(-5deg);-->
+<!--            transform-style: preserve-3d;-->
+<!--            color: #fff;-->
+<!--            background: linear-gradient(145deg, #ff9a9e, #fad0c4);-->
+<!--            padding: 10px 20px;-->
+<!--            border-radius: 12px;-->
+<!--            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.25),-->
+<!--            0 10px 10px rgba(255, 105, 180, 0.2);-->
+<!--            transition: transform 0.3s ease, box-shadow 0.3s ease;-->
+<!--            margin-bottom: 12px;-->
+<!--        }-->
 
-                            <div class="mb-4">
-                                <h2 class="mb-1 text-muted">
-                                    Mã HD: [[${billdetail.maDinhDanh}]]
-                                </h2>
-                            </div>
-                            <div class="mb-3">
-                                <h2 class="mb-1 text-muted">
-                                    POLO HUB
-                                </h2>
-                            </div>
+<!--        .thongtin-3d h2:hover,-->
+<!--        .thongtin-3d p:hover {-->
+<!--            transform: rotateX(0deg) rotateY(0deg) scale(1.05);-->
+<!--            box-shadow: 0 20px 30px rgba(255, 105, 180, 0.35);-->
+<!--            cursor: pointer;-->
+<!--        }-->
 
-                            <div class="text-muted">
-                                <p class="mb-1">
-                                    Đ/C: Toà Nhà Fpoly Trịnh Văn Bô
-                                </p>
-                                <p class="mb-1">
-                                    <i class="uil uil-envelope-alt me-1"></i>
-                                    Email: PoloHub@gmail.com
-                                </p>
-                                <p><i class="uil uil-phone me-1"></i>SĐT: 19009000-66668888 </p>
-                            </div>
-                        </div>
+<!--        .card-body {-->
+<!--            border: 2px solid #f9b9c3; /* Màu hồng pastel hoa anh đào */-->
+<!--            border-radius: 12px;-->
+<!--            background: rgba(255, 255, 255, 0.6);-->
+<!--            backdrop-filter: blur(8px);-->
+<!--            box-shadow: 0 0 15px rgba(249, 185, 195, 0.4);-->
+<!--            animation: glowCherry 3s ease-in-out infinite;-->
+<!--            transition: all 0.3s ease;-->
+<!--        }-->
 
-                        <hr class="my-4"/>
+<!--        /* Hiệu ứng sáng lên dịu nhẹ */-->
+<!--        @keyframes glowCherry {-->
+<!--            0% {-->
+<!--                box-shadow: 0 0 10px rgba(249, 185, 195, 0.3);-->
+<!--            }-->
+<!--            50% {-->
+<!--                box-shadow: 0 0 25px rgba(249, 185, 195, 0.7);-->
+<!--            }-->
+<!--            100% {-->
+<!--                box-shadow: 0 0 10px rgba(249, 185, 195, 0.3);-->
+<!--            }-->
+<!--        }-->
 
-                        <div class="row">
-                            <div class="col-sm-6">
-                                <div class="text-muted">
-                                    <h5 class="font-size-16 mb-3">Khách hàng:</h5>
-                                    <h5 class="font-size-15 mb-2" th:if="${billdetail.tenKhachHang != null}"
-                                        th:text="${billdetail.tenKhachHang}">
-                                        Preston Miller
-                                    </h5>
-                                    <h6 class="font-size-15 mb-2 font-italic"
-                                        th:if="${billdetail.tenKhachHang == null}">
-                                        Khách lẻ
-                                    </h6>
-                                    <p class="mb-1" th:if="${billdetail.tenKhachHang != null}"
-                                       th:text="${billdetail.diaChi}">
-                                        4068 Post Avenue Newfolden, MN 56738
-                                    </p>
-                                    <p th:if="${billdetail.tenKhachHang != null}"
-                                       th:text="${billdetail.soDienThoai}">
-                                        001-234-5678
-                                    </p>
-                                </div>
-                            </div>
-                            <!-- end col -->
-                            <div class="col-sm-6">
-                                <div class="text-muted text-sm-end">
-                                    <div class="mt-4">
-                                        <h5 class="font-size-15 mb-1">Ngày mua hàng:</h5>
-                                        <p
-                                                th:text="${#temporals.format(billdetail.createdDate, 'dd-MM-yyyy HH:mm')}">
-                                            25/11/2023
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- end col -->
-                        </div>
-                        <!-- end row -->
-                        <div class="py-2 mb-4">
-                            <div>
-                                <h5>Voucher:</h5>
-                            </div>
-                            <div th:if="${billdetail.voucherName != null}">
-                                <p style="color: red; font-size: 16px" th:text="${billdetail.voucherName}">
-                                </p>
-                                <th:block th:switch="${billdetail.getDiscountType()}">
-                                    <p th:case="2" class="mb-1" th:if="${billdetail.getDiscountAmount() != null}">
-                                            <span>
-                                                Giảm:
-                                            </span>
-                                        <span th:text="${#numbers.formatInteger(billdetail.getDiscountAmount(),3,'POINT') + 'VND'}"></span>
-                                    </p>
-                                    <p th:case="1" class="mb-1" th:if="${billdetail.getDiscountPercent() != null}">
-                                            <span>
-                                                Giảm:
-                                            </span>
-                                        <span th:text="${#numbers.formatInteger(billdetail.getDiscountPercent(),2,'POINT') + '%'}"></span>
-                                    </p>
-                                </th:block>
+<!--        .card {-->
+<!--            border: none !important;-->
+<!--            box-shadow: none !important; /* Nếu bạn cũng muốn bỏ cả đổ bóng */-->
+<!--        }-->
 
-                                <p class="mb-1" th:if="${billdetail.getDiscountMinimumAmountInCart != null}">
-                                        <span>
-                                            Hóa đơn tối thiểu:
-                                        </span>
-                                    <span th:text="${#numbers.formatInteger(billdetail.getDiscountMinimumAmountInCart(),3,'POINT') + 'VND'}"></span>
-                                </p>
+<!--        .scene-container {-->
+<!--            position: relative;-->
+<!--            height: 200px;-->
+<!--            margin-top: 20px;-->
+<!--            overflow: hidden;-->
+<!--            background: linear-gradient(to top, #ffeef4, #fffafc);-->
+<!--            border-radius: 16px;-->
+<!--            box-shadow: 0 0 20px rgba(255, 182, 193, 0.3);-->
+<!--        }-->
 
-                                <p class="mb-1" th:if="${billdetail.getDiscountMaximumAmount != null}">
-                                            <span>
-                                                Giảm tối đa:
-                                            </span>
-                                    <span th:text="${#numbers.formatInteger(billdetail.getDiscountMaximumAmount(),3,'POINT') + 'VND'}"></span>
-                                </p>
-                                <p class="mb-1" th:if="${billdetail.getDiscountEndDate() != null}">
-                                                <span>
-                                                    Hiệu lực tới:
-                                                </span>
-                                    <span th:text="${#dates.format(billdetail.getDiscountEndDate(),'HH:mm dd-MM-yyyy')}"></span>
-                                </p>
-                                <!--                                    <p class="mb-1" th:if="${billdetail.getDiscountUsage() != null}">-->
-                                <!--                                                    <span>-->
-                                <!--                                                        Số lượng còn lại:-->
-                                <!--                                                    </span>-->
-                                <!--                                        <span th:text="${billdetail.getDiscountUsage()}"></span>-->
-                                <!--                                    </p>-->
-                            </div>
+<!--        .tree {-->
+<!--            position: absolute;-->
+<!--            bottom: 0;-->
+<!--            height: 150px;-->
+<!--            animation: sway 2s ease-in-out infinite alternate;-->
+<!--            z-index: 1;-->
+<!--        }-->
 
-                            <div th:if="${billdetail.voucherName == null}">
-                                <span class="text-muted">Không sử dụng</span>
-                            </div>
-                        </div>
+<!--        @keyframes sway {-->
+<!--            0% { transform: rotate(0deg); }-->
+<!--            100% { transform: rotate(1.5deg); }-->
+<!--        }-->
 
-                        <div class="mb-4">
-                            <div>
-                                Loại đơn :
-                                <h5 style="color: rgb(21, 219, 153)">
-                                        <span
-                                                th:if="${billdetail.loaiHoaDon == T(com.example.demo.entities.enumClass.InvoiceType).OFFLINE}">Tại
-                                            quầy</span>
-                                    <span
-                                            th:if="${billdetail.loaiHoaDon == T(com.example.demo.entities.enumClass.InvoiceType).ONLINE}">Online</span>
-                                </h5>
-                            </div>
-                        </div>
+<!--        .tree-left {-->
+<!--            left: 0;-->
+<!--        }-->
 
-                        <div class="mb-4">
-                            <span>Mã giao dịch: <span class="text-warning font-weight-bold"
-                                                      th:text="${billdetail.maGiaoDich}"></span></span>
-                        </div>
+<!--        .tree-right {-->
+<!--            right: 0;-->
+<!--        }-->
 
-                        <div class="py-2">
-                            <h5 class="font-size-15">Danh sách đơn hàng</h5>
+<!--        .character {-->
+<!--            position: absolute;-->
+<!--            bottom: 0;-->
+<!--            height: 100px;-->
+<!--            animation: walk-reverse 10s linear infinite;-->
+<!--            z-index: 2;-->
+<!--        }-->
 
-                            <div class="table-responsive">
-                                <table class="table align-middle table-nowrap table-centered mb-0">
-                                    <thead>
-                                    <tr>
-                                        <th>Sản phẩm</th>
-                                        <th>Màu sắc</th>
-                                        <th>Kích cỡ</th>
-                                        <th>Giá tiền</th>
-                                        <th>Số lượng</th>
-                                        <th class="text-end" style="width: 120px">Thành tiền</th>
-                                    </tr>
-                                    </thead>
-                                    <!-- end thead -->
-                                    <tbody>
-                                    <tr th:each="productDetail : ${billDetailProduct}">
-                                        <td th:data-id="${productDetail.id}"
-                                            th:data-quantity="${productDetail.soLuong}">
-                                            <div>
-                                                <h6 class="text-truncate font-size-14 mb-1"
-                                                    th:text="${productDetail.tenSanPham}">
-                                                    Black Strap A012
-                                                </h6>
-                                            </div>
-                                        </td>
-                                        <td th:text="${productDetail.tenMau}"></td>
-                                        <td th:text="${productDetail.kichCo}">$ 245.50</td>
-                                        <td
-                                                th:text="${#numbers.formatDecimal(productDetail.giaTien, 0, 'POINT', 0, 'COMMA')}">
-                                        </td>
-                                        <td th:text="${productDetail.soLuong}"></td>
-                                        <td class="text-end"
-                                            th:text="${#numbers.formatDecimal(productDetail.tongTien, 0, 'POINT', 0, 'COMMA')}">
-                                            $ 245.50
-                                        </td>
-                                    </tr>
-                                    <!-- end tr -->
+<!--        @keyframes walk-reverse {-->
+<!--            0% {-->
+<!--                right: -100px;-->
+<!--            }-->
+<!--            100% {-->
+<!--                right: 100%;-->
+<!--            }-->
+<!--        }-->
 
-                                    <tr>
-                                        <th scope="row" colspan="5" class="text-end">
-                                            Tổng thanh toán sản phẩm
-                                        </th>
-                                        <td class="text-end"
-                                            th:text="${#numbers.formatDecimal(total, 0, 'POINT', 0, 'COMMA')}">
-                                            $732.50
-                                        </td>
-                                    </tr>
-                                    <!-- end tr -->
-                                    <tr>
-                                        <th scope="row" colspan="5" class="border-0 text-end">
-                                            Voucher :
-                                        </th>
-                                        <td class="border-0 text-end"
-                                            th:text="${#numbers.formatDecimal(billdetail.tienKhuyenMai, 0, 'POINT', 0, 'COMMA')}">
-                                            - $25.50
-                                        </td>
-                                    </tr>
-                                    <!-- end tr -->
-                                    <tr>
-                                        <th scope="row" colspan="5" class="border-0 text-end">
-                                            Phí ship :
-                                        </th>
-                                        <td class="border-0 text-end">0</td>
-                                    </tr>
-                                    <!-- end tr -->
+<!--        .row {-->
+<!--            background: linear-gradient(135deg, #ffeef2, #fbd3e9);-->
+<!--            border: 2px solid #f9c5d1;-->
+<!--            border-radius: 16px;-->
+<!--            padding: 20px;-->
+<!--            box-shadow: 0 4px 20px rgba(255, 182, 193, 0.25);-->
+<!--            animation: glowBorder 4s ease-in-out infinite alternate;-->
+<!--            transition: transform 0.3s ease;-->
+<!--        }-->
 
-                                    <!-- end tr -->
-                                    <tr>
-                                        <th scope="row" colspan="5" class="border-0 text-end">
-                                            Tổng thanh toán
-                                        </th>
-                                        <td class="border-0 text-end">
-                                            <h4 class="m-0 fw-semibold"
-                                                th:text="${#numbers.formatDecimal(total - billdetail.tienKhuyenMai, 0, 'POINT', 0, 'COMMA')}">
-                                                $739.00
-                                            </h4>
-                                        </td>
-                                    </tr>
-                                    <!-- end tr -->
-                                    </tbody>
-                                    <!-- end tbody -->
-                                </table>
-                                <!-- end table -->
-                            </div>
-                            <!-- end table responsive -->
-                            <div class="d-print-none mt-4">
-                                <div class="float-end">
-                                    <a th:href="@{'/admin/export-pdf/'+${billdetail.maDonHang}}"
-                                       class="btn btn-success me-1"><i class="fa fa-print"></i></a>
-                                    <a th:href="@{'/admin/bill-list'}">
-                                        <button type="button" class="btn btn-secondary w-md" data-dismiss="modal">
-                                            Đóng
-                                        </button>
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="py-2 bill-detail-update-status">
-                            <form th:action="@{'/admin/update-bill-status/' + ${billdetail.maDonHang}}" method="get">
-                                <input type="hidden" name="trangThaiDonHang" value="HUY"/>
-                                <button type="button" class="cancel-btn btn btn-danger rounded"
-                                        style="float: right; margin-bottom: 10px"
-                                        th:if="${billdetail.trangThaiDonHang != T(com.example.demo.entities.enumClass.BillStatus).CHO_HANG_VE &&
-                       billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).CHO_XAC_NHAN ||
-                       billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).CHO_LAY_HANG}">
-                                    <i class="far fa-times-circle"></i>&nbsp;Hủy đơn này
-                                </button>
-                            </form>
+<!--        .row:hover {-->
+<!--            transform: scale(1.01);-->
+<!--        }-->
 
-                            <form th:action="@{'/admin/update-bill-status/' + ${billdetail.maDonHang}}" method="get">
-                                <div th:data-status="${billdetail.trangThaiDonHang}" class="btn-update-status mt-2"
-                                     style="max-width: 180px"
-                                     th:if="${billdetail.trangThaiDonHang != T(com.example.demo.entities.enumClass.BillStatus).HUY &&
-                     billdetail.trangThaiDonHang != T(com.example.demo.entities.enumClass.BillStatus).HOAN_THANH}">
+<!--        @keyframes glowBorder {-->
+<!--            0% {-->
+<!--                box-shadow: 0 0 10px rgba(255, 182, 193, 0.3);-->
+<!--                border-color: #f9c5d1;-->
+<!--            }-->
+<!--            100% {-->
+<!--                box-shadow: 0 0 20px rgba(255, 105, 180, 0.6);-->
+<!--                border-color: #ffb6c1;-->
+<!--            }-->
+<!--        }-->
 
-                                    <!-- Chờ xác nhận -->
-                                    <span class="btn btn-secondary text-wrap rounded"
-                                          th:if="${billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).CHO_XAC_NHAN}"
-                                          data-status="CHO_XAC_NHAN"
-                                          data-out-of-stock="${billdetail.isOutOfStock}">
-    <i class="far fa-check-square text-wrap"></i>&nbsp; Xác nhận, duyệt đơn này
-</span>
+<!--        .row h5,-->
+<!--        .row h6,-->
+<!--        .row p {-->
+<!--            color: #6e2f5b;-->
+<!--        }-->
 
-                                    <!-- Chờ lấy hàng -->
-                                    <span class="btn btn-primary text-wrap rounded"
-                                          th:if="${billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).CHO_LAY_HANG}">
-                <i class="far fa-check-square text-wrap"></i>&nbsp; Xác nhận chuyển cho shipper
-            </span>
+<!--        .py-2.mb-4 {-->
+<!--            background: linear-gradient(135deg, #fff0f6, #ffeef2);-->
+<!--            border: 2px dashed #f9c5d1;-->
+<!--            border-radius: 14px;-->
+<!--            padding: 20px;-->
+<!--            box-shadow: 0 4px 16px rgba(255, 192, 203, 0.2);-->
+<!--            animation: gentlePulse 2s infinite ease-in-out;-->
+<!--            margin-top: 40px; /* 👈 thêm khoảng cách ở đây */-->
+<!--        }-->
 
-                                    <!-- Chờ hàng về -->
-                                    <span class="btn btn-warning text-wrap rounded"
-                                          th:if="${billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).CHO_HANG_VE}">
-                <i class="far fa-check-square text-wrap"></i>&nbsp; Xác nhận hàng đã về kho, duyệt đơn này
-            </span>
-                                    <!-- Nút hủy cho trạng thái "Chờ hàng về" -->
-                                    <form th:action="@{'/admin/update-bill-status/' + ${billdetail.maDonHang}}"
-                                          method="get">
-                                        <input type="hidden" name="trangThaiDonHang" value="HUY"/>
-                                        <button type="button" class="cancel-btn btn btn-danger rounded mt-4"
-                                                style="float: right; margin-bottom: 10px"
-                                                th:if="${billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).CHO_HANG_VE}">
-                                            <i class="far fa-times-circle"></i>&nbsp; Hủy đơn này
-                                        </button>
-                                    </form>
+<!--        .py-2.mb-4 h5 {-->
+<!--            font-weight: bold;-->
+<!--            color: #c2185b;-->
+<!--            font-size: 18px;-->
+<!--            margin-bottom: 10px;-->
+<!--        }-->
 
-                                    <!-- Chờ giao hàng -->
-                                    <span class="btn btn-success text-wrap rounded"
-                                          th:if="${billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).CHO_GIAO_HANG}">
-                <i class="far fa-check-square"></i> Giao hàng thành công
-            </span>
+<!--        .py-2.mb-4 p {-->
+<!--            font-size: 15px;-->
+<!--            color: #6e2f5b;-->
+<!--            margin-bottom: 6px;-->
+<!--        }-->
 
-                                    <!-- Giao hàng thất bại -->
-                                    <form th:action="@{'/admin/update-bill-status/' + ${billdetail.maDonHang}}"
-                                          method="get">
-                                        <input type="hidden" name="trangThaiDonHang" value="THAT_BAI"/>
-                                        <button type="button" class="failed-btn btn btn-danger rounded mt-4"
-                                                style="float: right; margin-bottom: 10px"
-                                                th:if="${billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).CHO_GIAO_HANG}">
-                                            <i class="far fa-times-circle"></i>&nbsp; Giao hàng thất bại
-                                        </button>
-                                    </form>
-                                </div>
-                            </form>
-                        </div>
+<!--        .py-2.mb-4 span {-->
+<!--            font-weight: 500;-->
+<!--        }-->
 
-                    </div>
-                </div>
-            </div>
-            <!-- end col -->
-        </div>
-    </div>
+<!--        .py-2.mb-4 .text-muted {-->
+<!--            font-style: italic;-->
+<!--            color: #999;-->
+<!--        }-->
 
-    <script>
-        $(".cancel-btn").on("click", function (e) {
-            e.stopPropagation();
-            Swal.fire({
-                title: "Xác nhận?",
-                text: "Bạn chắc chắn muốn hủy đơn này, thao tác này không thể trở lại!",
-                icon: "warning",
-                showCancelButton: true,
-                cancelButtonText: "Hủy",
-                confirmButtonText: "Xác nhận",
-                reverseButtons: true,
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    $(this).closest("form").submit();
-                }
-            });
-        });
+<!--        @keyframes gentlePulse {-->
+<!--            0% {-->
+<!--                box-shadow: 0 0 10px rgba(255, 192, 203, 0.15);-->
+<!--            }-->
+<!--            50% {-->
+<!--                box-shadow: 0 0 20px rgba(255, 182, 193, 0.35);-->
+<!--            }-->
+<!--            100% {-->
+<!--                box-shadow: 0 0 10px rgba(255, 192, 203, 0.15);-->
+<!--            }-->
+<!--        }-->
 
-        $(".failed-btn").on("click", function (e) {
-            e.stopPropagation();
+<!--        .voucher-section h5::before {-->
+<!--            content: "🎁";-->
+<!--            margin-right: 8px;-->
+<!--        }-->
 
-            Swal.fire({
-                title: "Xác nhận?",
-                text: "Đơn hàng chuyển sang trạng thái Giao hàng thất bại",
-                icon: "warning",
-                showCancelButton: true,
-                cancelButtonText: "Hủy",
-                confirmButtonText: "Xác nhận",
-                reverseButtons: true,
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    var form = $(this).closest("form");
-                    form.find("input[name='trangThaiDonHang']").val("THAT_BAI");
-                    form.submit();
-                }
-            });
-        });
+<!--        .voucher-section p::before {-->
+<!--            content: "💡";-->
+<!--            margin-right: 6px;-->
+<!--            color: #ff6699;-->
+<!--        }-->
 
-        $(".btn-update-status").on("click", function (e) {
-            e.stopPropagation();
-            var currentStatus = $(this).attr("data-status");
-            var nextStatus;
-            var statusMessage;
+<!--        /* Container của loại đơn */-->
+<!--        .loai-don-wrapper {-->
+<!--            padding: 16px 20px;-->
+<!--            background: linear-gradient(135deg, #e0fff9, #e8fef5);-->
+<!--            border: 2px solid #15db99;-->
+<!--            border-radius: 12px;-->
+<!--            box-shadow: 0 4px 14px rgba(21, 219, 153, 0.2);-->
+<!--            transition: transform 0.3s ease;-->
+<!--            margin-top: 20px;-->
+<!--        }-->
 
-            switch (currentStatus) {
-                case "CHO_XAC_NHAN":
-                    nextStatus = "CHO_LAY_HANG";
-                    statusMessage = "Chờ lấy hàng";
-                    break;
-                case "CHO_LAY_HANG":
-                    nextStatus = "CHO_GIAO_HANG";
-                    statusMessage = "Chờ giao hàng";
-                    break;
-                case "CHO_GIAO_HANG":
-                    nextStatus = "HOAN_THANH";
-                    statusMessage = "Hoàn thành";
-                    break;
-                case "CHO_HANG_VE":
-                    nextStatus = "CHO_LAY_HANG";
-                    statusMessage = "Chờ lấy hàng";
-                    break;
-            }
+<!--        /* Hover nhẹ cho vui mắt */-->
+<!--        .loai-don-wrapper:hover {-->
+<!--            transform: scale(1.02);-->
+<!--        }-->
 
-            Swal.fire({
-                title: "Xác nhận?",
-                text: "Xác nhận chuyển sang " + statusMessage, // Sử dụng dấu cộng để nối chuỗi
-                icon: "warning",
-                showCancelButton: true,
-                cancelButtonText: "Hủy",
-                confirmButtonText: "Xác nhận",
-                reverseButtons: true,
-            }).then((result) => {
-                debugger
+<!--        /* Tiêu đề màu xanh mượt */-->
+<!--        .loai-don-wrapper h5 {-->
+<!--            color: #15db99 !important;-->
+<!--            font-weight: bold;-->
+<!--            font-size: 20px;-->
+<!--            margin-top: 5px;-->
+<!--            animation: pulseText 2.5s infinite ease-in-out;-->
+<!--        }-->
+
+<!--        /* Thêm biểu tượng cho vui */-->
+<!--        .loai-don-wrapper::before {-->
+<!--            font-size: 22px;-->
+<!--            margin-right: 8px;-->
+<!--        }-->
+
+<!--        /* Nhấp nháy chữ */-->
+<!--        @keyframes pulseText {-->
+<!--            0%, 100% {-->
+<!--                opacity: 1;-->
+<!--            }-->
+<!--            50% {-->
+<!--                opacity: 0.7;-->
+<!--            }-->
+<!--        }-->
+
+<!--        .ma-giao-dich-wrapper {-->
+<!--            padding: 12px 18px;-->
+<!--            border: 2px dashed #ffc107;-->
+<!--            background-color: #fffbea;-->
+<!--            border-radius: 10px;-->
+<!--            box-shadow: 0 2px 10px rgba(255, 193, 7, 0.15);-->
+<!--            display: flex;-->
+<!--            align-items: center;-->
+<!--            gap: 10px;-->
+<!--            margin-top: 15px;-->
+<!--        }-->
+
+<!--        /* Icon hoặc emoji bên cạnh */-->
+<!--        .ma-giao-dich-wrapper::before {-->
+<!--            font-size: 20px;-->
+<!--        }-->
+
+<!--        /* Làm đậm mã */-->
+<!--        .ma-giao-dich-wrapper .text-warning {-->
+<!--            font-weight: 700;-->
+<!--            font-size: 16px;-->
+<!--        }-->
+
+<!--        /* Tiêu đề danh sách đơn hàng - kiểu nhẹ nhàng */-->
+<!--        .font-size-15 {-->
+<!--            font-size: 20px;-->
+<!--            font-weight: 600;-->
+<!--            color: #d63384; /* màu hồng hoa anh đào */-->
+<!--            margin-bottom: 16px;-->
+<!--            position: relative;-->
+<!--            font-family: 'Segoe UI', sans-serif;-->
+<!--        }-->
+
+<!--        .font-size-15::before {-->
+<!--            content: "🌸";-->
+<!--            margin-right: 10px;-->
+<!--            font-size: 20px;-->
+<!--        }-->
+
+<!--        /* Khung bảng */-->
+<!--        .table-responsive {-->
+<!--            background-color: #fff0f5;-->
+<!--            border-radius: 12px;-->
+<!--            padding: 16px;-->
+<!--            box-shadow: 0 4px 12px rgba(255, 182, 193, 0.3);-->
+<!--        }-->
+
+<!--        /* Tiêu đề bảng */-->
+<!--        .table thead th {-->
+<!--            background-color: #ffe4ec;-->
+<!--            color: #d63384;-->
+<!--            font-weight: bold;-->
+<!--            font-size: 14px;-->
+<!--            text-align: center;-->
+<!--        }-->
+
+<!--        /* Nội dung bảng */-->
+<!--        .table tbody td {-->
+<!--            vertical-align: middle;-->
+<!--            font-size: 14px;-->
+<!--            text-align: center;-->
+<!--            color: #555;-->
+<!--            font-family: 'Segoe UI', sans-serif;-->
+<!--        }-->
+
+<!--        /* Các dòng đặc biệt (voucher, phí ship, tổng tiền) */-->
+<!--        .table tbody tr:nth-last-child(3),-->
+<!--        .table tbody tr:nth-last-child(2),-->
+<!--        .table tbody tr:last-child {-->
+<!--            background-color: #fff7fb;-->
+<!--        }-->
+
+<!--        /* Tổng tiền cuối cùng nổi bật hơn */-->
+<!--        .table tbody tr:last-child h4 {-->
+<!--            color: #c2185b;-->
+<!--            font-weight: bold;-->
+<!--            font-size: 18px;-->
+<!--        }-->
+
+<!--        /* Dòng hover */-->
+<!--        .table tbody tr:hover {-->
+<!--            background-color: #ffeef5;-->
+<!--            transition: background-color 0.3s ease-in-out;-->
+<!--        }-->
+
+<!--        /* Nút */-->
+<!--        .d-print-none .btn-success {-->
+<!--            background-color: #d63384;-->
+<!--            border: none;-->
+<!--        }-->
+
+<!--        .d-print-none .btn-success:hover {-->
+<!--            background-color: #c2185b;-->
+<!--        }-->
+
+<!--        .d-print-none .btn-secondary {-->
+<!--            background-color: #f8bbd0;-->
+<!--            border: none;-->
+<!--            color: #000;-->
+<!--        }-->
+
+<!--        .d-print-none .btn-secondary:hover {-->
+<!--            background-color: #f48fb1;-->
+<!--            color: #000;-->
+<!--        }-->
+
+<!--        /* Container nút: canh giữa đẹp */-->
+<!--        .d-print-none .float-end {-->
+<!--            display: flex;-->
+<!--            justify-content: flex-end;-->
+<!--            gap: 16px;-->
+<!--            margin-top: 20px;-->
+<!--        }-->
+
+<!--        /* Nút chung style */-->
+<!--        .d-print-none .btn {-->
+<!--            padding: 14px 28px;-->
+<!--            font-size: 16px;-->
+<!--            font-weight: bold;-->
+<!--            border-radius: 12px;-->
+<!--            transition: all 0.3s ease-in-out;-->
+<!--            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);-->
+<!--        }-->
+
+<!--        /* Nút IN – màu sakura đậm */-->
+<!--        .d-print-none .btn-success {-->
+<!--            background-color: #d63384;-->
+<!--            color: white;-->
+<!--            border: none;-->
+<!--            position: relative;-->
+<!--            overflow: hidden;-->
+<!--        }-->
+
+<!--        .d-print-none .btn-success:hover {-->
+<!--            background-color: #c2185b;-->
+<!--            transform: scale(1.05);-->
+<!--            box-shadow: 0 8px 20px rgba(214, 51, 132, 0.5);-->
+<!--        }-->
+
+<!--        /* Hiệu ứng wave nhẹ khi hover */-->
+<!--        .d-print-none .btn-success::after {-->
+<!--            content: '';-->
+<!--            position: absolute;-->
+<!--            width: 120%;-->
+<!--            height: 100%;-->
+<!--            top: 0;-->
+<!--            left: -100%;-->
+<!--            background: rgba(255, 255, 255, 0.2);-->
+<!--            transform: skewX(-20deg);-->
+<!--            transition: left 0.6s;-->
+<!--        }-->
+
+<!--        .d-print-none .btn-success:hover::after {-->
+<!--            left: 100%;-->
+<!--        }-->
+
+<!--        /* Nút ĐÓNG – pastel nhẹ nhàng */-->
+<!--        .d-print-none .btn-secondary {-->
+<!--            background-color: #f8bbd0;-->
+<!--            color: #000;-->
+<!--            border: none;-->
+<!--            position: relative;-->
+<!--            overflow: hidden;-->
+<!--        }-->
+
+<!--        .d-print-none .btn-secondary:hover {-->
+<!--            background-color: #f48fb1;-->
+<!--            transform: scale(1.05);-->
+<!--            box-shadow: 0 8px 20px rgba(248, 187, 208, 0.6);-->
+<!--        }-->
+
+<!--        /* Hiệu ứng ánh sáng mờ */-->
+<!--        .d-print-none .btn-secondary::after {-->
+<!--            content: '';-->
+<!--            position: absolute;-->
+<!--            width: 120%;-->
+<!--            height: 100%;-->
+<!--            top: 0;-->
+<!--            left: -100%;-->
+<!--            background: rgba(255, 255, 255, 0.3);-->
+<!--            transform: skewX(-20deg);-->
+<!--            transition: left 0.6s;-->
+<!--        }-->
+
+<!--        .d-print-none .btn-secondary:hover::after {-->
+<!--            left: 100%;-->
+<!--        }-->
+
+<!--        /* ========== Nút Hủy ========== */-->
+<!--        .cancel-btn {-->
+<!--            background: #f44336 !important;-->
+<!--            color: white !important;-->
+<!--            font-weight: bold;-->
+<!--            font-size: 15px;-->
+<!--            padding: 12px 20px;-->
+<!--            border-radius: 12px !important;-->
+<!--            border: none;-->
+<!--            transition: all 0.3s ease-in-out;-->
+<!--            box-shadow: 0 6px 12px rgba(244, 67, 54, 0.3);-->
+<!--        }-->
+
+<!--        .cancel-btn:hover {-->
+<!--            background: #d32f2f !important;-->
+<!--            transform: scale(1.05);-->
+<!--            box-shadow: 0 8px 20px rgba(244, 67, 54, 0.5);-->
+<!--        }-->
+
+<!--        /* ========== Nút Giao hàng thất bại ========== */-->
+<!--        .failed-btn {-->
+<!--            background: #9c27b0 !important;-->
+<!--            color: white !important;-->
+<!--            font-weight: bold;-->
+<!--            font-size: 15px;-->
+<!--            padding: 12px 20px;-->
+<!--            border-radius: 12px !important;-->
+<!--            border: none;-->
+<!--            transition: all 0.3s ease-in-out;-->
+<!--            box-shadow: 0 6px 12px rgba(156, 39, 176, 0.3);-->
+<!--        }-->
+
+<!--        .failed-btn:hover {-->
+<!--            background: #7b1fa2 !important;-->
+<!--            transform: scale(1.05);-->
+<!--            box-shadow: 0 8px 20px rgba(156, 39, 176, 0.5);-->
+<!--        }-->
+
+<!--        /* ========== Nút Trạng thái: xác nhận, giao hàng,... ========== */-->
+<!--        .btn-update-status .btn {-->
+<!--            font-size: 15px;-->
+<!--            font-weight: bold;-->
+<!--            padding: 12px 20px;-->
+<!--            border-radius: 12px !important;-->
+<!--            transition: all 0.3s ease;-->
+<!--            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);-->
+<!--        }-->
+
+<!--        .btn-update-status .btn:hover {-->
+<!--            transform: translateY(-2px) scale(1.03);-->
+<!--            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);-->
+<!--        }-->
+
+<!--        /* Mỗi trạng thái có màu riêng thêm style nếu cần */-->
+<!--        .btn-update-status .btn-secondary {-->
+<!--            background-color: #607d8b !important;-->
+<!--            color: #fff !important;-->
+<!--        }-->
+
+<!--        .btn-update-status .btn-primary {-->
+<!--            background-color: #3f51b5 !important;-->
+<!--            color: #fff !important;-->
+<!--        }-->
+
+<!--        .btn-update-status .btn-warning {-->
+<!--            background-color: #ffc107 !important;-->
+<!--            color: #000 !important;-->
+<!--        }-->
+
+<!--        .btn-update-status .btn-success {-->
+<!--            background-color: #4caf50 !important;-->
+<!--            color: #fff !important;-->
+<!--        }-->
+
+<!--        @keyframes pulse-glow {-->
+<!--            0% {-->
+<!--                box-shadow: 0 0 0 0 rgba(255, 64, 129, 0.4);-->
+<!--            }-->
+<!--            70% {-->
+<!--                box-shadow: 0 0 0 10px rgba(255, 64, 129, 0);-->
+<!--            }-->
+<!--            100% {-->
+<!--                box-shadow: 0 0 0 0 rgba(255, 64, 129, 0);-->
+<!--            }-->
+<!--        }-->
+
+<!--        .cancel-btn:hover,-->
+<!--        .failed-btn:hover {-->
+<!--            animation: pulse-glow 1.2s infinite;-->
+<!--        }-->
 
 
-                if (result.isConfirmed) {
-                    let data = $('td[data-id]').map((index, item) => ({
-                        productDetailId: $(item).attr("data-id"),
-                        quantity: $(item).attr("data-quantity")
-                    })).get();
-                    fetch('/admin/api/bill-detail/check-bill', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify(data)
-                    })
-                        .then(response => {
-                            if (response.status === 200) {
-                                response.status // Trả về dữ liệu JSON nếu thành công
-                            } else {
-                                throw new Error(`HTTP error! status: ${response.status}`); // Nếu không phải 200, ném lỗi
-                            }
-                        })
-                        .then(result => {
-                            const form = $(".btn-update-status").closest("form");
-                            var url = form.attr("action") + "?trangThaiDonHang=" + nextStatus; // Nối chuỗi đúng cách
-                            window.location.href = url;
-                        })
-                        .catch(error => {
-                            alert("Không đủ số lượng");
-                            console.error('Error:', error.message); // Xử lý lỗi (lỗi HTTP hoặc lỗi mạng)
-                        });
+<!--    </style>-->
 
-                }
-            });
-        });
-    </script>
 
-</div>
-</body>
 
-</html>
+<!--    <div class="container">-->
+
+<!--        <div id="sakura-container"></div>-->
+
+<!--        <script>-->
+<!--            const container = document.getElementById('sakura-container');-->
+
+<!--            function createPetal() {-->
+<!--                const petal = document.createElement('div');-->
+<!--                petal.classList.add('sakura');-->
+<!--                petal.style.left = Math.random() * 100 + 'vw';-->
+<!--                petal.style.animationDuration = (5 + Math.random() * 5) + 's';-->
+<!--                petal.style.opacity = Math.random();-->
+<!--                petal.style.transform = `rotate(${Math.random() * 360}deg)`;-->
+<!--                container.appendChild(petal);-->
+
+<!--                setTimeout(() => {-->
+<!--                    petal.remove();-->
+<!--                }, 10000);-->
+<!--            }-->
+
+<!--            setInterval(createPetal, 300);-->
+<!--        </script>-->
+
+
+<!--        <div class="row">-->
+<!--            <div class="col-lg-12">-->
+<!--                <div class="card" style="position: relative">-->
+<!--                    <div class="card-body">-->
+<!--                        <div class="invoice-title">-->
+<!--                            &lt;!&ndash;                            <h4 class="float-end font-size-15"><span class="badge bg-success font-size-12 ms-2" th:text="${billdetail.trangThaiDonHang}"></span></h4>&ndash;&gt;-->
+<!--                            <div class="float-end mr-4">-->
+<!--                                &lt;!&ndash; Add class 'active' to progress &ndash;&gt;-->
+<!--                                <div class="track"-->
+<!--                                     th:if="${ billdetail.trangThaiDonHang != T(com.example.demo.entities.enumClass.BillStatus).HUY}">-->
+<!--                                    &lt;!&ndash; Step 1: Chờ xác nhận &ndash;&gt;-->
+<!--                                    <div class="step"-->
+<!--                                         th:classappend="${-->
+<!--                 (billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).CHO_XAC_NHAN ||-->
+<!--                 billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).CHO_GIAO_HANG ||-->
+<!--                 billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).CHO_LAY_HANG ||-->
+<!--                 billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).THAT_BAI ||-->
+<!--                 billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).HOAN_THANH ? 'active' : 'd-none')}">-->
+<!--            <span class="icon">-->
+<!--                &lt;!&ndash; Icon &ndash;&gt;-->
+<!--                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 256 256">-->
+<!--                    <path fill="currentColor" d="M232 136.66A104.12...Z"/>-->
+<!--                </svg>-->
+<!--            </span>-->
+<!--                                        <span class="text">Chờ xác nhận</span>-->
+<!--                                    </div>-->
+
+<!--                                    &lt;!&ndash; Step 2: Chờ hàng về &ndash;&gt;-->
+<!--                                    <div class="step"-->
+<!--                                         th:classappend="${-->
+<!--                                         billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).CHO_HANG_VE  ? 'active' : 'd-none'}"-->
+<!--                                    >-->
+<!--            <span class="icon">-->
+<!--                <svg class="w-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">&lt;!&ndash;!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.&ndash;&gt;<path fill="#ffffff" d="M383.5 192c.3-5.3 .5-10.6 .5-16c0-51-15.9-96-40.2-127.6C319.5 16.9 288.2 0 256 0s-63.5 16.9-87.8 48.4C143.9 80 128 125 128 176c0 5.4 .2 10.7 .5 16L240 192l0 128-32 0c-7 0-13.7 1.5-19.7 4.2L68.2 192l28.3 0c-.3-5.3-.5-10.6-.5-16c0-64 22.2-121.2 57.1-159.3C62 49.3 18.6 122.6 4.2 173.6C1.5 183.1 9 192 18.9 192l6 0L165.2 346.3c-3.3 6.5-5.2 13.9-5.2 21.7l0 96c0 26.5 21.5 48 48 48l96 0c26.5 0 48-21.5 48-48l0-96c0-7.8-1.9-15.2-5.2-21.7L487.1 192l6 0c9.9 0 17.4-8.9 14.7-18.4C493.4 122.6 450 49.3 358.9 16.7C393.8 54.8 416 112.1 416 176c0 5.4-.2 10.7-.5 16l28.3 0L323.7 324.2c-6-2.7-12.7-4.2-19.7-4.2l-32 0 0-128 111.5 0z"/></svg>            </span>-->
+<!--                                        <span class="text">Chờ hàng về</span>-->
+<!--                                    </div>-->
+
+<!--                                    &lt;!&ndash; Step 3: Chờ lấy hàng &ndash;&gt;-->
+<!--                                    <div class="step"-->
+<!--                                         th:classappend="${-->
+<!--                         billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).CHO_GIAO_HANG ||-->
+<!--                         billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).CHO_LAY_HANG ||-->
+<!--                         billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).THAT_BAI ||-->
+<!--                         billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).HOAN_THANH ? 'active' : ''}">-->
+<!--                    <span class="icon">-->
+<!--                        &lt;!&ndash; Icon &ndash;&gt;-->
+<!--                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">-->
+<!--                            <g fill="none" stroke-width="1.5">-->
+<!--                                <path fill="currentColor"-->
+<!--                                      d="m2.695 7.185l9 4l.61-1.37l-9-4l-.61 1.37ZM12.75 21.5v-11h-1.5v11h1.5Zm-.445-10.315l9-4l-.61-1.37l-9 4l.61 1.37Z"/>-->
+<!--                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"-->
+<!--                                      d="M3 17.11V6.89a.6.6 0 0 1 .356-.548l8.4-3.734a.6.6 0 0 1 .488 0l8.4 3.734A.6.6 0 0 1 21 6.89v10.22a.6.6 0 0 1-.356.548l-8.4 3.734a.6.6 0 0 1-.488 0l-8.4-3.734A.6.6 0 0 1 3 17.11Z"/>-->
+<!--                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"-->
+<!--                                      d="m7.5 4.5l8.644 3.842a.6.6 0 0 1 .356.548v3.61"/>-->
+<!--                            </g>-->
+<!--                        </svg>-->
+<!--                    </span>-->
+<!--                                        <span class="text">Chờ lấy hàng</span>-->
+<!--                                    </div>-->
+
+<!--                                    &lt;!&ndash; Step 4: Chờ giao hàng &ndash;&gt;-->
+<!--                                    <div class="step"-->
+<!--                                         th:classappend="${-->
+<!--                 billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).CHO_GIAO_HANG ||-->
+<!--                 billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).THAT_BAI ||-->
+<!--                 billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).HOAN_THANH ? 'active' : ''}">-->
+<!--            <span class="icon">-->
+<!--                &lt;!&ndash; Icon &ndash;&gt;-->
+<!--                <i class="fa fa-truck"></i>-->
+<!--            </span>-->
+<!--                                        <span class="text">Chờ giao hàng</span>-->
+<!--                                    </div>-->
+
+<!--                                    &lt;!&ndash; Step 5: Hoàn thành &ndash;&gt;-->
+<!--                                    <div class="step"-->
+<!--                                         th:classappend="${-->
+<!--                 billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).THAT_BAI ||-->
+<!--                 billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).HOAN_THANH ? 'active' : ''}">-->
+<!--            <span class="icon">-->
+<!--                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">-->
+<!--                    <path fill="currentColor" d="M19 13c.7 0 1.37...Z"/>-->
+<!--                </svg>-->
+<!--            </span>-->
+<!--                                        <span class="text">Hoàn thành</span>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+
+<!--                                &lt;!&ndash; ĐÃ HỦY &ndash;&gt;-->
+<!--                                <div th:if="${billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).HUY}">-->
+<!--                                    <div class="text-danger font-weight-bold border rounded p-2 border-danger">-->
+<!--                                        ĐÃ HỦY-->
+<!--                                    </div>-->
+<!--                                </div>-->
+
+<!--                                &lt;!&ndash; HOÀN TRẢ &ndash;&gt;-->
+
+<!--                            </div>-->
+
+<!--                            <div class="mb-4 thongtin-3d">-->
+<!--                                <h2 class="mb-1 text-muted">Mã HD: [[${billdetail.maDinhDanh}]]</h2>-->
+<!--                            </div>-->
+<!--                            <div class="mb-3 thongtin-3d">-->
+<!--                                <h2 class="mb-1 text-muted">POLO HUB</h2>-->
+<!--                            </div>-->
+
+<!--                            <div class="text-muted thongtin-3d">-->
+<!--                                <p class="mb-1">Đ/C: Toà Nhà Fpoly Trịnh Văn Bô</p>-->
+<!--                                <p class="mb-1"><i class="uil uil-envelope-alt me-1"></i>Email: PoloHub@gmail.com</p>-->
+<!--                                <p><i class="uil uil-phone me-1"></i>SĐT: 19009000-66668888</p>-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+<!--                        <div class="scene-container">-->
+<!--                            <img src="https://png.pngtree.com/png-clipart/20231024/original/pngtree-cherry-blossom-tree-png-image_13407092.png" class="tree tree-left" />-->
+
+<!--                            <img src="https://e7.pngegg.com/pngimages/344/945/png-clipart-haruka-nanase-makoto-tachibana-character-anime-light-novel-anime-cartoon-shoe.png" class="character" />-->
+
+<!--                            <img src="https://png.pngtree.com/png-clipart/20231024/original/pngtree-cherry-blossom-tree-png-image_13407092.png" class="tree tree-right" />-->
+<!--                        </div>-->
+
+
+<!--                        <hr class="my-4"/>-->
+
+<!--                        <div class="row">-->
+<!--                            <div class="col-sm-6">-->
+<!--                                <div class="text-muted">-->
+<!--                                    <h5 class="font-size-16 mb-3">Khách hàng:</h5>-->
+<!--                                    <h5 class="font-size-15 mb-2" th:if="${billdetail.tenKhachHang != null}"-->
+<!--                                        th:text="${billdetail.tenKhachHang}">-->
+<!--                                        Preston Miller-->
+<!--                                    </h5>-->
+<!--                                    <h6 class="font-size-15 mb-2 font-italic"-->
+<!--                                        th:if="${billdetail.tenKhachHang == null}">-->
+<!--                                        Khách lẻ-->
+<!--                                    </h6>-->
+<!--                                    <p class="mb-1" th:if="${billdetail.tenKhachHang != null}"-->
+<!--                                       th:text="${billdetail.diaChi}">-->
+<!--                                        4068 Post Avenue Newfolden, MN 56738-->
+<!--                                    </p>-->
+<!--                                    <p th:if="${billdetail.tenKhachHang != null}"-->
+<!--                                       th:text="${billdetail.soDienThoai}">-->
+<!--                                        001-234-5678-->
+<!--                                    </p>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            &lt;!&ndash; end col &ndash;&gt;-->
+<!--                            <div class="col-sm-6">-->
+<!--                                <div class="text-muted text-sm-end">-->
+<!--                                    <div class="mt-4">-->
+<!--                                        <h5 class="font-size-15 mb-1">Ngày mua hàng:</h5>-->
+<!--                                        <p-->
+<!--                                                th:text="${#temporals.format(billdetail.createdDate, 'dd-MM-yyyy HH:mm')}">-->
+<!--                                            25/11/2023-->
+<!--                                        </p>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                            &lt;!&ndash; end col &ndash;&gt;-->
+<!--                        </div>-->
+<!--                        &lt;!&ndash; end row &ndash;&gt;-->
+<!--                        <div class="py-2 mb-4 voucher-section">-->
+<!--                            <div>-->
+<!--                                <h5>Voucher:</h5>-->
+<!--                            </div>-->
+<!--                            <div th:if="${billdetail.voucherName != null}">-->
+<!--                                <p style="color: red; font-size: 16px" th:text="${billdetail.voucherName}">-->
+<!--                                </p>-->
+<!--                                <th:block th:switch="${billdetail.getDiscountType()}">-->
+<!--                                    <p th:case="2" class="mb-1" th:if="${billdetail.getDiscountAmount() != null}">-->
+<!--                                            <span>-->
+<!--                                                Giảm:-->
+<!--                                            </span>-->
+<!--                                        <span th:text="${#numbers.formatInteger(billdetail.getDiscountAmount(),3,'POINT') + 'VND'}"></span>-->
+<!--                                    </p>-->
+<!--                                    <p th:case="1" class="mb-1" th:if="${billdetail.getDiscountPercent() != null}">-->
+<!--                                            <span>-->
+<!--                                                Giảm:-->
+<!--                                            </span>-->
+<!--                                        <span th:text="${#numbers.formatInteger(billdetail.getDiscountPercent(),2,'POINT') + '%'}"></span>-->
+<!--                                    </p>-->
+<!--                                </th:block>-->
+
+<!--                                <p class="mb-1" th:if="${billdetail.getDiscountMinimumAmountInCart != null}">-->
+<!--                                        <span>-->
+<!--                                            Hóa đơn tối thiểu:-->
+<!--                                        </span>-->
+<!--                                    <span th:text="${#numbers.formatInteger(billdetail.getDiscountMinimumAmountInCart(),3,'POINT') + 'VND'}"></span>-->
+<!--                                </p>-->
+
+<!--                                <p class="mb-1" th:if="${billdetail.getDiscountMaximumAmount != null}">-->
+<!--                                            <span>-->
+<!--                                                Giảm tối đa:-->
+<!--                                            </span>-->
+<!--                                    <span th:text="${#numbers.formatInteger(billdetail.getDiscountMaximumAmount(),3,'POINT') + 'VND'}"></span>-->
+<!--                                </p>-->
+<!--                                <p class="mb-1" th:if="${billdetail.getDiscountEndDate() != null}">-->
+<!--                                                <span>-->
+<!--                                                    Hiệu lực tới:-->
+<!--                                                </span>-->
+<!--                                    <span th:text="${#dates.format(billdetail.getDiscountEndDate(),'HH:mm dd-MM-yyyy')}"></span>-->
+<!--                                </p>-->
+<!--                                &lt;!&ndash;                                    <p class="mb-1" th:if="${billdetail.getDiscountUsage() != null}">&ndash;&gt;-->
+<!--                                &lt;!&ndash;                                                    <span>&ndash;&gt;-->
+<!--                                &lt;!&ndash;                                                        Số lượng còn lại:&ndash;&gt;-->
+<!--                                &lt;!&ndash;                                                    </span>&ndash;&gt;-->
+<!--                                &lt;!&ndash;                                        <span th:text="${billdetail.getDiscountUsage()}"></span>&ndash;&gt;-->
+<!--                                &lt;!&ndash;                                    </p>&ndash;&gt;-->
+<!--                            </div>-->
+
+<!--                            <div th:if="${billdetail.voucherName == null}">-->
+<!--                                <span class="text-muted">Không sử dụng</span>-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+<!--                        <div class="mb-4 loai-don-wrapper">-->
+<!--                            <div>-->
+<!--                                📦 Loại đơn :-->
+<!--                                <h5 style="color: rgb(21, 219, 153)">-->
+<!--                                        <span-->
+<!--                                                th:if="${billdetail.loaiHoaDon == T(com.example.demo.entities.enumClass.InvoiceType).OFFLINE}">Tại-->
+<!--                                            quầy</span>-->
+<!--                                    <span-->
+<!--                                            th:if="${billdetail.loaiHoaDon == T(com.example.demo.entities.enumClass.InvoiceType).ONLINE}">Online</span>-->
+<!--                                </h5>-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+<!--                        <div class="mb-4 ma-giao-dich-wrapper">-->
+<!--                            <span>💳 Mã giao dịch: <span class="text-warning font-weight-bold"-->
+<!--                                                         th:text="${billdetail.maGiaoDich}"></span></span>-->
+<!--                        </div>-->
+
+<!--                        <div class="py-2">-->
+<!--                            <h5 class="font-size-15">Danh sách đơn hàng</h5>-->
+
+<!--                            <div class="table-responsive">-->
+<!--                                <table class="table align-middle table-nowrap table-centered mb-0">-->
+<!--                                    <thead>-->
+<!--                                    <tr>-->
+<!--                                        <th>Sản phẩm</th>-->
+<!--                                        <th>Màu sắc</th>-->
+<!--                                        <th>Kích cỡ</th>-->
+<!--                                        <th>Giá tiền</th>-->
+<!--                                        <th>Số lượng</th>-->
+<!--                                        <th class="text-end" style="width: 120px">Thành tiền</th>-->
+<!--                                    </tr>-->
+<!--                                    </thead>-->
+<!--                                    &lt;!&ndash; end thead &ndash;&gt;-->
+<!--                                    <tbody>-->
+<!--                                    <tr th:each="productDetail : ${billDetailProduct}">-->
+<!--                                        <td th:data-id="${productDetail.id}"-->
+<!--                                            th:data-quantity="${productDetail.soLuong}">-->
+<!--                                            <div>-->
+<!--                                                <h6 class="text-truncate font-size-14 mb-1"-->
+<!--                                                    th:text="${productDetail.tenSanPham}">-->
+<!--                                                    Black Strap A012-->
+<!--                                                </h6>-->
+<!--                                            </div>-->
+<!--                                        </td>-->
+<!--                                        <td th:text="${productDetail.tenMau}"></td>-->
+<!--                                        <td th:text="${productDetail.kichCo}">$ 245.50</td>-->
+<!--                                        <td-->
+<!--                                                th:text="${#numbers.formatDecimal(productDetail.giaTien, 0, 'POINT', 0, 'COMMA')}">-->
+<!--                                        </td>-->
+<!--                                        <td th:text="${productDetail.soLuong}"></td>-->
+<!--                                        <td class="text-end"-->
+<!--                                            th:text="${#numbers.formatDecimal(productDetail.tongTien, 0, 'POINT', 0, 'COMMA')}">-->
+<!--                                            $ 245.50-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
+<!--                                    &lt;!&ndash; end tr &ndash;&gt;-->
+
+<!--                                    <tr>-->
+<!--                                        <th scope="row" colspan="5" class="text-end">-->
+<!--                                            Tổng thanh toán sản phẩm-->
+<!--                                        </th>-->
+<!--                                        <td class="text-end"-->
+<!--                                            th:text="${#numbers.formatDecimal(total, 0, 'POINT', 0, 'COMMA')}">-->
+<!--                                            $732.50-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
+<!--                                    &lt;!&ndash; end tr &ndash;&gt;-->
+<!--                                    <tr>-->
+<!--                                        <th scope="row" colspan="5" class="border-0 text-end">-->
+<!--                                            Voucher :-->
+<!--                                        </th>-->
+<!--                                        <td class="border-0 text-end"-->
+<!--                                            th:text="${#numbers.formatDecimal(billdetail.tienKhuyenMai, 0, 'POINT', 0, 'COMMA')}">-->
+<!--                                            - $25.50-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
+<!--                                    &lt;!&ndash; end tr &ndash;&gt;-->
+<!--                                    <tr>-->
+<!--                                        <th scope="row" colspan="5" class="border-0 text-end">-->
+<!--                                            Phí ship :-->
+<!--                                        </th>-->
+<!--                                        <td class="border-0 text-end">0</td>-->
+<!--                                    </tr>-->
+<!--                                    &lt;!&ndash; end tr &ndash;&gt;-->
+
+<!--                                    &lt;!&ndash; end tr &ndash;&gt;-->
+<!--                                    <tr>-->
+<!--                                        <th scope="row" colspan="5" class="border-0 text-end">-->
+<!--                                            Tổng thanh toán-->
+<!--                                        </th>-->
+<!--                                        <td class="border-0 text-end">-->
+<!--                                            <h4 class="m-0 fw-semibold"-->
+<!--                                                th:text="${#numbers.formatDecimal(total - billdetail.tienKhuyenMai, 0, 'POINT', 0, 'COMMA')}">-->
+<!--                                                $739.00-->
+<!--                                            </h4>-->
+<!--                                        </td>-->
+<!--                                    </tr>-->
+<!--                                    &lt;!&ndash; end tr &ndash;&gt;-->
+<!--                                    </tbody>-->
+<!--                                    &lt;!&ndash; end tbody &ndash;&gt;-->
+<!--                                </table>-->
+<!--                                &lt;!&ndash; end table &ndash;&gt;-->
+<!--                            </div>-->
+<!--                            &lt;!&ndash; end table responsive &ndash;&gt;-->
+<!--                            <div class="d-print-none mt-4">-->
+<!--                                <div class="float-end">-->
+<!--                                    <a th:href="@{'/admin/export-pdf/'+${billdetail.maDonHang}}"-->
+<!--                                       class="btn btn-success me-1"><i class="fa fa-print"></i></a>-->
+<!--                                    <a th:href="@{'/admin/bill-list'}">-->
+<!--                                        <button type="button" class="btn btn-secondary w-md" data-dismiss="modal">-->
+<!--                                            Đóng-->
+<!--                                        </button>-->
+<!--                                    </a>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+
+<!--                        <div class="py-2 bill-detail-update-status">-->
+<!--                            <form th:action="@{'/admin/update-bill-status/' + ${billdetail.maDonHang}}" method="get">-->
+<!--                                <input type="hidden" name="trangThaiDonHang" value="HUY"/>-->
+<!--                                <button type="button" class="cancel-btn btn btn-danger rounded"-->
+<!--                                        style="float: right; margin-bottom: 10px"-->
+<!--                                        th:if="${billdetail.trangThaiDonHang != T(com.example.demo.entities.enumClass.BillStatus).CHO_HANG_VE &&-->
+<!--                       billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).CHO_XAC_NHAN ||-->
+<!--                       billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).CHO_LAY_HANG}">-->
+<!--                                    <i class="far fa-times-circle"></i>&nbsp;Hủy đơn này-->
+<!--                                </button>-->
+<!--                            </form>-->
+
+<!--                            <form th:action="@{'/admin/update-bill-status/' + ${billdetail.maDonHang}}" method="get">-->
+<!--                                <div th:data-status="${billdetail.trangThaiDonHang}" class="btn-update-status mt-2"-->
+<!--                                     style="max-width: 180px"-->
+<!--                                     th:if="${billdetail.trangThaiDonHang != T(com.example.demo.entities.enumClass.BillStatus).HUY &&-->
+<!--                     billdetail.trangThaiDonHang != T(com.example.demo.entities.enumClass.BillStatus).HOAN_THANH}">-->
+
+<!--                                    &lt;!&ndash; Chờ xác nhận &ndash;&gt;-->
+<!--                                    <span class="btn btn-secondary text-wrap rounded"-->
+<!--                                          th:if="${billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).CHO_XAC_NHAN}"-->
+<!--                                          data-status="CHO_XAC_NHAN"-->
+<!--                                          data-out-of-stock="${billdetail.isOutOfStock}">-->
+<!--    <i class="far fa-check-square text-wrap"></i>&nbsp; Xác nhận, duyệt đơn này-->
+<!--</span>-->
+
+<!--                                    &lt;!&ndash; Chờ lấy hàng &ndash;&gt;-->
+<!--                                    <span class="btn btn-primary text-wrap rounded"-->
+<!--                                          th:if="${billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).CHO_LAY_HANG}">-->
+<!--                <i class="far fa-check-square text-wrap"></i>&nbsp; Xác nhận chuyển cho shipper-->
+<!--            </span>-->
+
+<!--                                    &lt;!&ndash; Chờ hàng về &ndash;&gt;-->
+<!--                                    <span class="btn btn-warning text-wrap rounded"-->
+<!--                                          th:if="${billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).CHO_HANG_VE}">-->
+<!--                <i class="far fa-check-square text-wrap"></i>&nbsp; Xác nhận hàng đã về kho, duyệt đơn này-->
+<!--            </span>-->
+<!--                                    &lt;!&ndash; Nút hủy cho trạng thái "Chờ hàng về" &ndash;&gt;-->
+<!--                                    <form th:action="@{'/admin/update-bill-status/' + ${billdetail.maDonHang}}"-->
+<!--                                          method="get">-->
+<!--                                        <input type="hidden" name="trangThaiDonHang" value="HUY"/>-->
+<!--                                        <button type="button" class="cancel-btn btn btn-danger rounded mt-4"-->
+<!--                                                style="float: right; margin-bottom: 10px"-->
+<!--                                                th:if="${billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).CHO_HANG_VE}">-->
+<!--                                            <i class="far fa-times-circle"></i>&nbsp; Hủy đơn này-->
+<!--                                        </button>-->
+<!--                                    </form>-->
+
+<!--                                    &lt;!&ndash; Chờ giao hàng &ndash;&gt;-->
+<!--                                    <span class="btn btn-success text-wrap rounded"-->
+<!--                                          th:if="${billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).CHO_GIAO_HANG}">-->
+<!--                <i class="far fa-check-square"></i> Giao hàng thành công-->
+<!--            </span>-->
+
+<!--                                    &lt;!&ndash; Giao hàng thất bại &ndash;&gt;-->
+<!--                                    <form th:action="@{'/admin/update-bill-status/' + ${billdetail.maDonHang}}"-->
+<!--                                          method="get">-->
+<!--                                        <input type="hidden" name="trangThaiDonHang" value="THAT_BAI"/>-->
+<!--                                        <button type="button" class="failed-btn btn btn-danger rounded mt-4"-->
+<!--                                                style="float: right; margin-bottom: 10px"-->
+<!--                                                th:if="${billdetail.trangThaiDonHang == T(com.example.demo.entities.enumClass.BillStatus).CHO_GIAO_HANG}">-->
+<!--                                            <i class="far fa-times-circle"></i>&nbsp; Giao hàng thất bại-->
+<!--                                        </button>-->
+<!--                                    </form>-->
+<!--                                </div>-->
+<!--                            </form>-->
+<!--                        </div>-->
+
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            &lt;!&ndash; end col &ndash;&gt;-->
+<!--        </div>-->
+<!--    </div>-->
+
+<!--    <script>-->
+<!--        $(".cancel-btn").on("click", function (e) {-->
+<!--            e.stopPropagation();-->
+<!--            Swal.fire({-->
+<!--                title: "Xác nhận?",-->
+<!--                text: "Bạn chắc chắn muốn hủy đơn này, thao tác này không thể trở lại!",-->
+<!--                icon: "warning",-->
+<!--                showCancelButton: true,-->
+<!--                cancelButtonText: "Hủy",-->
+<!--                confirmButtonText: "Xác nhận",-->
+<!--                reverseButtons: true,-->
+<!--            }).then((result) => {-->
+<!--                if (result.isConfirmed) {-->
+<!--                    $(this).closest("form").submit();-->
+<!--                }-->
+<!--            });-->
+<!--        });-->
+
+<!--        $(".failed-btn").on("click", function (e) {-->
+<!--            e.stopPropagation();-->
+
+<!--            Swal.fire({-->
+<!--                title: "Xác nhận?",-->
+<!--                text: "Đơn hàng chuyển sang trạng thái Giao hàng thất bại",-->
+<!--                icon: "warning",-->
+<!--                showCancelButton: true,-->
+<!--                cancelButtonText: "Hủy",-->
+<!--                confirmButtonText: "Xác nhận",-->
+<!--                reverseButtons: true,-->
+<!--            }).then((result) => {-->
+<!--                if (result.isConfirmed) {-->
+<!--                    var form = $(this).closest("form");-->
+<!--                    form.find("input[name='trangThaiDonHang']").val("THAT_BAI");-->
+<!--                    form.submit();-->
+<!--                }-->
+<!--            });-->
+<!--        });-->
+
+<!--        $(".btn-update-status").on("click", function (e) {-->
+<!--            e.stopPropagation();-->
+<!--            var currentStatus = $(this).attr("data-status");-->
+<!--            var nextStatus;-->
+<!--            var statusMessage;-->
+
+<!--            switch (currentStatus) {-->
+<!--                case "CHO_XAC_NHAN":-->
+<!--                    nextStatus = "CHO_LAY_HANG";-->
+<!--                    statusMessage = "Chờ lấy hàng";-->
+<!--                    break;-->
+<!--                case "CHO_LAY_HANG":-->
+<!--                    nextStatus = "CHO_GIAO_HANG";-->
+<!--                    statusMessage = "Chờ giao hàng";-->
+<!--                    break;-->
+<!--                case "CHO_GIAO_HANG":-->
+<!--                    nextStatus = "HOAN_THANH";-->
+<!--                    statusMessage = "Hoàn thành";-->
+<!--                    break;-->
+<!--                case "CHO_HANG_VE":-->
+<!--                    nextStatus = "CHO_LAY_HANG";-->
+<!--                    statusMessage = "Chờ lấy hàng";-->
+<!--                    break;-->
+<!--            }-->
+
+<!--            Swal.fire({-->
+<!--                title: "Xác nhận?",-->
+<!--                text: "Xác nhận chuyển sang " + statusMessage, // Sử dụng dấu cộng để nối chuỗi-->
+<!--                icon: "warning",-->
+<!--                showCancelButton: true,-->
+<!--                cancelButtonText: "Hủy",-->
+<!--                confirmButtonText: "Xác nhận",-->
+<!--                reverseButtons: true,-->
+<!--            }).then((result) => {-->
+<!--                debugger-->
+
+
+<!--                if (result.isConfirmed) {-->
+<!--                    let data = $('td[data-id]').map((index, item) => ({-->
+<!--                        productDetailId: $(item).attr("data-id"),-->
+<!--                        quantity: $(item).attr("data-quantity")-->
+<!--                    })).get();-->
+<!--                    fetch('/admin/api/bill-detail/check-bill', {-->
+<!--                        method: 'POST',-->
+<!--                        headers: {-->
+<!--                            'Content-Type': 'application/json'-->
+<!--                        },-->
+<!--                        body: JSON.stringify(data)-->
+<!--                    })-->
+<!--                        .then(response => {-->
+<!--                            if (response.status === 200) {-->
+<!--                                response.status // Trả về dữ liệu JSON nếu thành công-->
+<!--                            } else {-->
+<!--                                throw new Error(`HTTP error! status: ${response.status}`); // Nếu không phải 200, ném lỗi-->
+<!--                            }-->
+<!--                        })-->
+<!--                        .then(result => {-->
+<!--                            const form = $(".btn-update-status").closest("form");-->
+<!--                            var url = form.attr("action") + "?trangThaiDonHang=" + nextStatus; // Nối chuỗi đúng cách-->
+<!--                            window.location.href = url;-->
+<!--                        })-->
+<!--                        .catch(error => {-->
+<!--                            alert("Không đủ số lượng");-->
+<!--                            console.error('Error:', error.message); // Xử lý lỗi (lỗi HTTP hoặc lỗi mạng)-->
+<!--                        });-->
+
+<!--                }-->
+<!--            });-->
+<!--        });-->
+<!--    </script>-->
+
+<!--</div>-->
+<!--</body>-->
+
+<!--</html>-->
