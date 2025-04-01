@@ -5,7 +5,9 @@ import com.example.demo.entities.VerificationCode;
 import com.example.demo.exceptions.ShopApiException;
 import com.example.demo.repositories.AccountRepository;
 import com.example.demo.repositories.VerificationRepository;
+import com.example.demo.services.EmailService;
 import com.example.demo.services.VerificationCodeService;
+import com.example.demo.untils.RandomUtils;
 import jakarta.mail.MessagingException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -17,18 +19,18 @@ public class VerificationCodeServiceImpl implements VerificationCodeService {
 
     private final AccountRepository accountRepository;
 
-//    private final EmailService emailService;
+    private final EmailService emailService;
 
-    public VerificationCodeServiceImpl(VerificationRepository verificationRepository, AccountRepository accountRepository) {
+    public VerificationCodeServiceImpl(VerificationRepository verificationRepository, AccountRepository accountRepository, EmailService emailService) {
         this.verificationRepository = verificationRepository;
         this.accountRepository = accountRepository;
-//        this.emailService = emailService;
+        this.emailService = emailService;
     }
 
     @Override
     public VerificationCode createVerificationCode(String email) {
         // Tạo mã xác nhận ngẫu nhiên
-//        String verificationCodeValue = generateRandomCode();
+        String verificationCodeValue = generateRandomCode();
 
         // Thiết lập thời gian hết hạn cho mã xác nhận
         LocalDateTime expiryTime = LocalDateTime.now().plusMinutes(5);
@@ -41,7 +43,7 @@ public class VerificationCodeServiceImpl implements VerificationCodeService {
         // Tạo đối tượng VerificationCode và lưu vào cơ sở dữ liệu
         VerificationCode verificationCode = new VerificationCode();
         verificationCode.setAccount(account);
-//        verificationCode.setCode(verificationCodeValue);
+        verificationCode.setCode(verificationCodeValue);
         verificationCode.setExpiryTime(expiryTime);
 
         // Tính thời gian còn lại bằng giây (hoặc phút, nếu cần)
@@ -56,19 +58,19 @@ public class VerificationCodeServiceImpl implements VerificationCodeService {
         // Tạo nội dung email
         StringBuilder str = new StringBuilder();
         str.append("Mã xác nhận của bạn là: ");
-//        str.append("<b>").append(verificationCodeValue).append("</b><br><br>");
+        str.append("<b>").append(verificationCodeValue).append("</b><br><br>");
         str.append("Lưu ý: Mã xác nhận này chỉ có hiệu lực trong vòng ");
         str.append(minutesRemaining).append(" phút ");
         str.append(secondsOnly).append(" giây.<br>");
         str.append("Nếu mã hết hạn, vui lòng yêu cầu mã mới.");
 
         String subject = "Xác nhận đặt lại mật khẩu";
-//        try {
-////            emailService.sendEmail(account.getEmail(), subject, str.toString());
-//        } catch (MessagingException e) {
-//            System.out.println("Lỗi không gửi được email");
-//            e.printStackTrace();
-//        }
+        try {
+            emailService.sendEmail(account.getEmail(), subject, str.toString());
+        } catch (MessagingException e) {
+            System.out.println("Lỗi không gửi được email");
+            e.printStackTrace();
+        }
 
         return verificationRepository.save(verificationCode);
     }
@@ -77,12 +79,12 @@ public class VerificationCodeServiceImpl implements VerificationCodeService {
     @Override
     public Account verifyCode(String code) {
         // Tìm mã xác nhận trong cơ sở dữ liệu
-//        VerificationCode verificationCode = verificationRepository.findByCode(code);
+        VerificationCode verificationCode = verificationRepository.findByCode(code);
 
-//        if (verificationCode != null && isValid(verificationCode)) {
-//            // Mã xác nhận hợp lệ, trả về người dùng liên kết
-//            return verificationCode.getAccount();
-//        }
+        if (verificationCode != null && isValid(verificationCode)) {
+            // Mã xác nhận hợp lệ, trả về người dùng liên kết
+            return verificationCode.getAccount();
+        }
 
         // Mã xác nhận không hợp lệ hoặc đã hết hạn
         return null;
@@ -94,8 +96,8 @@ public class VerificationCodeServiceImpl implements VerificationCodeService {
         return verificationCode.getExpiryTime().isAfter(now);
     }
 
-//    private String generateRandomCode() {
-//        // Logic để tạo mã xác nhận ngẫu nhiên (ví dụ: sử dụng thư viện RandomStringUtils)
-//        return RandomUtils.randomAlphanumeric(6);
-//    }
+    private String generateRandomCode() {
+        // Logic để tạo mã xác nhận ngẫu nhiên (ví dụ: sử dụng thư viện RandomStringUtils)
+        return RandomUtils.randomAlphanumeric(6);
+    }
 }
