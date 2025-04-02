@@ -1,17 +1,199 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{admin/admin-layout.html}"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        .card {
+            transition: transform 0.2s;
+            cursor: pointer;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-icon {
+            font-size: 2.5rem;
+            color: #009688;
+        }
+
+        .card-body {
+            padding: 20px;
+            height: 150px; /* Giảm chiều cao cho card */
+            text-align: center; /* Căn giữa nội dung */
+        }
+
+        .alert {
+            margin-top: 20px;
+        }
+    </style>
+</head>
 
 <body>
 <div class="main-wrapper" layout:fragment="content">
-    <h1>Trang admin</h1>
-    <h1>Đang cập nhập loading...</h1>
-</div>
-</body>
 
+    <div class="page-wrapper">
+        <div class="content container-fluid">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-sm-12 mt-3">
+                        <h3 class="page-title mt-3">Xin chào admin</h3>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item active">Dashboard</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xl-4 col-sm-6 col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div>
+                                <h3 class="card_widget_header" th:text="${totalBillQuantity}">0</h3>
+                                <h6 class="text-muted">Số lượt đặt hàng</h6>
+                            </div>
+                            <i class="card-icon fas fa-shopping-cart"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xl-4 col-sm-6 col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div>
+                                <h3 class="card_widget_header" th:text="${#numbers.formatDecimal(revenue, 0, 'POINT', 0, 'COMMA')}">0 đ</h3>
+                                <h6 class="text-muted">Tổng doanh thu</h6>
+                            </div>
+                            <i class="card-icon fas fa-dollar-sign"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-sm-6 col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <div>
+                                <h3 class="card_widget_header" th:text="${totalProduct}">0</h3>
+                                <h6 class="text-muted">Số sản phẩm hiện có</h6>
+                            </div>
+                            <i class="card-icon fas fa-box"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="alert alert-warning" role="alert">
+                <strong>Chú ý:</strong> Nhân viên không có quyền truy cập vào các mục
+                <strong>Quản Lý Khuyến Mãi</strong> và <strong>Quản Lý Tài Khoản</strong>
+            </div>
+
+            <h5>* Mục nhân viên vào làm việc:</h5>
+            <div class="row">
+                <div class="col-md-4 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Bán Hàng Tại Quầy</h5>
+                            <a class="btn btn-success" href="/admin/pos">Đi tới</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Quản Lý Sản Phẩm</h5>
+                            <a class="btn btn-success" href="/admin/product-all">Đi tới</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Quản Lý Màu Sắc</h5>
+                            <a class="btn btn-success" href="/admin/color-list">Đi tới</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Quản Lý Chất Liệu</h5>
+                            <a class="btn btn-success" href="/admin/material-all">Đi tới</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Quản Lý Kích Cỡ</h5>
+                            <a class="btn btn-success" href="/admin/size-all">Đi tới</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Quản Lý Nhãn Hàng</h5>
+                            <a class="btn btn-success" href="/admin/brand-all">Đi tới</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Quản Lý Hoá Đơn</h5>
+                            <a class="btn btn-success" href="/admin/bill-list">Đi tới</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            let userStatistics = [];
+
+            getData();
+            callApiStatisticOrder();
+
+            async function getData() {
+                await $.ajax({
+                    type: 'GET',
+                    dataType: 'json',
+                    url: '/get-statistic-user-by-month',
+                    success: function (list) {
+                        userStatistics = list;
+                        let labels = [];
+                        let data = [];
+                        for (let i = 0; i < list.length; i++) {
+                            labels.push(list[i].month);
+                            data.push(list[i].userCount);
+                        }
+                        loadUserChart(labels, data);
+                    }
+                });
+            }
+        });
+    </script>
+
+</div>
+
+</body>
 
 </html>
