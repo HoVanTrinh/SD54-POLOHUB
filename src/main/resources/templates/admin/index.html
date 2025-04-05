@@ -41,7 +41,139 @@
 
 <body>
 <div class="main-wrapper" layout:fragment="content">
+    <style>
+        /*title*/
+        .page-title {
+            color: red;
+            display: inline-block;
+            opacity: 0;
+            transform: translateX(-10px); /* Trượt từ trái */
+            animation: slideInLeftLabel 0.8s ease-out forwards;
+        }
+        @keyframes slideInLeftLabel {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        /*    background tổng*/
+        /* Thêm border và background cho content */
+        .container-fluid {
+            background: linear-gradient(135deg, #ffeef2, #fbd3e9);
+            border: 2px solid #f9c5d1;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(255, 182, 193, 0.25);
+            animation: glowBorder 4s ease-in-out infinite alternate;
+            transition: transform 0.3s ease;
+        }
 
+        .container-fluid:hover {
+            transform: scale(1.01);
+        }
+
+        @keyframes glowBorder {
+            0% {
+                box-shadow: 0 0 10px rgba(255, 182, 193, 0.3);
+                border-color: #f9c5d1;
+            }
+            100% {
+                box-shadow: 0 0 20px rgba(255, 105, 180, 0.6);
+                border-color: #ffb6c1;
+            }
+        }
+        /* Thêm border cho các card */
+        .card {
+            background: linear-gradient(135deg, #ffeef2, #fbd3e9);
+            border: 2px solid #f9c5d1;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(255, 182, 193, 0.25);
+            animation: glowBorder 4s ease-in-out infinite alternate;
+            transition: transform 0.3s ease;
+        }
+
+        /* Thêm hiệu ứng hover cho card */
+        .card:hover {
+            transform: scale(1.01);
+        }
+
+        /* Thêm background màu cho các alert */
+        .alert-warning {
+            background-color: #fff3cd; /* Màu nền vàng nhạt */
+            border: 1px solid #ffeeba; /* Viền màu vàng sáng */
+            border-radius: 8px;
+        }
+
+        /* Thêm hiệu ứng hover cho các button "Đi tới" */
+        .card .btn {
+            background-color: #28a745; /* Màu nền xanh lá cho nút */
+            color: white;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+        }
+
+        .card .btn:hover {
+            background-color: #218838; /* Nút chuyển sang màu xanh đậm khi hover */
+            transform: scale(1.05); /* Phóng to nhẹ khi hover */
+        }
+        /*tree*/
+        .scene-container {
+            position: relative;
+            height: 200px;
+            margin-top: 20px;
+            overflow: hidden;
+            background: linear-gradient(to top, #ffeef4, #fffafc);
+            border-radius: 16px;
+            box-shadow: 0 0 20px rgba(255, 182, 193, 0.3);
+        }
+
+        .tree {
+            position: absolute;
+            bottom: 0;
+            height: 150px;
+            animation: sway 2s ease-in-out infinite alternate;
+            z-index: 1;
+        }
+
+        @keyframes sway {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(1.5deg); }
+        }
+
+        .tree-left {
+            left: 0;
+        }
+
+        .tree-right {
+            right: 0;
+        }
+        /*page-header*/
+        .page-header {
+            background: linear-gradient(135deg, #ffeef2, #fbd3e9);
+            border: 2px solid #f9c5d1;
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 4px 20px rgba(255, 182, 193, 0.25);
+            animation: glowBorder 4s ease-in-out infinite alternate;
+            transition: transform 0.3s ease;
+        }
+
+        .page-header:hover {
+            transform: scale(1.01);
+        }
+
+        @keyframes glowBorder {
+            0% {
+                box-shadow: 0 0 10px rgba(255, 182, 193, 0.3);
+                border-color: #f9c5d1;
+            }
+            100% {
+                box-shadow: 0 0 20px rgba(255, 105, 180, 0.6);
+                border-color: #ffb6c1;
+            }
+        }
+    </style>
     <div class="page-wrapper">
         <div class="content container-fluid">
             <div class="page-header">
@@ -159,7 +291,15 @@
                     </div>
                 </div>
             </div>
+            <div class="scene-container">
+                <img src="https://png.pngtree.com/png-clipart/20231024/original/pngtree-cherry-blossom-tree-png-image_13407092.png" class="tree tree-left" />
+
+                <!--                            <img src="https://e7.pngegg.com/pngimages/344/945/png-clipart-haruka-nanase-makoto-tachibana-character-anime-light-novel-anime-cartoon-shoe.png" class="character" />-->
+
+                <img src="https://png.pngtree.com/png-clipart/20231024/original/pngtree-cherry-blossom-tree-png-image_13407092.png" class="tree tree-right" />
+            </div>
         </div>
+
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

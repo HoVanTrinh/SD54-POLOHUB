@@ -13,88 +13,209 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <style>
+        /* Định nghĩa nền chính */
         body {
-            background-color: #f8f9fa; /* Lighter background for better contrast */
+            background: url('https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/b071b9cb-e7d9-476b-bb6c-a571e4506d6f/dgkhlji-d2ba3107-8ac1-4026-9604-1aa3cbf1a83a.jpg/v1/fill/w_1192,h_670,q_70,strp/tong_hop_25_hinh_nen_phong_canh_anime_dep_mat_de_t_by_yukichibi12_dgkhlji-pre.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NzIwIiwicGF0aCI6IlwvZlwvYjA3MWI5Y2ItZTdkOS00NzZiLWJiNmMtYTU3MWU0NTA2ZDZmXC9kZ2tobGppLWQyYmEzMTA3LThhYzEtNDAyNi05NjA0LTFhYTNjYmYxYTgzYS5qcGciLCJ3aWR0aCI6Ijw9MTI4MCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.bYoTQOsMt10CwEG3b60aCD2e46KBuRQyahbVVR0gcmo') no-repeat center center fixed;
+            background-size: cover;
+            height: 118%;
+            margin: 0;
+            padding: 0;
+            /*overflow: hidden; !* Tránh scroll nếu không cần thiết *!*/
         }
 
+        /*body, html {*/
+        /*    height: 100%;*/
+        /*    margin: 0;*/
+        /*    padding: 0;*/
+        /*}*/
+
+        /* Bọc ngoài để canh giữa form */
+        .wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Chiều cao toàn màn hình */
+            /*min-height: 40vh; !* Đảm bảo full chiều cao *!*/
+        }
+
+        /* Làm nền `section` trong suốt nhưng vẫn giữ bố cục */
+        .bg-light.p-b-60 {
+            background: transparent !important;
+            flex-grow: 1; /* Giúp nội dung co giãn hợp lý */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+        }
+
+        /* Tổng thể */
         .login-container {
-            max-width: 400px; /* Set max width for the form */
-            margin: auto; /* Center the form */
-            padding: 30px; /* Add padding for space */
-            background-color: #ffffff; /* White background for the form */
-            border-radius: 8px; /* Rounded corners */
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            max-width: 400px;
+            background: rgba(0, 0, 0, 0.8); /* Nền đen trong suốt */
+            color: #fff; /* Chữ trắng */
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0px 4px 10px rgba(0, 255, 255, 0.3); /* Glow xanh dương */
+            backdrop-filter: blur(10px);
         }
 
-        .forgot-password {
-            text-align: right; /* Right align for better layout */
+        /* Tiêu đề */
+        .login-container h2 {
+            font-size: 24px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #00ffff; /* Màu neon xanh */
+            text-shadow: 0px 0px 5px #00ffff;
         }
 
-        .btn-back-to-top {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            display: none; /* Initially hidden */
-        }
-
+        /* Input Group */
         .input-group-text {
-            background-color: #007bff; /* Change background color of icons */
-            color: white; /* Change icon color */
+            background: transparent;
+            border: 1px solid #00ffff;
+            color: #00ffff;
         }
+
+        /* Input Fields */
+        .form-control {
+            background: transparent;
+            border: 1px solid #00ffff;
+            color: #fff;
+        }
+
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        /* Hiệu ứng khi focus vào ô input */
+        .form-control:focus {
+            border-color: #ff00ff;
+            box-shadow: 0px 0px 8px #ff00ff;
+            outline: none;
+        }
+
+        /* Checkbox */
+        .form-check-label {
+            color: #ccc;
+        }
+
+        /* Button */
+        .btn-primary {
+            background: linear-gradient(45deg, #00ffff, #ff00ff);
+            border: none;
+            padding: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: 0.3s;
+            border-radius: 8px;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 0px 10px #00ffff;
+        }
+
+        /* Link */
+        .forgot-password a,
+        .signup-link a {
+            color: #ff00ff;
+            font-weight: bold;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .signup-link p {
+            display: flex;
+            justify-content: center;
+            gap: 10px; /* Khoảng cách giữa chữ và link */
+        }
+
+        .forgot-password a:hover,
+        .signup-link a:hover {
+            text-shadow: 0px 0px 5px #ff00ff;
+        }
+
+        .signup-link {
+            display: block;
+            padding: 20px;
+            text-align: center; /* Căn giữa cho đẹp */
+            margin-top: 10px; /* Tạo khoảng cách với phần trên */
+            clear: both; /* Đảm bảo nó không bị dính vào phần "Quên mật khẩu" */
+        }
+
+        .form-check-input {
+            transition: all 0.3s ease-in-out;
+        }
+
+        .form-check-input:checked {
+            transform: scale(1.2); /* Khi tích vào, ô checkbox to lên một chút */
+            box-shadow: 0 0 8px rgba(0, 255, 0, 0.6); /* Hiệu ứng phát sáng xanh lá */
+        }
+
+        /* Footer giữ vị trí ở dưới cùng */
+        /*footer {*/
+        /*    text-align: center;*/
+        /*    padding: 15px;*/
+        /*    background: rgba(0, 0, 0, 0.8);*/
+        /*    color: white;*/
+        /*    width: 100%;*/
+        /*    margin-top: auto; !* Giúp footer luôn ở cuối trang *!*/
+        /*}*/
     </style>
 </head>
 <body>
 <div layout:fragment="content">
-    <section class="bg-light p-b-60">
-        <div class="container" style="background: #4caf50">
-            <div class="row justify-content-center">
-                <form class="login-container mt-5 shadow-sm border" th:action="@{/perform_login}" method="post" id="login-form" th:object="${user}">
-                    <h2 class="text-center">Đăng Nhập</h2>
-                    <div th:if="${errorMessage}" class="alert alert-danger">
-                        <p th:text="${errorMessage}"></p>
-                    </div>
-                    <div th:if="${success}" class="alert alert-success">
-                        <p th:text="${success}"></p>
-                    </div>
-
-                    <div class="form-group">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-                            </div>
-                            <input type="email" class="form-control" id="email" name="email" placeholder="Địa chỉ email" th:field="*{email}" required maxlength="100">
+    <div class="wrapper">
+        <section class="bg-light p-b-60">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <form class="login-container mt-5 shadow-sm border" th:action="@{/perform_login}" method="post" id="login-form" th:object="${user}">
+                        <h2 class="text-center">Đăng Nhập</h2>
+                        <div th:if="${errorMessage}" class="alert alert-danger">
+                            <p th:text="${errorMessage}"></p>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="fas fa-lock"></i></span>
-                            </div>
-                            <input type="password" class="form-control" id="password" name="password" placeholder="Mật khẩu" th:field="*{password}" required minlength="6" maxlength="50">
+                        <div th:if="${success}" class="alert alert-success">
+                            <p th:text="${success}"></p>
                         </div>
-                    </div>
 
-                    <div class="form-check">
-                        <input type="checkbox" name="remember" class="form-check-input" id="remember" checked>
-                        <label class="form-check-label" for="remember">Nhớ mật khẩu</label>
-                    </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                </div>
+                                <input type="email" class="form-control" id="email" name="email" placeholder="Địa chỉ email" th:field="*{email}" required maxlength="100">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                </div>
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Mật khẩu" th:field="*{password}" required minlength="6" maxlength="50">
+                            </div>
+                        </div>
 
-                    <div th:if="${param.error}">
-                        <p class="text-danger">Tài khoản hoặc mật khẩu không chính xác</p>
-                    </div>
+                        <div class="form-check">
+                            <input type="checkbox" name="remember" class="form-check-input" id="remember" checked>
+                            <label class="form-check-label" for="remember">Nhớ mật khẩu</label>
+                        </div>
 
-                    <button type="submit" class="btn btn-primary btn-block">ĐĂNG NHẬP</button>
-                    <div class="forgot-password mt-3">
-                        <a href="/forgot-pass" class="float-right">Quên mật khẩu?</a>
-                    </div>
-                    <div class="signup-link mt-2 text-center">
-                        <p>Bạn chưa có tài khoản? <a th:href="@{/register}">Đăng ký ngay!</a></p>
-                    </div>
-                </form>
+                        <div th:if="${param.error}">
+                            <p class="text-danger">Tài khoản hoặc mật khẩu không chính xác</p>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-block">ĐĂNG NHẬP</button>
+                        <div class="forgot-password mt-3">
+                            <a href="/forgot-pass" class="float-right">Quên mật khẩu?</a>
+                        </div>
+                        <div class="signup-link mt-2 text-center">
+                            <p>Bạn chưa có tài khoản? <a th:href="@{/register}">Đăng ký ngay!</a></p>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </div>
-    </section>
-
+        </section>
+    </div>
     <!-- Back to top button -->
     <div class="btn-back-to-top" id="myBtn">
         <span class="symbol-btn-back-to-top">
@@ -151,6 +272,22 @@
                 return false;
             });
         });
+    </script>
+
+    <script>
+        const backgrounds = [
+            'https://png.pngtree.com/background/20250104/original/pngtree-free-hd-wallpaper-4k-new-background-picture-image_15546678.jpg',
+            'https://wallpaperaccess.com/full/39617.jpg',
+            'https://images.unsplash.com/photo-1503264116251-35a269479413?auto=format&fit=crop&w=1950&q=80',
+            'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=1950&q=80'
+        ];
+
+        let index = 0;
+
+        setInterval(() => {
+            index = (index + 1) % backgrounds.length;
+            document.body.style.backgroundImage = `url('${backgrounds[index]}')`;
+        }, 5000); // đổi ảnh mỗi 5 giây
     </script>
 </div>
 </body>
