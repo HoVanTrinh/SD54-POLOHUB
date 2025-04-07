@@ -63,8 +63,9 @@
     background-color: #fff;
     border: 1px solid #e9ecef;
     border-radius: 2px;
-    -webkit-transition:opacity background 0.15s ease-out;
-    transition: opacity background 0.15s ease-out; }
+    /*-webkit-transition:opacity background 0.15s ease-out;*/
+    /*transition: opacity background 0.15s ease-out;*/
+  }
   .switch.switch-default .switch-input:checked ~ .switch-label:before {
     opacity: 0;
     -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"; }
@@ -139,8 +140,9 @@
     background-color: #fff;
     border: 1px solid #e9ecef;
     border-radius: 2px;
-    -webkit-transition:opacity background 0.15s ease-out;
-    transition: opacity background 0.15s ease-out; }
+    /*-webkit-transition:opacity background 0.15s ease-out;*/
+    /*transition: opacity background 0.15s ease-out;*/
+  }
   .switch.switch-text .switch-label:after,
   .switch.switch-text .switch-label:before {
     position: absolute;
@@ -236,8 +238,9 @@
     background-color: #fff;
     border: 1px solid #e9ecef;
     border-radius: 2px;
-    -webkit-transition:opacity background 0.15s ease-out;
-    transition: opacity background 0.15s ease-out; }
+    /*-webkit-transition:opacity background 0.15s ease-out;*/
+    /*transition: opacity background 0.15s ease-out; */
+  }
   .switch.switch-icon .switch-label:after,
   .switch.switch-icon .switch-label:before {
     position: absolute;
@@ -332,8 +335,9 @@
     background-color: #f8f9fa;
     border: 1px solid #e9ecef;
     border-radius: 2px;
-    -webkit-transition:opacity background 0.15s ease-out;
-    transition: opacity background 0.15s ease-out; }
+    /*-webkit-transition:opacity background 0.15s ease-out;*/
+    /*transition: opacity background 0.15s ease-out; }*/
+  }
   .switch.switch-3d .switch-input:checked ~ .switch-label:before {
     opacity: 0;
     -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"; }
@@ -982,7 +986,7 @@ textarea {
   width: 100%; }
 
 aside.left-panel {
-  background: #272c33;
+  background: #FFFFFF;
   display: table-cell;
   height: 100vh;
   min-height: 100%;
@@ -993,7 +997,7 @@ aside.left-panel {
   transition: width 0.3s ease; }
 
 .navbar {
-  background: #272c33;
+  background: #FFFFFF;
   border-radius: 0;
   border: none;
   display: block;
@@ -1005,7 +1009,7 @@ aside.left-panel {
     width: 100%; }
   .navbar .navbar-brand {
     border-bottom: 1px solid #4e4e52;
-    color: #f1f2f7 !important;
+    color: #FFFFFF !important;
     font-family: 'Open Sans';
     font-size: 22px;
     float: none;
@@ -1034,7 +1038,8 @@ aside.left-panel {
       display: none; }
   .navbar .menu-title {
     border-bottom: 1px solid #4e4e52;
-    color: #9496a1;
+    /*color: #9496a1;*/
+    color: #0a0a0a;
     clear: both;
     display: block;
     font-family: 'Open Sans';
@@ -1057,7 +1062,7 @@ aside.left-panel {
         display: none; }
       .navbar .navbar-nav li > a {
         background: none !important;
-        color: #c8c9ce !important;
+        color: #0a0a0a !important;
         display: inline-block;
         font-family: 'Open Sans';
         font-size: 14px;
@@ -1067,9 +1072,9 @@ aside.left-panel {
         width: 100%; }
         .navbar .navbar-nav li > a:hover,
         .navbar .navbar-nav li > a:hover .menu-icon {
-          color: #fff !important; }
+          color: red !important; }
         .navbar .navbar-nav li > a .menu-icon {
-          color: #8b939b;
+          color: #0a0a0a;
           float: left;
           margin-top: 8px;
           width: 55px;
@@ -1090,7 +1095,8 @@ aside.left-panel {
           line-height: 30px; }
           .navbar .navbar-nav li.menu-item-has-children a:before {
             content: "\f105";
-            color: #c8c9ce;
+            /*color: #c8c9ce;*/
+            color: #0a0a0a;
             font-family: 'Fontawesome';
             font-size: 16px;
             position: absolute;
@@ -1110,7 +1116,8 @@ aside.left-panel {
           .navbar .navbar-nav li.menu-item-has-children .sub-menu li {
             position: relative; }
           .navbar .navbar-nav li.menu-item-has-children .sub-menu i {
-            color: #c8c9ce;
+            /*color: #c8c9ce;*/
+            color: #0a0a0a;
             float: left;
             padding: 0;
             position: absolute;
@@ -1137,8 +1144,15 @@ aside.left-panel {
 .navbar .navbar-nav > .active > a,
 .navbar .navbar-nav > .active > a:focus,
 .navbar .navbar-nav > .active > a:hover {
-  color: #d7d9e3 !important; }
-
+  /*color: #d7d9e3 !important; */
+  color: #0a0a0a !important;
+}
+.menu,
+.navbar-nav {
+  list-style-type: none; /* Loại bỏ các chấm tròn */
+  padding: 0; /* Xóa khoảng cách phía trong danh sách */
+  margin: 0; /* Xóa khoảng cách phía ngoài danh sách */
+}
 .navbar-nav li span.count {
   background: #a9d86e;
   border-radius: 50%;

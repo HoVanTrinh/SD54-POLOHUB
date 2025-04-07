@@ -153,6 +153,64 @@
             }
         }
 
+        /*    back hồng cho phần nội dung chính*/
+        .container-full {
+            background: linear-gradient(135deg, #ffeef2, #fbd3e9);
+            border: 2px solid #f9c5d1;
+            border-radius: 16px;
+            padding: 20px;
+            margin: 10px;
+            box-shadow: 0 4px 20px rgba(255, 182, 193, 0.25);
+            animation: glowBorder 4s ease-in-out infinite alternate;
+            transition: transform 0.3s ease;
+        }
+
+        .container-full:hover {
+            transform: scale(1.01);
+        }
+
+        @keyframes glowBorder {
+            0% {
+                box-shadow: 0 0 10px rgba(255, 182, 193, 0.3);
+                border-color: #f9c5d1;
+            }
+            100% {
+                box-shadow: 0 0 20px rgba(255, 105, 180, 0.6);
+                border-color: #ffb6c1;
+            }
+        }
+
+        /*    tree*/
+        .scene-container {
+            position: relative;
+            height: 200px;
+            margin-top: 20px;
+            overflow: hidden;
+            background: linear-gradient(to top, #ffeef4, #fffafc);
+            border-radius: 16px;
+            box-shadow: 0 0 20px rgba(255, 182, 193, 0.3);
+        }
+
+        .tree {
+            position: absolute;
+            bottom: 0;
+            height: 150px;
+            animation: sway 2s ease-in-out infinite alternate;
+            z-index: 1;
+        }
+
+        @keyframes sway {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(1.5deg);
+            }
+        }
+
+        .tree-right {
+            left: 0;
+        }
     </style>
     <div className="custom-modal" id="add-address-modal">
         <div className="modal-content rounded">
@@ -185,9 +243,9 @@
         </div>
     </div>
 
-    <div className="d-flex flex-column w-100" style="background-color: rgb(249, 249, 249);">
-        <div className="page-wrapper">
-            <div className="d-flex justify-content-center">
+    <div className="row container-full" style="background-color: rgb(249, 249, 249);">
+        <div className="col-lg-12">
+            <div className="col-md-7 justify-content-center" style="margin:auto;">
                 <div className="page-right">
                     <h3 className="title">Quản lý tài khoản</h3>
                     <div>
@@ -297,9 +355,7 @@
                                             <div className="form-group">
                                                 <input type="password"
                                                        className="form-control" id="newPassword" name="newPassword">
-                                                <!--                                                <i class="fa-solid" style="margin: 10px 0 0 -30px; cursor: pointer;"-->
-                                                <!--                                                   [ngClass]="{'fa-eye': newPasswordVisible, 'fa-eye-slash': !newPasswordVisible }"-->
-                                                <!--                                                   (click)="toggleNewPasswordVisibility()"></i>-->
+
                                                 <span className="error text-danger"></span>
                                             </div>
                                         </div>

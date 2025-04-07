@@ -90,11 +90,11 @@ Page<BillDtoInterface> listBill(Pageable pageable);
 
     @Query(value = "select * from bill b where DATEDIFF(DAY, b.create_date, GETDATE()) <= 7 and b.status='HOAN_THANH' and b.invoice_type='OFFLINE'", nativeQuery = true)    Page<Bill> findValidBillToReturn(Pageable pageable);
 
-    @Query(value = "SELECT COALESCE(SUM(bill.amount), 0) +COALESCE(SUM(-bill.promotion_price), 0)  AS total\n" +
-            "FROM bill\n" +
-            "         LEFT JOIN bill_return billReturn ON bill.id = billReturn.bill_id\n" +
-            "WHERE bill.status = 'HOAN_THANH' ;\n", nativeQuery = true)
-    Double calculateTotalRevenue();
+//    @Query(value = "SELECT COALESCE(SUM(bill.amount), 0) +COALESCE(SUM(-bill.promotion_price), 0)  AS total\n" +
+//            "FROM bill\n" +
+//            "         LEFT JOIN bill_return billReturn ON bill.id = billReturn.bill_id\n" +
+//            "WHERE bill.status = 'HOAN_THANH' ;\n", nativeQuery = true)
+//    Double calculateTotalRevenue();
 
     @Query(value = "SELECT " +
             "COALESCE(SUM(b.amount), 0) + COALESCE(SUM(-b.promotion_price), 0) AS total " +
