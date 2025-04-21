@@ -1,7 +1,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{user/layout-user.html}">
 <head>
-    <meta charSet="UTF-8">
+    <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
@@ -9,12 +9,11 @@
     <style>
         .page-right {
             background-color: #f0f4f8; /* Màu nền nhẹ nhàng - có thể thay bằng màu khác */
-            border: 1px solid #ccc; /* Viền xám nhạt */
-            border-radius: 8px; /* Bo góc nhẹ cho mềm mại */
-            padding: 24px; /* Thêm khoảng cách bên trong */
+            border: 1px solid #ccc;   /* Viền xám nhạt */
+            border-radius: 8px;       /* Bo góc nhẹ cho mềm mại */
+            padding: 24px;            /* Thêm khoảng cách bên trong */
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ cho đẹp hơn */
         }
-
         /*đậm tiêu đề*/
         .subtitle, .control-label {
             font-weight: bold;
@@ -38,7 +37,6 @@
                 transform: translateX(0);
             }
         }
-
         /*    animation cho phần thông tin*/
         .control-label {
             display: inline-block;
@@ -46,14 +44,12 @@
             transform: translateX(-10px); /* Trượt từ trái */
             animation: slideInLeftLabel 0.8s ease-out forwards;
         }
-
         @keyframes slideInLeftLabel {
             to {
                 opacity: 1;
                 transform: translateX(0);
             }
         }
-
         /*    button profile */
         .btn-save-profile {
             background-color: #3498db;
@@ -64,13 +60,13 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
         }
 
         /* Hover effect + nâng nhẹ lên */
         .btn-save-profile:hover {
             background-color: #2980b9;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.25);
             transform: translateY(-2px);
         }
 
@@ -97,13 +93,13 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
         }
 
         /* Hover effect + nâng nhẹ lên */
         .btn-save-pass:hover {
             background-color: #2980b9;
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.25);
             transform: translateY(-2px);
         }
 
@@ -119,7 +115,6 @@
                 transform: scale(0.95);
             }
         }
-
         /*button thêm địa chỉ*/
         #add-address {
             background-color: #4caf50;
@@ -152,16 +147,10 @@
                 transform: scale(1.05);
             }
         }
-
         /*    back hồng cho phần nội dung chính*/
         .container-full {
-            background: linear-gradient(135deg, #ffeef2, #fbd3e9);
-            border: 2px solid #f9c5d1;
-            border-radius: 16px;
             padding: 20px;
             margin: 10px;
-            box-shadow: 0 4px 20px rgba(255, 182, 193, 0.25);
-            animation: glowBorder 4s ease-in-out infinite alternate;
             transition: transform 0.3s ease;
         }
 
@@ -169,216 +158,172 @@
             transform: scale(1.01);
         }
 
-        @keyframes glowBorder {
-            0% {
-                box-shadow: 0 0 10px rgba(255, 182, 193, 0.3);
-                border-color: #f9c5d1;
-            }
-            100% {
-                box-shadow: 0 0 20px rgba(255, 105, 180, 0.6);
-                border-color: #ffb6c1;
-            }
-        }
-
-        /*    tree*/
-        .scene-container {
-            position: relative;
-            height: 200px;
-            margin-top: 20px;
-            overflow: hidden;
-            background: linear-gradient(to top, #ffeef4, #fffafc);
-            border-radius: 16px;
-            box-shadow: 0 0 20px rgba(255, 182, 193, 0.3);
-        }
-
-        .tree {
-            position: absolute;
-            bottom: 0;
-            height: 150px;
-            animation: sway 2s ease-in-out infinite alternate;
-            z-index: 1;
-        }
 
         @keyframes sway {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(1.5deg);
-            }
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(1.5deg); }
         }
 
-        .tree-right {
-            left: 0;
-        }
+
     </style>
-    <div className="custom-modal" id="add-address-modal">
-        <div className="modal-content rounded">
-            <span className="close" id="closeModal">&times;</span>
-            <div className="modal-header mb-1">
+    <div class="custom-modal" id="add-address-modal">
+        <div class="modal-content rounded">
+            <span class="close" id="closeModal">&times;</span>
+            <div class="modal-header mb-1">
                 <h5>Thông tin địa chỉ</h5>
             </div>
             <form id="address-form">
-                <div className="rs1-select2 rs2-select2 bor8 bg0 m-b-12 m-t-9">
-                    <select className="js-select2" name="district" id="district">
+                <div class="rs1-select2 rs2-select2 bor8 bg0 m-b-12 m-t-9">
+                    <select class="js-select2" name="district" id="district">
 
                     </select>
-                    <div className="dropDownSelect2"></div>
+                    <div class="dropDownSelect2"></div>
                 </div>
 
-                <div className="rs1-select2 rs2-select2 bor8 bg0 m-b-12 m-t-9">
-                    <select className="js-select2" name="ward" id="ward">
+                <div class="rs1-select2 rs2-select2 bor8 bg0 m-b-12 m-t-9">
+                    <select class="js-select2" name="ward" id="ward">
 
                     </select>
-                    <div className="dropDownSelect2"></div>
+                    <div class="dropDownSelect2"></div>
                 </div>
 
-                <div className="bor8 bg0 m-b-12">
-                    <input className="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="street" id="street"
+                <div class="bor8 bg0 m-b-12">
+                    <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="street" id="street"
                            placeholder="Số nhà, đường, xóm">
                 </div>
-                <button type="button" className="btn btn-primary mt-2 w-100" id="save-address-btn">Lưu</button>
+                <button type="button" class="btn btn-primary mt-2 w-100" id="save-address-btn">Lưu</button>
             </form>
 
         </div>
     </div>
 
-    <div className="row container-full" style="background-color: rgb(249, 249, 249);">
-        <div className="col-lg-12">
-            <div className="col-md-7 justify-content-center" style="margin:auto;">
-                <div className="page-right">
-                    <h3 className="title">Quản lý tài khoản</h3>
+    <div class="row container-full">
+        <div class="col-lg-12" >
+            <div class="col-md-7 justify-content-center" style="margin:auto;">
+                <div class="page-right" style="background-color: #caefe8">
+                    <h3 class="title">Quản lý tài khoản</h3>
                     <div>
                         <!-- Tab items -->
-                        <div className="tab-bills">
-                            <div className="tab-item active">
+                        <div class="tab-bills">
+                            <div class="tab-item active">
                                 Chỉnh sửa thông tin
                             </div>
-                            <div className="tab-item">
+                            <div class="tab-item">
                                 Đổi mật khẩu
                             </div>
-                            <div className="line"></div>
+                            <div class="line"></div>
                         </div>
 
                         <!-- Tab content -->
-                        <div className="tab-content">
-                            <div className="tab-pane active">
+                        <div class="tab-content" >
+                            <div class="tab-pane active">
                                 <form th:action="@{/update-profile}" method="post" id="profile-form">
-                                    <h4 className="subtitle my-3">Thông tin cá nhân</h4>
-                                    <div className="alert alert-success" th:if="${successMessage != null}"
-                                         th:text="${successMessage}"></div>
-                                    <div className="alert alert-danger" th:if="${errorMessage != null}"
-                                         th:text="${errorMessage}"></div>
-                                    <div className="row mt-3">
-                                        <div className="col-sm-6">
-                                            <div className="form-group">
-                                                <label className="control-label">
+                                    <h4 class="subtitle my-3">Thông tin cá nhân</h4>
+                                    <div class="alert alert-success" th:if="${successMessage != null}" th:text="${successMessage}"></div>
+                                    <div class="alert alert-danger" th:if="${errorMessage != null}" th:text="${errorMessage}"></div>
+                                    <div class="row mt-3">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label class="control-label">
                                                     Họ và tên
                                                 </label>
-                                                <input type="text" className="form-control" name="name" id="name"
-                                                       th:value="${profile.name}">
-                                                <span className="error text-danger"></span>
+                                                <input type="text" class="form-control" name="name" id="name" th:value="${profile.name}">
+                                                <span class="error text-danger"></span>
                                             </div>
                                         </div>
-                                        <div className="col-sm-6">
-                                            <label className="control-label">
+                                        <div class="col-sm-6">
+                                            <label  class="control-label">
                                                 Email
                                             </label>
-                                            <input type="text" className="form-control" name="email"
-                                                   th:value="${profile.email}" readOnly>
+                                            <input type="text" class="form-control" name="email" th:value="${profile.email}" readonly>
                                         </div>
-                                        <div className="col-sm-6">
-                                            <div className="form-group">
-                                                <label className="control-label">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label class="control-label">
                                                     Số điện thoại
                                                 </label>
-                                                <input type="text" style="color: red" className="form-control"
-                                                       id="phoneNumber" th:value="${profile.phoneNumber}"
-                                                       name="phoneNumber">
-                                                <span className="error text-danger"></span>
+                                                <input type="text" style="color: red" class="form-control" id="phoneNumber" th:value="${profile.phoneNumber}" name="phoneNumber">
+                                                <span class="error text-danger"></span>
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="btn-save-group">
-                                        <button className="btn-save btn-save-profile">Lưu thay đổi</button>
+                                    <div class="btn-save-group">
+                                        <button class="btn-save btn-save-profile">Lưu thay đổi</button>
                                     </div>
-                                    <div className="row mt-3">
-                                        <div className="col-sm-12">
-                                            <label className="control-label">
+                                    <div class="row mt-3">
+                                        <div class="col-sm-12">
+                                            <label class="control-label">
                                                 Địa chỉ giao hàng
                                             </label>
                                             <div id="address-list">
                                                 <div th:each="address: ${profile.addressShippingList}">
-                                                    <div className="d-flex align-items-center justify-content-between my-1">
+                                                    <div class="d-flex align-items-center justify-content-between my-1">
                                                         <span>
-                                                            <i className="fa fa-map-marker" aria-hidden="true"></i>
+                                                            <i class="fa fa-map-marker" aria-hidden="true"></i>
                                                             <span th:text="${address.address}"></span>
                                                         </span>
-                                                        <span className="text-danger cursor-pointer delete-address-btn"
-                                                              th:address-id="${address.id}">
-                                                            <i className="fa fa-trash-o" aria-hidden="true"></i>
+                                                        <span class="text-danger cursor-pointer delete-address-btn" th:address-id="${address.id}">
+                                                            <i class="fa fa-trash-o" aria-hidden="true"></i>
                                                         </span>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button type="button" className="bg2 size-102" id="add-address">Thêm địa chỉ
-                                                +
-                                            </button>
+                                            <button type="button" class="bg2 size-102" id="add-address">Thêm địa chỉ +</button>
                                         </div>
                                     </div>
 
                                 </form>
                             </div>
-                            <div className="tab-pane">
+                            <div class="tab-pane">
                                 <form id="change-password-form" th:action="@{/change-password}" method="post">
-                                    <h4 className="subtitle my-3">Đổi mật khẩu</h4>
-                                    <div className="row mt-3">
-                                        <div className="col-sm-6">
-                                            <label className="control-label">
+                                    <h4 class="subtitle my-3">Đổi mật khẩu</h4>
+                                    <div class="row mt-3">
+                                        <div class="col-sm-6">
+                                            <label  class="control-label">
                                                 Mật khẩu hiện tại
                                             </label>
-                                            <div className="form-group">
+                                            <div class="form-group">
                                                 <input type="password"
-                                                       className="form-control" id="currentPassword"
-                                                       name="currentPassword">
+                                                       class="form-control" id="currentPassword" name="currentPassword">
                                                 <!--                                                <i class="fa-solid" style="margin: 10px 0 0 -30px; cursor: pointer;"-->
                                                 <!--                                                   [ngClass]="{'fa-eye': currentPasswordVisible, 'fa-eye-slash': !currentPasswordVisible }"-->
                                                 <!--                                                   (click)="togglePasswordVisibility()"></i>-->
-                                                <span className="error text-danger"></span>
+                                                <span class="error text-danger"></span>
                                             </div>
                                         </div>
-                                        <div className="col-sm-6">
-                                            <label className="control-label">
+                                        <div class="col-sm-6">
+                                            <label class="control-label">
                                                 Mật khẩu mới
                                             </label>
                                             <!--                                            <span class="red_require"> *</span>-->
-                                            <div className="form-group">
+                                            <div class="form-group">
                                                 <input type="password"
-                                                       className="form-control" id="newPassword" name="newPassword">
-
-                                                <span className="error text-danger"></span>
+                                                       class="form-control" id="newPassword" name="newPassword">
+                                                <!--                                                <i class="fa-solid" style="margin: 10px 0 0 -30px; cursor: pointer;"-->
+                                                <!--                                                   [ngClass]="{'fa-eye': newPasswordVisible, 'fa-eye-slash': !newPasswordVisible }"-->
+                                                <!--                                                   (click)="toggleNewPasswordVisibility()"></i>-->
+                                                <span class="error text-danger"></span>
                                             </div>
                                         </div>
 
-                                        <div className="col-sm-6">
-                                            <label className="control-label">
+                                        <div class="col-sm-6">
+                                            <label class="control-label">
                                                 Xác nhận mật khẩu mới
                                             </label>
-                                            <div className="form-group">
+                                            <div class="form-group">
                                                 <input type="password"
-                                                       className="form-control" id="confirmPassword"
-                                                       name="confirmPassword">
+                                                       class="form-control" id="confirmPassword" name="confirmPassword">
                                                 <!--                                                <i class="fa-solid" style="margin: 10px 0 0 -30px; cursor: pointer;"-->
                                                 <!--                                                   [ngClass]="{'fa-eye': confirmPasswordVisible, 'fa-eye-slash': !confirmPasswordVisible }"-->
                                                 <!--                                                   (click)="toggleConfirmPasswordVisibility()"></i>-->
-                                                <span className="error text-danger"></span>
+                                                <span class="error text-danger"></span>
 
                                             </div>
                                         </div>
 
                                     </div>
-                                    <div className="btn-save-pass-group">
-                                        <button className="btn-save btn-save-pass">Lưu thay đổi</button>
+                                    <div class="btn-save-pass-group">
+                                        <button class="btn-save btn-save-pass">Lưu thay đổi</button>
                                     </div>
                                 </form>
                             </div>
@@ -390,12 +335,12 @@
     </div>
     <!--    script click-->
     <script>
-        document.querySelector('.btn-save-profile').addEventListener('click', function () {
+        document.querySelector('.btn-save-profile').addEventListener('click', function() {
             this.classList.add('clicked');
             // Nếu muốn làm gì đó sau khi nút biến mất:
             // setTimeout(() => { ... }, 500);
         });
-        document.querySelector('.btn-save-pass').addEventListener('click', function () {
+        document.querySelector('.btn-save-pass').addEventListener('click', function() {
             this.classList.add('clicked');
             // Nếu muốn làm gì đó sau khi nút biến mất:
             // setTimeout(() => { ... }, 500);
@@ -432,7 +377,7 @@
                     Validator.isRequired('#confirmPassword', 'Vui lòng nhập nhập lại mật khẩu mới'),
                     Validator.maxLength('#confirmPassword', 50),
                     Validator.minLength('#confirmPassword', 6),
-                    Validator.isConfirmed('#confirmPassword', () => {
+                    Validator.isConfirmed('#confirmPassword', () =>  {
                         return document.querySelector('#change-password-form #newPassword').value;
                     }, 'Mật khẩu nhập lại không chính xác'),
                 ],
@@ -461,7 +406,7 @@
             tabs.forEach((tab, index) => {
                 const pane = panes[index];
 
-                if (tab instanceof HTMLElement) {
+                if( tab instanceof HTMLElement) {
                     tab.onclick = function () {
                         document.querySelector(".tab-item.active")?.classList.remove("active");
                         document.querySelector(".tab-pane.active")?.classList.remove("active");
@@ -492,13 +437,13 @@
                 dataType: "json",
                 url: `https://vapi.vnappmob.com/api/v2/province/district/40`,
                 success: function (data) {
-                    district = data.results.map(item => ({value: item.district_id, label: item.district_name}))
+                    district = data.results.map(item => ({ value: item.district_id, label: item.district_name }))
                     loadDistrictSelect(data)
                 }
             })
 
             function loadDistrictSelect(data) {
-                district = data.results.map(item => ({value: item.district_id, label: item.district_name}))
+                district = data.results.map(item => ({ value: item.district_id, label: item.district_name }))
 
                 var selectElement = document.getElementById("district");
 
@@ -577,7 +522,7 @@
                 const street = $("#street").val().trim()
                 if (district == "" || ward == "" || street == "") {
                     swal("Lỗi", "Vui lòng nhập đầy đủ địa chỉ")
-                } else {
+                }else {
                     addressSelected.street = street
                     var dataSend = {
                         address: Object.entries(addressSelected)

@@ -17,7 +17,7 @@
             padding: 8px 20px;
             border-radius: 30px;
             font-weight: 600;
-            background-color: transparent;
+            /*background-color: transparent;*/
             transition: all 0.3s ease;
             overflow: hidden;
             z-index: 1;
@@ -30,7 +30,7 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: linear-gradient(45deg, #fff , #fff, #fff, #fff);
+            /*background: linear-gradient(45deg, #fff , #fff, #fff, #fff);*/
             animation: neonMove 4s linear infinite;
             z-index: 0;
             opacity: 0.1;
@@ -38,15 +38,14 @@
 
         .filter-gender a:hover {
             color: #fff;
-            box-shadow: 0 0 10px #FFA500, 0 0 20px #FFA500, 0 0 40px #FFA500;
+            /*box-shadow: 0 0 10px #FFA500, 0 0 20px #FFA500, 0 0 40px #FFA500;*/
             transform: translateY(-2px);
         }
 
         .filter-gender a.how-active1 {
             background-color: #FFA500;
             color: #000;
-            box-shadow: 0 0 15px #FFA500, 0 0 30px #FFA500, 0 0 60px #FFA500;
-            border-color: #FFA500;
+            /*box-shadow: 0 0 15px #FFA500, 0 0 30px #FFA500, 0 0 60px #FFA500;*/
             text-shadow: none;
         }
 
@@ -68,14 +67,12 @@
             background-color: #1a1a1a;
             color: #FFA500;
             transition: all 0.4s ease;
-            box-shadow: 0 0 10px #FFA50088, 0 0 20px #FFA50055 inset;
-            text-shadow: 0 0 3px #FFA500;
         }
 
         .flex-w.flex-c-m .bor4:hover {
             background-color: #FFA500;
             color: #1a1a1a;
-            box-shadow: 0 0 15px #FFA500, 0 0 30px #FF8C00, 0 0 10px #FFA500 inset;
+            /*box-shadow: 0 0 15px #FFA500, 0 0 30px #FF8C00, 0 0 10px #FFA500 inset;*/
             transform: scale(1.05);
         }
 
@@ -93,7 +90,7 @@
         .panel-filter {
             background-color: #1a1a1a;
             border-radius: 12px;
-            padding: 20px;
+            padding: 10px;
             box-shadow: 0 0 20px rgba(255, 165, 0, 0.2);
             animation: fadeInUp 0.5s ease-in-out;
         }
@@ -301,25 +298,7 @@
             }
         }
 
-        .glow-left, .glow-right {
-            position: absolute;
-            top: 0;
-            width: 60px;
-            height: 100%;
-            pointer-events: none; /* Không ảnh hưởng click */
-            background: radial-gradient(circle at center, rgba(255, 100, 0, 0.5), transparent 70%);
-            filter: blur(30px);
-            animation: flicker-glow 4s ease-in-out infinite;
-            z-index: 0;
-        }
 
-        .glow-left {
-            left: 0;
-        }
-
-        .glow-right {
-            right: 0;
-        }
 
         .main-content {
             position: relative;
@@ -338,28 +317,6 @@
             }
         }
 
-        .neon-bar {
-            position: fixed;
-            top: 0;
-            width: 17px; /* vẫn to nha */
-            height: 100%;
-            background: linear-gradient(to bottom, rgba(255, 165, 0, 0.1), rgba(255, 140, 0, 0.9), rgba(255, 165, 0, 0.1));
-            z-index: 1;
-            pointer-events: none;
-            animation: move-neon 4s linear infinite;
-            filter: drop-shadow(0 0 10px orange) drop-shadow(0 0 20px orange) drop-shadow(0 0 30px orange);
-            opacity: 0.9;
-            border-radius: 6px;
-        }
-
-
-        .neon-left {
-            left: 0;
-        }
-
-        .neon-right {
-            right: 0;
-        }
 
         @keyframes move-neon {
             0% { transform: translateY(-100%); }
@@ -591,19 +548,13 @@
 
 <body>
 <div layout:fragment="content">
-    <div class="neon-bar" style="left: 0;"></div>
-    <div class="neon-bar" style="right: 0;"></div>
-    <!-- Góc trái phát sáng -->
-    <div class="glow-left"></div>
 
-    <!-- Góc phải phát sáng -->
-    <div class="glow-right"></div>
 
     <!-- Nội dung chính -->
     <div class="main-content">
 
         <div class="bg0 m-t-23 p-b-140">
-            <div class="container">
+            <div class="container" style="background-color: #caefe8; padding-bottom: 20px; border-radius: 12px;">
                 <div class="flex-w flex-sb-m p-b-52">
                     <div class="flex-w flex-l-m filter-tope-group m-tb-10 filter-gender">
                         <a href="/product" th:classappend="${dataFilter.gender == null} ? 'how-active1'"
@@ -790,7 +741,7 @@
                 </div>
 
                 <!-- Load more -->
-                <nav th:if="${products.totalPages > 0}" class="pagination is-centered mt-4" role="navigation" aria-label="pagination" >
+                <nav th:if="${products.totalPages > 0}" class="pagination is-centered mt-4" role="navigation" aria-label="pagination">
                     <ul class="pagination-list">
                         <li>
                             <a th:if="${products.pageable.pageNumber != 0 && url == null}" th:href="@{/product?page=0}" class="pagination-link" aria-label="First">

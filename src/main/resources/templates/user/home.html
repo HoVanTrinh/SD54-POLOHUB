@@ -737,7 +737,81 @@
                         </a>
                     </div>
                 </div>
+                <div id="chatWindow" style="border: 1px solid #ccc; padding: 10px; height: 400px; overflow-y: auto;">
+                    <!-- Tin nhắn sẽ được đẩy vào đây -->
+                </div>
 
+                <input type="text" id="userInput" placeholder="Nhập tin nhắn..." style="width: 80%;" />
+                <button onclick="sendMessage()">Gửi</button>
+                <script>
+                    let history = [
+                        { role: "system", content: "Bạn là trợ lý của PoloHub." },
+                    ];
+
+                    // Hàm hiển thị tin nhắn lên giao diện
+                    function displayMessage(role, content) {
+                        const chatWindow = document.getElementById("chatWindow");
+
+                        const messageDiv = document.createElement("div");
+
+                        if (role === "user") {
+                            messageDiv.style.textAlign = "right";
+                            messageDiv.style.backgroundColor = "#d1e7dd";
+                            messageDiv.style.color = "#0f5132";
+                            messageDiv.style.padding = "8px 12px";
+                            messageDiv.style.margin = "5px 0";
+                            messageDiv.style.borderRadius = "10px";
+                            messageDiv.style.maxWidth = "70%";
+                            messageDiv.textContent = content;
+                        } else if (role === "assistant") {
+                            messageDiv.style.textAlign = "left";
+                            messageDiv.style.backgroundColor = "#cff4fc";
+                            messageDiv.style.color = "#055160";
+                            messageDiv.style.padding = "8px 12px";
+                            messageDiv.style.margin = "5px 0";
+                            messageDiv.style.borderRadius = "10px";
+                            messageDiv.style.maxWidth = "70%";
+                            messageDiv.textContent = content;
+                        } else if (role === "system") {
+                            // Có thể ẩn hoặc hiển thị khác biệt nếu muốn
+                            messageDiv.style.textAlign = "center";
+                            messageDiv.style.fontStyle = "italic";
+                            messageDiv.style.color = "#6c757d";
+                            messageDiv.style.margin = "5px 0";
+                            messageDiv.textContent = content;
+                        }
+
+                        chatWindow.appendChild(messageDiv);
+                        chatWindow.scrollTop = chatWindow.scrollHeight; // scroll xuống cuối chat
+                    }
+
+                    function sendMessage() {
+                        const userInputEl = document.getElementById("userInput");
+                        const userMsg = userInputEl.value.trim();
+                        if (!userMsg) return; // Bỏ qua tin nhắn rỗng
+
+                        displayMessage("user", userMsg);
+                        history.push({ role: "user", content: userMsg });
+
+                        userInputEl.value = ""; // Clear input
+
+                        fetch("/chatgpt/message", {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ messages: history })
+                        })
+                            .then(res => res.json())
+                            .then(data => {
+                                const botReply = data.reply;
+                                displayMessage("assistant", botReply);
+                                history.push({ role: "assistant", content: botReply });
+                            })
+                            .catch(err => {
+                                console.error("Lỗi khi gọi API:", err);
+                                displayMessage("assistant", "Xin lỗi, có lỗi xảy ra khi gửi yêu cầu.");
+                            });
+                    }
+                </script>
                 <!--Hàng mới-->
                 <!--    <section id="new-arrivals" class="new-arrival product-carousel py-5 position-relative overflow-hidden">-->
                 <!--        <div class="container">-->
