@@ -146,6 +146,222 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        /* Chat Window */
+        #chatWindow {
+            width: 100%;
+            max-width: 600px;
+            height: 400px;
+            margin: 20px auto;
+            border: 2px solid #ddd;
+            border-radius: 20px;
+            background-color: #f7f7f7;
+            padding: 20px;
+            overflow-y: auto;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #6a11cb, #2575fc);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+
+        /* Cải thiện giao diện input và button */
+        .inputContainer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 20px;
+            box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        #userInput {
+            width: 80%;
+            padding: 12px;
+            border-radius: 20px;
+            border: 2px solid #ddd;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s ease;
+            background-color: #fafafa;
+        }
+
+        #userInput:focus {
+            border-color: #2575fc;
+            box-shadow: 0 0 8px rgba(37, 117, 252, 0.7);
+        }
+
+        button {
+            padding: 12px 20px;
+            background-color: #2575fc;
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #6a11cb;
+        }
+
+        /* Giao diện tổng thể khung chat */
+        #chatContainer {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 320px;
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            font-family: 'Segoe UI', sans-serif;
+            display: none;
+            flex-direction: column;
+        }
+
+        /* Header chat */
+        #chatHeader {
+            background: #0078FF;
+            color: #fff;
+            padding: 14px 16px;
+            font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 16px;
+        }
+
+        /* Nội dung chat */
+        #chatWindow {
+            height: 260px;
+            padding: 14px;
+            overflow-y: auto;
+            background: #f9f9f9;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        /* Tin nhắn */
+        .chat-bubble {
+            padding: 10px 14px;
+            border-radius: 16px;
+            max-width: 75%;
+            line-height: 1.4;
+            font-size: 14px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .chat-user {
+            align-self: flex-end;
+            background: #d3f4f1;
+            color: #333;
+            border-bottom-right-radius: 4px;
+        }
+
+        .chat-bot {
+            align-self: flex-start;
+            background: #cceeff;
+            color: #333;
+            border-bottom-left-radius: 4px;
+        }
+
+        /* Input + nút gửi */
+        #inputArea {
+            display: flex;
+            padding: 10px;
+            border-top: 1px solid #ddd;
+            background: #fff;
+        }
+
+        #userInput {
+            flex: 1;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            padding: 8px 14px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        #inputArea button {
+            margin-left: 8px;
+            border: none;
+            background: #0078FF;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+
+        #inputArea button:hover {
+            background: #005FCC;
+        }
+
+        /* Bong bóng chat tròn */
+        #chatBubble {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #0078FF;
+            color: #fff;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 26px;
+            cursor: pointer;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            z-index: 999;
+        }
+
+        #chatBubble:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Khung chat - ẩn mặc định */
+        #chatContainer {
+            position: fixed;
+            bottom: 100px;
+            right: 30px;
+            width: 320px;
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            font-family: 'Segoe UI', sans-serif;
+            display: none;
+            flex-direction: column;
+            animation: slideUp 0.3s ease-out;
+            z-index: 999;
+        }
+
+        /* Animation hiện khung */
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* Nội dung còn lại y như bản trước (chatWindow, inputArea, bubble v.v...) */
+
+
     </style>
 
 </head>
@@ -737,13 +953,48 @@
                         </a>
                     </div>
                 </div>
-                <div id="chatWindow" style="border: 1px solid #ccc; padding: 10px; height: 400px; overflow-y: auto;">
-                    <!-- Tin nhắn sẽ được đẩy vào đây -->
+
+                <!-- Nút bong bóng chat -->
+                <div id="chatBubble" onclick="toggleChat()">
+                    💬
                 </div>
 
-                <input type="text" id="userInput" placeholder="Nhập tin nhắn..." style="width: 80%;" />
-                <button onclick="sendMessage()">Gửi</button>
+                <!-- Khung chat -->
+                <div id="chatContainer">
+                    <div id="chatHeader">
+                        Polohub A.I
+                        <span style="cursor: pointer;" onclick="toggleChat()">❌</span>
+                    </div>
+                    <div id="chatWindow"></div>
+                    <div id="inputArea">
+                        <input type="text" id="userInput" placeholder="Nhập tin nhắn..." />
+                        <button onclick="sendMessage()">Gửi</button>
+                    </div>
+                </div>
+
+
+
+
                 <script>
+
+                    function toggleChat() {
+                        const chat = document.getElementById('chatContainer');
+                        chat.style.display = (chat.style.display === 'none' || chat.style.display === '') ? 'flex' : 'none';
+                    }
+
+
+                    function appendMessage(message, sender) {
+                        const chatWindow = document.getElementById('chatWindow');
+                        const msg = document.createElement('div');
+                        msg.classList.add('chat-bubble', sender === 'user' ? 'chat-user' : 'chat-bot');
+                        msg.textContent = message;
+                        chatWindow.appendChild(msg);
+
+                        // Tự động cuộn xuống dưới
+                        chatWindow.scrollTop = chatWindow.scrollHeight;
+                    }
+                    //
+
                     let history = [
                         { role: "system", content: "Bạn là trợ lý của PoloHub." },
                     ];
@@ -810,8 +1061,49 @@
                                 console.error("Lỗi khi gọi API:", err);
                                 displayMessage("assistant", "Xin lỗi, có lỗi xảy ra khi gửi yêu cầu.");
                             });
+
+                        const input = document.getElementById('userInput');
+                        const message = input.value.trim();
+                        if (message === '') return;
+
+                        appendMessage(message, 'user');
+                        input.value = '';
+
+                        // Giả lập phản hồi AI
+                        setTimeout(() => {
+                            appendMessage("Bạn vừa nói: " + message, 'bot');
+                        }, 500);
                     }
                 </script>
+
+
+
+                <!--                <h2>💬 Chat với AI của bạn</h2>-->
+                <!--                <textarea id="input" rows="4" cols="50" placeholder="Nhập tin nhắn..."></textarea><br>-->
+                <!--                <button onclick="sendMessage()">Gửi</button>-->
+                <!--                <div id="response" style="margin-top: 20px; white-space: pre-line;"></div>-->
+
+                <!--                <script>-->
+                <!--                    function sendMessage() {-->
+                <!--                        const msg = document.getElementById("input").value;-->
+
+                <!--                        fetch("/api/chat", {-->
+                <!--                            method: "POST",-->
+                <!--                            headers: {-->
+                <!--                                "Content-Type": "text/plain"-->
+                <!--                            },-->
+                <!--                            body: msg-->
+                <!--                        })-->
+                <!--                            .then(res => res.text())-->
+                <!--                            .then(data => {-->
+                <!--                                document.getElementById("response").innerText = "🤖 AI: " + data;-->
+                <!--                            });-->
+                <!--                    }-->
+                <!--                </script>-->
+
+
+
+
                 <!--Hàng mới-->
                 <!--    <section id="new-arrivals" class="new-arrival product-carousel py-5 position-relative overflow-hidden">-->
                 <!--        <div class="container">-->
