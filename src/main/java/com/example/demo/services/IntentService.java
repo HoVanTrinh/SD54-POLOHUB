@@ -104,6 +104,9 @@ public class IntentService {
         if (Pattern.compile(".*(tạm biệt|goodbye|bye).*").matcher(message).matches()) {
             return "GOODBYE";
         }
+        if(Pattern.compile(".*(vũ|vu).*").matcher(message).matches()){
+            return "VU";
+        }
         // ... tiếp tục các điều kiện
         if (intent.equals("UNKNOWN")) {
             logger.warning("Không xác định intent: " + message);

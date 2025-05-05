@@ -103,7 +103,8 @@ public class ChatGptController {
                     return ResponseEntity.ok(Map.of("reply", "Bạn cần giúp đỡ trong việc đặt hàng? Để mình hướng dẫn nhé."));
                 case "FAST_DELIVERY":
                     return ResponseEntity.ok(Map.of("reply", "Chúng tôi cung cấp dịch vụ giao hàng nhanh trong vòng 1-2 ngày làm việc với chi phí hợp lý."));
-
+                case "VU":
+                    return ResponseEntity.ok(Map.of("reply", "Vũ ngu như con chó"));
                 default:
                     String reply = chatGptService.chat(chatMessages);
                     return ResponseEntity.ok(Map.of("reply", "Xin lỗi, tôi không thể hiểu được câu hỏi của bạn. Bạn có thể thử lại không?"));
