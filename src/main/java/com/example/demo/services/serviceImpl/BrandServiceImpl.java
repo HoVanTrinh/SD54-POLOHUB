@@ -35,7 +35,7 @@ public class BrandServiceImpl implements BrandService {
             throw new ShopApiException(HttpStatus.BAD_REQUEST, "Mã nhãn hàng đã tồn tại");
         }
         brand.setStatus(1);
-        brand.setDeleteFlag(false);
+        brand.setDeleteFlag(true);
         return save(brand);
     }
 
@@ -50,7 +50,7 @@ public class BrandServiceImpl implements BrandService {
                 throw new ShopApiException(HttpStatus.BAD_REQUEST, "Mã nhãn hàng " + brand.getCode() + " đã tồn tại");
             }
         }
-        brand.setDeleteFlag(false);
+        brand.setDeleteFlag(true);
         return save(brand);
     }
 
@@ -84,7 +84,7 @@ public class BrandServiceImpl implements BrandService {
         }
         Brand brand = convertToEntity(brandDto);
         brand.setStatus(1);
-        brand.setDeleteFlag(false);
+        brand.setDeleteFlag(true);
         Brand brandNew = brandRepository.save(brand);
         return convertToDto(brandNew);
     }

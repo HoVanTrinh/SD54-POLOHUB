@@ -11,36 +11,50 @@
 </head>
 <body>
 <div layout:fragment="content">
+    <style>
+        .container-fluid {
+            background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+            padding: 50px;
+            border-radius: 18px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+            animation: fadeInUp 0.8s ease;
+            transition: all 0.4s ease;
+        }
+        @media (max-width: 768px) {
+            form.container-fluid {
+                padding: 16px;
+            }
+        }
 
+    </style>
     <h4>Thông tin cỡ</h4>
-    <form th:object="${Size}" method="post" th:action="${action}" id="size-form">
-        <div class="my-3">
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label>Mã cỡ</label>
-                    <span class="red_require"> *</span>
-                    <input type="text" class="form-control" th:field="*{code}" placeholder="Nhập mã cỡ">
-                    <span class="error"></span>
-
-                    <label>Tên cỡ</label>
-                    <span class="red_require"> *</span>
-                    <input type="text" class="form-control" th:field="*{name}" placeholder="Nhập tên cỡ">
-                    <span class="error"></span>
-                    <div class="form-group col-md-6">
-                        <button type="submit" class="btn btn-primary m-1"><i class="fa ti-save"></i> Lưu lại
-                        </button>
-
-                        <a href="/admin/size-all" class="btn btn-secondary m-1"><i class="fa fa-mail-reply (alias)"></i> <span>Hủy bỏ</span></a>
-                    </div>
-                </div>
-
-                <!--            <button type="submit" class="btn btn-primary m-1"><i class="fa ti-save"></i> Lưu lại-->
-                <!--            </button>-->
-
-                <!--            <a href="/admin/size-all" class="btn btn-secondary m-1"><i class="fa fa-mail-reply (alias)"></i> <span>Hủy bỏ</span></a>-->
-
+    <div class="container-fluid">
+        <form th:object="${Size}" method="post" th:action="${action}" id="size-form">
+            <div class="form-group">
+                <label>Mã cỡ  <span class="text-danger"> *</span></label>
+                <input type="text" class="form-control" th:field="*{code}" placeholder="Nhập mã cỡ">
+                <span class="error"></span>
             </div>
-    </form>
+            <div class="form-group">
+                <label>Tên cỡ <span class="text-danger"> *</span></label>
+                <input type="text" class="form-control" th:field="*{name}" placeholder="Nhập tên cỡ">
+                <span class="error"></span>
+            </div>
+            <div class="form-group text-center">
+                <button type="submit" class="btn btn-primary m-1"><i class="fa ti-save"></i> Lưu lại
+                </button>
+
+                <a href="/admin/size-all" class="btn btn-secondary m-1"><i class="fa fa-mail-reply (alias)"></i> <span>Hủy bỏ</span></a>
+            </div>
+
+            <!--            <button type="submit" class="btn btn-primary m-1"><i class="fa ti-save"></i> Lưu lại-->
+            <!--            </button>-->
+
+            <!--            <a href="/admin/size-all" class="btn btn-secondary m-1"><i class="fa fa-mail-reply (alias)"></i> <span>Hủy bỏ</span></a>-->
+
+
+        </form>
+    </div>
     <div class="alert alert-danger" th:if="${errorMessage}" th:text="${errorMessage}"></div>
     <div th:if="${duplicateName != null}" th:text="${duplicateName}" class="alert alert-danger ml-2 py-2 px-2"></div>
 

@@ -6,96 +6,418 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Kích Cỡ</title>
 
 </head>
 <body>
 <div layout:fragment="content">
+    <style>
+        h4 {
+            font-size: 26px;
+            font-weight: 600;
+            text-align: center;
+            background: linear-gradient(90deg, #00c6ff, #0072ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            opacity: 0;
+            transform: translateY(-20px);
+            animation: fadeSlideIn 1.2s ease-out forwards;
+            transition: transform 0.3s ease-in-out;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
 
+        h4:hover {
+            transform: scale(1.05);
+            filter: brightness(1.3);
+        }
+
+        /* Animation keyframes */
+        @keyframes fadeSlideIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        /* FORM CONTAINER */
+        .container-fluid{
+            background: linear-gradient(135deg, #f0f9ff, #e0f2fe);
+            padding: 50px;
+            border-radius: 18px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+            animation: fadeInUp 0.8s ease;
+            transition: all 0.4s ease;
+        }
+
+
+        /* MEDIA */
+        @media (max-width: 768px) {
+            form.container-fluid {
+                padding: 16px;
+            }
+        }
+
+        .btn-success {
+            background-color: #28a745;
+            border-color: #28a745;
+            transition: 0.3s;
+        }
+        a.btn-success {
+            background: linear-gradient(45deg, #10b981, #22d3ee);
+            border: none;
+            color: white;
+            font-weight: 600;
+            border-radius: 10px;
+            padding: 10px 20px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        a.btn-success::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(255,255,255,0.3), rgba(255,255,255,0));
+            transition: left 0.5s ease-in-out;
+            z-index: 0;
+        }
+
+        a.btn-success:hover::before {
+            left: 100%;
+        }
+
+        a.btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.5);
+            cursor: pointer;
+        }
+
+        a.btn-success span,
+        a.btn-success i {
+            position: relative;
+            z-index: 2;
+        }
+
+
+        .pagination .page-link {
+            color: #007bff;
+        }
+
+        .pagination .disabled .page-link {
+            color: #6c757d;
+        }
+
+        .delete-btn i {
+            color: red;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .delete-btn i:hover {
+            color: darkred;
+        }
+        .update-btn i{
+            color: yellow;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .update-btn i:hover {
+            color: darkred;
+        }
+        /* Cấu trúc bảng */
+        .table {
+            border-collapse: separate;
+            border-spacing: 0 0px;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease-in-out;
+        }
+
+
+        /* Phần tiêu đề */
+        .table thead {
+            background: linear-gradient(90deg, #0ea5e9, #38bdf8);
+            color: white;
+            text-align: center;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        /* Tiêu đề các cột */
+        .table thead th {
+            padding: 14px 12px;
+            border: none;
+            background: #e0e0e0;
+            position: relative;
+        }
+        .table thead th::after {
+            content: '⇅';
+            position: absolute;
+            right: 10px;
+            font-size: 12px;
+            color: #888;
+        }
+
+        /* Hàng trong bảng */
+        .table tbody tr {
+            background-color: #f9fafb;
+            transition: transform 0.2s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .table tbody tr:hover {
+            background: linear-gradient(90deg, #e0f7fa, #e0f2f1);
+            transform: scale(1.01);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+            cursor: pointer;
+        }
+
+        /* Các ô trong bảng */
+        .table tbody td {
+            padding: 14px 12px;
+            vertical-align: middle;
+            border-top: none;
+            position: relative;
+        }
+
+        /* Hiệu ứng Ripple khi hover vào ô */
+        .table tbody td:hover::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 200%;
+            height: 200%;
+            background-color: rgba(0, 171, 197, 0.3);
+            border-radius: 50%;
+            animation: ripple 0.6s linear;
+            transform: translate(-50%, -50%);
+        }
+
+        /* Đảm bảo link vẫn clickable */
+        .table tbody td a {
+            position: relative; /* Đảm bảo các link luôn ở trên */
+            z-index: 2; /* Đặt link ở phía trước ripple */
+            color: #0284c7;
+            font-weight: 500;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        /* Hiệu ứng hover cho link */
+        .table tbody td a:hover {
+            color: #0ea5e9;
+            text-decoration: underline;
+        }
+
+        /* Hiệu ứng hover cho toàn bộ ô */
+        .table tbody td:hover {
+            background-color: #e0f7fa;
+            box-shadow: 0 3px 10px rgba(0, 171, 197, 0.2);
+            transform: scale(1.02);
+        }
+
+        /* Đảm bảo chức năng icon trong ô hoạt động */
+        .table tbody td i {
+            position: relative; /* Đảm bảo icon luôn ở trên */
+            z-index: 2;
+        }
+
+        /* Chỉnh sửa cho pagination */
+        .pagination {
+            display: flex;
+            justify-content: flex-end;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Các mục trong pagination */
+        .page-item {
+            margin: 0 5px;
+            transition: transform 0.2s ease-in-out, background-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        /* Màu nền khi hover hoặc focus */
+        .page-item:hover, .page-item:focus {
+            background-color: #38bdf8;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 171, 197, 0.3);
+            transform: translateY(-4px);
+        }
+
+        /* Các liên kết trong pagination */
+        .page-link {
+            display: inline-block;
+            padding: 10px 15px;
+            font-size: 18px;
+            color: #0284c7;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        /* Màu chữ khi hover hoặc focus */
+        .page-link:hover, .page-link:focus {
+            color: #ffffff;
+            transform: scale(1.1);
+        }
+
+        /* Chỉnh sửa các biểu tượng */
+        .page-link i {
+            font-size: 18px;
+            transition: transform 0.3s ease;
+        }
+
+        /* Tạo hiệu ứng chuyển động cho biểu tượng khi hover */
+        .page-item:hover .page-link i {
+            transform: rotate(15deg);
+        }
+
+        /* Disable trạng thái: không cho phép hover */
+        .page-item.disabled .page-link {
+            color: #bbb;
+            pointer-events: none;
+            cursor: not-allowed;
+        }
+
+        .page-item.disabled .page-link:hover {
+            background-color: transparent;
+            box-shadow: none;
+        }
+
+        /* Thêm màu sắc khác cho hover */
+        .page-item:not(.disabled):hover .page-link {
+            background-color: #0284c7;
+            color: white;
+        }
+        .table tbody tr th:first-child {
+            background-color: #f0f0f0; /* Màu xám nhạt */
+            color: #333;
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
+            font-weight: bold;
+        }
+        .action-buttons {
+            display: flex;
+            gap: 12px; /* Giãn nhẹ giữa các nút, có thể chỉnh 8px - 16px */
+            align-items: center;
+            justify-content: center; /* Giữ chúng nằm giữa ô */
+        }
+
+        .action-buttons a {
+            color: #007bff;
+            font-size: 18px;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .action-buttons a:hover {
+            color: #0056b3;
+        }
+
+    </style>
     <h4>Quản lý kích cỡ</h4>
-    <a href="/admin/size-create" class="btn btn-success my-3 float-right"><i class="fa fa-plus-square"></i> <span>Thêm cỡ mới</span></a>
-    <div class="alert alert-success" th:if="${successMessage}" th:text="${successMessage}"></div>
-    <table class="table my-3">
-        <thead class="thead-light">
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Mã cỡ
-                <!--                <a th:href="@{/admin/size-all(page=0, sort='id,asc')}" class="sort-link">↑</a>-->
-                <!--                <a th:href="@{/admin/size-all(page=0, sort='id,desc')}" class="sort-link">↓</a>-->
-            </th>
-            <th scope="col">Tên cỡ</th>
-            <th scope="col">Thao tác</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="items:${items}">
-            <th scope="row" th:text="${items.id}">1</th>
-            <td th:text="${items.code}">Mark</td>
-            <td th:text="${items.name}"></td>
-            <td>
+    <div class="container-fluid">
+        <a href="/admin/size-create" class="btn btn-success my-3 float-right"><i class="fa fa-plus-square"></i> <span>Thêm cỡ mới</span></a>
+        <div class="alert alert-success" th:if="${successMessage}" th:text="${successMessage}"></div>
+        <table class="table my-3">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Mã cỡ
+                    <!--                <a th:href="@{/admin/size-all(page=0, sort='id,asc')}" class="sort-link">↑</a>-->
+                    <!--                <a th:href="@{/admin/size-all(page=0, sort='id,desc')}" class="sort-link">↓</a>-->
+                </th>
+                <th scope="col">Tên cỡ</th>
+                <th scope="col">Thao tác</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="items:${items}">
+                <th scope="row" th:text="${items.id}">1</th>
+                <td th:text="${items.code}">Mark</td>
+                <td th:text="${items.name}"></td>
+                <td>
+                    <div class="action-buttons">
+                        <a th:data-link="'/admin/size-delete/'+${items.id}"class="delete-btn cursor-pointer"><i class="fa fa-trash-o"></i></a>
+                        <a th:href="@{'/admin/size-detail/'+${items.id}}" class="update-btn cursor-pointer"><i class="fa ti-pencil-alt"></i></a>
+                        <!--                <a th:href="@{'/admin/size-delete/' + ${items.id}}"><i class="fa fa-trash-o"></i>-->
+                        <!--                </a>-->
+                    </div>
+                </td>
 
-                <a th:href="@{'/admin/size-detail/'+${items.id}}"><i class="fa ti-pencil-alt"></i></a>
-                <a th:data-link="'/admin/size-delete/'+${items.id}"class="delete-btn cursor-pointer"><i class="fa fa-trash-o"></i></a>
-                <!--                <a th:href="@{'/admin/size-delete/' + ${items.id}}"><i class="fa fa-trash-o"></i>-->
-                <!--                </a>-->
-
-            </td>
-
-        </tr>
-        </tbody>
-    </table>
-    <div class="clearfix float-right">
-        <ul class="pagination">
-            <li th:classappend="${items.hasPrevious() ? '' : 'disabled'}" class="page-item">
-                <a th:href="@{/admin/size-all(page=0, sort=${sortField + ',' + (sortDirection == 'asc' ? 'desc' : 'asc')})}"
-                   class="page-link">
-                    <i class="fas fa-angle-double-left"></i>
-                </a>
-            </li>
-            <li th:classappend="${items.hasPrevious() ? '' : 'disabled'}" class="page-item">
-                <a th:href="@{/admin/size-all(page=${items.number - 1}, sort=${sortField + ',' + (sortDirection == 'asc' ? 'desc' : 'asc')})}"
-                   class="page-link">
-                    <i class="fas fa-angle-left"></i>
-                </a>
-            </li>
-            <li th:classappend="${items.hasNext() ? '' : 'disabled'}" class="page-item">
-                <a th:href="@{/admin/size-all(page=${items.number + 1}, sort=${sortField + ',' + (sortDirection == 'asc' ? 'desc' : 'asc')})}"
-                   class="page-link">
-                    <i class="fas fa-angle-right"></i>
-                </a>
-            </li>
-            <li th:classappend="${items.hasNext() ? '' : 'disabled'}" class="page-item">
-                <a th:href="@{/admin/size-all(page=${items.totalPages - 1}, sort=${sortField + ',' + (sortDirection == 'asc' ? 'desc' : 'asc')})}"
-                   class="page-link">
-                    <i class="fas fa-angle-double-right"></i>
-                </a>
-            </li>
-        </ul>
-    </div>
+            </tr>
+            </tbody>
+        </table>
+        <div class="clearfix float-right">
+            <ul class="pagination">
+                <li th:classappend="${items.hasPrevious() ? '' : 'disabled'}" class="page-item">
+                    <a th:href="@{/admin/size-all(page=0, sort=${sortField + ',' + (sortDirection == 'asc' ? 'desc' : 'asc')})}"
+                       class="page-link">
+                        <i class="fas fa-angle-double-left"></i>
+                    </a>
+                </li>
+                <li th:classappend="${items.hasPrevious() ? '' : 'disabled'}" class="page-item">
+                    <a th:href="@{/admin/size-all(page=${items.number - 1}, sort=${sortField + ',' + (sortDirection == 'asc' ? 'desc' : 'asc')})}"
+                       class="page-link">
+                        <i class="fas fa-angle-left"></i>
+                    </a>
+                </li>
+                <li th:classappend="${items.hasNext() ? '' : 'disabled'}" class="page-item">
+                    <a th:href="@{/admin/size-all(page=${items.number + 1}, sort=${sortField + ',' + (sortDirection == 'asc' ? 'desc' : 'asc')})}"
+                       class="page-link">
+                        <i class="fas fa-angle-right"></i>
+                    </a>
+                </li>
+                <li th:classappend="${items.hasNext() ? '' : 'disabled'}" class="page-item">
+                    <a th:href="@{/admin/size-all(page=${items.totalPages - 1}, sort=${sortField + ',' + (sortDirection == 'asc' ? 'desc' : 'asc')})}"
+                       class="page-link">
+                        <i class="fas fa-angle-double-right"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
 
 
-    <script>
-        $(document).ready(function () {
-            $('.delete-btn').on('click', function (e) {
-                Swal.fire({
-                    title: "Xác nhận?",
-                    text: `Bạn chắc chắn muốn xóa kích cỡ này`,
-                    icon: "warning",
-                    showCancelButton: true,
-                    cancelButtonText: 'Hủy',
-                    confirmButtonText: 'Xác nhận',
-                    reverseButtons: true
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        // const id = $(this).attr('data-product-id')
-                        var url = $(this).attr('data-link')
-                        window.location.href = url
-                    }
-                });
+        <script>
+            $(document).ready(function () {
+                $('.delete-btn').on('click', function (e) {
+                    Swal.fire({
+                        title: "Xác nhận?",
+                        text: `Bạn chắc chắn muốn xóa kích cỡ này`,
+                        icon: "warning",
+                        showCancelButton: true,
+                        cancelButtonText: 'Hủy',
+                        confirmButtonText: 'Xác nhận',
+                        reverseButtons: true
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // const id = $(this).attr('data-product-id')
+                            var url = $(this).attr('data-link')
+                            window.location.href = url
+                        }
+                    });
+                })
             })
-        })
 
-    </script>
+        </script>
+    </div>
 </div>
 </body>
 </html>
