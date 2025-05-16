@@ -54,9 +54,10 @@ public class ColorServiceIpml implements ColorService {
 
     @Override
     public void delete(Long id) {
-        Color existingColor = colorRepo.findById(id).orElseThrow(() -> new NotFoundException("Không tìm thấy màu có id " + id) );
-        existingColor.setDeleteFlag(true);
-        colorRepo.save(existingColor);
+//        Color existingColor = colorRepo.findById(id).orElseThrow(() -> new NotFoundException("Không tìm thấy màu có id " + id) );
+//        existingColor.setDeleteFlag(true);
+//        colorRepo.save(existingColor);
+        colorRepo.deleteById(id);
     }
 
     @Override

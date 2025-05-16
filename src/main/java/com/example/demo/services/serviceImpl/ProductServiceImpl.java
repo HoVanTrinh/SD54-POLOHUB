@@ -112,8 +112,10 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product delete(Long id)  {
         Product product = productRepository.findById(id).orElseThrow( () -> new NotFoundException("Product not found"));
-        product.setDeleteFlag(true);
-        return productRepository.save(product);
+//        product.setDeleteFlag(true);
+//        return productRepository.save(product);
+         productRepository.deleteById(id);
+         return productRepository.save(product);
     }
 
     @Override

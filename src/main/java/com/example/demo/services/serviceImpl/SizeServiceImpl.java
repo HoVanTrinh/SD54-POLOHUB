@@ -66,9 +66,10 @@ public class SizeServiceImpl implements SizeService {
 
     @Override
     public void delete(Long id) {
-        Size size = sizeRepository.findById(id).orElseThrow(() -> new NotFoundException("Không tìm thấy cỡ có id " + id) );
-        size.setDeleteFlag(true);
-        sizeRepository.save(size);
+//        Size size = sizeRepository.findById(id).orElseThrow(() -> new NotFoundException("Không tìm thấy cỡ có id " + id) );
+//        size.setDeleteFlag(true);
+//        sizeRepository.save(size);
+        sizeRepository.deleteById(id);
     }
 
     @Override

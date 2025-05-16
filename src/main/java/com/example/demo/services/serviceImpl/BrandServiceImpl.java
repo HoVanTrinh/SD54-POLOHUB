@@ -62,9 +62,11 @@ public class BrandServiceImpl implements BrandService {
 
     @Override
     public void delete(Long id) {
-        Brand brand = brandRepository.findById(id).orElseThrow(null);
-        brand.setDeleteFlag(true);
-        brandRepository.save(brand);
+//        Brand brand = brandRepository.findById(id).orElseThrow(null);
+//        brand.setDeleteFlag(true);
+//        brandRepository.save(brand);
+        // xoá khỏi database
+        brandRepository.deleteById(id);
     }
 
     @Override

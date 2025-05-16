@@ -94,7 +94,7 @@
 
             <td>
                 <a th:href="@{'/admin/product-edit/' + ${item.maSanPham}}"><i class="fa ti-pencil-alt" sec:authorize="hasRole('ADMIN')"></i></a>
-                <!--                <a class="cursor-pointer" th:data-product-id="${item.idSanPham}" id="delete-btn"><i class="fa fa-trash-o"></i></a>-->
+                                <a class="cursor-pointer" th:data-product-id="${item.idSanPham}" id="delete-btn"><i class="fa fa-trash-o"></i></a>
             </td>
         </tr>
         </tbody>
