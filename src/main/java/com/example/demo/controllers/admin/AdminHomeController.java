@@ -34,7 +34,7 @@ public class AdminHomeController {
         Page<BillDtoInterface> billDtos = billService.findAll(pageable);
 
         Page<ProductDto> productDtos = productService.getAllProductApi(Pageable.ofSize(10));
-//        double totalRevenue = billRepository.calculateTotalRevenue();
+        double totalRevenue = billRepository.calculateTotalRevenue();
         long totalBillWaiting = billRepository.getTotalBillStatusWaiting();
         long totalBillWaiting2 = billRepository.getTotalBillStatusWaiting2();
 
@@ -42,9 +42,15 @@ public class AdminHomeController {
         model.addAttribute("billList", billDtos.getContent());
         model.addAttribute("totalBillQuantity", totalBillWaiting2);
         model.addAttribute("totalProduct", productDtos.getTotalElements());
-//        model.addAttribute("revenue", totalRevenue);
+        model.addAttribute("revenue", totalRevenue);
         model.addAttribute("totalBillWaiting", totalBillWaiting);
 
         return "/admin/index";
+    }
+
+    @GetMapping("/admin/thong-ke-san-pham")
+    public String viewStatisticProductPage(Model model) {
+
+        return "/admin/thong-ke-san-pham";
     }
 }

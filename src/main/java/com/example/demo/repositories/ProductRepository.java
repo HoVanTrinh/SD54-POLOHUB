@@ -88,8 +88,60 @@ Page<ProductSearchDto> listSearchProduct(String maSanPham, String tenSanPham, Lo
 
     Product findTopByOrderByIdDesc();
 
+    @Query(value = "SELECT top(10) p.id, p.code, p.name, " +
+            "(SELECT top(1) image.link FROM image WHERE image.product_id = p.id) as imageUrl, " +
+            "brand.name as brand, " +
+            "COALESCE(SUM(bd.quantity),0) AS totalQuantity, " +
+            "COALESCE(SUM(bd.return_quantity),0) AS totalQuantityReturn, " +
+            "SUM(bd.quantity * bd.moment_price) as revenue " +
+            "FROM bill b " +
+            "JOIN bill_detail bd ON b.id = bd.bill_id " +
+            "JOIN product_detail pd ON pd.id = bd.product_detail_id " +
+            "JOIN product p ON p.id = pd.product_id " +
+            "JOIN brand ON brand.id = p.brand_id " +
+            "WHERE b.status = 'HOAN_THANH' " +
+            "GROUP BY p.id, p.code, p.name, brand.name " +
+            "ORDER BY totalQuantity DESC", nativeQuery = true)
+    List<BestSellerProduct> getBestSellerProduct();
 
 
+    @Query(value = "SELECT top(10) p.id, p.code, p.name, " +
+            "(SELECT top(1) image.link FROM image WHERE image.product_id = p.id) as imageUrl, " +
+            "brand.name as brand, " +
+            "COALESCE(SUM(bd.quantity),0) AS totalQuantity, " +
+            "COALESCE(SUM(bd.return_quantity),0) AS totalQuantityReturn, " +
+            "SUM(bd.quantity * bd.moment_price) as revenue " +
+            "FROM bill b " +
+            "JOIN bill_detail bd ON b.id = bd.bill_id " +
+            "JOIN product_detail pd ON pd.id = bd.product_detail_id " +
+            "JOIN product p ON p.id = pd.product_id " +
+            "JOIN brand ON brand.id = p.brand_id " +
+            "WHERE b.status = 'HOAN_THANH' AND b.create_date BETWEEN :fromDate AND :toDate " +
+            "GROUP BY p.id, p.code, p.name, brand.name " +
+            "ORDER BY totalQuantity DESC", nativeQuery = true)
+    List<BestSellerProduct> getBestSellerProduct(String fromDate, String toDate);
 
+    @Query(value = "SELECT\n" +
+            "    p.id,\n" +
+            "    p.code,\n" +
+            "    p.name,\n" +
+            "    brand.name AS brand,\n" +
+            "    COALESCE(SUM(bd.quantity), 0) AS totalQuantity,\n" +
+            "    COALESCE(SUM(bd.return_quantity), 0) AS totalQuantityReturn,\n" +
+            "    COALESCE(SUM(bd.quantity * bd.moment_price), 0) AS revenue\n" +
+            "FROM\n" +
+            "    product p\n" +
+            "JOIN\n" +
+            "    product_detail pd ON p.id = pd.product_id\n" +
+            "LEFT JOIN\n" +
+            "    bill_detail bd ON pd.id = bd.product_detail_id\n" +
+            "LEFT JOIN\n" +
+            "    bill b ON bd.bill_id = b.id\n" +
+            "LEFT JOIN\n" +
+            "    brand ON brand.id = p.brand_id \n" +
+            "WHERE (b.status = 'HOAN_THANH' AND b.create_date between :fromDate AND :toDate OR b.status IS NULL) \n" +
+            "GROUP BY\n" +
+            "    p.id, p.code, p.name, brand.name;", nativeQuery = true)
+    List<ProductStatistic> getStatisticProduct(String fromDate, String toDate);
 
 }

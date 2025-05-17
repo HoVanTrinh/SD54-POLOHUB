@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{admin/admin-layout.html}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .pagination .page-item .page-link:hover {
+            background-color: #90EE90 !important; /* Light green */
+            border-color: #90EE90 !important; /* Light green border */
+            color: white !important; /* Change text color */
+        }
+    </style>
+</head>
+
+<body>
+<div class="main-wrapper" layout:fragment="content">
+    <div id="loading-overlay">
+        <div class="loading-spinner"></div>
+    </div>
+    <h4>Thống kê sản phẩm</h4>
+
+
+    <div class="row mt-4">
+        <div class="top-product mt-4 col-md-8">
+            <div class="mb-2 d-flex justify-content-between">
+                <h5>Danh sách sản phẩm bán chạy nhất</h5>
+                <div class="d-flex">
+                    <select class="form-select" style="width: 200px; margin-right: 10px;" id="best-seller-time-select">
+                        <option value="">Tất cả thời gian</option>
+                       
+                    </select>
+                    <button id="apply-filter-btn" class="btn btn-primary">Lọc</button>
+                </div>
+            </div>
+
+            <table class="table mt-3">
+                <thead>
+                <tr>
+                    <th scope="col">Sản phẩm</th>
+                    <th scope="col"></th>
+                    <th scope="col">Số lượng bán</th>
+                    <th scope="col">Doanh thu</th>
+                </tr>
+                </thead>
+                <tbody id="best-seller-list">
+
+            </table>
+        </div>
+        <div class="mt-4 col-md-4">
+            <canvas id="donut-best-seller"></canvas>
+        </div>
+    </div>
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/shim.min.js"></script>
+
+    <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+
+
+
+    <script>
+        document.getElementById('apply-filter-btn').addEventListener('click', function () {
+            applyFilters();
+        });
+
+        function applyFilters() {
+            var timeValue = document.getElementById('best-seller-time-select').value;
+            var currentDate = new Date();
+            var fromDate = '';
+
+            if (timeValue == '7') {
+                var sevenDaysAgo = new Date();
+                sevenDaysAgo.setDate(currentDate.getDate() - 7);
+                fromDate = formatToYYYYMMDD(sevenDaysAgo);
+            } else if (timeValue == '15') {
+                var fifteenDaysAgo = new Date();
+                fifteenDaysAgo.setDate(currentDate.getDate() - 15);
+                fromDate = formatToYYYYMMDD(fifteenDaysAgo);
+            } else if (timeValue == '30') {
+                var thirtyDaysAgo = new Date();
+                thirtyDaysAgo.setDate(currentDate.getDate() - 30);
+                fromDate = formatToYYYYMMDD(thirtyDaysAgo);
+            }
+
+            if (fromDate) {
+                callApiGetBestSellerInTime(fromDate, formatToYYYYMMDD(new Date()));
+            } else {
+                callApiGetBestSellerAll();
+            }
+        }
+
+        async function callApiGetBestSellerInTime(fromDate, toDate) {
+            await $.ajax({
+                type: 'GET',
+                dataType: 'json',
+                url: `/api/get-bestseller-product-time?fromDate=${fromDate}&toDate=${toDate}`,
+                success: function (data) {
+                    loadHtmlBestSeller(data);
+                }
+            });
+        }
+
+        function callApiGetBestSellerAll() {
+            $.ajax({
+                type: 'GET',
+                dataType: 'json',
+                url: '/api/get-bestseller-product-all',
+                success: function (data) {
+                    loadHtmlBestSeller(data);
+                }
+            });
+        }
+
+        function loadHtmlBestSeller(data) {
+            var html = '';
+            data.forEach(product => {
+                var price = formatNumber(parseFloat(product.revenue));
+                html += `<tr scope="row">
+            <td>
+                <a class="text-primary" href="/admin/chi-tiet-san-pham/${product.code}">${product.name}</a>
+            </td>
+            <td><img src="/${product.imageUrl}" alt="" width="50"></td>
+            <td>${product.totalQuantity}</td>
+            <td>${price}</td>
+        </tr>`;
+            });
+
+            document.getElementById('best-seller-list').innerHTML = html;
+        }
+
+        function formatToYYYYMMDD(date) {
+            var yyyy = date.getFullYear().toString();
+            var mm = (date.getMonth() + 1).toString().padStart(2, '0');
+            var dd = date.getDate().toString().padStart(2, '0');
+            return yyyy + '-' + mm + '-' + dd;
+        }
+
+        function formatNumber(number) {
+            return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        }
+
+
+        $('.by-date').show()
+        $('.by-month').hide()
+        initProduct();
+
+        function initProduct() {
+            $.ajax({
+                type: 'GET',
+                dataType: 'json',
+                url: `/api/get-statistic-product-time?fromDate=${$('#dateStart').val()}&toDate=${$('#dateEnd').val()}`,
+                success: function (data) {
+                    loadHtmlProduct(data)
+                }
+            })
+        }
+
+        async function loadHtmlProduct(productList) {
+            var html = ''
+            table.destroy()
+            await productList.forEach(product => {
+                var price = formatNumber(product.revenue)
+                html += `<tr scope="row">
+                        <td>
+                            <a class="text-primary" href="/admin/chi-tiet-san-pham/${product.code}">${product.code}</a>
+                        </td>
+                        <td>
+                            <a class="text-primary" href="/admin/chi-tiet-san-pham/${product.code}">${product.name}</a>
+                        </td>
+                        <td>${product.brand}</td>
+                        <td>${product.totalQuantity}</td>
+                        <td>${product.totalQuantityReturn}</td>
+                        <td>${price}</td>
+                    </tr>`
+            })
+
+
+
+        }
+
+        callApiGetBestSellerAll()
+        function loadDonutCharBestSeller(labelList, dataList) {
+            let chartStatus = Chart.getChart("donut-best-seller"); // <canvas> id
+            if (chartStatus != undefined) {
+                chartStatus.destroy();
+            }
+            var chart = new Chart($('#donut-best-seller'), {
+                type: 'doughnut',
+                data: {
+                    labels: labelList,
+                    datasets: [{
+                        label: 'Doanh thu',
+                        data: dataList,
+                        backgroundColor: [
+                            'rgba(255, 182, 193, 0.6)',  // Màu hồng pastel
+                            'rgba(173, 216, 230, 0.6)',  // Màu xanh pastel
+                            'rgba(144, 238, 144, 0.6)',  // Màu xanh lá nhạt
+                            'rgba(255, 239, 184, 0.6)',  // Màu vàng nhạt
+                            'rgba(216, 191, 216, 0.6)',  // Màu tím nhạt
+                            'rgba(245, 245, 220, 0.6)',  // Màu be nhạt
+                            'rgba(220, 220, 220, 0.6)'   // Màu xám nhạt
+                        ],
+                        hoverOffset: 4
+                    }]
+                },
+
+                options: {
+
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: `Biểu đồ doanh thu`
+                        },
+                        customCanvasBackgroundColor: {
+                            color: '#fff',
+                        }
+                    }
+                },
+
+                plugins: [plugin],
+            });
+        }
+
+        function callApiGetBestSellerAll() {
+            $.ajax({
+                type: 'GET',
+                dataType: 'json',
+                url: '/api/get-bestseller-product-all',
+                success: function (data) {
+                    loadHtmlBestSeller(data)
+                    var lableList = []
+                    var dataList = []
+                    data.forEach(item => {
+                        lableList.push(item.name)
+                        dataList.push(item.revenue)
+                        loadDonutCharBestSeller(lableList, dataList)
+                    })
+                }
+            })
+        }
+
+        function loadHtmlBestSeller(data) {
+            var html = ''
+            data.forEach(product => {
+                var price = formatNumber(parseFloat(product.revenue))
+                html += `<tr scope="row">
+                        <td>
+                            <a class="text-primary" href="/admin/chi-tiet-san-pham/${product.code}">${product.name}</a>
+                        </td>
+                        <td><img src="/${product.imageUrl}}" alt="" width="50"></td>
+                        <td>${product.totalQuantity}</td>
+                        <td>${price}</td>
+                    </tr>`
+            })
+
+            $('#best-seller-list').html(html)
+
+        }
+
+
+        async function callApiGetBestSellerInTime(fromDate, toDate) {
+            await $.ajax({
+                type: 'GET',
+                dataType: 'json',
+                url: `/api/get-bestseller-product-time?fromDate=${fromDate}&toDate=${toDate}`,
+                success: function (data) {
+                    loadHtmlBestSeller(data)
+                    var lableList = []
+                    var dataList = []
+                    data.forEach(item => {
+                        lableList.push(item.name)
+                        dataList.push(item.revenue)
+                        loadDonutCharBestSeller(lableList, dataList)
+                    })
+                }
+            })
+        }
+
+        const plugin = {
+            id: 'customCanvasBackgroundColor',
+            beforeDraw: (chart, args, options) => {
+                const {ctx} = chart;
+                ctx.save();
+                ctx.globalCompositeOperation = 'destination-over';
+                ctx.fillStyle = options.color || '#99ffff';
+                ctx.fillRect(0, 0, chart.width, chart.height);
+                ctx.restore();
+            }
+        };
+
+        function formatToYYYYMMDD(date) {
+            var yyyy = date.getFullYear().toString();
+            var mm = (date.getMonth() + 1).toString().padStart(2, '0');
+            var dd = date.getDate().toString().padStart(2, '0');
+            return yyyy + '-' + mm + '-' + dd;
+        }
+        function formatNumber(number) {
+            return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        }
+
+        function removeAnyNonDigit(value) {
+            return value.replace(/\D/g, '');
+        }
+    </script>
+</div>
+</body>
+</html>
