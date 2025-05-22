@@ -14,547 +14,1077 @@
 
     <style>
 
-        #sakura-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 9999;
+        /*#sakura-container {*/
+        /*    position: fixed;*/
+        /*    top: 0;*/
+        /*    left: 0;*/
+        /*    width: 100%;*/
+        /*    height: 100%;*/
+        /*    pointer-events: none;*/
+        /*    z-index: 9999;*/
+        /*}*/
+
+        /*.sakura {*/
+        /*    position: absolute;*/
+        /*    width: 30px;*/
+        /*    height: 30px;*/
+        /*    background-image: url('https://image.similarpng.com/file/similarpng/very-thumbnail/2021/05/Realistic-sakura-or-cherry-blossom-Premium-vector-PNG.png'); !* Bông hoa PNG *!*/
+        /*    background-size: cover;*/
+        /*    background-repeat: no-repeat;*/
+        /*    opacity: 0.8;*/
+        /*    animation: fall linear infinite;*/
+        /*    filter: drop-shadow(0 0 3px rgba(255, 192, 203, 0.8)); !* hồng nhẹ xung quanh *!*/
+        /*    mix-blend-mode: multiply;*/
+        /*}*/
+
+        /*@keyframes fall {*/
+        /*    0% {*/
+        /*        transform: translateY(-10px) rotate(0deg);*/
+        /*        opacity: 1;*/
+        /*    }*/
+        /*    100% {*/
+        /*        transform: translateY(100vh) rotate(360deg);*/
+        /*        opacity: 0;*/
+        /*    }*/
+        /*}*/
+
+        /*.thongtin-3d {*/
+        /*    perspective: 1000px;*/
+        /*}*/
+
+        /*.thongtin-3d h2,*/
+        /*.thongtin-3d p {*/
+        /*    max-width: 500px; !* 👈 hoặc thử 480px, 450px... tuỳ bạn *!*/
+        /*    width: 100%;*/
+        /*    transform: rotateX(5deg) rotateY(-5deg);*/
+        /*    transform-style: preserve-3d;*/
+        /*    color: #fff;*/
+        /*    background: linear-gradient(145deg, #ff9a9e, #fad0c4);*/
+        /*    padding: 10px 20px;*/
+        /*    border-radius: 12px;*/
+        /*    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.25),*/
+        /*    0 10px 10px rgba(255, 105, 180, 0.2);*/
+        /*    transition: transform 0.3s ease, box-shadow 0.3s ease;*/
+        /*    margin-bottom: 12px;*/
+        /*}*/
+
+        /*.thongtin-3d h2:hover,*/
+        /*.thongtin-3d p:hover {*/
+        /*    transform: rotateX(0deg) rotateY(0deg) scale(1.05);*/
+        /*    box-shadow: 0 20px 30px rgba(255, 105, 180, 0.35);*/
+        /*    cursor: pointer;*/
+        /*}*/
+
+        /*.card-body {*/
+        /*    border: 2px solid #f9b9c3; !* Màu hồng pastel hoa anh đào *!*/
+        /*    border-radius: 12px;*/
+        /*    background: rgba(255, 255, 255, 0.6);*/
+        /*    backdrop-filter: blur(8px);*/
+        /*    box-shadow: 0 0 15px rgba(249, 185, 195, 0.4);*/
+        /*    animation: glowCherry 3s ease-in-out infinite;*/
+        /*    transition: all 0.3s ease;*/
+        /*}*/
+
+        /*!* Hiệu ứng sáng lên dịu nhẹ *!*/
+        /*@keyframes glowCherry {*/
+        /*    0% {*/
+        /*        box-shadow: 0 0 10px rgba(249, 185, 195, 0.3);*/
+        /*    }*/
+        /*    50% {*/
+        /*        box-shadow: 0 0 25px rgba(249, 185, 195, 0.7);*/
+        /*    }*/
+        /*    100% {*/
+        /*        box-shadow: 0 0 10px rgba(249, 185, 195, 0.3);*/
+        /*    }*/
+        /*}*/
+
+        /*.card {*/
+        /*    border: none !important;*/
+        /*    box-shadow: none !important; !* Nếu bạn cũng muốn bỏ cả đổ bóng *!*/
+        /*}*/
+
+        /*.scene-container {*/
+        /*    position: relative;*/
+        /*    height: 200px;*/
+        /*    margin-top: 20px;*/
+        /*    overflow: hidden;*/
+        /*    background: linear-gradient(to top, #ffeef4, #fffafc);*/
+        /*    border-radius: 16px;*/
+        /*    box-shadow: 0 0 20px rgba(255, 182, 193, 0.3);*/
+        /*}*/
+
+        /*.tree {*/
+        /*    position: absolute;*/
+        /*    bottom: 0;*/
+        /*    height: 150px;*/
+        /*    animation: sway 2s ease-in-out infinite alternate;*/
+        /*    z-index: 1;*/
+        /*}*/
+
+        /*@keyframes sway {*/
+        /*    0% { transform: rotate(0deg); }*/
+        /*    100% { transform: rotate(1.5deg); }*/
+        /*}*/
+
+        /*.tree-left {*/
+        /*    left: 0;*/
+        /*}*/
+
+        /*.tree-right {*/
+        /*    right: 0;*/
+        /*}*/
+
+        /*.character {*/
+        /*    position: absolute;*/
+        /*    bottom: 0;*/
+        /*    height: 100px;*/
+        /*    animation: walk-reverse 10s linear infinite;*/
+        /*    z-index: 2;*/
+        /*}*/
+
+        /*@keyframes walk-reverse {*/
+        /*    0% {*/
+        /*        right: -100px;*/
+        /*    }*/
+        /*    100% {*/
+        /*        right: 100%;*/
+        /*    }*/
+        /*}*/
+
+        /*.row {*/
+        /*    background: linear-gradient(135deg, #ffeef2, #fbd3e9);*/
+        /*    border: 2px solid #f9c5d1;*/
+        /*    border-radius: 16px;*/
+        /*    padding: 20px;*/
+        /*    box-shadow: 0 4px 20px rgba(255, 182, 193, 0.25);*/
+        /*    animation: glowBorder 4s ease-in-out infinite alternate;*/
+        /*    transition: transform 0.3s ease;*/
+        /*}*/
+
+        /*.row:hover {*/
+        /*    transform: scale(1.01);*/
+        /*}*/
+
+        /*@keyframes glowBorder {*/
+        /*    0% {*/
+        /*        box-shadow: 0 0 10px rgba(255, 182, 193, 0.3);*/
+        /*        border-color: #f9c5d1;*/
+        /*    }*/
+        /*    100% {*/
+        /*        box-shadow: 0 0 20px rgba(255, 105, 180, 0.6);*/
+        /*        border-color: #ffb6c1;*/
+        /*    }*/
+        /*}*/
+
+        /*.row h5,*/
+        /*.row h6,*/
+        /*.row p {*/
+        /*    color: #6e2f5b;*/
+        /*}*/
+
+        /*.py-2.mb-4 {*/
+        /*    background: linear-gradient(135deg, #fff0f6, #ffeef2);*/
+        /*    border: 2px dashed #f9c5d1;*/
+        /*    border-radius: 14px;*/
+        /*    padding: 20px;*/
+        /*    box-shadow: 0 4px 16px rgba(255, 192, 203, 0.2);*/
+        /*    animation: gentlePulse 2s infinite ease-in-out;*/
+        /*    margin-top: 40px; !* 👈 thêm khoảng cách ở đây *!*/
+        /*}*/
+
+        /*.py-2.mb-4 h5 {*/
+        /*    font-weight: bold;*/
+        /*    color: #c2185b;*/
+        /*    font-size: 18px;*/
+        /*    margin-bottom: 10px;*/
+        /*}*/
+
+        /*.py-2.mb-4 p {*/
+        /*    font-size: 15px;*/
+        /*    color: #6e2f5b;*/
+        /*    margin-bottom: 6px;*/
+        /*}*/
+
+        /*.py-2.mb-4 span {*/
+        /*    font-weight: 500;*/
+        /*}*/
+
+        /*.py-2.mb-4 .text-muted {*/
+        /*    font-style: italic;*/
+        /*    color: #999;*/
+        /*}*/
+
+        /*@keyframes gentlePulse {*/
+        /*    0% {*/
+        /*        box-shadow: 0 0 10px rgba(255, 192, 203, 0.15);*/
+        /*    }*/
+        /*    50% {*/
+        /*        box-shadow: 0 0 20px rgba(255, 182, 193, 0.35);*/
+        /*    }*/
+        /*    100% {*/
+        /*        box-shadow: 0 0 10px rgba(255, 192, 203, 0.15);*/
+        /*    }*/
+        /*}*/
+
+        /*.voucher-section h5::before {*/
+        /*    content: "🎁";*/
+        /*    margin-right: 8px;*/
+        /*}*/
+
+        /*.voucher-section p::before {*/
+        /*    content: "💡";*/
+        /*    margin-right: 6px;*/
+        /*    color: #ff6699;*/
+        /*}*/
+
+        /*!* Container của loại đơn *!*/
+        /*.loai-don-wrapper {*/
+        /*    padding: 16px 20px;*/
+        /*    background: linear-gradient(135deg, #e0fff9, #e8fef5);*/
+        /*    border: 2px solid #15db99;*/
+        /*    border-radius: 12px;*/
+        /*    box-shadow: 0 4px 14px rgba(21, 219, 153, 0.2);*/
+        /*    transition: transform 0.3s ease;*/
+        /*    margin-top: 20px;*/
+        /*}*/
+
+        /*!* Hover nhẹ cho vui mắt *!*/
+        /*.loai-don-wrapper:hover {*/
+        /*    transform: scale(1.02);*/
+        /*}*/
+
+        /*!* Tiêu đề màu xanh mượt *!*/
+        /*.loai-don-wrapper h5 {*/
+        /*    color: #15db99 !important;*/
+        /*    font-weight: bold;*/
+        /*    font-size: 20px;*/
+        /*    margin-top: 5px;*/
+        /*    animation: pulseText 2.5s infinite ease-in-out;*/
+        /*}*/
+
+        /*!* Thêm biểu tượng cho vui *!*/
+        /*.loai-don-wrapper::before {*/
+        /*    font-size: 22px;*/
+        /*    margin-right: 8px;*/
+        /*}*/
+
+        /*!* Nhấp nháy chữ *!*/
+        /*@keyframes pulseText {*/
+        /*    0%, 100% {*/
+        /*        opacity: 1;*/
+        /*    }*/
+        /*    50% {*/
+        /*        opacity: 0.7;*/
+        /*    }*/
+        /*}*/
+
+        /*.ma-giao-dich-wrapper {*/
+        /*    padding: 12px 18px;*/
+        /*    border: 2px dashed #ffc107;*/
+        /*    background-color: #fffbea;*/
+        /*    border-radius: 10px;*/
+        /*    box-shadow: 0 2px 10px rgba(255, 193, 7, 0.15);*/
+        /*    display: flex;*/
+        /*    align-items: center;*/
+        /*    gap: 10px;*/
+        /*    margin-top: 15px;*/
+        /*}*/
+
+        /*!* Icon hoặc emoji bên cạnh *!*/
+        /*.ma-giao-dich-wrapper::before {*/
+        /*    font-size: 20px;*/
+        /*}*/
+
+        /*!* Làm đậm mã *!*/
+        /*.ma-giao-dich-wrapper .text-warning {*/
+        /*    font-weight: 700;*/
+        /*    font-size: 16px;*/
+        /*}*/
+
+        /*!* Tiêu đề danh sách đơn hàng - kiểu nhẹ nhàng *!*/
+        /*.font-size-15 {*/
+        /*    font-size: 20px;*/
+        /*    font-weight: 600;*/
+        /*    color: #d63384; !* màu hồng hoa anh đào *!*/
+        /*    margin-bottom: 16px;*/
+        /*    position: relative;*/
+        /*    font-family: 'Segoe UI', sans-serif;*/
+        /*}*/
+
+        /*.font-size-15::before {*/
+        /*    content: "🌸";*/
+        /*    margin-right: 10px;*/
+        /*    font-size: 20px;*/
+        /*}*/
+
+        /*!* Khung bảng *!*/
+        /*.table-responsive {*/
+        /*    background-color: #fff0f5;*/
+        /*    border-radius: 12px;*/
+        /*    padding: 16px;*/
+        /*    box-shadow: 0 4px 12px rgba(255, 182, 193, 0.3);*/
+        /*}*/
+
+        /*!* Tiêu đề bảng *!*/
+        /*.table thead th {*/
+        /*    background-color: #ffe4ec;*/
+        /*    color: #d63384;*/
+        /*    font-weight: bold;*/
+        /*    font-size: 14px;*/
+        /*    text-align: center;*/
+        /*}*/
+
+        /*!* Nội dung bảng *!*/
+        /*.table tbody td {*/
+        /*    vertical-align: middle;*/
+        /*    font-size: 14px;*/
+        /*    text-align: center;*/
+        /*    color: #555;*/
+        /*    font-family: 'Segoe UI', sans-serif;*/
+        /*}*/
+
+        /*!* Các dòng đặc biệt (voucher, phí ship, tổng tiền) *!*/
+        /*.table tbody tr:nth-last-child(3),*/
+        /*.table tbody tr:nth-last-child(2),*/
+        /*.table tbody tr:last-child {*/
+        /*    background-color: #fff7fb;*/
+        /*}*/
+
+        /*!* Tổng tiền cuối cùng nổi bật hơn *!*/
+        /*.table tbody tr:last-child h4 {*/
+        /*    color: #c2185b;*/
+        /*    font-weight: bold;*/
+        /*    font-size: 18px;*/
+        /*}*/
+
+        /*!* Dòng hover *!*/
+        /*.table tbody tr:hover {*/
+        /*    background-color: #ffeef5;*/
+        /*    transition: background-color 0.3s ease-in-out;*/
+        /*}*/
+
+        /*!* Nút *!*/
+        /*.d-print-none .btn-success {*/
+        /*    background-color: #d63384;*/
+        /*    border: none;*/
+        /*}*/
+
+        /*.d-print-none .btn-success:hover {*/
+        /*    background-color: #c2185b;*/
+        /*}*/
+
+        /*.d-print-none .btn-secondary {*/
+        /*    background-color: #f8bbd0;*/
+        /*    border: none;*/
+        /*    color: #000;*/
+        /*}*/
+
+        /*.d-print-none .btn-secondary:hover {*/
+        /*    background-color: #f48fb1;*/
+        /*    color: #000;*/
+        /*}*/
+
+        /*!* Container nút: canh giữa đẹp *!*/
+        /*.d-print-none .float-end {*/
+        /*    display: flex;*/
+        /*    justify-content: flex-end;*/
+        /*    gap: 16px;*/
+        /*    margin-top: 20px;*/
+        /*}*/
+
+        /*!* Nút chung style *!*/
+        /*.d-print-none .btn {*/
+        /*    padding: 14px 28px;*/
+        /*    font-size: 16px;*/
+        /*    font-weight: bold;*/
+        /*    border-radius: 12px;*/
+        /*    transition: all 0.3s ease-in-out;*/
+        /*    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);*/
+        /*}*/
+
+        /*!* Nút IN – màu sakura đậm *!*/
+        /*.d-print-none .btn-success {*/
+        /*    background-color: #d63384;*/
+        /*    color: white;*/
+        /*    border: none;*/
+        /*    position: relative;*/
+        /*    overflow: hidden;*/
+        /*}*/
+
+        /*.d-print-none .btn-success:hover {*/
+        /*    background-color: #c2185b;*/
+        /*    transform: scale(1.05);*/
+        /*    box-shadow: 0 8px 20px rgba(214, 51, 132, 0.5);*/
+        /*}*/
+
+        /*!* Hiệu ứng wave nhẹ khi hover *!*/
+        /*.d-print-none .btn-success::after {*/
+        /*    content: '';*/
+        /*    position: absolute;*/
+        /*    width: 120%;*/
+        /*    height: 100%;*/
+        /*    top: 0;*/
+        /*    left: -100%;*/
+        /*    background: rgba(255, 255, 255, 0.2);*/
+        /*    transform: skewX(-20deg);*/
+        /*    transition: left 0.6s;*/
+        /*}*/
+
+        /*.d-print-none .btn-success:hover::after {*/
+        /*    left: 100%;*/
+        /*}*/
+
+        /*!* Nút ĐÓNG – pastel nhẹ nhàng *!*/
+        /*.d-print-none .btn-secondary {*/
+        /*    background-color: #f8bbd0;*/
+        /*    color: #000;*/
+        /*    border: none;*/
+        /*    position: relative;*/
+        /*    overflow: hidden;*/
+        /*}*/
+
+        /*.d-print-none .btn-secondary:hover {*/
+        /*    background-color: #f48fb1;*/
+        /*    transform: scale(1.05);*/
+        /*    box-shadow: 0 8px 20px rgba(248, 187, 208, 0.6);*/
+        /*}*/
+
+        /*!* Hiệu ứng ánh sáng mờ *!*/
+        /*.d-print-none .btn-secondary::after {*/
+        /*    content: '';*/
+        /*    position: absolute;*/
+        /*    width: 120%;*/
+        /*    height: 100%;*/
+        /*    top: 0;*/
+        /*    left: -100%;*/
+        /*    background: rgba(255, 255, 255, 0.3);*/
+        /*    transform: skewX(-20deg);*/
+        /*    transition: left 0.6s;*/
+        /*}*/
+
+        /*.d-print-none .btn-secondary:hover::after {*/
+        /*    left: 100%;*/
+        /*}*/
+
+        /*!* ========== Nút Hủy ========== *!*/
+        /*.cancel-btn {*/
+        /*    background: #f44336 !important;*/
+        /*    color: white !important;*/
+        /*    font-weight: bold;*/
+        /*    font-size: 15px;*/
+        /*    padding: 12px 20px;*/
+        /*    border-radius: 12px !important;*/
+        /*    border: none;*/
+        /*    transition: all 0.3s ease-in-out;*/
+        /*    box-shadow: 0 6px 12px rgba(244, 67, 54, 0.3);*/
+        /*}*/
+
+        /*.cancel-btn:hover {*/
+        /*    background: #d32f2f !important;*/
+        /*    transform: scale(1.05);*/
+        /*    box-shadow: 0 8px 20px rgba(244, 67, 54, 0.5);*/
+        /*}*/
+
+        /*!* ========== Nút Giao hàng thất bại ========== *!*/
+        /*.failed-btn {*/
+        /*    background: #9c27b0 !important;*/
+        /*    color: white !important;*/
+        /*    font-weight: bold;*/
+        /*    font-size: 15px;*/
+        /*    padding: 12px 20px;*/
+        /*    border-radius: 12px !important;*/
+        /*    border: none;*/
+        /*    transition: all 0.3s ease-in-out;*/
+        /*    box-shadow: 0 6px 12px rgba(156, 39, 176, 0.3);*/
+        /*}*/
+
+        /*.failed-btn:hover {*/
+        /*    background: #7b1fa2 !important;*/
+        /*    transform: scale(1.05);*/
+        /*    box-shadow: 0 8px 20px rgba(156, 39, 176, 0.5);*/
+        /*}*/
+
+        /*!* ========== Nút Trạng thái: xác nhận, giao hàng,... ========== *!*/
+        /*.btn-update-status .btn {*/
+        /*    font-size: 15px;*/
+        /*    font-weight: bold;*/
+        /*    padding: 12px 20px;*/
+        /*    border-radius: 12px !important;*/
+        /*    transition: all 0.3s ease;*/
+        /*    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);*/
+        /*}*/
+
+        /*.btn-update-status .btn:hover {*/
+        /*    transform: translateY(-2px) scale(1.03);*/
+        /*    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);*/
+        /*}*/
+
+        /*!* Mỗi trạng thái có màu riêng thêm style nếu cần *!*/
+        /*.btn-update-status .btn-secondary {*/
+        /*    background-color: #607d8b !important;*/
+        /*    color: #fff !important;*/
+        /*}*/
+
+        /*.btn-update-status .btn-primary {*/
+        /*    background-color: #3f51b5 !important;*/
+        /*    color: #fff !important;*/
+        /*}*/
+
+        /*.btn-update-status .btn-warning {*/
+        /*    background-color: #ffc107 !important;*/
+        /*    color: #000 !important;*/
+        /*}*/
+
+        /*.btn-update-status .btn-success {*/
+        /*    background-color: #4caf50 !important;*/
+        /*    color: #fff !important;*/
+        /*}*/
+
+        /*@keyframes pulse-glow {*/
+        /*    0% {*/
+        /*        box-shadow: 0 0 0 0 rgba(255, 64, 129, 0.4);*/
+        /*    }*/
+        /*    70% {*/
+        /*        box-shadow: 0 0 0 10px rgba(255, 64, 129, 0);*/
+        /*    }*/
+        /*    100% {*/
+        /*        box-shadow: 0 0 0 0 rgba(255, 64, 129, 0);*/
+        /*    }*/
+        /*}*/
+
+        /*.cancel-btn:hover,*/
+        /*.failed-btn:hover {*/
+        /*    animation: pulse-glow 1.2s infinite;*/
+        /*}*/
+
+        body {
+            background-color: #1a1a1a !important;
         }
 
-        .sakura {
-            position: absolute;
-            width: 30px;
-            height: 30px;
-            background-image: url('https://image.similarpng.com/file/similarpng/very-thumbnail/2021/05/Realistic-sakura-or-cherry-blossom-Premium-vector-PNG.png'); /* Bông hoa PNG */
-            background-size: cover;
-            background-repeat: no-repeat;
-            opacity: 0.8;
-            animation: fall linear infinite;
-            filter: drop-shadow(0 0 3px rgba(255, 192, 203, 0.8)); /* hồng nhẹ xung quanh */
-            mix-blend-mode: multiply;
-        }
-
-        @keyframes fall {
+        /* Base animation for shine */
+        @keyframes shine {
             0% {
-                transform: translateY(-10px) rotate(0deg);
-                opacity: 1;
+                background-position: -200%;
             }
             100% {
-                transform: translateY(100vh) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        .thongtin-3d {
-            perspective: 1000px;
-        }
-
-        .thongtin-3d h2,
-        .thongtin-3d p {
-            max-width: 500px; /* 👈 hoặc thử 480px, 450px... tuỳ bạn */
-            width: 100%;
-            transform: rotateX(5deg) rotateY(-5deg);
-            transform-style: preserve-3d;
-            color: #fff;
-            background: linear-gradient(145deg, #ff9a9e, #fad0c4);
-            padding: 10px 20px;
-            border-radius: 12px;
-            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.25),
-            0 10px 10px rgba(255, 105, 180, 0.2);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            margin-bottom: 12px;
-        }
-
-        .thongtin-3d h2:hover,
-        .thongtin-3d p:hover {
-            transform: rotateX(0deg) rotateY(0deg) scale(1.05);
-            box-shadow: 0 20px 30px rgba(255, 105, 180, 0.35);
-            cursor: pointer;
-        }
-
-        .card-body {
-            border: 2px solid #f9b9c3; /* Màu hồng pastel hoa anh đào */
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.6);
-            backdrop-filter: blur(8px);
-            box-shadow: 0 0 15px rgba(249, 185, 195, 0.4);
-            animation: glowCherry 3s ease-in-out infinite;
-            transition: all 0.3s ease;
-        }
-
-        /* Hiệu ứng sáng lên dịu nhẹ */
-        @keyframes glowCherry {
-            0% {
-                box-shadow: 0 0 10px rgba(249, 185, 195, 0.3);
-            }
-            50% {
-                box-shadow: 0 0 25px rgba(249, 185, 195, 0.7);
-            }
-            100% {
-                box-shadow: 0 0 10px rgba(249, 185, 195, 0.3);
+                background-position: 200%;
             }
         }
 
         .card {
-            border: none !important;
-            box-shadow: none !important; /* Nếu bạn cũng muốn bỏ cả đổ bóng */
-        }
-
-        .scene-container {
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            border-radius: 20px;
+            padding: 36px;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.2), inset 0 0 15px rgba(255, 215, 0, 0.05);
+            color: #f9f9f9;
+            font-family: 'Poppins', sans-serif;
+            animation: fadeInLuxury 1s ease;
             position: relative;
-            height: 200px;
-            margin-top: 20px;
             overflow: hidden;
-            background: linear-gradient(to top, #ffeef4, #fffafc);
-            border-radius: 16px;
-            box-shadow: 0 0 20px rgba(255, 182, 193, 0.3);
         }
 
-        .tree {
+        .card::before {
+            content: "";
             position: absolute;
-            bottom: 0;
-            height: 150px;
-            animation: sway 2s ease-in-out infinite alternate;
-            z-index: 1;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(from 90deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+            animation: rotateBorder 10s linear infinite;
+            z-index: 0;
         }
 
-        @keyframes sway {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(1.5deg); }
-        }
-
-        .tree-left {
-            left: 0;
-        }
-
-        .tree-right {
-            right: 0;
-        }
-
-        .character {
-            position: absolute;
-            bottom: 0;
-            height: 100px;
-            animation: walk-reverse 10s linear infinite;
-            z-index: 2;
-        }
-
-        @keyframes walk-reverse {
+        @keyframes rotateBorder {
             0% {
-                right: -100px;
+                transform: rotate(0deg);
             }
             100% {
-                right: 100%;
+                transform: rotate(360deg);
             }
         }
 
-        .row {
-            background: linear-gradient(135deg, #ffeef2, #fbd3e9);
-            border: 2px solid #f9c5d1;
-            border-radius: 16px;
-            padding: 20px;
-            box-shadow: 0 4px 20px rgba(255, 182, 193, 0.25);
-            animation: glowBorder 4s ease-in-out infinite alternate;
-            transition: transform 0.3s ease;
-        }
-
-        .row:hover {
-            transform: scale(1.01);
-        }
-
-        @keyframes glowBorder {
-            0% {
-                box-shadow: 0 0 10px rgba(255, 182, 193, 0.3);
-                border-color: #f9c5d1;
-            }
-            100% {
-                box-shadow: 0 0 20px rgba(255, 105, 180, 0.6);
-                border-color: #ffb6c1;
-            }
-        }
-
-        .row h5,
-        .row h6,
-        .row p {
-            color: #6e2f5b;
-        }
-
-        .py-2.mb-4 {
-            background: linear-gradient(135deg, #fff0f6, #ffeef2);
-            border: 2px dashed #f9c5d1;
-            border-radius: 14px;
-            padding: 20px;
-            box-shadow: 0 4px 16px rgba(255, 192, 203, 0.2);
-            animation: gentlePulse 2s infinite ease-in-out;
-            margin-top: 40px; /* 👈 thêm khoảng cách ở đây */
-        }
-
-        .py-2.mb-4 h5 {
+        h2 {
+            position: relative;
+            display: inline-block;
+            font-size: 28px;
             font-weight: bold;
-            color: #c2185b;
-            font-size: 18px;
-            margin-bottom: 10px;
+            text-align: center;
+            background: linear-gradient(135deg, #d4af37, #fff6c1, #f9e79f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            overflow: hidden;
         }
 
-        .py-2.mb-4 p {
-            font-size: 15px;
-            color: #6e2f5b;
-            margin-bottom: 6px;
+        /* Hiệu ứng ánh sáng quét ngang */
+        h2::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -75%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(
+                    120deg,
+                    rgba(255, 255, 255, 0) 0%,
+                    rgba(255, 255, 255, 0.6) 50%,
+                    rgba(255, 255, 255, 0) 100%
+            );
+            transform: skewX(-25deg);
+            animation: shine 3s infinite;
         }
 
-        .py-2.mb-4 span {
+        /* Keyframes quét ánh sáng */
+        @keyframes shine {
+            0% {
+                left: -75%;
+            }
+            100% {
+                left: 125%;
+            }
+        }
+
+        .text-muted p {
+            color: #D4AF37; /* Màu vàng hoàng gia nhẹ */
             font-weight: 500;
+            font-size: 1.05rem;
+            background: none;
+            margin-bottom: 6px;
+            letter-spacing: 0.4px;
+            font-family: 'Segoe UI', 'Roboto', sans-serif;
+            transition: color 0.3s ease-in-out;
         }
 
-        .py-2.mb-4 .text-muted {
+        .text-muted i {
+            color: #C0A060; /* Vàng nhạt hơn cho biểu tượng */
+            margin-right: 6px;
+            font-size: 1.1rem;
+        }
+
+        hr.my-4 {
+            border: none;
+            height: 2px;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0), #f5d76e, #ffffff, #f5d76e, rgba(255, 255, 255, 0));
+            margin: 1.5rem 0;
+            border-radius: 1px;
+            opacity: 0.9;
+        }
+
+        .text-muted h5,
+        .text-muted h6,
+        .text-muted p {
+            color: #f9e79f; /* vàng nhạt ánh sáng */
+            font-weight: 500;
+            background: linear-gradient(90deg, #fffbe6, #f5d76e, #fffbe6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-family: 'Segoe UI', sans-serif;
+            letter-spacing: 0.3px;
+            transition: all 0.3s ease;
+        }
+
+        .text-muted h6 {
             font-style: italic;
-            color: #999;
+            opacity: 0.85;
         }
 
-        @keyframes gentlePulse {
+        .text-sm-end h5,
+        .text-sm-end p {
+            color: #fefefe;
+            background: linear-gradient(90deg, #ffffff, #bfa43a, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 600;
+        }
+
+        .mu-aa {
+            position: relative;
+            display: inline-block;
+            font-size: 26px;
+            font-weight: bold;
+            text-align: center;
+            background: linear-gradient(135deg, #d4af37, #fff6c1, #f9e79f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            overflow: hidden;
+        }
+
+        .mu-aa::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -75%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(
+                    120deg,
+                    rgba(255, 255, 255, 0) 0%,
+                    rgba(255, 255, 255, 0.6) 50%,
+                    rgba(255, 255, 255, 0) 100%
+            );
+            transform: skewX(-25deg);
+            animation: shine 3s infinite;
+        }
+
+        /* Keyframes quét ánh sáng */
+        @keyframes shine {
             0% {
-                box-shadow: 0 0 10px rgba(255, 192, 203, 0.15);
-            }
-            50% {
-                box-shadow: 0 0 20px rgba(255, 182, 193, 0.35);
+                left: -75%;
             }
             100% {
-                box-shadow: 0 0 10px rgba(255, 192, 203, 0.15);
+                left: 125%;
             }
         }
 
-        .voucher-section h5::before {
-            content: "🎁";
-            margin-right: 8px;
+        .voucher-section {
+            /*background: rgba(255, 255, 255, 0.05); !* nền trong suốt *!*/
+            /*padding: 20px;*/
+            /*border-radius: 14px;*/
+            /*border: 1px solid rgba(255, 215, 0, 0.4); !* viền vàng nhạt *!*/
+            font-family: 'Segoe UI', sans-serif;
+            color: #eaeaea;
+            /*backdrop-filter: blur(4px);*/
         }
 
-        .voucher-section p::before {
-            content: "💡";
-            margin-right: 6px;
-            color: #ff6699;
+        .voucher-section p {
+            display: block;
+            margin: 6px 0;
+            font-size: 15px;
+            font-weight: 500;
+            color: #f9f9f9;
         }
 
-        /* Container của loại đơn */
-        .loai-don-wrapper {
-            padding: 16px 20px;
-            background: linear-gradient(135deg, #e0fff9, #e8fef5);
-            border: 2px solid #15db99;
-            border-radius: 12px;
-            box-shadow: 0 4px 14px rgba(21, 219, 153, 0.2);
-            transition: transform 0.3s ease;
-            margin-top: 20px;
+        .voucher-section p span {
+            background: linear-gradient(90deg, #f7e9b9, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        /* Hover nhẹ cho vui mắt */
-        .loai-don-wrapper:hover {
-            transform: scale(1.02);
-        }
+        /*.voucher-section p:hover span {*/
+        /*    background: linear-gradient(90deg, #fffaf0, #ffd700);*/
+        /*    transform: scale(1.03);*/
+        /*}*/
 
-        /* Tiêu đề màu xanh mượt */
-        .loai-don-wrapper h5 {
-            color: #15db99 !important;
+        .voucher-name {
             font-weight: bold;
-            font-size: 20px;
-            margin-top: 5px;
-            animation: pulseText 2.5s infinite ease-in-out;
+            font-size: 17px;
+            margin: 6px 0;
+            background: linear-gradient(90deg, #c0003b, #ffccd5, #c0003b); /* ruby đậm + highlight trắng */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+            animation: shineRuby 3s infinite linear;
         }
 
-        /* Thêm biểu tượng cho vui */
-        .loai-don-wrapper::before {
-            font-size: 22px;
-            margin-right: 8px;
-        }
-
-        /* Nhấp nháy chữ */
-        @keyframes pulseText {
-            0%, 100% {
-                opacity: 1;
+        /* Optional: tạo hiệu ứng ánh sáng di chuyển qua chữ */
+        @keyframes shineRuby {
+            0% {
+                background-position: 0% center;
             }
-            50% {
-                opacity: 0.7;
+            100% {
+                background-position: 200% center;
+            }
+        }
+
+        .loai-hoadon {
+            font-size: 1.15rem;
+            font-weight: 600;
+            background: linear-gradient(90deg, #00f5c9, #2ed8b6, #00f5c9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            color: transparent;
+            animation: shimmerGreen 4s infinite linear;
+            letter-spacing: 0.5px;
+        }
+
+        @keyframes shimmerGreen {
+            0% {
+                background-position: 0% center;
+            }
+            100% {
+                background-position: 200% center;
             }
         }
 
         .ma-giao-dich-wrapper {
-            padding: 12px 18px;
-            border: 2px dashed #ffc107;
-            background-color: #fffbea;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(255, 193, 7, 0.15);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-top: 15px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            color: #d4af37; /* vàng ánh kim */
+            padding: 6px 0;
+            border-radius: 8px;
+            font-family: 'Segoe UI', sans-serif;
         }
 
-        /* Icon hoặc emoji bên cạnh */
-        .ma-giao-dich-wrapper::before {
-            font-size: 20px;
-        }
-
-        /* Làm đậm mã */
         .ma-giao-dich-wrapper .text-warning {
-            font-weight: 700;
-            font-size: 16px;
+            color: #ffcc00 !important;
+            text-shadow: 0 0 6px rgba(255, 235, 150, 0.9);
+            font-weight: bold;
+            font-size: 1.15rem;
         }
 
-        /* Tiêu đề danh sách đơn hàng - kiểu nhẹ nhàng */
-        .font-size-15 {
-            font-size: 20px;
-            font-weight: 600;
-            color: #d63384; /* màu hồng hoa anh đào */
-            margin-bottom: 16px;
-            position: relative;
-            font-family: 'Segoe UI', sans-serif;
-        }
-
-        .font-size-15::before {
-            content: "🌸";
-            margin-right: 10px;
-            font-size: 20px;
-        }
-
-        /* Khung bảng */
         .table-responsive {
-            background-color: #fff0f5;
+            background-color: transparent;
             border-radius: 12px;
-            padding: 16px;
-            box-shadow: 0 4px 12px rgba(255, 182, 193, 0.3);
+            padding: 8px;
         }
 
-        /* Tiêu đề bảng */
-        .table thead th {
-            background-color: #ffe4ec;
-            color: #d63384;
-            font-weight: bold;
-            font-size: 14px;
-            text-align: center;
-        }
-
-        /* Nội dung bảng */
-        .table tbody td {
-            vertical-align: middle;
-            font-size: 14px;
-            text-align: center;
-            color: #555;
+        .table {
+            background: rgba(255, 255, 255, 0.02); /* nền trong suốt nhẹ */
+            color: #f5f5f5;
             font-family: 'Segoe UI', sans-serif;
-        }
-
-        /* Các dòng đặc biệt (voucher, phí ship, tổng tiền) */
-        .table tbody tr:nth-last-child(3),
-        .table tbody tr:nth-last-child(2),
-        .table tbody tr:last-child {
-            background-color: #fff7fb;
-        }
-
-        /* Tổng tiền cuối cùng nổi bật hơn */
-        .table tbody tr:last-child h4 {
-            color: #c2185b;
-            font-weight: bold;
-            font-size: 18px;
-        }
-
-        /* Dòng hover */
-        .table tbody tr:hover {
-            background-color: #ffeef5;
-            transition: background-color 0.3s ease-in-out;
-        }
-
-        /* Nút */
-        .d-print-none .btn-success {
-            background-color: #d63384;
-            border: none;
-        }
-
-        .d-print-none .btn-success:hover {
-            background-color: #c2185b;
-        }
-
-        .d-print-none .btn-secondary {
-            background-color: #f8bbd0;
-            border: none;
-            color: #000;
-        }
-
-        .d-print-none .btn-secondary:hover {
-            background-color: #f48fb1;
-            color: #000;
-        }
-
-        /* Container nút: canh giữa đẹp */
-        .d-print-none .float-end {
-            display: flex;
-            justify-content: flex-end;
-            gap: 16px;
-            margin-top: 20px;
-        }
-
-        /* Nút chung style */
-        .d-print-none .btn {
-            padding: 14px 28px;
-            font-size: 16px;
-            font-weight: bold;
-            border-radius: 12px;
-            transition: all 0.3s ease-in-out;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Nút IN – màu sakura đậm */
-        .d-print-none .btn-success {
-            background-color: #d63384;
-            color: white;
-            border: none;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .d-print-none .btn-success:hover {
-            background-color: #c2185b;
-            transform: scale(1.05);
-            box-shadow: 0 8px 20px rgba(214, 51, 132, 0.5);
-        }
-
-        /* Hiệu ứng wave nhẹ khi hover */
-        .d-print-none .btn-success::after {
-            content: '';
-            position: absolute;
-            width: 120%;
-            height: 100%;
-            top: 0;
-            left: -100%;
-            background: rgba(255, 255, 255, 0.2);
-            transform: skewX(-20deg);
-            transition: left 0.6s;
-        }
-
-        .d-print-none .btn-success:hover::after {
-            left: 100%;
-        }
-
-        /* Nút ĐÓNG – pastel nhẹ nhàng */
-        .d-print-none .btn-secondary {
-            background-color: #f8bbd0;
-            color: #000;
-            border: none;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .d-print-none .btn-secondary:hover {
-            background-color: #f48fb1;
-            transform: scale(1.05);
-            box-shadow: 0 8px 20px rgba(248, 187, 208, 0.6);
-        }
-
-        /* Hiệu ứng ánh sáng mờ */
-        .d-print-none .btn-secondary::after {
-            content: '';
-            position: absolute;
-            width: 120%;
-            height: 100%;
-            top: 0;
-            left: -100%;
-            background: rgba(255, 255, 255, 0.3);
-            transform: skewX(-20deg);
-            transition: left 0.6s;
-        }
-
-        .d-print-none .btn-secondary:hover::after {
-            left: 100%;
-        }
-
-        /* ========== Nút Hủy ========== */
-        .cancel-btn {
-            background: #f44336 !important;
-            color: white !important;
-            font-weight: bold;
             font-size: 15px;
-            padding: 12px 20px;
-            border-radius: 12px !important;
-            border: none;
-            transition: all 0.3s ease-in-out;
-            box-shadow: 0 6px 12px rgba(244, 67, 54, 0.3);
+            border-collapse: separate;
+            /*border-spacing: 0 8px;*/
         }
 
-        .cancel-btn:hover {
-            background: #d32f2f !important;
-            transform: scale(1.05);
-            box-shadow: 0 8px 20px rgba(244, 67, 54, 0.5);
-        }
-
-        /* ========== Nút Giao hàng thất bại ========== */
-        .failed-btn {
-            background: #9c27b0 !important;
-            color: white !important;
-            font-weight: bold;
+        .table th {
+            background: linear-gradient(to right, #f7e7ce, #fceabb);
+            color: #4b2e12;
+            font-weight: 700;
             font-size: 15px;
-            padding: 12px 20px;
-            border-radius: 12px !important;
+            text-transform: uppercase;
+            padding: 14px;
             border: none;
-            transition: all 0.3s ease-in-out;
-            box-shadow: 0 6px 12px rgba(156, 39, 176, 0.3);
+            border-radius: 8px 8px 0 0;
         }
 
-        .failed-btn:hover {
-            background: #7b1fa2 !important;
-            transform: scale(1.05);
-            box-shadow: 0 8px 20px rgba(156, 39, 176, 0.5);
+        .table td {
+            background: rgba(255, 255, 255, 0.05);
+            color: #ffffff;
+            border: none;
+            padding: 12px;
+            vertical-align: middle;
+            border-radius: 0 0 8px 8px;
         }
 
-        /* ========== Nút Trạng thái: xác nhận, giao hàng,... ========== */
+        .table td.text-end,
+        .table th.text-end {
+            text-align: right;
+        }
+
+        .table h4 {
+            color: #ffcc66;
+            font-weight: 700;
+        }
+
+        .table tr:last-child td {
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Highlight giá trị tổng */
+        .table tr:last-child td h4 {
+            font-size: 1.3rem;
+            text-shadow: 0 0 6px rgba(255, 204, 102, 0.5);
+        }
+
+        /* Container d-flex */
+        .d-flex.flex-column.gap-2 {
+            gap: 12px;
+        }
+
+        /* Nút chung */
         .btn-update-status .btn {
+            padding: 10px 18px;
             font-size: 15px;
-            font-weight: bold;
-            padding: 12px 20px;
-            border-radius: 12px !important;
+            font-weight: 600;
+            border: none;
             transition: all 0.3s ease;
-            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(3px);
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 14px;
+            color: #ffffff;
         }
 
-        .btn-update-status .btn:hover {
-            transform: translateY(-2px) scale(1.03);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Mỗi trạng thái có màu riêng thêm style nếu cần */
+        /* Mỗi nút trạng thái riêng biệt */
         .btn-update-status .btn-secondary {
-            background-color: #607d8b !important;
-            color: #fff !important;
+            background: linear-gradient(to right, #f8dcdc, #f0a3a3);
+            color: #4b1f1f;
         }
 
         .btn-update-status .btn-primary {
-            background-color: #3f51b5 !important;
-            color: #fff !important;
+            background: linear-gradient(to right, #cfe9ff, #a3d4ff);
+            color: #143a52;
         }
 
         .btn-update-status .btn-warning {
-            background-color: #ffc107 !important;
-            color: #000 !important;
+            background: linear-gradient(to right, #fff4cc, #ffd966);
+            color: #665500;
         }
 
         .btn-update-status .btn-success {
-            background-color: #4caf50 !important;
-            color: #fff !important;
+            background: linear-gradient(to right, #d5fbe3, #98e2b8);
+            color: #145c2b;
         }
 
-        @keyframes pulse-glow {
-            0% {
-                box-shadow: 0 0 0 0 rgba(255, 64, 129, 0.4);
-            }
-            70% {
-                box-shadow: 0 0 0 10px rgba(255, 64, 129, 0);
-            }
-            100% {
-                box-shadow: 0 0 0 0 rgba(255, 64, 129, 0);
-            }
+        /* Các nút hủy/ thất bại */
+        .cancel-btn,
+        .failed-btn {
+            background: linear-gradient(to right, #ffe0e0, #ffafaf);
+            color: #5c0000;
+            font-weight: bold;
         }
 
+        /* Hover hiệu ứng mượt */
+        .btn-update-status .btn:hover,
         .cancel-btn:hover,
         .failed-btn:hover {
-            animation: pulse-glow 1.2s infinite;
+            transform: scale(1.04);
+            opacity: 0.92;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+
+        /* Container d-flex */
+        .d-flex.flex-column.gap-2 {
+            gap: 12px;
+        }
+
+        /* Nút chung */
+        .btn-update-status .btn,
+        .cancel-btn,
+        .failed-btn {
+            padding: 10px 18px;
+            font-size: 15px;
+            font-weight: 600;
+            border: none;
+            border-radius: 14px;
+            color: #fff;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.4s ease;
+            backdrop-filter: blur(5px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Nền gradient động */
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Nút Secondary */
+        .btn-update-status .btn-secondary {
+            background: linear-gradient(270deg, #4db6ac, #008080, #4db6ac);
+            background-size: 600% 600%;
+            animation: gradientShift 6s ease infinite;
+            color: #e0f7f5; /* màu chữ sáng nhẹ, tương phản */
+            box-shadow: 0 0 8px #008080cc; /* bóng màu xanh ngọc bích trong suốt */
+
+        }
+
+        /* Nút Primary */
+        .btn-update-status .btn-primary {
+            background: linear-gradient(270deg, #cfe9ff, #a3d4ff, #cfe9ff);
+            background-size: 600% 600%;
+            animation: gradientShift 6s ease infinite;
+            color: #143a52;
+            box-shadow: 0 0 8px #a3d4ffcc;
+        }
+
+        /* Nút Warning */
+        .btn-update-status .btn-warning {
+            background: linear-gradient(270deg, #fff4cc, #ffd966, #fff4cc);
+            background-size: 600% 600%;
+            animation: gradientShift 6s ease infinite;
+            color: #665500;
+            box-shadow: 0 0 8px #ffd966cc;
+        }
+
+        /* Nút Success */
+        .btn-update-status .btn-success {
+            background: linear-gradient(270deg, #d5fbe3, #98e2b8, #d5fbe3);
+            background-size: 600% 600%;
+            animation: gradientShift 6s ease infinite;
+            color: #145c2b;
+            box-shadow: 0 0 8px #98e2b8cc;
+        }
+
+        /* Nút Cancel & Failed */
+        .cancel-btn,
+        .failed-btn {
+            background: linear-gradient(270deg, #ffe0e0, #ffafaf, #ffe0e0);
+            background-size: 600% 600%;
+            animation: gradientShift 6s ease infinite;
+            color: #5c0000;
+            font-weight: 700;
+            box-shadow: 0 0 8px #ffafafcc;
+        }
+
+        /* Hover hiệu ứng glow và scale */
+        .btn-update-status .btn:hover,
+        .cancel-btn:hover,
+        .failed-btn:hover {
+            transform: scale(1.08);
+            box-shadow:
+                    0 0 15px 4px rgba(255, 255, 255, 0.5),
+                    0 0 25px 8px rgba(255, 255, 255, 0.3);
+            z-index: 10;
+        }
+
+        /* Thêm glow sáng nhẹ bên trong */
+        .btn-update-status .btn::before,
+        .cancel-btn::before,
+        .failed-btn::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: 14px;
+            pointer-events: none;
+            opacity: 0;
+            box-shadow: 0 0 12px 6px rgba(255, 255, 255, 0.3);
+            transition: opacity 0.4s ease;
+        }
+
+        .btn-update-status .btn:hover::before,
+        .cancel-btn:hover::before,
+        .failed-btn:hover::before {
+            opacity: 1;
+        }
+
+        /* Nút In - màu xanh ngọc bích với hiệu ứng nhẹ */
+        .col-md-4 .btn-success {
+            background: linear-gradient(270deg, #4db6ac, #008080, #4db6ac);
+            background-size: 600% 600%;
+            animation: gradientShift 6s ease infinite;
+            color: #e0f7f5;
+            box-shadow: 0 0 8px #008080cc;
+            border: none;
+            transition: transform 0.3s ease;
+            border-radius: 6px;
+        }
+
+        .col-md-4 .btn-success:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 12px #00b4aa;
+            color: #ffffff;
+        }
+
+        /* Nút Đóng - tông xám nhẹ, sang trọng */
+        .col-md-4 .btn-secondary {
+            background: #000000;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 25px;
+            font-weight: 600;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+            transition: box-shadow 0.3s ease, background-color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .col-md-4 .btn-secondary:hover {
+            background: #111111;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.9);
+            color: #fff;
         }
 
 
@@ -685,27 +1215,27 @@
 
                             </div>
 
-                            <div class="mb-4 thongtin-3d">
+                            <div class="mb-4">
                                 <h2 class="mb-1 text-muted">Mã HD: [[${billdetail.maDinhDanh}]]</h2>
                             </div>
-                            <div class="mb-3 thongtin-3d">
+                            <div class="mb-3">
                                 <h2 class="mb-1 text-muted">POLO HUB</h2>
                             </div>
 
-                            <div class="text-muted thongtin-3d">
+                            <div class="text-muted">
                                 <p class="mb-1">Đ/C: Toà Nhà Fpoly Trịnh Văn Bô</p>
                                 <p class="mb-1"><i class="uil uil-envelope-alt me-1"></i>Email: PoloHub@gmail.com</p>
                                 <p><i class="uil uil-phone me-1"></i>SĐT: 19009000-66668888</p>
                             </div>
                         </div>
 
-                        <div class="scene-container">
-                            <img src="https://png.pngtree.com/png-clipart/20231024/original/pngtree-cherry-blossom-tree-png-image_13407092.png" class="tree tree-left" />
+                        <!--                        <div class="scene-container">-->
+                        <!--                            <img src="https://png.pngtree.com/png-clipart/20231024/original/pngtree-cherry-blossom-tree-png-image_13407092.png" class="tree tree-left" />-->
 
-                            <!--                            <img src="https://e7.pngegg.com/pngimages/344/945/png-clipart-haruka-nanase-makoto-tachibana-character-anime-light-novel-anime-cartoon-shoe.png" class="character" />-->
+                        <!--                            &lt;!&ndash;                            <img src="https://e7.pngegg.com/pngimages/344/945/png-clipart-haruka-nanase-makoto-tachibana-character-anime-light-novel-anime-cartoon-shoe.png" class="character" />&ndash;&gt;-->
 
-                            <img src="https://png.pngtree.com/png-clipart/20231024/original/pngtree-cherry-blossom-tree-png-image_13407092.png" class="tree tree-right" />
-                        </div>
+                        <!--                            <img src="https://png.pngtree.com/png-clipart/20231024/original/pngtree-cherry-blossom-tree-png-image_13407092.png" class="tree tree-right" />-->
+                        <!--                        </div>-->
 
 
                         <hr class="my-4"/>
@@ -713,7 +1243,7 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="text-muted">
-                                    <h5 class="font-size-16 mb-3">Khách hàng:</h5>
+                                    <h5 class="font-size-16 mb-3 mu-aa">Khách hàng:</h5>
                                     <h5 class="font-size-15 mb-2" th:if="${billdetail.tenKhachHang != null}"
                                         th:text="${billdetail.tenKhachHang}">
                                         Preston Miller
@@ -736,7 +1266,7 @@
                             <div class="col-sm-6">
                                 <div class="text-muted text-sm-end">
                                     <div class="mt-4">
-                                        <h5 class="font-size-15 mb-1">Ngày mua hàng:</h5>
+                                        <h5 class="font-size-15 mb-1 mu-aa">Ngày mua hàng:</h5>
                                         <p
                                                 th:text="${#temporals.format(billdetail.createdDate, 'dd-MM-yyyy HH:mm')}">
                                             25/11/2023
@@ -746,13 +1276,15 @@
                             </div>
                             <!-- end col -->
                         </div>
+
+                        <hr class="my-4"/>
                         <!-- end row -->
                         <div class="py-2 mb-4 voucher-section">
                             <div>
-                                <h5>Voucher:</h5>
+                                <h5 class="mu-aa">Voucher:</h5>
                             </div>
                             <div th:if="${billdetail.voucherName != null}">
-                                <p style="color: red; font-size: 16px" th:text="${billdetail.voucherName}">
+                                <p class="voucher-name" th:text="${billdetail.voucherName}">
                                 </p>
                                 <th:block th:switch="${billdetail.getDiscountType()}">
                                     <p th:case="2" class="mb-1" th:if="${billdetail.getDiscountAmount() != null}">
@@ -797,14 +1329,16 @@
                             </div>
 
                             <div th:if="${billdetail.voucherName == null}">
-                                <span class="text-muted">Không sử dụng</span>
+                                <span class="voucher-name">Không sử dụng</span>
                             </div>
                         </div>
 
+                        <hr class="my-4"/>
+
                         <div class="mb-4 loai-don-wrapper">
                             <div>
-                                📦 Loại đơn :
-                                <h5 style="color: rgb(21, 219, 153)">
+                                <h2 class="mu-aa">📦 Loại đơn :</h2>
+                                <h5 class="loai-hoadon">
                                         <span
                                                 th:if="${billdetail.loaiHoaDon == T(com.example.demo.entities.enumClass.InvoiceType).OFFLINE}">Tại
                                             quầy</span>
@@ -819,8 +1353,10 @@
                                                          th:text="${billdetail.maGiaoDich}"></span></span>
                         </div>
 
+                        <hr class="my-4"/>
+
                         <div class="py-2">
-                            <h5 class="font-size-15">Danh sách đơn hàng</h5>
+                            <h5 class="mu-aa">Danh sách đơn hàng</h5>
 
                             <div class="table-responsive">
                                 <table class="table align-middle table-nowrap table-centered mb-0">

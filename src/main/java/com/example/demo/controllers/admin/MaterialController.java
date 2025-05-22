@@ -8,6 +8,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -105,9 +106,15 @@ public class MaterialController {
         }
     }
 
-    @GetMapping("/material-delete/{id}")
-    public String delete(@PathVariable("id") Long id, ModelMap modelMap){
-        materialService.delete(id);
-        return "redirect:/admin/material-all";
-    }
+//    @GetMapping("/material-delete/{id}")
+//    public String delete(@PathVariable("id") Long id, ModelMap modelMap){
+//        materialService.delete(id);
+//        return "redirect:/admin/material-all";
+//    }
+@PreAuthorize("hasRole('ADMIN')")
+@GetMapping("/material-delete/{id}")
+public String delete(@PathVariable("id") Long id, ModelMap modelMap) {
+    materialService.delete(id);
+    return "redirect:/admin/material-all";
+}
 }

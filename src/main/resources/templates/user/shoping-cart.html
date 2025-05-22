@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 
     <style>
+
         /* Container chính */
         .bread-crumb {
             background: #fff;
@@ -300,7 +301,7 @@
         /* Tiêu đề bảng */
         /* Phần header bảng */
         .table_head {
-            background: linear-gradient(90deg, #ff6ec4, #1fd1f9); /* hồng - xanh dịu */
+            background: #4d4d4d; /*  xám đậm */
             text-align: center;
             text-transform: uppercase;
             font-weight: bold;
@@ -474,7 +475,7 @@
         /* Khung tổng thể */
         .bor10 {
             background: linear-gradient(145deg, #ffffff, #f0f0f0);
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            /*box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);*/
             border-radius: 16px;
             transition: all 0.3s ease;
         }
@@ -485,7 +486,7 @@
             z-index: 1;
             background-color: white; /* hoặc giữ màu gốc bạn đang dùng */
             overflow: hidden;
-            box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+            /*box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);*/
         }
 
         .bor10::before {
@@ -495,10 +496,10 @@
             left: -3px;
             right: -3px;
             bottom: -3px;
-            background: linear-gradient(60deg, #00f0ff, #ff00cc, #00f0ff);
+            background: #f9f9f9;
             background-size: 300% 300%;
             z-index: -1;
-            animation: neonMove 6s linear infinite;
+            /*animation: neonMove 6s linear infinite;*/
             border-radius: 12px;
             filter: blur(5px);
         }
@@ -545,7 +546,7 @@
         #add-address {
             border: none;
             color: white;
-            background: linear-gradient(to right, #36d1dc, #5b86e5);
+            background:#e0e0e0;
             padding: 10px 20px;
             border-radius: 10px;
             font-weight: 600;
@@ -587,7 +588,7 @@
             outline: none;
         }
 
-        /*!* Nút Lưu & Bỏ qua *!*/
+        /*/* Nút Lưu & Bỏ qua */*/
         /*#save-address-btn,*/
         /*#cancel-add-address {*/
         /*    margin-top: 10px;*/
@@ -617,50 +618,50 @@
         /*}*/
 
         .bor10 {
-            color: white;
-            text-shadow: 0 0 5px rgba(255, 255, 255, 0.6);
+            color: black;
+            /*text-shadow: 0 0 5px rgba(255, 255, 255, 0.6);*/
         }
 
-        .bor10 * {
-            color: white !important;
-        }
+        /*.bor10 * {*/
+        /*    color: white !important;*/
+        /*}*/
 
         h4.mtext-109 {
-            color: #fff;
-            animation: neonFlash 2s infinite alternate;
-            text-shadow:
-                    0 0 5px #fff,
-                    0 0 10px #ff00ff,
-                    0 0 15px #00fff7,
-                    0 0 20px #ff00ff,
-                    0 0 25px #00fff7,
-                    0 0 30px #ff00ff,
-                    0 0 35px #00fff7;
+            color: black;
+            /*animation: neonFlash 2s infinite alternate;*/
+            /*text-shadow:*/
+            /*        0 0 5px #fff,*/
+            /*        0 0 10px #ff00ff,*/
+            /*        0 0 15px #00fff7,*/
+            /*        0 0 20px #ff00ff,*/
+            /*        0 0 25px #00fff7,*/
+            /*        0 0 30px #ff00ff,*/
+            /*        0 0 35px #00fff7;*/
         }
 
         /* Animation chuyển màu giữa neon hồng và xanh */
-        @keyframes neonFlash {
-            0% {
-                text-shadow:
-                        0 0 5px #fff,
-                        0 0 10px #ff00ff,
-                        0 0 15px #ff00ff,
-                        0 0 20px #ff00ff,
-                        0 0 25px #ff00ff,
-                        0 0 30px #ff00ff,
-                        0 0 35px #ff00ff;
-            }
-            100% {
-                text-shadow:
-                        0 0 5px #fff,
-                        0 0 10px #00fff7,
-                        0 0 15px #00fff7,
-                        0 0 20px #00fff7,
-                        0 0 25px #00fff7,
-                        0 0 30px #00fff7,
-                        0 0 35px #00fff7;
-            }
-        }
+        /*@keyframes neonFlash {*/
+        /*    0% {*/
+        /*        text-shadow:*/
+        /*                0 0 5px #fff,*/
+        /*                0 0 10px #ff00ff,*/
+        /*                0 0 15px #ff00ff,*/
+        /*                0 0 20px #ff00ff,*/
+        /*                0 0 25px #ff00ff,*/
+        /*                0 0 30px #ff00ff,*/
+        /*                0 0 35px #ff00ff;*/
+        /*    }*/
+        /*    100% {*/
+        /*        text-shadow:*/
+        /*                0 0 5px #fff,*/
+        /*                0 0 10px #00fff7,*/
+        /*                0 0 15px #00fff7,*/
+        /*                0 0 20px #00fff7,*/
+        /*                0 0 25px #00fff7,*/
+        /*                0 0 30px #00fff7,*/
+        /*                0 0 35px #00fff7;*/
+        /*    }*/
+        /*}*/
 
         #add-address {
             justify-content: center;  /* căn giữa ngang */
@@ -673,20 +674,20 @@
             font-size: 18px;
             font-weight: bold;
             text-align: center;
-            color: #fff;
+            color: black;
             text-transform: uppercase;
             background: transparent;
-            border: 2px solid #ff00ff;
+            /*border: 2px solid #ff00ff;*/
             border-radius: 12px;
             cursor: pointer;
             z-index: 1;
             overflow: hidden;
-            transition: all 0.4s ease-in-out;
+            /*transition: all 0.4s ease-in-out;*/
             letter-spacing: 1px;
-            box-shadow:
-                    0 0 5px #ff00ff,
-                    0 0 10px #00fff7,
-                    0 0 15px #ff00ff;
+            /*box-shadow:*/
+            /*        0 0 5px #ff00ff,*/
+            /*        0 0 10px #00fff7,*/
+            /*        0 0 15px #ff00ff;*/
         }
 
         /* Viền ánh sáng chuyển động */
@@ -697,7 +698,7 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: linear-gradient(45deg, #ff00ff, #00fff7, #ff00ff, #00fff7);
+            background: #cccccc;
             background-size: 400% 400%;
             animation: borderFlow 4s linear infinite;
             z-index: -1;
@@ -708,11 +709,11 @@
         #add-address:hover {
             color: #000;
             background-color: rgba(255, 255, 255, 0.2);
-            box-shadow:
-                    0 0 15px #ff00ff,
-                    0 0 30px #00fff7,
-                    0 0 45px #ff00ff;
-            transform: scale(1.05);
+            /*box-shadow:*/
+            /*        0 0 15px #ff00ff,*/
+            /*        0 0 30px #00fff7,*/
+            /*        0 0 45px #ff00ff;*/
+            /*transform: scale(1.05);*/
         }
 
         /* Hiệu ứng chuyển động viền */
@@ -729,27 +730,27 @@
         }
 
         /* Nút LƯU - nhấp nháy hồng */
-        @keyframes neon-pink {
-            0% {
-                box-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff;
-            }
-            100% {
-                box-shadow: 0 0 15px #ff66ff, 0 0 25px #ff00ff;
-            }
-        }
+        /*@keyframes neon-pink {*/
+        /*    0% {*/
+        /*        box-shadow: 0 0 5px #ff00ff, 0 0 10px #ff00ff;*/
+        /*    }*/
+        /*    100% {*/
+        /*        box-shadow: 0 0 15px #ff66ff, 0 0 25px #ff00ff;*/
+        /*    }*/
+        /*}*/
 
-        @keyframes neon-blue {
-            0% {
-                box-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff;
-            }
-            100% {
-                box-shadow: 0 0 15px #66ffff, 0 0 25px #00ffff;
-            }
-        }
+        /*@keyframes neon-blue {*/
+        /*    0% {*/
+        /*        box-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff;*/
+        /*    }*/
+        /*    100% {*/
+        /*        box-shadow: 0 0 15px #66ffff, 0 0 25px #00ffff;*/
+        /*    }*/
+        /*}*/
 
         #save-address-btn {
-            background-color: transparent !important;
-            color: white !important;
+            background-color: #2563eb !important;
+            color: #ffffff !important;
             border: 2px solid #ff00ff !important;
             padding: 12px 30px !important;
             border-radius: 12px !important;
@@ -772,8 +773,8 @@
         }
 
         #cancel-add-address {
-            background-color: transparent !important;
-            color: white !important;
+            background-color:  #e0e0e0 !important;
+            color: #333333 !important;
             border: 2px solid #00ffff !important;
             padding: 12px 30px !important;
             border-radius: 12px !important;
@@ -799,18 +800,18 @@
             appearance: none;
             width: 20px;
             height: 20px;
-            border: 2px solid #00ffff;
+            border: 2px solid black;
             border-radius: 4px;
             background-color: transparent;
             position: relative;
             cursor: pointer;
-            box-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff;
+            /*box-shadow: 0 0 5px #00ffff, 0 0 10px #00ffff;*/
             transition: 0.3s ease-in-out;
         }
 
         .checkbox input[type="checkbox"]:checked {
-            background-color: #ff00ff;
-            box-shadow: 0 0 10px #ff00ff, 0 0 20px #ff00ff;
+            background-color: blue;
+            box-shadow: 0 0 10px blue, 0 0 15px blue;
         }
 
         .checkbox input[type="checkbox"]::after {
@@ -833,15 +834,15 @@
 
         /* Hiệu ứng chữ điều khoản */
         .checkbox a {
-            color: #00ffff !important;
-            text-shadow: 0 0 5px #00ffff;
+            color: black  !important;
+            text-shadow: 0 0 2px black ;
             font-weight: bold;
             transition: 0.3s;
         }
 
         .checkbox a:hover {
-            color: #ff00ff !important;
-            text-shadow: 0 0 10px #ff00ff;
+            color: blue !important;
+            text-shadow: 0 0 10px blue;
             text-decoration: underline;
         }
 
@@ -849,15 +850,15 @@
         #submitBtn {
             font-weight: bold;
             background-color: #111 !important;
-            border: 2px solid #ff00ff !important;
-            box-shadow: 0 0 10px #ff00ff;
+            border: 2px solid black !important;
+            box-shadow: 0 0 5px black;
             transition: 0.4s ease-in-out;
         }
 
         #submitBtn:hover:enabled {
             background-color: #000;
             color: white;
-            box-shadow: 0 0 20px #00ffff, 0 0 40px #ff00ff;
+            /*box-shadow: 0 0 20px #00ffff, 0 0 40px #ff00ff;*/
             transform: scale(1.05);
             text-shadow: 0 0 5px white;
         }
@@ -871,23 +872,24 @@
             cursor: not-allowed;
         }
 
-        @keyframes neonGlow {
-            0%, 100% {
-                box-shadow: 0 0 10px #ff00ff, 0 0 20px #00ffff, 0 0 30px #ff00ff;
-                border-color: #ff00ff;
-                color: white;
-            }
-            50% {
-                box-shadow: 0 0 5px #00ffff, 0 0 15px #ff00ff, 0 0 25px #00ffff;
-                border-color: #00ffff;
-                color: white;
-            }
-        }
+
+        /*@keyframes neonGlow {*/
+        /*    0%, 100% {*/
+        /*        box-shadow: 0 0 10px #A1887F, 0 0 20px #A1887F, 0 0 30px #A1887F;*/
+        /*        border-color: #A1887F;*/
+        /*        color: white;*/
+        /*    }*/
+        /*    50% {*/
+        /*        box-shadow: 0 0 5px #A1887F, 0 0 15px #A1887F, 0 0 25px #A1887F;*/
+        /*        border-color: #A1887F;*/
+        /*        color: white;*/
+        /*    }*/
+        /*}*/
 
         /* Ghi đè CSS cho nút Đặt hàng */
         #submitBtn:enabled {
-            background-color: transparent !important;
-            border: 2px solid #ff00ff !important;
+            background-color: black !important;
+            border: 2px solid black !important;
             color: white !important;
             animation: neonGlow 1.5s infinite ease-in-out;
             display: flex;
@@ -951,28 +953,28 @@
         }
 
         #street {
-            color: black !important;
+            color: #FFFFFF !important;
             background: transparent;
-            border: 2px solid;
-            border-image: linear-gradient(90deg, #ff00cc, #3333ff) 1;
-            animation: glow-border 1.5s infinite;
+            border: 1px solid #E0E0E0;
+            /*border-image:  ;*/
+            /*animation: glow-border 1.5s infinite;*/
         }
 
         #street::placeholder {
             color: #555 !important;
         }
 
-        @keyframes glow-border {
-            0% {
-                box-shadow: 0 0 5px #ff00cc;
-            }
-            50% {
-                box-shadow: 0 0 10px #3333ff;
-            }
-            100% {
-                box-shadow: 0 0 5px #ff00cc;
-            }
-        }
+        /*@keyframes glow-border {*/
+        /*    0% {*/
+        /*        box-shadow: 0 0 5px #ff00cc;*/
+        /*    }*/
+        /*    50% {*/
+        /*        box-shadow: 0 0 10px #3333ff;*/
+        /*    }*/
+        /*    100% {*/
+        /*        box-shadow: 0 0 5px #ff00cc;*/
+        /*    }*/
+        /*}*/
 
         .address-list {
             padding-top: 15px;
@@ -983,11 +985,12 @@
             display: flex;
             flex-direction: column;
             gap: 10px;
+
         }
 
         .address-item {
             background: rgba(255, 255, 255, 0.05);
-            border: 2px solid #ff00cc;
+            border: 2px solid black;
             border-radius: 10px;
             padding: 15px;
             color: #ffffff;
@@ -1020,10 +1023,10 @@
 
         .shipping-choose > div {
             background-color: rgba(255, 255, 255, 0.05);
-            border: 2px solid #ff00cc;
+            border: 0px solid black;
             border-radius: 10px;
             padding: 15px 20px;
-            box-shadow: 0 0 10px #ff00cc, 0 0 20px #00fff7;
+            box-shadow: 0 0 10px black, 0 0 0px black;
             transition: all 0.3s ease;
             width: 90%;
             max-width: 500px;
@@ -1041,6 +1044,11 @@
             font-weight: 600;
             color: #ffffff;
             word-wrap: break-word;
+        }
+        .shipping-choose.active{
+            border: 1px solid #A9A9A9;
+            background-color: #A9A9A9;
+            color: #fff;
         }
 
         #name-input {
@@ -1234,196 +1242,202 @@
                 </div>
 
             </div>
-            <div class=" m-b-50">
-                <div class="bor10 p-lr-40 p-t-30 p-b-40">
-                    <h4 class="mtext-109 cl2 p-b-30">
-                        Địa chỉ nhận hàng
-                    </h4>
-                    <div class="flex-w flex-t bor12 p-b-13" style="margin-bottom: 20px">
-                        <div class="size-208">
-                            <span class="stext-110 cl2">Tên người nhận:</span>
-                        </div>
-                        <div class="size-209">
-                            <span id="name-display" class="mtext-110 cl2" th:text="${profile.name}">Placeholder</span>
-                            <input type="text" id="name-input" class="form-control" style="display: none;" value=""/>
-                            <i id="edit-name" class="fa fa-edit cl1 pointer" style="margin-left: 10px;"></i>
-                            <i id="save-name" class="fa fa-save cl1 pointer"
-                               style="display: none; margin-left: 10px;"></i>
-                        </div>
-                    </div>
 
-                    <div class="flex-w flex-t bor12 p-b-13" style="margin-bottom: 20px">
-                        <div class="size-208">
-                            <span class="stext-110 cl2">Số điện thoại:</span>
+
+            <div class="row">
+
+                <div class="col-6">
+                    <div class="bor10 p-lr-40 p-t-30 p-b-40">
+                        <h4 class="mtext-109 cl2 p-b-30">
+                            Địa chỉ nhận hàng
+                        </h4>
+                        <div class="flex-w flex-t bor12 p-b-13" style="margin-bottom: 20px">
+                            <div class="size-208">
+                                <span class="stext-110 cl2">Tên người nhận:</span>
+                            </div>
+                            <div class="size-209">
+                                <span id="name-display" class="mtext-110 cl2" th:text="${profile.name}">Placeholder</span>
+                                <input type="text" id="name-input" class="form-control" style="display: none;" value=""/>
+                                <i id="edit-name" class="fa fa-edit cl1 pointer" style="margin-left: 10px;"></i>
+                                <i id="save-name" class="fa fa-save cl1 pointer"
+                                   style="display: none; margin-left: 10px;"></i>
+                            </div>
                         </div>
-                        <div class="size-209">
+
+                        <div class="flex-w flex-t bor12 p-b-13" style="margin-bottom: 20px">
+                            <div class="size-208">
+                                <span class="stext-110 cl2">Số điện thoại:</span>
+                            </div>
+                            <div class="size-209">
                             <span id="phone-display" class="mtext-110 cl2"
                                   th:text="${profile.phoneNumber}">Placeholder</span>
-                            <input type="text" id="phone-input" class="form-control" style="display: none;" value=""/>
-                            <i id="edit-phone" class="fa fa-edit cl1 pointer" style="margin-left: 10px;"></i>
-                            <i id="save-phone" class="fa fa-save cl1 pointer"
-                               style="display: none; margin-left: 10px;"></i>
+                                <input type="text" id="phone-input" class="form-control" style="display: none;" value=""/>
+                                <i id="edit-phone" class="fa fa-edit cl1 pointer" style="margin-left: 10px;"></i>
+                                <i id="save-phone" class="fa fa-save cl1 pointer"
+                                   style="display: none; margin-left: 10px;"></i>
+                            </div>
                         </div>
-                    </div>
-                    <div class="flex-w flex-t">
-                        <div class="size-208 w-full-ssm">
+                        <div class="flex-w flex-t" style="padding-bottom: 91px;">
+                            <div class="size-208 w-full-ssm">
 									<span class="stext-110 cl2">
 										Địa chỉ:
 									</span>
-                        </div>
+                            </div>
 
-                        <div class="size-209 p-r-18 p-r-0-sm w-full-ssm">
-                            <!--                                <p class="stext-111 cl6 p-t-2">-->
-                            <!--                                    There are no shipping methods available. Please double check your address, or-->
-                            <!--                                    contact us if you need any help.-->
-                            <!--                                </p>-->
-                            <div class="p-t-15 addressArea">
+                            <div class="size-209 p-r-18 p-r-0-sm w-full-ssm">
+                                <!--                                <p class="stext-111 cl6 p-t-2">-->
+                                <!--                                    There are no shipping methods available. Please double check your address, or-->
+                                <!--                                    contact us if you need any help.-->
+                                <!--                                </p>-->
+                                <div class="p-t-15 addressArea">
 										<span class="stext-112 cl8">
 											Chọn địa chỉ
 										</span>
-                                <div class="address-list pt-15">
-                                    <div th:if="${addressShippings.size() > 0}" class="pt-15">
-                                        <div th:each="address : *{addressShippings}" class="shipping-choose">
-                                            <div th:id="'shipping' + ${address.id}" class="address-item"
-                                                 data-id="${address.id}">
-                                                <p th:text="${address.address}"></p>
+                                    <div class="address-list pt-15">
+                                        <div th:if="${addressShippings.size() > 0}" class="pt-15">
+                                            <div th:each="address : *{addressShippings}" class="shipping-choose">
+                                                <div th:id="'shipping' + ${address.id}" class="address-item"
+                                                     data-id="${address.id}">
+                                                    <p th:text="${address.address}"></p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
+                                    <button type="button" class="bg2 size-102" id="add-address">Thêm địa chỉ +</button>
+                                    <!--                                    -->
+                                    <div id="address-select-group" style="display: none">
+                                        <!--                                    <div class="rs1-select2 rs2-select2 bor8 bg0 m-b-12 m-t-9">-->
+                                        <!--                                        <select class="js-select2" name="province" id="province">-->
+
+                                        <!--                                        </select>-->
+                                        <!--                                        <div class="dropDownSelect2"></div>-->
+                                        <!--                                    </div>-->
+                                        <div class="rs1-select2 rs2-select2 bor8 bg0 m-b-12 m-t-9">
+                                            <select class="js-select2" name="district" id="district">
+
+                                            </select>
+                                            <div class="dropDownSelect2"></div>
+                                        </div>
+
+                                        <div class="rs1-select2 rs2-select2 bor8 bg0 m-b-12 m-t-9">
+                                            <select class="js-select2" name="ward" id="ward">
+
+                                            </select>
+                                            <div class="dropDownSelect2"></div>
+                                        </div>
+
+                                        <div class="bor8 bg0 m-b-12">
+                                            <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="street"
+                                                   id="street"
+                                                   placeholder="Số nhà, đường, xóm">
+                                        </div>
+                                        <span class="stext-111 errorStreet" style="color: red; display: none">Vui lòng nhập số nhà, đường, xóm</span>
+                                        <div>
+                                            <button class="bg2 size-102 hov-btn3" type="button" id="save-address-btn">Lưu
+                                            </button>
+                                            <button class="bor8 size-102" type="button" id="cancel-add-address">Bỏ qua
+                                            </button>
+                                        </div>
+                                    </div>
+
                                 </div>
-                                <button type="button" class="bg2 size-102" id="add-address">Thêm địa chỉ +</button>
-                                <!--                                    -->
-                                <div id="address-select-group" style="display: none">
-                                    <!--                                    <div class="rs1-select2 rs2-select2 bor8 bg0 m-b-12 m-t-9">-->
-                                    <!--                                        <select class="js-select2" name="province" id="province">-->
-
-                                    <!--                                        </select>-->
-                                    <!--                                        <div class="dropDownSelect2"></div>-->
-                                    <!--                                    </div>-->
-                                    <div class="rs1-select2 rs2-select2 bor8 bg0 m-b-12 m-t-9">
-                                        <select class="js-select2" name="district" id="district">
-
-                                        </select>
-                                        <div class="dropDownSelect2"></div>
-                                    </div>
-
-                                    <div class="rs1-select2 rs2-select2 bor8 bg0 m-b-12 m-t-9">
-                                        <select class="js-select2" name="ward" id="ward">
-
-                                        </select>
-                                        <div class="dropDownSelect2"></div>
-                                    </div>
-
-                                    <div class="bor8 bg0 m-b-12">
-                                        <input class="stext-111 cl8 plh3 size-111 p-lr-15" type="text" name="street"
-                                               id="street"
-                                               placeholder="Số nhà, đường, xóm">
-                                    </div>
-                                    <span class="stext-111 errorStreet" style="color: red; display: none">Vui lòng nhập số nhà, đường, xóm</span>
-                                    <div>
-                                        <button class="bg2 size-102 hov-btn3" type="button" id="save-address-btn">Lưu
-                                        </button>
-                                        <button class="bor8 size-102" type="button" id="cancel-add-address">Bỏ qua
-                                        </button>
-                                    </div>
-                                </div>
-
                             </div>
                         </div>
+
+
                     </div>
                 </div>
-            </div>
-            <div class=" m-b-50">
-                <div class="bor10 p-lr-40 p-t-30 p-b-40">
-                    <h4 class="mtext-109 cl2 p-b-30">
-                        Thông tin đơn hàng
-                    </h4>
-
-                    <div class="flex-w flex-t bor12 p-b-13">
-                        <div class="size-208">
+                <div class="col-6">
+                    <div class="bor10 p-lr-40 p-t-30 p-b-40">
+                        <h4 class="mtext-109 cl2 p-b-30">
+                            Thông tin đơn hàng
+                        </h4>
+                        <div class="flex-w flex-t bor12 p-b-13">
+                            <div class="size-208">
 									<span class="stext-110 cl2">
 										Tổng tiền:
 									</span>
-                        </div>
+                            </div>
 
-                        <div class="size-209">
+                            <div class="size-209">
 									<span class="mtext-110 cl2" id="sub-total">
 
 									</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="flex-w flex-t bor12 p-t-15 p-b-30">
-                        <div class="size-208 w-full-ssm">
+                        <div class="flex-w flex-t bor12 p-t-15 p-b-30">
+                            <div class="size-208 w-full-ssm">
 									<span class="stext-110 cl2">
 										Giảm giá voucher:
 									</span>
 
-                        </div>
-                        <div class="size-209">
+                            </div>
+                            <div class="size-209">
 									<span class="mtext-110 cl2" id="voucher-pic">
                                         0 VND
 									</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="flex-w flex-t bor12 p-t-15 p-b-30">
-                        <div class="size-208 w-full-ssm">
+                        <div class="flex-w flex-t bor12 p-t-15 p-b-30">
+                            <div class="size-208 w-full-ssm">
 									<span class="stext-110 cl2">
 										Phí vận chuyển:
 									</span>
 
-                        </div>
-                        <div class="size-209">
+                            </div>
+                            <div class="size-209">
 									<span class="mtext-110 cl2" id="shipping-fee">
                                         0 VND
 									</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="flex-w flex-t p-t-27 p-b-33">
-                        <div class="size-208">
+                        <div class="flex-w flex-t p-t-27 p-b-33">
+                            <div class="size-208">
 									<span class="mtext-101 cl2">
-										Tổng tiền phải thanh toán:
+										Thành tiền:
 									</span>
-                        </div>
+                            </div>
 
-                        <div class="size-209 p-t-1">
+                            <div class="size-209 p-t-1">
 									<span class="mtext-110 cl2" id="all-total">
 
 									</span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="flex-w flex-t p-t-27 p-b-33">
-                        <div class="size-208">
+                        <div class="flex-w flex-t p-t-27 p-b-33">
+                            <div class="size-208">
 									<span class="mtext-101 cl2">
 										Phương thức thanh toán:
 									</span>
-                        </div>
+                            </div>
 
-                        <div class="size-209 p-t-1">
-                            <div class="form-group">
-                                <input type="radio" class="custom-radio" value="3" name="paymentMethod"
-                                       id="payment-online" checked>
-                                <label for="payment-online">Thanh toán qua thẻ ngân hàng (Card Payment)</label>
-                            </div>
-                            <div class="form-group">
-                                <input type="radio" class="custom-radio" value="1" name="paymentMethod"
-                                       id="payment-offline">
-                                <label for="payment-offline">Thanh toán khi nhận hàng (COD)</label>
+                            <div class="size-209 p-t-1">
+                                <div class="form-group">
+                                    <input type="radio" class="custom-radio" value="3" name="paymentMethod"
+                                           id="payment-online" checked>
+                                    <label for="payment-online">Thanh toán qua thẻ ngân hàng (Card Payment)</label>
+                                </div>
+                                <div class="form-group">
+                                    <input type="radio" class="custom-radio" value="1" name="paymentMethod"
+                                           id="payment-offline">
+                                    <label for="payment-offline">Thanh toán khi nhận hàng (COD)</label>
+                                </div>
                             </div>
                         </div>
+                        <!--                    <div class="mb-5">-->
+                        <!--                        <span class="text-danger font-weight-bold" style="font-size: 20px">Lưu ý: Chỉ ship trong khu vực Nghệ AN, phí ship(30k) khách tự trả</span>-->
+                        <!--                    </div>-->
+                        <label class="checkbox d-flex">
+                            <input type="checkbox" class="mr-2" id="term">
+                            Tôi đồng ý với <a style="color: blue" data-toggle="modal" data-target="#exampleModalCenter2">&nbsp;
+                            điều khoản &nbsp</a> của cửa hàng.
+                        </label>
+                        <button type="button" id="submitBtn"
+                                class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer"
+                                disabled>
+                            Đặt hàng
+                        </button>
                     </div>
-                    <div class="mb-5">
-                        <span class="text-danger font-weight-bold" style="font-size: 20px">Lưu ý: Chỉ ship trong khu vực Nghệ AN, phí ship(30k) khách tự trả</span>
-                    </div>
-                    <label class="checkbox d-flex">
-                        <input type="checkbox" class="mr-2" id="term">
-                        Tôi đồng ý với <a style="color: blue" data-toggle="modal" data-target="#exampleModalCenter2">&nbsp;
-                        điều khoản &nbsp</a> của cửa hàng.
-                    </label>
-                    <button type="button" id="submitBtn"
-                            class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer"
-                            disabled>
-                        Đặt hàng
-                    </button>
                 </div>
             </div>
         </div>

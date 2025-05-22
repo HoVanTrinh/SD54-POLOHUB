@@ -2182,58 +2182,177 @@
     handleSubmit()
 
     //     ============================================ HANDLE SUBMIT ==========================
-    function handleSubmit() {
+    // function handleSubmit() {
+    //     $('#save-discount-btn').on('click', async function () {
+    //         var productDiscounts = []
+    //         var canSubmit = true
+    //         await $('.product-select-item').each((index, item) => {
+    //             const productItem = $(item)
+    //             const amount = productItem.find('.amount').val()
+    //             const startDate = productItem.find('.startDate').val()
+    //             const endDate = productItem.find('.endDate').val()
+    //             if (amount.trim() == '' || amount == null) {
+    //                 Swal.fire({
+    //                     title: 'Lỗi',
+    //                     text: 'Vui lòng điền đấy đủ giá giảm',
+    //                     icon: 'error',
+    //                 })
+    //                 canSubmit = false
+    //                 return
+    //             }
+    //
+    //             if (startDate == '' || startDate == null) {
+    //                 Swal.fire({
+    //                     title: 'Lỗi',
+    //                     text: 'Vui lòng điền đấy đủ ngày bắt đầu',
+    //                     icon: 'error',
+    //                 })
+    //                 canSubmit = false
+    //                 return
+    //             }
+    //
+    //             if (endDate == '' || endDate == null) {
+    //                 Swal.fire({
+    //                     title: 'Lỗi',
+    //                     text: 'Vui lòng điền đấy đủ ngày kết thúc',
+    //                     icon: 'error',
+    //                 })
+    //                 canSubmit = false
+    //                 return
+    //             }
+    //
+    //             productDiscounts.push({
+    //                 discountedAmount: productItem.find('.amount').val(),
+    //                 startDate: productItem.find('.startDate').val(),
+    //                 endDate: productItem.find('.endDate').val(),
+    //                 productDetailId: productItem.attr('data-select-detail-id')
+    //             })
+    //         })
+    //
+    //         if (!canSubmit) {
+    //             return;
+    //         }
+    //
+    //         const dataSend = {productDiscounts: productDiscounts}
+    //         await $.ajax({
+    //             type: "POST",
+    //             url: `/api/private/product-discount/multiple`,
+    //             dataType: 'json',
+    //             contentType: "application/json; charset=utf-8",
+    //             data: JSON.stringify(dataSend),
+    //             success: function () {
+    //                 Swal.fire({
+    //                     title: 'Tạo giảm giá',
+    //                     text: 'Thiết lập giảm giá thành công',
+    //                     icon: 'success',
+    //                     showCancelButton: true,
+    //                     confirmButtonText: 'Tiếp tục thiết lập',
+    //                     cancelButtonText: 'Quay lại',
+    //                     customClass: {
+    //                         confirmButton: 'confirm-button-class',
+    //                         cancelButton: 'cancel-button-class'
+    //                     }
+    //                 }).then((result) => {
+    //                     if (result.isConfirmed) {
+    //                         window.location.reload();
+    //                     } else {
+    //                         window.location.href = '/admin-only/product-discount';
+    //                     }
+    //                 });
+    //
+    //             },
+    //             error: function (xhr, status, error) {
+    //                 $('#loading-overlay').hide();
+    //                 console.log(xhr.responseText); // Kiểm tra phản hồi lỗi từ server
+    //                 swal("Error", xhr.responseJSON.message, "error");
+    //             }
+    //         })
+    //
+    //     })
+    // }
+    async function handleSubmit() {
         $('#save-discount-btn').on('click', async function () {
             var productDiscounts = []
             var canSubmit = true
-            await $('.product-select-item').each((index, item) => {
-                const productItem = $(item)
-                const amount = productItem.find('.amount').val()
-                const startDate = productItem.find('.startDate').val()
-                const endDate = productItem.find('.endDate').val()
-                if (amount.trim() == '' || amount == null) {
+
+            // Hàm check async xem sản phẩm đã có giảm giá chưa
+            async function hasDiscount(productDetailId) {
+                try {
+                    const response = await $.ajax({
+                        url: `/api/private/product-discount/check/${productDetailId}`,
+                        method: 'GET',
+                        dataType: 'json'
+                    });
+                    return response.hasDiscount; // server trả về { hasDiscount: true/false }
+                } catch (err) {
+                    console.error('Lỗi khi kiểm tra giảm giá:', err);
+                    return false; // Giả định không có giảm giá nếu lỗi
+                }
+            }
+
+            // Lặp qua từng sản phẩm
+            for (let index = 0; index < $('.product-select-item').length; index++) {
+                const item = $('.product-select-item').eq(index);
+                const productDetailId = item.attr('data-select-detail-id');
+                const amount = item.find('.amount').val();
+                const startDate = item.find('.startDate').val();
+                const endDate = item.find('.endDate').val();
+
+                if (!amount || amount.trim() === '') {
                     Swal.fire({
                         title: 'Lỗi',
-                        text: 'Vui lòng điền đấy đủ giá giảm',
+                        text: 'Vui lòng điền đầy đủ giá giảm',
                         icon: 'error',
-                    })
-                    canSubmit = false
-                    return
+                    });
+                    canSubmit = false;
+                    break;
                 }
 
-                if (startDate == '' || startDate == null) {
+                if (!startDate || startDate.trim() === '') {
                     Swal.fire({
                         title: 'Lỗi',
-                        text: 'Vui lòng điền đấy đủ ngày bắt đầu',
+                        text: 'Vui lòng điền đầy đủ ngày bắt đầu',
                         icon: 'error',
-                    })
-                    canSubmit = false
-                    return
+                    });
+                    canSubmit = false;
+                    break;
                 }
 
-                if (endDate == '' || endDate == null) {
+                if (!endDate || endDate.trim() === '') {
                     Swal.fire({
                         title: 'Lỗi',
-                        text: 'Vui lòng điền đấy đủ ngày kết thúc',
+                        text: 'Vui lòng điền đầy đủ ngày kết thúc',
                         icon: 'error',
-                    })
-                    canSubmit = false
-                    return
+                    });
+                    canSubmit = false;
+                    break;
+                }
+
+                // Kiểm tra xem sản phẩm này có đã giảm giá chưa
+                const discountExists = await hasDiscount(productDetailId);
+                if (discountExists) {
+                    Swal.fire({
+                        title: 'Lỗi',
+                        text: `Sản phẩm với ID ${productDetailId} đã có giảm giá! Không thể tạo lệnh giảm giá mới.`,
+                        icon: 'error',
+                    });
+                    canSubmit = false;
+                    break;
                 }
 
                 productDiscounts.push({
-                    discountedAmount: productItem.find('.amount').val(),
-                    startDate: productItem.find('.startDate').val(),
-                    endDate: productItem.find('.endDate').val(),
-                    productDetailId: productItem.attr('data-select-detail-id')
-                })
-            })
+                    discountedAmount: amount,
+                    startDate: startDate,
+                    endDate: endDate,
+                    productDetailId: productDetailId
+                });
+            }
 
             if (!canSubmit) {
                 return;
             }
 
-            const dataSend = {productDiscounts: productDiscounts}
+            const dataSend = { productDiscounts: productDiscounts };
             await $.ajax({
                 type: "POST",
                 url: `/api/private/product-discount/multiple`,
@@ -2263,14 +2382,12 @@
                 },
                 error: function (xhr, status, error) {
                     $('#loading-overlay').hide();
-                    console.log(xhr.responseText); // Kiểm tra phản hồi lỗi từ server
-                    swal("Error", xhr.responseJSON.message, "error");
+                    console.log(xhr.responseText);
+                    Swal.fire("Error", xhr.responseJSON.message, "error");
                 }
             })
-
         })
     }
-
 
     $('#cancel-discount-btn').on('click', function () {
         window.location.href = '/admin-only/product-discount'

@@ -483,7 +483,11 @@
                     <td th:text="${items.name}"></td>
                     <td>
                         <div class="action-buttons">
-                            <a th:data-link="'/admin/material-delete/'+${items.id}" class="delete-btn cursor-pointer">
+<!--                            <a th:data-link="'/admin/material-delete/'+${items.id}" class="delete-btn cursor-pointer">-->
+<!--                                <i class="fa fa-trash-o"></i>-->
+<!--                            </a>-->
+                            <a th:if="${#authorization.expression('hasRole(''ADMIN'')')}"
+                               th:data-link="'/admin/material-delete/'+${items.id}" class="delete-btn cursor-pointer">
                                 <i class="fa fa-trash-o"></i>
                             </a>
                             <a th:href="@{'/admin/material-detail/'+${items.id}}" class="update-btn cursor-pointer">

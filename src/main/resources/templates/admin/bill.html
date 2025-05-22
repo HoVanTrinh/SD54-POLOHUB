@@ -640,9 +640,7 @@
                 <a th:href="@{/admin/bill-list}" class="btn btn-secondary m-1"> Hủy bỏ</a>
             </div>
 
-            <!--            <a href="#" onclick="exportToExcel()">-->
-            <!--                <button type="button" class="btn btn-success m-1"><i class="far fa-file-excel"></i> Export</button>-->
-            <!--            </a>-->
+
         </div>
     </form>
 
@@ -949,26 +947,26 @@
             });
         });
 
-        // function exportToExcel() {
-        //     var page = document.getElementById("pageValue").value;
-        //     var sort = document.getElementById("sortValue").value;
-        //     var ngayTaoStart = document.getElementById("ngayTaoStart").value;
-        //     var ngayTaoEnd = document.getElementById("ngayTaoEnd").value;
-        //
-        //     Swal.fire({
-        //         title: "Xác nhận ?",
-        //         text: "Xác nhận export file excel ?",
-        //         icon: "warning",
-        //         buttons: true,
-        //         dangerMode: true,
-        //     })
-        //         .then((willDelete) => {
-        //             if (willDelete) {
-        //                 var exportUrl = `/admin/export-bill?page=${page}&sort=${sort}&ngayTaoStart=${ngayTaoStart}&ngayTaoEnd=${ngayTaoEnd}`;
-        //                 window.location.href = exportUrl;
-        //             }
-        //         });
-        // }
+        function exportToExcel() {
+            var page = document.getElementById("pageValue").value;
+            var sort = document.getElementById("sortValue").value;
+            var ngayTaoStart = document.getElementById("ngayTaoStart").value;
+            var ngayTaoEnd = document.getElementById("ngayTaoEnd").value;
+
+            Swal.fire({
+                title: "Xác nhận ?",
+                text: "Xác nhận export file excel ?",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        var exportUrl = `/admin/export-bill?page=${page}&sort=${sort}&ngayTaoStart=${ngayTaoStart}&ngayTaoEnd=${ngayTaoEnd}`;
+                        window.location.href = exportUrl;
+                    }
+                });
+        }
 
 
 

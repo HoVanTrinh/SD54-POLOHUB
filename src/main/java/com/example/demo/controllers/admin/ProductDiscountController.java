@@ -12,11 +12,15 @@ import com.example.demo.services.ProductDiscountService;
 import com.example.demo.services.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class ProductDiscountController {
@@ -106,5 +110,14 @@ public class ProductDiscountController {
     @PostMapping("/api/private/product-discount/{id}/status/{status}")
     public ProductDiscountDto updateProductDiscount(@Valid @PathVariable Long id, @PathVariable boolean status) {
         return productDiscountService.updateCloseProductDiscount(id, status);
+    }
+    @ResponseBody
+    @GetMapping("/api/private/product-discount/check/{productDetailId}")
+    public ResponseEntity<Map<String, Boolean>> checkDiscount(@PathVariable Long productDetailId) {
+        Date now = new Date();
+        boolean hasDiscount = productDiscountRepository.existsActiveDiscount(productDetailId, now);
+        Map<String, Boolean> response = new HashMap<>();
+        response.put("hasDiscount", hasDiscount);
+        return ResponseEntity.ok(response);
     }
 }

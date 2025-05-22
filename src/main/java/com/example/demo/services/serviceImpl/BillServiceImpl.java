@@ -374,7 +374,7 @@ public class BillServiceImpl implements BillService {
                 "    <div class=\"invoice-container\">\n" +
                 "        <h1>POLO HUB</h1>\n" +
                 "        <h4>Toà nhà Fpoly Trinh Van Bo</h3>\n" +
-                "        <h4>Điện thoại : 190090090-66668888 </h3>\n" +
+                "        <h4>Điện thoại : 0396861480 </h3>\n" +
                 "        <h5>Mã hóa đơn: " + billDetailDtoInterface.getMaDinhDanh() + "</h5>\n" +
                 "        <h5>Ngày thanh toán: " + billDetailDtoInterface.getCreatedDate().format(formatter) + "</h5>\n" +
                 "        <h5>Họ và tên: " + customerName + "</h5>\n" +
@@ -498,6 +498,10 @@ public class BillServiceImpl implements BillService {
 //        listCheck.forEach(bill->{
 //
 //        });
+    }
+    @Override
+    public void hienbill(){
+        billRepository.listBill();
     }
 
 }

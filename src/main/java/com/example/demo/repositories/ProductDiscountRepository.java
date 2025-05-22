@@ -10,6 +10,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+
+import java.util.Date;
 import java.util.List;
 
 public interface ProductDiscountRepository extends JpaRepository<ProductDiscount, Long> {
@@ -34,4 +36,10 @@ public interface ProductDiscountRepository extends JpaRepository<ProductDiscount
     // Thêm phương thức truy vấn dựa trên đối tượng Color và Size
     @Query("SELECT pd FROM ProductDiscount pd WHERE pd.productDetail.color = :color AND pd.productDetail.size = :size")
     List<ProductDiscount> findByProductDetail_ColorAndProductDetail_Size(Color color, Size size);
+
+    @Query("SELECT CASE WHEN COUNT(pd) > 0 THEN true ELSE false END FROM ProductDiscount pd " +
+            "WHERE pd.productDetail.id = :productDetailId " +
+            "AND pd.closed = false " +
+            "AND pd.startDate <= :now AND pd.endDate >= :now")
+    boolean existsActiveDiscount(@Param("productDetailId") Long productDetailId, @Param("now") Date now);
 }

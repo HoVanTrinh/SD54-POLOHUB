@@ -72,4 +72,5 @@ public interface BillService {
     void deductProductQuantitiesOnStatusChange(Long billId);
 
     void updateStatusChoHangVe();
+    void hienbill();
 }

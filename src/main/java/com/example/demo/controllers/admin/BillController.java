@@ -2,6 +2,7 @@ package com.example.demo.controllers.admin;
 
 import com.example.demo.dto.Bill.*;
 import com.example.demo.entities.Bill;
+import com.example.demo.entities.DiscountCode;
 import com.example.demo.entities.enumClass.BillStatus;
 import com.example.demo.entities.enumClass.InvoiceType;
 import com.example.demo.repositories.DiscountCodeRepository;
@@ -53,162 +54,159 @@ public class BillController {
         return null;
 
     }
+    @GetMapping("/bill-list")
+    public String getBill(
+            Model model,
+            @RequestParam(name = "page", defaultValue = "0") int page,
+            @RequestParam(name = "sort", defaultValue = "createDate,asc") String sortField,
+            @RequestParam(name = "maDinhDanh", required = false) String maDinhDanh,
+            @RequestParam(name = "ngayTaoStart", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date ngayTaoStart,
+            @RequestParam(name = "ngayTaoEnd", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date ngayTaoEnd,
+            @RequestParam(name = "trangThai", required = false) String trangThai,
+            @RequestParam(name = "loaiDon", required = false) String loaiDon,
+            @RequestParam(name = "soDienThoai", required = false) String soDienThoai,
+            @RequestParam(name = "hoVaTen", required = false) String hoVaTen
+    ) {
+        // Cập nhật trạng thái cho hóa đơn
+        billService.updateStatusChoHangVe();
 
+        int pageSize = 8;
+        Sort sort = Sort.by(Sort.Direction.fromString(sortField.split(",")[1]), sortField.split(",")[0]);
+        Pageable pageable = PageRequest.of(page, pageSize, sort);
 
-//    @GetMapping("/bill-list")
-//    public String getBill(
-//            Model model,
-//            @RequestParam(name = "page", defaultValue = "0") int page,
-//            @RequestParam(name = "sort", defaultValue = "createDate,asc") String sortField,
-//            @RequestParam(name = "maDinhDanh", required = false) String maDinhDanh,
-//            @RequestParam(name = "ngayTaoStart", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date ngayTaoStart,
-//            @RequestParam(name = "ngayTaoEnd", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date ngayTaoEnd,
-//            @RequestParam(name = "trangThai", required = false) String trangThai,
-//            @RequestParam(name = "loaiDon", required = false) String loaiDon,
-//            @RequestParam(name = "soDienThoai", required = false) String soDienThoai,
-//            @RequestParam(name = "hoVaTen", required = false) String hoVaTen
-//    ) {
-//        //update status các hóa đơn chờ xác nhận nhưng thiếu hàng
-//        billService.updateStatusChoHangVe();
+        // Khai báo biến billPage
+        Page<BillDtoInterface> billPage;
+
+        // Chuyển đổi ngày nếu có
+        LocalDateTime convertedNgayTaoStart = (ngayTaoStart != null) ?
+                ngayTaoStart.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime() : null;
+
+        LocalDateTime convertedNgayTaoEnd = (ngayTaoEnd != null) ?
+                ngayTaoEnd.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime() : null;
+
+        // Kiểm tra tham số tìm kiếm
+        boolean hasFilters = maDinhDanh != null || convertedNgayTaoStart != null || convertedNgayTaoEnd != null ||
+                trangThai != null || loaiDon != null || soDienThoai != null || hoVaTen != null;
+
+        // Lấy tất cả hóa đơn nếu không có bộ lọc
+        if (!hasFilters) {
+            billPage = billService.findAll(pageable);
+        } else {
+            // Trimming tham số và tìm kiếm theo bộ lọc
+            billPage = billService.searchListBill(
+                    maDinhDanh != null ? maDinhDanh.trim() : null,
+                    convertedNgayTaoStart,
+                    convertedNgayTaoEnd,
+                    trangThai,
+                    loaiDon,
+                    soDienThoai != null ? soDienThoai.trim() : null,
+                    hoVaTen != null ? hoVaTen.trim() : null,
+                    pageable
+            );
+        }
+
+        // Thêm dữ liệu vào model
+        model.addAttribute("items", billPage);
+        model.addAttribute("sortField", sortField);
+        model.addAttribute("maDinhDanh", maDinhDanh);
+        model.addAttribute("trangThai", trangThai);
+        model.addAttribute("loaiDon", loaiDon);
+        model.addAttribute("soDienThoai", soDienThoai);
+        model.addAttribute("hoVaTen", hoVaTen);
+        model.addAttribute("billStatus", BillStatus.values());
+        model.addAttribute("invoiceType", InvoiceType.values());
+
+        return "admin/bill";
+    }
+//@GetMapping("/bill-list")
+//public String getBill(
+//        Model model,
+//        @RequestParam(name = "page", defaultValue = "0") int page,
+//        @RequestParam(name = "sort", defaultValue = "createDate,asc") String sortField,
+//        @RequestParam(name = "maDinhDanh", required = false) String maDinhDanh,
+//        @RequestParam(name = "ngayTaoStart", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date ngayTaoStart,
+//        @RequestParam(name = "ngayTaoEnd", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date ngayTaoEnd,
+//        @RequestParam(name = "trangThai", required = false) String trangThai,
+//        @RequestParam(name = "loaiDon", required = false) String loaiDon,
+//        @RequestParam(name = "soDienThoai", required = false) String soDienThoai,
+//        @RequestParam(name = "hoVaTen", required = false) String hoVaTen
+//) {
+//    // Update status for bills awaiting confirmation but lacking inventory
+//    billService.updateStatusChoHangVe();
 //
-//        int pageSize = 8;
-//        String[] sortParams = sortField.split(",");
-//        String sortFieldName = sortParams[0];
-//        Sort.Direction sortDirection = Sort.Direction.ASC;
+//    int pageSize = 8;
+//    String[] sortParams = sortField.split(",");
+//    String sortFieldName = sortParams[0];
+//    Sort.Direction sortDirection = sortParams.length > 1 && sortParams[1].equalsIgnoreCase("asc") ? Sort.Direction.ASC : Sort.Direction.DESC;
+//    Sort sort = Sort.by(sortDirection, sortFieldName);
+//    Pageable pageable = PageRequest.of(page, pageSize, sort);
 //
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+//    // Initialize the Page variable as null to catch potential issues
+//    Page<BillDtoInterface> billPage = null;
 //
-//        if (sortParams.length > 1 && sortParams[1].equalsIgnoreCase("asc")) {
-//            sortDirection = Sort.Direction.ASC;
-//        }
+//    // Convert dates if they are provided
+//    LocalDateTime convertedNgayTaoStart = (ngayTaoStart != null) ?
+//            ngayTaoStart.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime() : null;
 //
-//        Sort sort = Sort.by(sortDirection, sortFieldName);
-//        Pageable pageable = PageRequest.of(page, pageSize, sort);
+//    LocalDateTime convertedNgayTaoEnd = (ngayTaoEnd != null) ?
+//            ngayTaoEnd.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime() : null;
 //
-//        Page<BillDtoInterface> Bill;
-//        LocalDateTime convertedNgayTaoStart = null;
-//        LocalDateTime convertedNgayTaoEnd = null;
-//
-//        if (ngayTaoStart != null || ngayTaoEnd != null || maDinhDanh != null || trangThai != null || loaiDon != null || hoVaTen != null || soDienThoai != null) {
-//            // Convert Date to LocalDateTime
-//
-//            if (ngayTaoStart != null) {
-//                convertedNgayTaoStart = ngayTaoStart.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-//                model.addAttribute("ngayTaoStart", convertedNgayTaoStart.format(formatter));
-//            }
-//            if (ngayTaoEnd != null) {
-//                convertedNgayTaoEnd = ngayTaoEnd.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
-//                model.addAttribute("ngayTaoEnd", convertedNgayTaoEnd.format(formatter));
-//            }
-//             Bill = billService.searchListBill(maDinhDanh.trim(), convertedNgayTaoStart, convertedNgayTaoEnd, trangThai, loaiDon, soDienThoai.trim(), hoVaTen.trim(), pageable);
-//        } else {
-//           Bill = billService.findAll(pageable);
-//        }
-//
-//        model.addAttribute("sortField", sortFieldName);
-//        model.addAttribute("sortDirection", sortDirection);
-//        model.addAttribute("items",Bill );
-//
-//
-//        model.addAttribute("maDinhDanh", maDinhDanh);
-//        model.addAttribute("trangThai", trangThai);
-//        model.addAttribute("loaiDon", loaiDon);
-//        model.addAttribute("soDienThoai", soDienThoai);
-//        model.addAttribute("hoVaTen", hoVaTen);
-//        model.addAttribute("sortField", sortField);
-//        model.addAttribute("billStatus", BillStatus.values());
-//        model.addAttribute("invoiceType", InvoiceType.values());
-//        return "admin/bill";
+//    // Log the conversion for debugging
+//    if (convertedNgayTaoStart != null) {
+//        System.out.println("Converted NgayTaoStart: " + convertedNgayTaoStart);
 //    }
-@GetMapping("/bill-list")
-public String getBill(
-        Model model,
-        @RequestParam(name = "page", defaultValue = "0") int page,
-        @RequestParam(name = "sort", defaultValue = "createDate,asc") String sortField,
-        @RequestParam(name = "maDinhDanh", required = false) String maDinhDanh,
-        @RequestParam(name = "ngayTaoStart", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date ngayTaoStart,
-        @RequestParam(name = "ngayTaoEnd", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date ngayTaoEnd,
-        @RequestParam(name = "trangThai", required = false) String trangThai,
-        @RequestParam(name = "loaiDon", required = false) String loaiDon,
-        @RequestParam(name = "soDienThoai", required = false) String soDienThoai,
-        @RequestParam(name = "hoVaTen", required = false) String hoVaTen
-) {
-    // Update status for bills awaiting confirmation but lacking inventory
-    billService.updateStatusChoHangVe();
-
-    int pageSize = 8;
-    String[] sortParams = sortField.split(",");
-    String sortFieldName = sortParams[0];
-    Sort.Direction sortDirection = sortParams.length > 1 && sortParams[1].equalsIgnoreCase("asc") ? Sort.Direction.ASC : Sort.Direction.DESC;
-    Sort sort = Sort.by(sortDirection, sortFieldName);
-    Pageable pageable = PageRequest.of(page, pageSize, sort);
-
-    // Initialize the Page variable as null to catch potential issues
-    Page<BillDtoInterface> billPage = null;
-
-    // Convert dates if they are provided
-    LocalDateTime convertedNgayTaoStart = (ngayTaoStart != null) ?
-            ngayTaoStart.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime() : null;
-
-    LocalDateTime convertedNgayTaoEnd = (ngayTaoEnd != null) ?
-            ngayTaoEnd.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime() : null;
-
-    // Log the conversion for debugging
-    if (convertedNgayTaoStart != null) {
-        System.out.println("Converted NgayTaoStart: " + convertedNgayTaoStart);
-    }
-    if (convertedNgayTaoEnd != null) {
-        System.out.println("Converted NgayTaoEnd: " + convertedNgayTaoEnd);
-    }
-
-    // Check for search parameters and execute appropriate logic
-    boolean hasFilters = maDinhDanh != null || convertedNgayTaoStart != null || convertedNgayTaoEnd != null ||
-            trangThai != null || loaiDon != null || soDienThoai != null || hoVaTen != null;
-
-
-    if (hasFilters) {
-        // Trimming parameters to avoid issues with null or whitespace
-        billPage = billService.searchListBill(
-                maDinhDanh != null ? maDinhDanh.trim() : null,
-                convertedNgayTaoStart,
-                convertedNgayTaoEnd,
-                trangThai,
-                loaiDon,
-                soDienThoai != null ? soDienThoai.trim() : null,
-                hoVaTen != null ? hoVaTen.trim() : null,
-                pageable
-        );
-
-
-    } else {
-        // Fetch all bills if no filters are applied
-        billPage = billService.findAll(pageable);
-    }
-
-    // Check if billPage is null and log for debugging
-    if (billPage == null) {
-        System.out.println("BillPage is null. Check your billService methods.");
-        billPage = Page.empty(); // Use an empty page to avoid null errors
-    } else {
-        System.out.println("Fetched Bill Page: " + billPage.getContent().size() + " items"); // Log number of items fetched
-    }
-
-    // Adding the necessary attributes to the model
-
-    model.addAttribute("items", billPage);
-
-    model.addAttribute("sortField", sortFieldName);
-    model.addAttribute("sortDirection", sortDirection);
-    model.addAttribute("maDinhDanh", maDinhDanh);
-    model.addAttribute("trangThai", trangThai);
-    model.addAttribute("loaiDon", loaiDon);
-    model.addAttribute("soDienThoai", soDienThoai);
-    model.addAttribute("hoVaTen", hoVaTen);
-    model.addAttribute("billStatus", BillStatus.values());
-    model.addAttribute("invoiceType", InvoiceType.values());
-
-    return "admin/bill";
-}
+//    if (convertedNgayTaoEnd != null) {
+//        System.out.println("Converted NgayTaoEnd: " + convertedNgayTaoEnd);
+//    }
+//
+//    // Check for search parameters and execute appropriate logic
+//    boolean hasFilters = maDinhDanh != null || convertedNgayTaoStart != null || convertedNgayTaoEnd != null ||
+//            trangThai != null || loaiDon != null || soDienThoai != null || hoVaTen != null;
+//
+//
+//    if (hasFilters) {
+//        // Trimming parameters
+//        billPage = billService.searchListBill(
+//                maDinhDanh != null ? maDinhDanh.trim() : null,
+//                convertedNgayTaoStart,
+//                convertedNgayTaoEnd,
+//                trangThai,
+//                loaiDon,
+//                soDienThoai != null ? soDienThoai.trim() : null,
+//                hoVaTen != null ? hoVaTen.trim() : null,
+//                pageable
+//        );
+//    } else {
+//        // Fetch all bills on initial load
+//        billPage = billService.findAll(pageable);
+//    }
+//
+//
+//
+//    // Check if billPage is null and log for debugging
+//    if (billPage == null) {
+//        System.out.println("BillPage is null. Check your billService methods.");
+//        billPage = Page.empty(); // Use an empty page to avoid null errors
+//    } else {
+//        System.out.println("Fetched Bill Page: " + billPage.getContent().size() + " items"); // Log number of items fetched
+//    }
+//
+//    // Adding the necessary attributes to the model
+//
+//    model.addAttribute("items", billPage);
+//
+//    model.addAttribute("sortField", sortFieldName);
+//    model.addAttribute("sortDirection", sortDirection);
+//    model.addAttribute("maDinhDanh", maDinhDanh);
+//    model.addAttribute("trangThai", trangThai);
+//    model.addAttribute("loaiDon", loaiDon);
+//    model.addAttribute("soDienThoai", soDienThoai);
+//    model.addAttribute("hoVaTen", hoVaTen);
+//    model.addAttribute("billStatus", BillStatus.values());
+//    model.addAttribute("invoiceType", InvoiceType.values());
+//
+//    return "admin/bill";
+//}
     @GetMapping("/update-bill-status/{billId}")
     public String updateBillStatus2(Model model,
                                     @PathVariable Long billId,
@@ -285,74 +283,22 @@ public String getBill(
 
     }
 
-//    @GetMapping("/export-bill")
-//    public void exportBill(
-//            HttpServletResponse response,
-//            @RequestParam(name = "page", defaultValue = "0") int page,
-//            @RequestParam(name = "sort", defaultValue = "create_Date,desc") String sortField,
-//            @RequestParam(name = "ngayTaoStart", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date ngayTaoStart,
-//            @RequestParam(name = "ngayTaoEnd", required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date ngayTaoEnd,
-//            UriComponentsBuilder uriBuilder
-//    ) throws IOException {
-//        int pageSize = 10;
-//        String[] sortParams = sortField.split(",");
-//        String sortFieldName = sortParams[0];
-//        Sort.Direction sortDirection = Sort.Direction.ASC;
-//
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-//
-//        if (sortParams.length > 1 && sortParams[1].equalsIgnoreCase("desc")) {
-//            sortDirection = Sort.Direction.DESC;
-//        }
-//
-//        Sort sort = Sort.by(sortDirection, sortFieldName);
-//
-//
-//        Pageable pageable = PageRequest.of(page, pageSize, sort);
-//        Page<BillDtoInterface> bills;
-//        bills = billService.findAll(pageable);
-//
-//
-//        String exportUrl = uriBuilder.path("/export-bill")
-//                .queryParam("page", page)
-//                .queryParam("sort", sortField)
-//                .queryParam("ngayTaoStart", ngayTaoStart)
-//                .queryParam("ngayTaoEnd", ngayTaoEnd)
-//                .toUriString();
-//
-//        billService.exportToExcel(response, bills, exportUrl);
-//    }
-//
-//    @GetMapping("/export-pdf/{maHoaDon}")
-//    public String exportPdf(HttpServletResponse response, @PathVariable("maHoaDon") Long maHoaDon) throws DocumentException, IOException {
-//        return billService.exportPdf(response, maHoaDon);
-//    }
-//
-//    @GetMapping("admin/api/bill-detail/rollback-voucher/{voucherId}")
-//    public ResponseEntity<?> rollbackvoucher(@PathVariable Long voucherId) {
-//        if (voucherId == 0)
-//            return ResponseEntity.badRequest().build();
-//        Optional<DiscountCode> optVoucher = discountCodeRepository.findById(voucherId);
-//        if (!optVoucher.isPresent()) {
-//            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-//        }
-//        var voucher=optVoucher.get();
-//        voucher.setMaximumUsage(voucher.getMaximumUsage() + 1);
-//        discountCodeRepository.save(voucher);
-//
-//        return new ResponseEntity<>(HttpStatus.OK);
-//    }
 
-//    @GetMapping("/generate-pdf/{maHoaDon}")
-//    public ResponseEntity<String> generatePDF(@PathVariable Long maHoaDon) {
-//        // Your HTML content as a string
-//        String htmlContent = billService.getHtmlContent(maHoaDon);
-//
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.add("Content-Type", "text/html; charset=utf-8");
-//
-//        return new ResponseEntity<>(htmlContent, headers, HttpStatus.OK);
-//    }
+
+    @GetMapping("admin/api/bill-detail/rollback-voucher/{voucherId}")
+    public ResponseEntity<?> rollbackvoucher(@PathVariable Long voucherId) {
+        if (voucherId == 0)
+            return ResponseEntity.badRequest().build();
+        Optional<DiscountCode> optVoucher = discountCodeRepository.findById(voucherId);
+        if (!optVoucher.isPresent()) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        var voucher=optVoucher.get();
+        voucher.setMaximumUsage(voucher.getMaximumUsage() + 1);
+        discountCodeRepository.save(voucher);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
 
     @ResponseBody
