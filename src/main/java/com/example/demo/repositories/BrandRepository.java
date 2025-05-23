@@ -9,4 +9,5 @@ public interface BrandRepository extends JpaRepository<Brand, Long> {
     boolean existsByCode(String code);
     List<Brand> findAllByDeleteFlagFalse();
     boolean existsByName(String name);
+    List<Brand> findByDeleteFlagTrue(); // Danh sách đã xoá
 }

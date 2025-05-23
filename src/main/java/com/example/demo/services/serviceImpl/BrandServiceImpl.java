@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -62,13 +63,21 @@ public class BrandServiceImpl implements BrandService {
 
     @Override
     public void delete(Long id) {
-//        Brand brand = brandRepository.findById(id).orElseThrow(null);
-//        brand.setDeleteFlag(true);
-//        brandRepository.save(brand);
-        // xoá khỏi database
-        brandRepository.deleteById(id);
-    }
+        Brand brand = brandRepository.findById(id).orElseThrow(null);
+        brand.setDeleteFlag(true);
+        brandRepository.save(brand);
 
+    }
+    @Override
+    public List<Brand> findAllByDeleteFlagFalse() {
+        return brandRepository.findAllByDeleteFlagFalse();
+    }
+    @Override
+    public void restore(Long id) {
+        Brand brand = brandRepository.findById(id).orElseThrow(() -> new NoSuchElementException("Brand not found"));
+        brand.setDeleteFlag(false);
+        brandRepository.save(brand);
+    }
     @Override
     public Optional<Brand> findById(Long id) {
         return brandRepository.findById(id);

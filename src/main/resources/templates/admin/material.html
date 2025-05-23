@@ -458,7 +458,8 @@
         .action-buttons a:hover {
             color: #0056b3;
         }
-
+        .text-danger { color: #dc3545; }
+        .text-success { color: #28a745; }
     </style>
     <h4 class="text-center text-primary my-3">Quản lý chất liệu</h4>
     <div class="container-fluid">
@@ -473,6 +474,7 @@
                     <th scope="row">#</th>
                     <th scope="col">Mã chất liệu</th>
                     <th scope="col">Tên chất liệu</th>
+                    <th scope="col">Trạng Thái</th>
                     <th scope="col">Thao tác</th>
                 </tr>
                 </thead>
@@ -482,18 +484,24 @@
                     <td th:text="${items.code}"></td>
                     <td th:text="${items.name}"></td>
                     <td>
-                        <div class="action-buttons">
-<!--                            <a th:data-link="'/admin/material-delete/'+${items.id}" class="delete-btn cursor-pointer">-->
-<!--                                <i class="fa fa-trash-o"></i>-->
-<!--                            </a>-->
-                            <a th:if="${#authorization.expression('hasRole(''ADMIN'')')}"
-                               th:data-link="'/admin/material-delete/'+${items.id}" class="delete-btn cursor-pointer">
-                                <i class="fa fa-trash-o"></i>
+                    <span th:text="${items.deleteFlag} ? 'Ngừng Hoạt Động' : 'Hoạt Động'"
+                          th:classappend="${items.deleteFlag} ? 'text-danger' : 'text-success'"></span>
+                    </td>
+                    <td>
+                        <a th:href="@{'/admin/material-detail/'+${items.id}}" class="update-btn cursor-pointer"th:if="${!items.deleteFlag}">
+
+                            <i class="fa ti-pencil-alt"></i> Sửa
+                        </a>
+                        <a
+                               th:data-link="'/admin/material-delete/'+${items.id}" class="delete-btn cursor-pointer"th:if="${!items.deleteFlag}">
+
+                                <i class="fa fa-trash-o"></i> Xoá
                             </a>
-                            <a th:href="@{'/admin/material-detail/'+${items.id}}" class="update-btn cursor-pointer">
-                                <i class="fa ti-pencil-alt"></i>
-                            </a>
-                        </div>
+                        <a th:href="@{'/admin/material-restore/'+${items.id}}" class="restore-btn cursor-pointer text-success"
+                           th:if="${items.deleteFlag}">
+                            <i class="fa fa-undo"></i> Khôi phục
+                        </a>
+
                     </td>
                 </tr>
                 </tbody>
@@ -543,6 +551,25 @@
                 });
             });
         });
+        // Xác nhận Khôi phục
+        $('.restore-btn').on('click', function (e) {
+            e.preventDefault();
+            Swal.fire({
+                title: "Xác nhận?",
+                text: "Bạn có muốn khôi phục chất liệu này?",
+                icon: "question",
+                showCancelButton: true,
+                cancelButtonText: 'Hủy',
+                confirmButtonText: 'Khôi phục',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    var url = $(this).attr('href');
+                    window.location.href = url;
+                }
+            });
+        });
+
     </script>
 </div>
 </body>

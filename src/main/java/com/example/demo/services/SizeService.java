@@ -19,7 +19,7 @@ public interface SizeService {
     Size updateSize(Size size);
 
     void delete(Long id);
-
+    void restore(Long id);
     Optional<Size> findById(Long id);
 
     List<Size> getAll();

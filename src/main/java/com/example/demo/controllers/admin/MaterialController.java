@@ -111,10 +111,15 @@ public class MaterialController {
 //        materialService.delete(id);
 //        return "redirect:/admin/material-all";
 //    }
-@PreAuthorize("hasRole('ADMIN')")
+//@PreAuthorize("hasRole('ADMIN')")
 @GetMapping("/material-delete/{id}")
 public String delete(@PathVariable("id") Long id, ModelMap modelMap) {
     materialService.delete(id);
     return "redirect:/admin/material-all";
 }
+    @GetMapping("/material-restore/{id}")
+    public String restore(@PathVariable("id") Long id, ModelMap modelMap) {
+        materialService.restore(id);
+        return "redirect:/admin/material-all";
+    }
 }

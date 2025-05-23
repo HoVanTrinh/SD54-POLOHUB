@@ -10,13 +10,13 @@ import java.util.Optional;
 
 public interface BrandService {
     Page<Brand> getAllBrand(Pageable pageable);
-
+    List<Brand> findAllByDeleteFlagFalse();
     Brand createBrand(Brand brand);
     Brand updateBrand(Long id, Brand brand);
     Brand save(Brand brand);
 
     void delete(Long id);
-
+     void restore(Long id);
     Optional<Brand> findById(Long id);
 
     List<Brand> getAll();

@@ -476,8 +476,11 @@
 
         .action-buttons a:hover {
             color: #0056b3;
-        }
 
+
+        }
+        .text-danger { color: #dc3545; }
+        .text-success { color: #28a745; }
     </style>
     <h4>Quản lý nhãn hàng</h4>
     <div class="container-fluid">
@@ -492,7 +495,9 @@
                     <th>#</th>
                     <th>Mã nhãn hàng</th>
                     <th>Tên nhãn hàng</th>
+                    <th>Trạng thái</th>
                     <th>Thao tác</th>
+
                 </tr>
                 </thead>
                 <tbody>
@@ -501,14 +506,38 @@
                     <td th:text="${items.code}"></td>
                     <td th:text="${items.name}"></td>
                     <td>
-                        <div class="action-buttons">
-                            <a th:href="@{'/admin/brand-detail/'+${items.id}}" class="update-btn cursor-pointer">
+                     <span th:text="${items.deleteFlag} ? 'Ngừng Hoạt Động' : 'Hoạt Động'"
+                      th:classappend="${items.deleteFlag} ? 'text-danger' : 'text-success'"></span>
+                    </td>
+<!--                    <td>-->
+<!--                        <div class="action-buttons">-->
+<!--                            <a th:href="@{'/admin/brand-detail/'+${items.id}}" class="update-btn cursor-pointer">-->
+<!--                                <i class="fa ti-pencil-alt"></i>-->
+<!--                            </a>-->
+<!--                            <a th:data-link="'/admin/brand-delete/'+${items.id}" class="delete-btn cursor-pointer">-->
+<!--                                <i class="fa fa-trash-o"></i>-->
+<!--                            </a>-->
+<!--                        </div>-->
+<!--                    </td>-->
+                    <td>
+
+                            <a th:href="@{'/admin/brand-detail/'+${items.id}}" class="update-btn cursor-pointer"
+                               th:if="${!items.deleteFlag}">
                                 <i class="fa ti-pencil-alt"></i>
                             </a>
-                            <a th:data-link="'/admin/brand-delete/'+${items.id}" class="delete-btn cursor-pointer">
+
+                            <!-- Nút Xoá chỉ hiện khi chưa xoá -->
+                            <a th:href="@{'/admin/brand-delete/'+${items.id}}" class="delete-btn cursor-pointer"
+                               th:if="${!items.deleteFlag}">
                                 <i class="fa fa-trash-o"></i>
                             </a>
-                        </div>
+
+                            <!-- Nút Khôi phục chỉ hiện khi đã xoá -->
+                            <a th:href="@{'/admin/brand-restore/'+${items.id}}" class="restore-btn cursor-pointer text-success"
+                               th:if="${items.deleteFlag}">
+                                <i class="fa fa-undo"></i> Khôi phục
+                            </a>
+
                     </td>
                 </tr>
                 </tbody>
@@ -540,10 +569,12 @@
         </div>
         <script>
             $(document).ready(function () {
+                // Xác nhận Xoá
                 $('.delete-btn').on('click', function (e) {
+                    e.preventDefault(); // tránh chạy ngay href
                     Swal.fire({
                         title: "Xác nhận?",
-                        text: `Bạn chắc chắn muốn xóa nhãn hàng này`,
+                        text: "Bạn chắc chắn muốn xóa nhãn hàng này?",
                         icon: "warning",
                         showCancelButton: true,
                         cancelButtonText: 'Hủy',
@@ -551,7 +582,26 @@
                         reverseButtons: true
                     }).then((result) => {
                         if (result.isConfirmed) {
-                            var url = $(this).attr('data-link');
+                            var url = $(this).attr('href'); // lấy href thay vì attr data-link
+                            window.location.href = url;
+                        }
+                    });
+                });
+
+                // Xác nhận Khôi phục
+                $('.restore-btn').on('click', function (e) {
+                    e.preventDefault();
+                    Swal.fire({
+                        title: "Xác nhận?",
+                        text: "Bạn có muốn khôi phục nhãn hàng này?",
+                        icon: "question",
+                        showCancelButton: true,
+                        cancelButtonText: 'Hủy',
+                        confirmButtonText: 'Khôi phục',
+                        reverseButtons: true
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            var url = $(this).attr('href');
                             window.location.href = url;
                         }
                     });

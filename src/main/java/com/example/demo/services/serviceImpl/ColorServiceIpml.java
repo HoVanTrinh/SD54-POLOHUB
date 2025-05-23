@@ -43,6 +43,12 @@ public class ColorServiceIpml implements ColorService {
         return colorRepo.save(color);
     }
 
+    public void restore(Long id){
+        Color existingColor = colorRepo.findById(id).orElseThrow(() -> new NotFoundException("Không tìm thấy màu có id " + id) );
+        existingColor.setDeleteFlag(false);
+        colorRepo.save(existingColor);
+    }
+
     @Override
     public Color createColor(Color color) {
         if(colorRepo.existsByCode(color.getCode())) {
@@ -54,11 +60,12 @@ public class ColorServiceIpml implements ColorService {
 
     @Override
     public void delete(Long id) {
-//        Color existingColor = colorRepo.findById(id).orElseThrow(() -> new NotFoundException("Không tìm thấy màu có id " + id) );
-//        existingColor.setDeleteFlag(true);
-//        colorRepo.save(existingColor);
-        colorRepo.deleteById(id);
+        Color existingColor = colorRepo.findById(id).orElseThrow(() -> new NotFoundException("Không tìm thấy màu có id " + id) );
+        existingColor.setDeleteFlag(true);
+        colorRepo.save(existingColor);
+
     }
+
 
     @Override
     public List<Color> findAll() {

@@ -114,4 +114,9 @@ public class BrandController {
         brandService.delete(id);
         return "redirect:/admin/brand-all";
     }
+    @GetMapping("/brand-restore/{id}")
+    public String restore(@PathVariable("id") Long id, ModelMap modelMap){
+        brandService.restore(id);
+        return "redirect:/admin/brand-all"; // hoặc redirect về trang phù hợp
+    }
 }

@@ -111,4 +111,9 @@ public class ColorController {
         colorService.delete(id);
         return "redirect:/admin/color-list";
     }
+    @GetMapping("/color-restore/{id}")
+    public String restore(@PathVariable("id") Long id, ModelMap modelMap){
+        colorService.restore(id);
+        return "redirect:/admin/color-list";
+    }
 }

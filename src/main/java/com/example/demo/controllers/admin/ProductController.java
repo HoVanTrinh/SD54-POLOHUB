@@ -4,6 +4,9 @@ package com.example.demo.controllers.admin;
 import com.example.demo.dto.product.CreateProductDetailsForm;
 import com.example.demo.dto.product.ProductSearchDto;
 import com.example.demo.entities.*;
+import com.example.demo.repositories.ColorRepo;
+import com.example.demo.repositories.MaterialRepository;
+import com.example.demo.repositories.SizeRepository;
 import com.example.demo.services.*;
 import com.example.demo.untils.FileUploadUtil;
 import jakarta.servlet.http.HttpSession;
@@ -42,16 +45,19 @@ public class ProductController {
     @Autowired
     private BrandService brandService;
 
-
+@Autowired
+private MaterialRepository materialRepository;
     @Autowired
     private SizeService sizeService;
 
     @Autowired
     private MaterialService materialService;
-
+    @Autowired
+    private SizeRepository sizeRepository;
     @Autowired
     private ColorService colorService;
-
+    @Autowired
+    private ColorRepo colorRepo;
     @Autowired
     private ImageService imageService;
 
@@ -341,24 +347,28 @@ public String handlePart1(@ModelAttribute("product") Product product, HttpSessio
 
     @ModelAttribute("listSize")
     public List<Size> getSize() {
-        return sizeService.getAll();
+        return sizeRepository.findAllByDeleteFlagFalse();
     }
 
     @ModelAttribute("listColor")
     public List<Color> getColor() {
-        return colorService.findAll();
+        return
+
+                colorRepo.findAllByDeleteFlagFalse();
     }
 
 
 
     @ModelAttribute("listBrand")
     public List<Brand> getBrand() {
-        return brandService.getAll();
+
+    return brandService.findAllByDeleteFlagFalse();
     }
 
     @ModelAttribute("listMaterial")
     public List<Material> getMaterial() {
-        return materialService.getAll();
+        return materialRepository.findAllByDeleteFlagFalse();
+
     }
 
     @GetMapping("/product-delete/{id}")

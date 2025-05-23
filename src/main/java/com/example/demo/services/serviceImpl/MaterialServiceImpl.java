@@ -53,10 +53,10 @@ public class MaterialServiceImpl implements MaterialService {
 
     @Override
     public void delete(Long id) {
-//        Material material = materialRepository.findById(id).orElseThrow(null);
-//        material.setDeleteFlag(true);
-//        materialRepository.save(material);
-        materialRepository.deleteById(id);
+        Material material = materialRepository.findById(id).orElseThrow(null);
+        material.setDeleteFlag(true);
+        materialRepository.save(material);
+
     }
 
     @Override
@@ -81,5 +81,11 @@ public class MaterialServiceImpl implements MaterialService {
     @Override
     public boolean existsByName(String name) {
         return materialRepository.existsByName(name);
+    }
+    @Override
+    public void restore(Long id){
+        Material material = materialRepository.findById(id).orElseThrow(null);
+        material.setDeleteFlag(false);
+        materialRepository.save(material);
     }
 }

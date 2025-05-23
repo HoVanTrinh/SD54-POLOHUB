@@ -129,6 +129,11 @@ public class SizeController {
         model.addAttribute("successMessage", "Xóa kích cỡ thành công");
         return "redirect:/admin/size-all";
     }
-
+    @GetMapping("/size-restore/{id}")
+    public String restore(@PathVariable("id") Long id, Model model){
+        sizeService.restore(id);
+        model.addAttribute("successMessage", "Khôi phục kích cỡ thành công");
+        return "redirect:/admin/size-all";
+    }
 
 }
